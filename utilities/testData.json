@@ -1,0 +1,12 @@
+[
+    {
+        "TestNo": "1",
+        "OriginCity": "Pune",
+        "DestinationCity": "Shimoga"
+    },
+    {
+        "TestNo": "2",
+        "OriginCity": "Mumbai",
+        "DestinationCity": "Hubli"
+    }
+]

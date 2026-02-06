@@ -1,0 +1,21 @@
+{
+  "name": "projectsetup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "start": "node server.js",
+    "cucumber": "cucumber-js",
+    "cucumber:report": "cucumber-js && node generate-report.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "latest",
+    "@playwright/test": "latest",
+    "cucumber-html-reporter": "^7.2.0",
+    "playwright": "latest"
+  }
+}
