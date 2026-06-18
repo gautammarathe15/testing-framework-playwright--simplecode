@@ -1,0 +1,9 @@
+{
+  "allure": [
+    "allure-results"
+  ],
+  "port": 3000,
+  "resultPattern": "allure-results/**/*.json",
+  "reportPattern": "allure-report/**",
+  "timeout": 4000
+}
