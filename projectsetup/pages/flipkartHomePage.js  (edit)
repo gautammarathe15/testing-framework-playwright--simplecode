@@ -1,0 +1,16 @@
+class FlipkartHomePage {
+    constructor(page) {
+        this.page = page;
+        this.searchInput = page.locator('input[name="q"]:nth-of-type(1)');
+        this.loginButton = page.locator('a:has-text("Login")');
+    }
+
+    async searchFor(product) {
+        await this.searchInput.fill(product);
+        await this.searchInput.press('Enter');
+    }
+
+    async clickLogin() {
+        await this.loginButton.click();
+    }
+}

@@ -1,0 +1,253 @@
+{
+  "validTestData": {
+    "movies": [
+      {
+        "name": "Avengers: Endgame",
+        "rating": 8.4,
+        "format": "2D, 3D, IMAX",
+        "language": "English",
+        "id": 1
+      },
+      {
+        "name": "The Lion King",
+        "rating": 8.5,
+        "format": "2D",
+        "language": "Hindi, English",
+        "id": 2
+      },
+      {
+        "name": "Inception",
+        "rating": 8.8,
+        "format": "2D, IMAX",
+        "language": "English",
+        "id": 3
+      },
+      {
+        "name": "Dune",
+        "rating": 8.0,
+        "format": "2D, 3D, IMAX",
+        "language": "English, Hindi",
+        "id": 4
+      }
+    ],
+    "locations": [
+      {
+        "name": "Bangalore",
+        "code": "BLR",
+        "theaters": 5,
+        "id": 1
+      },
+      {
+        "name": "Mumbai",
+        "code": "MUM",
+        "theaters": 8,
+        "id": 2
+      },
+      {
+        "name": "Delhi",
+        "code": "DEL",
+        "theaters": 6,
+        "id": 3
+      },
+      {
+        "name": "Hyderabad",
+        "code": "HYD",
+        "theaters": 4,
+        "id": 4
+      }
+    ],
+    "theaters": [
+      {
+        "name": "Cinepolis Mall of Bangalore",
+        "location": "Bangalore",
+        "screens": 8,
+        "id": 1
+      },
+      {
+        "name": "Cinepolis Phoenix Market City",
+        "location": "Mumbai",
+        "screens": 6,
+        "id": 2
+      },
+      {
+        "name": "Cinepolis Select City Walk",
+        "location": "Delhi",
+        "screens": 7,
+        "id": 3
+      }
+    ],
+    "showtimes": [
+      {
+        "time": "09:30 AM",
+        "format": "2D",
+        "price": 300,
+        "available": true,
+        "id": 1
+      },
+      {
+        "time": "01:00 PM",
+        "format": "3D",
+        "price": 400,
+        "available": true,
+        "id": 2
+      },
+      {
+        "time": "04:30 PM",
+        "format": "IMAX",
+        "price": 500,
+        "available": false,
+        "id": 3
+      },
+      {
+        "time": "08:00 PM",
+        "format": "2D",
+        "price": 350,
+        "available": true,
+        "id": 4
+      },
+      {
+        "time": "11:00 PM",
+        "format": "2D",
+        "price": 300,
+        "available": true,
+        "id": 5
+      }
+    ],
+    "seats": {
+      "total": 100,
+      "available": 45,
+      "booked": 55,
+      "seatLayout": [
+        {
+          "row": "A",
+          "seats": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        {
+          "row": "B",
+          "seats": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        {
+          "row": "C",
+          "seats": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        {
+          "row": "D",
+          "seats": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        },
+        {
+          "row": "E",
+          "seats": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }
+      ]
+    },
+    "bookedSeats": [
+      "A1",
+      "A2",
+      "A3",
+      "B1",
+      "B2",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "testUser": {
+      "email": "test@example.com",
+      "phone": "9876543210"
+    }
+  },
+  "invalidTestData": {
+    "movies": [
+      "NonExistentMovie123",
+      "@#$%^&*()",
+      "",
+      "   "
+    ],
+    "locations": [
+      "InvalidCity",
+      "FakeLocation123",
+      "",
+      "XYZ"
+    ],
+    "showtimes": [
+      "25:00 AM",
+      "13:00 PM",
+      "invalid",
+      ""
+    ],
+    "seats": [
+      "Z99",
+      "A0",
+      "B11",
+      "invalid"
+    ]
+  },
+  "testScenarios": {
+    "singleSeatBooking": {
+      "seatCount": 1,
+      "expectedPrice": 300
+    },
+    "twoSeatBooking": {
+      "seatCount": 2,
+      "expectedPrice": 600
+    },
+    "threeOrMoreSeatBooking": {
+      "seatCount": 3,
+      "expectedPrice": 900,
+      "discount": "5%"
+    },
+    "peakHourBooking": {
+      "showtime": "08:00 PM",
+      "priceMultiplier": 1.2
+    }
+  },
+  "selectors": {
+    "homepage": {
+      "movieCard": "[data-testid='movie-card']",
+      "selectMovieBtn": "button:has-text('Select Show')",
+      "movieTitle": "[data-testid='movie-title']",
+      "movieRating": "[data-testid='movie-rating']",
+      "cityDropdown": "[data-testid='city-dropdown']",
+      "searchBox": "[placeholder='Search movies...']"
+    },
+    "locationPage": {
+      "locationCard": "[data-testid='location-card']",
+      "theaterCard": "[data-testid='theater-card']",
+      "selectTheaterBtn": "button:has-text('Select Showtime')"
+    },
+    "showtimePage": {
+      "showtimeSlot": "[data-testid='showtime-slot']",
+      "showtimeFormat": "[data-testid='showtime-format']",
+      "showtimePrice": "[data-testid='showtime-price']",
+      "selectShowtimeBtn": "button:has-text('Book')"
+    },
+    "seatPage": {
+      "seat": "[data-testid='seat']",
+      "availableSeat": "[data-testid='seat'][data-status='available']",
+      "selectedSeat": "[data-testid='seat'][data-status='selected']",
+      "bookedSeat": "[data-testid='seat'][data-status='booked']",
+      "proceedBtn": "button:has-text('Proceed to Summary')"
+    },
+    "summaryPage": {
+      "movieName": "[data-testid='summary-movie-name']",
+      "location": "[data-testid='summary-location']",
+      "showtime": "[data-testid='summary-showtime']",
+      "totalAmount": "[data-testid='summary-total-amount']",
+      "confirmBtn": "button:has-text('Confirm Booking')"
+    }
+  },
+  "timeouts": {
+    "short": 5000,
+    "medium": 15000,
+    "long": 30000,
+    "extraLong": 60000
+  },
+  "retryPolicy": {
+    "maxRetries": 3,
+    "initialDelayMs": 1000,
+    "backoffMultiplier": 2
+  }
+}

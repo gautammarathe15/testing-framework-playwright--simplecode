@@ -1,20 +1,20 @@
 [
   {
-    "description": "  As a user\n  I want to login to the application\n  So that I can access my account",
+    "description": "  As a user\n  I want to select a movie and a seat\n  So that I can proceed to the payment summary",
     "elements": [
       {
         "description": "",
-        "id": "user-login;successful-login-with-valid-credentials",
+        "id": "cinépolis-movie-booking-flow;successfully-select-a-seat-in-row-b-and-proceed",
         "keyword": "Scenario",
-        "line": 6,
-        "name": "Successful login with valid credentials",
+        "line": 8,
+        "name": "Successfully select a seat in Row B and proceed",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 907753099
+              "duration": 796793399
             }
           },
           {
@@ -22,340 +22,86 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 142100
+              "duration": 232500
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 7,
-            "name": "user navigates to the login page",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:22"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 570764799
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 8,
-            "name": "user enters email \"gautammarathe15@gmail.com\"",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:27"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 123930299
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
             "line": 9,
-            "name": "user enters password \"Password@15\"",
+            "name": "I navigate to the Cinépolis homepage",
             "match": {
-              "location": "features\\step_definitions\\login.steps.js:31"
+              "location": "features\\step_definitions\\cinepolisindia.steps.js:11"
             },
             "result": {
-              "status": "passed",
-              "duration": 26807299
+              "status": "failed",
+              "duration": 9817700,
+              "error_message": "TypeError: Cannot read properties of undefined (reading 'getByRole')\n    at new CinepolisHomePage (G:\\Playwright_class\\projectsetup\\pages\\cineHomePage.js:6:35)\n    at World.<anonymous> (G:\\Playwright_class\\projectsetup\\features\\step_definitions\\cinepolisindia.steps.js:12:16)"
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 10,
-            "name": "user clicks the login button",
+            "name": "I select \"Pune\" as my city",
             "match": {
-              "location": "features\\step_definitions\\login.steps.js:35"
+              "location": "features\\step_definitions\\cinepolisindia.steps.js:18"
             },
             "result": {
-              "status": "passed",
-              "duration": 96481699
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
             "arguments": [],
-            "keyword": "Then ",
+            "keyword": "And ",
             "line": 11,
-            "name": "user should be logged in successfully",
+            "name": "I choose the cinema \"Cinépolis Seasons\" and movie \"RAJA SHIVAJI (MARATHI)\"",
             "match": {
-              "location": "features\\step_definitions\\login.steps.js:39"
+              "location": "features\\step_definitions\\cinepolisindia.steps.js:22"
             },
             "result": {
-              "status": "passed",
-              "duration": 2010391599
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 371399
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 205080399
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "user-login;book-a-ticket-after-login",
-        "keyword": "Scenario Outline",
-        "line": 24,
-        "name": "Book a Ticket after login",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 401790700
-            }
-          },
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 188900
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 14,
-            "name": "user is logged in",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:47"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 2234773200
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 15,
-            "name": "user navigates to homepage",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:53"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 535577000
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 16,
-            "name": "user selects origin for \"1\"",
+            "line": 12,
+            "name": "I select the first available date and time",
             "match": {
-              "location": "features\\step_definitions\\login.steps.js:58"
+              "location": "features\\step_definitions\\cinepolisindia.steps.js:26"
             },
             "result": {
-              "status": "passed",
-              "duration": 217611200
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 17,
-            "name": "user selects destination for \"1\"",
+            "line": 13,
+            "name": "I select the first available seat in Row \"B\"",
             "match": {
-              "location": "features\\step_definitions\\login.steps.js:64"
+              "location": "features\\step_definitions\\cinepolisindia.steps.js:30"
             },
             "result": {
-              "status": "passed",
-              "duration": 164894500
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 18,
-            "name": "user selects date as tomorrow",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:70"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 672520399
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 19,
-            "name": "user clicks search button",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:74"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 106972599
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 20,
-            "name": "search results should be displayed",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:78"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 2015807899
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 281600
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 151059299
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "user-login;book-a-ticket-after-login",
-        "keyword": "Scenario Outline",
-        "line": 25,
-        "name": "Book a Ticket after login",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 329008499
-            }
-          },
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 78700
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
             "line": 14,
-            "name": "user is logged in",
+            "name": "I should be navigated to the Booking Summary page",
             "match": {
-              "location": "features\\step_definitions\\login.steps.js:47"
+              "location": "features\\step_definitions\\cinepolisindia.steps.js:35"
             },
             "result": {
-              "status": "passed",
-              "duration": 2181949300
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 15,
-            "name": "user navigates to homepage",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:53"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 536599099
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 16,
-            "name": "user selects origin for \"2\"",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:58"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 150638900
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 17,
-            "name": "user selects destination for \"2\"",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:64"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 150102300
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 18,
-            "name": "user selects date as tomorrow",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:70"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 633632799
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 19,
-            "name": "user clicks search button",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:74"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 52415899
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 20,
-            "name": "search results should be displayed",
-            "match": {
-              "location": "features\\step_definitions\\login.steps.js:78"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 2009474500
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -363,7 +109,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 164899
+              "duration": 362599
             }
           },
           {
@@ -371,19 +117,24 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 147754000
+              "duration": 2710557000
             }
           }
         ],
-        "tags": [],
+        "tags": [
+          {
+            "name": "@Smoke",
+            "line": 7
+          }
+        ],
         "type": "scenario"
       }
     ],
-    "id": "user-login",
+    "id": "cinépolis-movie-booking-flow",
     "line": 1,
     "keyword": "Feature",
-    "name": "User Login",
+    "name": "Cinépolis Movie Booking Flow",
     "tags": [],
-    "uri": "features\\login.feature"
+    "uri": "features\\cinepolisindia.feature"
   }
 ]
