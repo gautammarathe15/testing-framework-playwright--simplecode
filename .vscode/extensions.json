@@ -1,0 +1,25 @@
+{
+  "recommendations": [
+    "cucumber.cucumber-official",
+    "ms-playwright.playwright",
+    "ms-vscode.vscode-typescript-next",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "orta.vscode-jest",
+    "hbenl.vscode-test-explorer",
+    "ms-vscode.js-debug",
+    "ms-vscode.js-debug-companion",
+    "github.copilot",
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    "redhat.vscode-yaml",
+    "gruntfuggly.todo-tree",
+    "chrisdias.vscode-open-in-browser",
+    "humao.rest-client",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode.makefile-tools",
+    "sonarsource.sonarlint-vscode"
+  ]
+}
