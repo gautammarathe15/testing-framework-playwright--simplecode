@@ -1,12 +1,8 @@
 [
-    {
-        "TestNo": "1",
-        "OriginCity": "Pune",
-        "DestinationCity": "Shimoga"
-    },
-    {
-        "TestNo": "2",
-        "OriginCity": "Mumbai",
-        "DestinationCity": "Hubli"
-    }
+  { "id": 1, "type": "Positive", "username": "admin", "password": "sa", "desc": "Admin Account" },
+  { "id": 2, "type": "Positive", "username": "Green", "password": "sa", "desc": "Green Account" },
+  { "id": 3, "type": "Positive", "username": "1003", "password": "sa", "desc": "Numeric Account ID" },
+  { "id": 4, "type": "Negative", "username": "admin", "password": "wrong_password", "desc": "Invalid Password" },
+  { "id": 5, "type": "Negative", "username": "InvalidUser", "password": "sa", "desc": "Invalid Username" },
+  { "id": 6, "type": "Negative", "username": "", "password": "", "desc": "Empty Credentials Submission" }
 ]

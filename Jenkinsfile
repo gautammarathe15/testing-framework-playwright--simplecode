@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/gautammarathe15/busroute_feb_6.git'
+                git branch: 'main', url: ''
             }
         }
 

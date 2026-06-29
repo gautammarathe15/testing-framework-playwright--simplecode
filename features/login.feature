@@ -1,26 +1,32 @@
-Feature: User Login
-  As a user
-  I want to login to the application
-  So that I can access my account
+Feature: CLMS Login Functionality Verification
 
-  Scenario: Successful login with valid credentials
-    Given user navigates to the login page
-    When user enters email "gautammarathe15@gmail.com"
-    And user enters password "Password@15"
-    And user clicks the login button
-    Then user should be logged in successfully
+  Background:
+    Given User opens the CLMS login application page
 
-  Scenario Outline: Book a Ticket after login
-    Given user is logged in
-    And user navigates to homepage
-    When user selects origin for "<TestNo>"
-    And user selects destination for "<TestNo>"
-    And user selects date as tomorrow
-    And user clicks search button
-    Then search results should be displayed
+  Scenario: Validate Username and Password fields are visible and editable
+    Then User verifies that the Username input field is visible and editable
+    And User verifies that the Password input field is visible and editable
+
+  # 🟢 3 POSITIVE SCENARIOS (Valid Username variations with valid password)
+  Scenario Outline: Successful login with valid credentials (Positive Scenarios)
+    When User enters username "<username>" and password "<password>"
+    And User clicks on the Login button
+    Then User should be navigated to the main application dashboard
 
     Examples:
-      | TestNo | origin | destination |
-      | 1      | Pune   | Shimoga     |
-      | 2      | Mumbai | Hubli   | 
-      
+      | username | password | Comment            |
+      | admin    | sa       | Admin Account      |
+      | Green    | sa       | Green Account      |
+      | 1003     | sa       | Numeric Account ID |
+
+  # 🔴 3 NEGATIVE SCENARIOS (Incorrect input validation)
+  Scenario Outline: Unsuccessful login with invalid credentials (Negative Scenarios)
+    When User enters username "<username>" and password "<password>"
+    And User clicks on the Login button
+    Then User should see an appropriate authentication error message
+
+    Examples:
+      | username | password | Comment                     |
+      | admin    | wrong_sa | Invalid Password            |
+      | Invalid  | sa       | Invalid Username            |
+      |          |          | Empty Credentials Submission|

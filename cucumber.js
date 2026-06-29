@@ -1,12 +1,15 @@
 /**
  * CUCUMBER CONFIGURATION
+ * Optimized for CLMS Plain POM Framework with Modular Steps
  * Supports multiple reporting formats: Cucumber HTML & Allure Reports
  */
 
 module.exports = {
+  // Default Configuration Profile
   default: {
     require: [
-      'features/step_definitions/**/*.js',
+      // 🎯 FIXED: Dynamic pattern to auto-load both 'login.steps.js' and your new 'master.steps.js'
+      'features/step_definitions/*.steps.js', 
       'features/support/**/*.js',
     ],
     format: [
@@ -19,14 +22,14 @@ module.exports = {
     formatOptions: {
       snippetInterface: 'async-await',
     },
-    parallel: 2,
+    parallel: 1, 
     retry: 0,
     strict: true,
     dryRun: false,
     failFast: false,
     timeout: 60000,
     worldParameters: {
-      appUrl: process.env.BASE_URL || 'http://localhost:3000',
+      appUrl: process.env.BASE_URL || 'http://192.168.40.115/CLMS_ENT_5.5/app',
       browser: process.env.BROWSER || 'chromium',
       headless: process.env.HEADLESS !== 'false',
     }
@@ -35,7 +38,7 @@ module.exports = {
   // Shift Module Tests
   shift: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -51,7 +54,7 @@ module.exports = {
   // Leave Module Tests
   leave: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -67,7 +70,7 @@ module.exports = {
   // Attendance Module Tests
   attendance: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -83,7 +86,7 @@ module.exports = {
   // Smoke Tests
   smoke: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -92,14 +95,14 @@ module.exports = {
       'json:./allure-results/smoke-report.json',
     ],
     tags: '@SMOKE',
-    parallel: 2,
+    parallel: 1,
     timeout: 60000,
   },
 
   // Regression Tests
   regression: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -108,27 +111,14 @@ module.exports = {
       'json:./allure-results/regression-report.json',
     ],
     tags: '@REGRESSION or @MODULE',
-    parallel: 2,
+    parallel: 1,
     timeout: 60000,
   },
 
-  // Debug Profile
-  debug: {
+  // API Testing Profile
+  api: {
     require: [
-      'features/step_definitions/**/*.js',
-      'features/support/**/*.js',
-    ],
-    format: [
-      'progress-bar',
-      'html:cucumber-report-debug.html',
-      'json:./allure-results/debug-report.json',
-    ],
-    parallel: 1,
-    timeout: 120000,
-    dryRun: false,
-    strict: true,
-  },
-};
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -137,12 +127,13 @@ module.exports = {
       'json:cucumber-report-api.json',
     ],
     tags: '@api',
-    parallel: 2,
+    parallel: 1,
   },
 
+  // Negative Scenario Profile
   negative: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -154,9 +145,10 @@ module.exports = {
     parallel: 1,
   },
 
+  // Accessibility Testing Profile
   accessibility: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -168,9 +160,10 @@ module.exports = {
     parallel: 1,
   },
 
+  // Debug Profile
   debug: {
     require: [
-      'features/step_definitions/**/*.js',
+      'features/step_definitions/*.steps.js',
       'features/support/**/*.js',
     ],
     format: [
@@ -178,7 +171,9 @@ module.exports = {
       'usage:usage.txt',
     ],
     tags: '@smoke',
+    parallel: 1,
     dryRun: false,
     failFast: true,
-  },
+    strict: true,
+  }
 };

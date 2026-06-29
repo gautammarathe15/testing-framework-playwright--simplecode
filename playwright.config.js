@@ -1,7 +1,7 @@
 const { defineConfig, devices } = require('@playwright/test');
 
 /**
- * Playwright Configuration for Cinepolis UI Automation Tests
+ * Playwright Configuration for CLMS UI Automation Tests
  * @see https://playwright.dev/docs/test-configuration
  */
 
@@ -31,8 +31,11 @@ module.exports = defineConfig({
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://www.cinepolsindia.com',
+    /* 🎯 बदल १: तुमची CLMS ची ओरिजिनल URL इथे सेट केली आहे */
+    baseURL: 'http://192.168.40.115/CLMS_ENT_5.5/app',
+
+    /* Headless mode false केला जेणेकरून टेस्ट धावताना डोळ्यांसमोर ब्राउझर दिसेल */
+    headless: false,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -46,10 +49,6 @@ module.exports = defineConfig({
     /* Viewport configuration */
     viewport: { width: 1366, height: 768 },
 
-    /* User agent */
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-
     /* Ignore HTTPS errors */
     ignoreHTTPSErrors: true,
 
@@ -59,21 +58,19 @@ module.exports = defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    /* 🎯 बदल २: इथे आपण तुमच्या सिस्टीममधील ओरिजिनल 'Google Chrome' चा पाथ सेट केला आहे */
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Google Chrome',
+      use: { 
+        ...devices['Desktop Chrome'],
+        channel: 'chrome' // 👈 यामुळे ती 'Executable doesn't exist' एरर पुन्हा कधीच येणार नाही!
+      },
     },
 
-    /* Uncomment for Firefox testing */
+    /* Uncomment for Firefox testing if needed */
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    /* Uncomment for Safari testing */
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
     // },
   ],
 
@@ -89,4 +86,3 @@ module.exports = defineConfig({
   /* Quiet mode - no console output */
   quiet: false,
 });
-
