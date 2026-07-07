@@ -7,7 +7,7 @@ class CLMSDashboardPage {
     }
 
     /**
-     * युझर यशस्वीपणे डॅशबोर्ड पेजवर आला आहे की नाही हे तपासणे
+     * -- Validate the User Come on Dashboard page or not --
      */
     async isDashboardVisible() {
         try {

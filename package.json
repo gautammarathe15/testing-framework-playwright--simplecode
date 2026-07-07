@@ -42,5 +42,7 @@
     "playwright": "^1.40.0",
     "rimraf": "^5.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "mssql": "^12.6.0"
+  }
 }

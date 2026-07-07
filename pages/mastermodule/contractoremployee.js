@@ -1,71 +1,60 @@
+
+const { expect } = require('@playwright/test');
+
 class ContractorEmployeePage {
-    constructor(page) {
-        this.page = page;
-        
-        // Locators representing core elements for navigation and verification
-        this.masterMenuLink = this.page.getByRole('link', { name: 'Masters' });
-        
-        // Handles generic sidebar toggle buttons across different layout states
-        this.menuToggleBtn = this.page.locator('.navbar-toggle, #menuToggleBtn, [title="Toggle navigation"]').first(); 
-        
-        // Target option link to be validated
-        this.contractorEmployeeLink = this.page.getByRole('link', { name: 'Contractor Employee' });
-    }
+  constructor(page) {
+    this.page = page;
 
-    /**
-     * Core validation logic to verify if the "Contractor Employee" option is visible on screen.
-     * Reused across multiple navigation workflows to prevent code duplication.
-     * @returns {Promise<boolean>}
-     */
-    async verifyVisibility() {
-        try {
-            // Wait for the element to stabilize and appear in the DOM
-            await this.contractorEmployeeLink.waitFor({ state: 'visible', timeout: 4000 });
-            return await this.contractorEmployeeLink.isVisible();
-        } catch (error) {
-            return false;
-        }
-    }
+    // --- प्रकार १ चे लोकेटर्स (Header/Master Flow) ---
+    this.masterMenuHeader = page.locator('text=Master'); 
+    this.employeeSubMenu = page.locator('text=Employee');
+    this.contractorEmployeeHeaderOpt = page.locator('text=Contractor Employee');
 
-    /**
-     * Method 1: Directly click the top-level 'Masters' menu item and verify target visibility.
-     * @returns {Promise<boolean>}
-     */
-    async validateViaMasterMenu() {
-        console.log("🔍 [Method 1] Clicking on 'Masters' menu...");
-        await this.masterMenuLink.waitFor({ state: 'visible', timeout: 3000 });
-        await this.masterMenuLink.click();
-        
-        // Reusability: Delegate check to the core validation function
-        return await this.verifyVisibility(); 
-    }
+    // --- प्रकार २ चे लोकेटर्स (Dashboard Sector Flow) ---
+    this.employeeSectorWidget = page.locator('.employee-sector-widget, #employeeSector'); 
+    this.contractorEmployeeDashboardBtn = page.locator('button:has-text("Contractor Employee"), a:has-text("Contractor Employee")');
 
-    /**
-     * Method 2: Check visibility directly on the Dashboard landing view (e.g., via shortcut cards).
-     * @returns {Promise<boolean>}
-     */
-    async validateDirectOnDashboard() {
-        console.log("🔍 [Method 2] Checking directly on Dashboard view...");
-        
-        // Reusability: Directly check visibility without trigger interactions
-        return await this.verifyVisibility();
-    }
+    // --- प्रकार ३ चे लोकेटर्स (Toggle/Sidebar Flow) ---
+    this.menuToggleBtn = page.locator('#menuToggleBtn, .menu-toggle'); 
+    this.sidebarDashboardOpt = page.locator('.sidebar text=Dashboard, #sidebarDashboard');
+    this.sidebarMasterOpt = page.locator('.sidebar text=Master, #sidebarMaster');
+  }
 
-    /**
-     * Method 3: Expand the structural sidebar via toggle button first, then proceed to Masters.
-     * @returns {Promise<boolean>}
-     */
-    async validateViaMenuToggle() {
-        console.log("🔍 [Method 3] Triggering responsive Menu Toggle Button...");
-        await this.menuToggleBtn.click();
+  // --- प्रकार १ चे ॲक्शन्स ---
+  async clickMasterHeader() {
+    await this.masterMenuHeader.waitFor({ state: 'visible', timeout: 10000 });
+    await this.masterMenuHeader.click();
+  }
 
-        console.log("🔍 Clicking on 'Masters' inside expanded toggle menu...");
-        await this.masterMenuLink.waitFor({ state: 'visible', timeout: 3000 });
-        await this.masterMenuLink.click();
+  async verifyEmployeeAndContractorInHeader() {
+    await expect(this.employeeSubMenu).toBeVisible({ timeout: 5000 });
+    await expect(this.contractorEmployeeHeaderOpt).toBeVisible({ timeout: 5000 });
+  }
 
-        // Reusability: Verify element state after completing layout sequence
-        return await this.verifyVisibility();
-    }
+  // --- प्रकार २ चे ॲक्शन्स ---
+  async verifyDashboardSectorAndBtn() {
+    await expect(this.employeeSectorWidget).toBeVisible({ timeout: 7000 });
+    await expect(this.contractorEmployeeDashboardBtn).toBeVisible({ timeout: 5000 });
+  }
+
+  // --- प्रकार ३ चे ॲक्शन्स ---
+  async clickMenuToggle() {
+    await this.menuToggleBtn.waitFor({ state: 'visible' });
+    await this.menuToggleBtn.click();
+  }
+
+  async verifySidebarOptions() {
+    await expect(this.sidebarDashboardOpt).toBeVisible({ timeout: 5000 });
+    await expect(this.sidebarMasterOpt).toBeVisible({ timeout: 5000 });
+  }
+
+  async clickDashboardFromSidebar() {
+    await this.sidebarDashboardOpt.click();
+  }
+
+  async clickMasterFromSidebar() {
+    await this.sidebarMasterOpt.click();
+  }
 }
 
 module.exports = { ContractorEmployeePage };
