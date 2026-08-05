@@ -6,12 +6,28 @@
 const reporter = require('cucumber-html-reporter');
 const fs = require('fs');
 const path = require('path');
+const { exec } = require('child_process');
 
 // Ensure directories exist
 const allureResultsDir = './allure-results';
 if (!fs.existsSync(allureResultsDir)) {
     fs.mkdirSync(allureResultsDir, { recursive: true });
 }
+
+/**
+ * Open HTML report automatically in default browser
+ */
+const autoOpenReport = (filePath) => {
+    if (fs.existsSync(filePath)) {
+        console.log(`🌐 Opening report automatically: ${filePath}`);
+        const command = process.platform === 'win32' ? `start "" "${filePath}"` : `open "${filePath}"`;
+        exec(command, (error) => {
+            if (error) {
+                console.log(`⚠️ Could not auto-open browser automatically. You can manually open ${filePath}`);
+            }
+        });
+    }
+};
 
 /**
  * Generate Cucumber HTML Report
@@ -25,7 +41,7 @@ const generateCucumberHTMLReport = () => {
         output: 'cucumber-report-extended.html',
         reportSuiteAsScenarios: true,
         scenarioTimestamp: true,
-        launchReport: false,
+        launchReport: true, // 👈 Automatic launch enable kela ahe
         metadata: {
             "App Version": "1.0.0",
             "Test Environment": process.env.ENV || "STAGING",
@@ -37,8 +53,13 @@ const generateCucumberHTMLReport = () => {
     };
 
     try {
-        reporter.generate(options);
-        console.log('✅ Cucumber HTML Report generated: cucumber-report-extended.html');
+        if (fs.existsSync('cucumber-report.json')) {
+            reporter.generate(options);
+            console.log('✅ Cucumber HTML Report generated: cucumber-report-extended.html');
+            autoOpenReport('cucumber-report-extended.html'); // 👈 Explicit Browser Open Trigger
+        } else {
+            console.warn('⚠️ "cucumber-report.json" file clean or missing. Standard report skipped.');
+        }
     } catch (error) {
         console.error('❌ Error generating Cucumber HTML Report:', error.message);
     }
@@ -92,11 +113,11 @@ const generateAllureReport = () => {
     
     try {
         // Clean and generate Allure report
-        execSync('allure generate ./allure-results --clean -o ./allure-report', { stdio: 'inherit' });
+        execSync('allure generate ./allure-results --clean -o ./allure-report', { stdio: 'pipe' });
         console.log('✅ Allure Report generated successfully');
         console.log('📂 View report at: ./allure-report/index.html');
     } catch (error) {
-        console.error('⚠️  Allure CLI not found. Install with: npm install -g allure-commandline');
+        console.log('⚠️ Allure CLI or Java missing/not configured properly.');
         console.log('💡 You can still view Cucumber HTML reports at: ./cucumber-report-extended.html');
     }
 };

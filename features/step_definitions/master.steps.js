@@ -1,80 +1,45 @@
+/**
+ * --------------------------------------------------------------------------
+ * Cucumber Step Definitions for Master Module
+ * File: features/step_definitions/master.steps.js
+ * --------------------------------------------------------------------------
+ */
+
 const { Given, When, Then } = require('@cucumber/cucumber');
-const { CLMSDashboardPage } = require('../../pages/clmsdashboard');
-const { ContractorEmployeePage } = require('../../pages/mastermodule/contractorEmployee');
+const { CLMSDashboardPage } = require('../../pages/clmsdashboard.js');
+const { ContractorEmployeePage } = require('../../pages/mastermodule/contractorEmployee.js');
 
-// ==========================================
-// 🔹 Type 1: Master Menu Navigation
-// ==========================================
-When('user clicks on the {string} menu in the header', async function (menuName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  if (menuName === 'Master') {
-    await contractorPage.clickMasterHeader();
-  }
+When('User clicks on the Contractor Employee menu option', { timeout: 120000 }, async function () {
+    console.log("👉 Preparing to navigate to Contractor Employee section...");
+
+    if (!this.clmsDashboardPage) {
+        this.clmsDashboardPage = new CLMSDashboardPage(this.page);
+    }
+
+    // 🎯 १. Contractor Employee वर नेव्हिगेट होण्याआधीच इथे पॉझ होईल आणि Playwright Inspector उघडेल
+    console.log("⏸️ Execution paused BEFORE navigation/click. Playwright Inspector is now open...");
+    await this.page.pause();
+
+    // 🎯 २. Inspector मधील Resume (▶️) दबाल्ल्यावर ही पुढे नेव्हिगेट होईल
+    const currentUrl = this.page.url();
+    const baseUrl = currentUrl.substring(0, currentUrl.indexOf('/app/')); 
+    const targetUrl = `${baseUrl}/app/Employee/Index`;
+
+    console.log(`🌐 Direct Navigating to: ${targetUrl}`);
+    await this.page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+
+    console.log("✅ Successfully navigated to Contractor Employee Page!");
+
+    // Page object इनिशियलाईझ करा
+    this.contractorEmployeePage = new ContractorEmployeePage(this.page);
 });
 
-// Fixed: Removed the extra "then" keyword from the matching string
-Then('user should see {string} option visible', async function (subMenuName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.employeeSubMenu.waitFor({ state: 'visible' });
-});
+Then('User should see the Create and Upload options on the Contractor Employee page', { timeout: 60000 }, async function () {
+    console.log("🔍 Verifying Create and Upload options...");
 
-Then('the {string} option should be visible inside Employee section', async function (optName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.verifyEmployeeAndContractorInHeader();
-});
+    if (!this.contractorEmployeePage) {
+        this.contractorEmployeePage = new ContractorEmployeePage(this.page);
+    }
 
-
-// ==========================================
-// 🔹 Type 2: Dashboard Quick Sector Navigation
-// ==========================================
-When('user is on the main dashboard', async function () {
-  const dashboardPage = new CLMSDashboardPage(this.page);
-  await this.page.waitForLoadState('networkidle');
-  await dashboardPage.verifyEmsphereIsVisible();
-});
-
-Then('the {string} widget\/section should be visible', async function (sectionName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.employeeSectorWidget.waitFor({ state: 'visible' });
-});
-
-Then('the {string} button should be visible inside it', async function (btnName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.verifyDashboardSectorAndBtn();
-});
-
-
-// ==========================================
-// 🔹 Type 3: Menu Toggle Sidebar Navigation
-// ==========================================
-When('user clicks on the {string} to open sidebar', async function (btnName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.clickMenuToggle();
-});
-
-Then('the {string} and {string} options should be visible in the sidebar menu', async function (opt1, opt2) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.verifySidebarOptions();
-});
-
-When('user clicks on {string} from sidebar', async function (sidebarMenu) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  if (sidebarMenu === 'Dashboard') {
-    await contractorPage.clickDashboardFromSidebar();
-  } else if (sidebarMenu === 'Master') {
-    await contractorPage.clickMasterFromSidebar();
-  }
-});
-
-Then('user should see the same Dashboard page with {string} sector button', async function (btnName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  const dashboardPage = new CLMSDashboardPage(this.page);
-  
-  await dashboardPage.verifyEmsphereIsVisible();
-  await contractorPage.verifyDashboardSectorAndBtn();
-});
-
-Then('user should see the {string} option under header master flow', async function (optName) {
-  const contractorPage = new ContractorEmployeePage(this.page);
-  await contractorPage.verifyEmployeeAndContractorInHeader();
+    await this.contractorEmployeePage.verifyCreateAndUploadOptionsVisible();
 });

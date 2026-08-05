@@ -1,107 +1,241 @@
 [
   {
-    "description": "  As a user\n  I want to select a movie and a seat\n  So that I can proceed to the payment summary",
+    "description": "",
     "elements": [
       {
         "description": "",
-        "id": "cinépolis-movie-booking-flow;successfully-select-a-seat-in-row-b-and-proceed",
+        "id": "contractor-employee-master-verification;verify-create-and-upload-options-are-visible-on-contractor-employee-page",
         "keyword": "Scenario",
-        "line": 8,
-        "name": "Successfully select a seat in Row B and proceed",
+        "line": 3,
+        "name": "Verify Create and Upload options are visible on Contractor Employee Page",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 796793399
-            }
-          },
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 232500
+              "duration": 110135900
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 9,
-            "name": "I navigate to the Cinépolis homepage",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
             "match": {
-              "location": "features\\step_definitions\\cinepolisindia.steps.js:11"
+              "location": "features\\step_definitions\\login.steps.js:19"
             },
             "result": {
-              "status": "failed",
-              "duration": 9817700,
-              "error_message": "TypeError: Cannot read properties of undefined (reading 'getByRole')\n    at new CinepolisHomePage (G:\\Playwright_class\\projectsetup\\pages\\cineHomePage.js:6:35)\n    at World.<anonymous> (G:\\Playwright_class\\projectsetup\\features\\step_definitions\\cinepolisindia.steps.js:12:16)"
+              "status": "passed",
+              "duration": 4021236299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 33914499
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 10,
-            "name": "I select \"Pune\" as my city",
+            "line": 6,
+            "name": "User clicks on the Login button",
             "match": {
-              "location": "features\\step_definitions\\cinepolisindia.steps.js:18"
+              "location": "features\\step_definitions\\login.steps.js:41"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 490223799
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 11,
-            "name": "I choose the cinema \"Cinépolis Seasons\" and movie \"RAJA SHIVAJI (MARATHI)\"",
+            "line": 7,
+            "name": "User clicks on the Contractor Employee menu option",
             "match": {
-              "location": "features\\step_definitions\\cinepolisindia.steps.js:22"
+              "location": "features\\step_definitions\\master.steps.js:12"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 6915412299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "User should see the Create and Upload options on the Contractor Employee page",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 18125311500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 4207859300
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "contractor-employee-master-verification",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Contractor Employee Master Verification",
+    "tags": [],
+    "uri": "features\\contractoremployee.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;validate-username-and-password-fields-are-visible-and-editable",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Validate Username and Password fields are visible and editable",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 106501600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 129440699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "User verifies that the Username input field is visible and editable",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:49"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 18955999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User verifies that the Password input field is visible and editable",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:54"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3519299
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 16846899
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;successful-login-with-valid-credentials-(positive-scenarios)",
+        "keyword": "Scenario Outline",
+        "line": 18,
+        "name": "Successful login with valid credentials (Positive Scenarios)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83601699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113025600
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
             "line": 12,
-            "name": "I select the first available date and time",
+            "name": "User enters username \"admin\" and password \"sa\"",
             "match": {
-              "location": "features\\step_definitions\\cinepolisindia.steps.js:26"
+              "location": "features\\step_definitions\\login.steps.js:25"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 26169699
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 13,
-            "name": "I select the first available seat in Row \"B\"",
+            "name": "User clicks on the Login button",
             "match": {
-              "location": "features\\step_definitions\\cinepolisindia.steps.js:30"
+              "location": "features\\step_definitions\\login.steps.js:41"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 106282400
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
             "line": 14,
-            "name": "I should be navigated to the Booking Summary page",
+            "name": "User should be navigated to the main application dashboard",
             "match": {
-              "location": "features\\step_definitions\\cinepolisindia.steps.js:35"
+              "location": "features\\step_definitions\\login.steps.js:60"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 259422899
             }
           },
           {
@@ -109,7 +243,78 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 362599
+              "duration": 13487600
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;successful-login-with-valid-credentials-(positive-scenarios)",
+        "keyword": "Scenario Outline",
+        "line": 19,
+        "name": "Successful login with valid credentials (Positive Scenarios)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 76658100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 109797899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23878000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 267383399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "User should be navigated to the main application dashboard",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:60"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 272117500
             }
           },
           {
@@ -117,24 +322,335 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 2710557000
+              "duration": 15383600
             }
           }
         ],
-        "tags": [
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;successful-login-with-valid-credentials-(positive-scenarios)",
+        "keyword": "Scenario Outline",
+        "line": 20,
+        "name": "Successful login with valid credentials (Positive Scenarios)",
+        "steps": [
           {
-            "name": "@Smoke",
-            "line": 7
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 93029500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103473299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "User enters username \"1003\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24940600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116979899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "User should be navigated to the main application dashboard",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:60"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217659499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 15295200
+            }
           }
         ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;unsuccessful-login-with-invalid-credentials-(negative-scenarios)",
+        "keyword": "Scenario Outline",
+        "line": 30,
+        "name": "Unsuccessful login with invalid credentials (Negative Scenarios)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 77351099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107093500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "User enters username \"admin\" and password \"wrong_sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23131300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103100100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "User should see an appropriate authentication error message",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17384500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14696600
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;unsuccessful-login-with-invalid-credentials-(negative-scenarios)",
+        "keyword": "Scenario Outline",
+        "line": 31,
+        "name": "Unsuccessful login with invalid credentials (Negative Scenarios)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 79485099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110028299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "User enters username \"Invalid\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23637199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 99276600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "User should see an appropriate authentication error message",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15350500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 14811999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "clms-login-functionality-verification;unsuccessful-login-with-invalid-credentials-(negative-scenarios)",
+        "keyword": "Scenario Outline",
+        "line": 32,
+        "name": "Unsuccessful login with invalid credentials (Negative Scenarios)",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 81249499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 96973099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "User enters username \"\" and password \"\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24050799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 93857000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "User should see an appropriate authentication error message",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25233200
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13812999
+            }
+          }
+        ],
+        "tags": [],
         "type": "scenario"
       }
     ],
-    "id": "cinépolis-movie-booking-flow",
+    "id": "clms-login-functionality-verification",
     "line": 1,
     "keyword": "Feature",
-    "name": "Cinépolis Movie Booking Flow",
+    "name": "CLMS Login Functionality Verification",
     "tags": [],
-    "uri": "features\\cinepolisindia.feature"
+    "uri": "features\\login.feature"
   }
 ]

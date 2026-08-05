@@ -1,60 +1,45 @@
+/**
+ * --------------------------------------------------------------------------
+ * CLMS Master Module - Contractor Employee Page Object Class
+ * File: pages/mastermodule/contractorEmployee.js
+ * --------------------------------------------------------------------------
+ */
 
 const { expect } = require('@playwright/test');
 
 class ContractorEmployeePage {
-  constructor(page) {
-    this.page = page;
+    /**
+     * @param {import('@playwright/test').Page} page
+     */
+    constructor(page) {
+        this.page = page;
 
-    // --- प्रकार १ चे लोकेटर्स (Header/Master Flow) ---
-    this.masterMenuHeader = page.locator('text=Master'); 
-    this.employeeSubMenu = page.locator('text=Employee');
-    this.contractorEmployeeHeaderOpt = page.locator('text=Contractor Employee');
+        // DOM Element Locators
+        this.createButton = this.page.locator('#hrfEmployeeCreate');
+        this.uploadButton = this.page.locator('#btnExport');
+    }
 
-    // --- प्रकार २ चे लोकेटर्स (Dashboard Sector Flow) ---
-    this.employeeSectorWidget = page.locator('.employee-sector-widget, #employeeSector'); 
-    this.contractorEmployeeDashboardBtn = page.locator('button:has-text("Contractor Employee"), a:has-text("Contractor Employee")');
+    /**
+     * Verifies the visibility of both +Create and Upload options on the Contractor Employee page
+     */
+    async verifyCreateAndUploadOptionsVisible() {
+        console.log("🔍 Verifying visibility for '+Create' and 'Upload' buttons...");
 
-    // --- प्रकार ३ चे लोकेटर्स (Toggle/Sidebar Flow) ---
-    this.menuToggleBtn = page.locator('#menuToggleBtn, .menu-toggle'); 
-    this.sidebarDashboardOpt = page.locator('.sidebar text=Dashboard, #sidebarDashboard');
-    this.sidebarMasterOpt = page.locator('.sidebar text=Master, #sidebarMaster');
-  }
+        // 1. Wait for DOM network idle / page load
+        await this.page.waitForLoadState('networkidle').catch(() => {});
 
-  // --- प्रकार १ चे ॲक्शन्स ---
-  async clickMasterHeader() {
-    await this.masterMenuHeader.waitFor({ state: 'visible', timeout: 10000 });
-    await this.masterMenuHeader.click();
-  }
+        // 2. Validate +Create Button Visibility (#hrfEmployeeCreate)
+        await this.createButton.waitFor({ state: 'attached', timeout: 20000 });
+        await this.createButton.waitFor({ state: 'visible', timeout: 20000 });
+        await expect(this.createButton).toBeVisible();
+        console.log("✅ '+Create' button (#hrfEmployeeCreate) is visible on UI.");
 
-  async verifyEmployeeAndContractorInHeader() {
-    await expect(this.employeeSubMenu).toBeVisible({ timeout: 5000 });
-    await expect(this.contractorEmployeeHeaderOpt).toBeVisible({ timeout: 5000 });
-  }
-
-  // --- प्रकार २ चे ॲक्शन्स ---
-  async verifyDashboardSectorAndBtn() {
-    await expect(this.employeeSectorWidget).toBeVisible({ timeout: 7000 });
-    await expect(this.contractorEmployeeDashboardBtn).toBeVisible({ timeout: 5000 });
-  }
-
-  // --- प्रकार ३ चे ॲक्शन्स ---
-  async clickMenuToggle() {
-    await this.menuToggleBtn.waitFor({ state: 'visible' });
-    await this.menuToggleBtn.click();
-  }
-
-  async verifySidebarOptions() {
-    await expect(this.sidebarDashboardOpt).toBeVisible({ timeout: 5000 });
-    await expect(this.sidebarMasterOpt).toBeVisible({ timeout: 5000 });
-  }
-
-  async clickDashboardFromSidebar() {
-    await this.sidebarDashboardOpt.click();
-  }
-
-  async clickMasterFromSidebar() {
-    await this.sidebarMasterOpt.click();
-  }
+        // 3. Validate Upload Button Visibility (#btnExport)
+        await this.uploadButton.waitFor({ state: 'attached', timeout: 20000 });
+        await this.uploadButton.waitFor({ state: 'visible', timeout: 20000 });
+        await expect(this.uploadButton).toBeVisible();
+        console.log("✅ 'Upload' button (#btnExport) is visible on UI.");
+    }
 }
 
 module.exports = { ContractorEmployeePage };

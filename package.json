@@ -4,19 +4,21 @@
   "description": "CLMS Automation Test Suite with Cucumber BDD and Playwright - Shift, Leave, Attendance Management",
   "main": "index.js",
   "scripts": {
-    "cucumber": "cucumber-js",
-    "cucumber:all": "cucumber-js --profile default",
-    "cucumber:shift": "cucumber-js features/shift.feature",
-    "cucumber:leave": "cucumber-js features/leave.feature",
-    "cucumber:attendance": "cucumber-js features/attendance.feature",
-    "cucumber:smoke": "cucumber-js --tags @SMOKE",
-    "cucumber:regression": "cucumber-js --tags @REGRESSION",
+    "test": "cucumber-js --profile default ; node generate-report.js",
+    "test:launch": "node pages/launch.js ; node generate-report.js",
+    "cucumber": "cucumber-js --profile default ; node generate-report.js",
+    "cucumber:all": "cucumber-js --profile default ; node generate-report.js",
+    "cucumber:shift": "cucumber-js --profile shift ; node generate-report.js",
+    "cucumber:leave": "cucumber-js --profile leave ; node generate-report.js",
+    "cucumber:attendance": "cucumber-js --profile attendance ; node generate-report.js",
+    "cucumber:smoke": "cucumber-js --profile smoke ; node generate-report.js",
+    "cucumber:regression": "cucumber-js --profile regression ; node generate-report.js",
     "cucumber:report": "node generate-report.js",
     "allure:report": "allure generate ./allure-results --clean -o ./allure-report && allure open ./allure-report",
     "allure:clean": "rimraf ./allure-results ./allure-report",
     "test:debug": "cucumber-js --dry-run",
     "start": "node server.js",
-    "clean": "rimraf ./screenshots ./videos ./hars ./test-results ./playwright-report"
+    "clean": "rimraf ./screenshots ./videos ./hars ./test-results ./playwright-report *.json *.html"
   },
   "keywords": [
     "playwright",
@@ -24,12 +26,7 @@
     "testing",
     "cucumber",
     "bdd",
-    "clms",
-    "page-object-model",
-    "allure",
-    "shift-management",
-    "leave-management",
-    "attendance-management"
+    "clms"
   ],
   "author": "QA Automation Team",
   "license": "ISC",

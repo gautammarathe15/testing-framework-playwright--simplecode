@@ -1,15 +1,14 @@
-
 /**
  * HOOKS - Test Lifecycle Hooks
- * Tier 2 - Step Definitions & Lifecycle Hooks
- * Handles setup, teardown, and Allure reporting
+ * Handles setup, teardown, and reporting
  */
 
-const { Before, After, BeforeAll, AfterAll, Status } = require('@cucumber/cucumber');
+const { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } = require('@cucumber/cucumber');
 const { chromium, firefox, webkit } = require('@playwright/test');
-const allure = require('allure-playwright');
-const path = require('path');
 const fs = require('fs');
+
+// 🟢 1. सेट Global Timeout to 30 Seconds (इथे सेट केल्यामुळे सर्व स्टेप्सला स्वतंत्रपणे टाइमआऊट द्यावा लागणार नाही)
+setDefaultTimeout(30000);
 
 // Global browser instance
 let browser;
@@ -19,117 +18,85 @@ let browser;
  */
 BeforeAll(async function() {
     const browserType = process.env.BROWSER || 'chromium';
+    const isHeadless = process.env.HEADLESS === 'true'; 
     
     switch(browserType.toLowerCase()) {
         case 'firefox':
-            browser = await firefox.launch({ headless: process.env.HEADLESS !== 'false' });
+            browser = await firefox.launch({ headless: isHeadless });
             break;
         case 'webkit':
-            browser = await webkit.launch({ headless: process.env.HEADLESS !== 'false' });
+            browser = await webkit.launch({ headless: isHeadless });
             break;
         case 'chromium':
         default:
-            browser = await chromium.launch({ headless: process.env.HEADLESS !== 'false' });
+            browser = await chromium.launch({ 
+                headless: isHeadless,  
+                channel: 'chrome'
+            });
+            break;
     }
     
-    console.log(`Browser launched: ${browserType}`);
+    console.log(`🚀 Global Browser Launched: ${browserType}`);
 });
 
 /**
  * Before - Setup before each scenario
  */
-Before(async function() {
-    // Create new page context for each scenario
+Before(async function(scenario) {
     this.context = await browser.newContext({
-        recordVideo: process.env.RECORD_VIDEO === 'true' ? { dir: './videos' } : undefined,
-        recordHar: { path: './hars/request.har' }
+        recordVideo: process.env.RECORD_VIDEO === 'true' ? { dir: './videos' } : undefined
     });
     
     this.page = await this.context.newPage();
-    
-    // Set viewport
     await this.page.setViewportSize({ width: 1280, height: 720 });
     
-    // Enable Allure screenshot on every action
-    allure.attachScreenshot(this.page);
-    
-    // Navigate to base URL
-    const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    await this.page.goto(baseUrl, { waitUntil: 'networkidle' }).catch(() => {
-        // Continue even if URL is not available
-    });
-    
-    // Add Allure step tracking
-    this.allure = allure;
-    this.scenarioName = this.pickle.name;
+    this.scenarioName = scenario?.pickle?.name || 'Unnamed_Scenario';
+    console.log(`\n▶️ Starting Scenario: ${this.scenarioName}`);
 });
 
 /**
- * After - Cleanup after each scenario
+ * After - Cleanup after each scenario & handle failure reporting
  */
 After(async function(scenario) {
-    // Attach screenshot on failure
-    if (scenario.result.status === Status.FAILED) {
-        const screenshot = await this.page.screenshot({ 
-            path: `./screenshots/${scenario.pickle.name.replace(/\s+/g, '_')}_failure.png`,
-            fullPage: true 
-        });
+    const scenarioName = scenario?.pickle?.name || this.scenarioName || 'Unnamed_Scenario';
+    const status = scenario?.result?.status;
+
+    // टेस्ट फेल झाल्यास स्क्रीनशॉट काढणे आणि रिपोर्टला अटॅच करणे
+    if (status === Status.FAILED) {
+        const sanitizedTitle = scenarioName.replace(/[^a-zA-Z0-9]/g, '_');
+        const screenshotPath = `./screenshots/${sanitizedTitle}_failure.png`;
         
-        allure.addAttachment(
-            'Failure Screenshot',
-            screenshot,
-            'image/png'
-        );
-        
-        // Attach console logs
-        const logs = await this.page.evaluate(() => {
-            return JSON.stringify(window.__consoleLogs || []);
-        }).catch(() => '[]');
-        
-        allure.addAttachment(
-            'Console Logs',
-            logs,
-            'application/json'
-        );
+        if (!fs.existsSync('./screenshots')) {
+            fs.mkdirSync('./screenshots', { recursive: true });
+        }
+
+        if (this.page) {
+            // १. स्क्रीनशॉट डिस्कवर सेव्ह करा
+            const imgBuffer = await this.page.screenshot({ 
+                path: screenshotPath, 
+                fullPage: true 
+            });
+            console.log(`❌ Scenario Failed. Screenshot saved at: ${screenshotPath}`);
+
+            // २. Cucumber HTML रिपोर्टसाठी इमेज अटॅच करा
+            await this.attach(imgBuffer, 'image/png');
+        }
     }
-    
-    // Attach HAR file for debugging
-    const harPath = './hars/request.har';
-    if (fs.existsSync(harPath)) {
-        const harContent = fs.readFileSync(harPath, 'utf-8');
-        allure.addAttachment(
-            'Network HAR',
-            harContent,
-            'application/json'
-        );
-    }
-    
-    // Add test metadata
-    allure.addLabel('feature', scenario.pickle.tags[0]?.name || 'General');
-    allure.addLabel('story', scenario.pickle.name);
-    allure.addLabel('browser', process.env.BROWSER || 'chromium');
-    allure.addLabel('environment', process.env.ENV || 'staging');
-    
-    // Close page and context
-    await this.page.close();
-    await this.context.close();
+
+    if (this.page) await this.page.close();
+    if (this.context) await this.context.close();
 });
 
 /**
- * AfterAll - Cleanup after all tests
+ * AfterAll - Cleanup after all tests completed
  */
 AfterAll(async function() {
     if (browser) {
         await browser.close();
-        console.log('Browser closed');
+        console.log('🔒 Global Browser Closed');
     }
 });
 
-/**
- * Global error handler
- */
 process.on('unhandledRejection', (reason, promise) => {
     console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
-
-module.exports = { browser };

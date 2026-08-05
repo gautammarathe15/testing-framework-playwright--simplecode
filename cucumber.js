@@ -4,20 +4,28 @@
  * Supports multiple reporting formats: Cucumber HTML & Allure Reports
  */
 
+// Common loader for step definitions to prevent duplication
+const commonRequire = [
+  './features/step_definitions/*.js',
+  './features/step_definitions/**/*.js',
+  './features/support/*.js',
+  './features/support/**/*.js'
+];
+
+const commonPaths = [
+  './features/**/*.feature'
+];
+
 module.exports = {
   // Default Configuration Profile
   default: {
-    require: [
-      // 🎯 FIXED: Dynamic pattern to auto-load both 'login.steps.js' and your new 'master.steps.js'
-      'features/step_definitions/*.steps.js', 
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths, 
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report.html',
       'json:cucumber-report.json',
       'junit:cucumber-results.xml',
-      '@cucumber/pretty',
     ],
     formatOptions: {
       snippetInterface: 'async-await',
@@ -37,14 +45,13 @@ module.exports = {
 
   // Shift Module Tests
   shift: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-shift.html',
-      'json:./allure-results/shift-report.json',
+      'json:cucumber-report.json',
+      'json:cucumber-report-shift.json'
     ],
     tags: '@SHIFT',
     parallel: 1,
@@ -53,14 +60,13 @@ module.exports = {
 
   // Leave Module Tests
   leave: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-leave.html',
-      'json:./allure-results/leave-report.json',
+      'json:cucumber-report.json',
+      'json:cucumber-report-leave.json'
     ],
     tags: '@LEAVE',
     parallel: 1,
@@ -69,14 +75,13 @@ module.exports = {
 
   // Attendance Module Tests
   attendance: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-attendance.html',
-      'json:./allure-results/attendance-report.json',
+      'json:cucumber-report.json',
+      'json:cucumber-report-attendance.json'
     ],
     tags: '@ATTENDANCE',
     parallel: 1,
@@ -85,14 +90,12 @@ module.exports = {
 
   // Smoke Tests
   smoke: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-smoke.html',
-      'json:./allure-results/smoke-report.json',
+      'json:cucumber-report.json'
     ],
     tags: '@SMOKE',
     parallel: 1,
@@ -101,14 +104,12 @@ module.exports = {
 
   // Regression Tests
   regression: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-regression.html',
-      'json:./allure-results/regression-report.json',
+      'json:cucumber-report.json'
     ],
     tags: '@REGRESSION or @MODULE',
     parallel: 1,
@@ -117,14 +118,12 @@ module.exports = {
 
   // API Testing Profile
   api: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-api.html',
-      'json:cucumber-report-api.json',
+      'json:cucumber-report.json'
     ],
     tags: '@api',
     parallel: 1,
@@ -132,14 +131,12 @@ module.exports = {
 
   // Negative Scenario Profile
   negative: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-negative.html',
-      'json:cucumber-report-negative.json',
+      'json:cucumber-report.json'
     ],
     tags: '@negative',
     parallel: 1,
@@ -147,14 +144,12 @@ module.exports = {
 
   // Accessibility Testing Profile
   accessibility: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'html:cucumber-report-accessibility.html',
-      'json:cucumber-report-accessibility.json',
+      'json:cucumber-report.json'
     ],
     tags: '@accessibility',
     parallel: 1,
@@ -162,10 +157,8 @@ module.exports = {
 
   // Debug Profile
   debug: {
-    require: [
-      'features/step_definitions/*.steps.js',
-      'features/support/**/*.js',
-    ],
+    paths: commonPaths,
+    require: commonRequire,
     format: [
       'progress-bar',
       'usage:usage.txt',
