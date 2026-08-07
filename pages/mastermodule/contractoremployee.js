@@ -40,6 +40,16 @@ class ContractorEmployeePage {
         await expect(this.uploadButton).toBeVisible();
         console.log("✅ 'Upload' button (#btnExport) is visible on UI.");
     }
+
+    /**
+     * Clicks on the +Create button (#hrfEmployeeCreate)
+     */
+    async clickCreateButton() {
+        console.log("👆 Clicking on '+Create' button...");
+        await this.createButton.waitFor({ state: 'visible', timeout: 20000 });
+        await this.createButton.click();
+        console.log("✅ Clicked on '+Create' button successfully.");
+    }
 }
 
 module.exports = { ContractorEmployeePage };
