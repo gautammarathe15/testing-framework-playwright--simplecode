@@ -6,57 +6,76 @@
  */
 
 const { Given, When, Then } = require('@cucumber/cucumber');
-const { CLMSDashboardPage } = require('../../pages/clmsdashboard.js');
 const { ContractorEmployeePage } = require('../../pages/mastermodule/contractorEmployee.js');
 
-// १. Contractor Employee पेजवर नेव्हिगेट करणे
 When('User clicks on the Contractor Employee menu option', { timeout: 120000 }, async function () {
-    console.log("👉 Navigating to Contractor Employee section...");
+    const currentUrl = this.page.url();
+    let targetUrl;
 
-    if (!this.clmsDashboardPage) {
-        this.clmsDashboardPage = new CLMSDashboardPage(this.page);
+    if (currentUrl.includes('/app/')) {
+        const baseUrl = currentUrl.substring(0, currentUrl.indexOf('/app/'));
+        targetUrl = `${baseUrl}/app/Employee/Index`;
+    } else {
+        targetUrl = 'http://192.168.40.115/CLMS_ENT_5.5/app/Employee/Index';
     }
 
-    const currentUrl = this.page.url();
-    const baseUrl = currentUrl.substring(0, currentUrl.indexOf('/app/')); 
-    const targetUrl = `${baseUrl}/app/Employee/Index`;
-
-    console.log(`🌐 Direct Navigating to: ${targetUrl}`);
     await this.page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-
-    console.log("✅ Successfully navigated to Contractor Employee Page!");
-
-    // Page object इनिशियलाईझ करा
     this.contractorEmployeePage = new ContractorEmployeePage(this.page);
 });
 
-// २. फक्त '+Create' आणि Upload बटणे Visible आहेत का ते तपासणे
-Then('User should see the Create and Upload options on the Contractor Employee page', { timeout: 60000 }, async function () {
-    console.log("🔍 Verifying Create and Upload options visibility...");
-
-    if (!this.contractorEmployeePage) {
-        this.contractorEmployeePage = new ContractorEmployeePage(this.page);
-    }
-
-    await this.contractorEmployeePage.verifyCreateAndUploadOptionsVisible();
-    console.log("✅ Visibility verified successfully!");
-});
-
-// ३. '+Create' बटणावर क्लिक करणे (नवीन सिनेरियोसाठी)
 When('User clicks on the Create button', { timeout: 60000 }, async function () {
-    console.log("👆 Clicking on '+Create' button...");
-
     if (!this.contractorEmployeePage) {
         this.contractorEmployeePage = new ContractorEmployeePage(this.page);
     }
-
     await this.contractorEmployeePage.clickCreateButton();
 });
 
-// ४. क्लिक केल्यावर Playwright Inspector उघडणे
+Then('User should see the Create and Upload options on the Contractor Employee page', async function () {
+    await this.contractorEmployeePage.verifyCreateAndUploadOptionsVisible();
+});
+
+// Pop-up Steps
+When('User clicks on the Close symbol on popup', async function () {
+    await this.contractorEmployeePage.clickCloseSymbol();
+});
+
+When('User clicks on the Close button on popup', async function () {
+    await this.contractorEmployeePage.clickCloseButton();
+});
+
+Then('User should see the Create button on the Contractor Employee page', async function () {
+    await this.contractorEmployeePage.verifyCreateButtonVisible();
+});
+
+Then('User should see the Upload button on the Contractor Employee page', async function () {
+    await this.contractorEmployeePage.verifyUploadButtonVisible();
+});
+
+// Dynamic Aadhaar Input Steps
+Then('User verifies Aadhaar Card input field is visible', async function () {
+    await this.contractorEmployeePage.verifyAadhaarInputVisible();
+});
+
+When('User enters Aadhaar number {string}', async function (aadhaarNo) {
+    if (!this.contractorEmployeePage) {
+        this.contractorEmployeePage = new ContractorEmployeePage(this.page);
+    }
+    await this.contractorEmployeePage.enterAadhaarNumber(aadhaarNo);
+});
+
+When('User clicks on the Verify link if visible', async function () {
+    await this.contractorEmployeePage.clickVerifyLinkIfVisible();
+});
+
+// Submit आणि Skip Verification व्हॅलिडेशन स्टेप
+Then('User should see Submit and Skip Verification options and click Skip Verification', async function () {
+    if (!this.contractorEmployeePage) {
+        this.contractorEmployeePage = new ContractorEmployeePage(this.page);
+    }
+    await this.contractorEmployeePage.verifyButtonsAndClickSkipVerification();
+});
+
 Then('Playwright Inspector should open for further recording', { timeout: 300000 }, async function () {
-    console.log("⏸️ Clicked on '+' button. Playwright Inspector is now open...");
-    
-    // इथे Playwright Inspector विंडो उघडेल
+    console.log("⏸️ Opening Playwright Inspector...");
     await this.page.pause();
 });

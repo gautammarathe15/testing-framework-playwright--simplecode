@@ -6,7 +6,7 @@
         "description": "",
         "id": "contractor-employee-master-verification;verify-create-and-upload-options-are-visible-on-contractor-employee-page",
         "keyword": "Scenario",
-        "line": 10,
+        "line": 9,
         "name": "Verify Create and Upload options are visible on Contractor Employee Page",
         "steps": [
           {
@@ -14,72 +14,72 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 143450399
+              "duration": 138620300
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 5,
+            "line": 4,
             "name": "User opens the CLMS login application page",
             "match": {
               "location": "features\\step_definitions\\login.steps.js:19"
             },
             "result": {
               "status": "passed",
-              "duration": 3095114700
+              "duration": 159075200
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 6,
+            "line": 5,
             "name": "User enters username \"admin\" and password \"sa\"",
             "match": {
               "location": "features\\step_definitions\\login.steps.js:25"
             },
             "result": {
               "status": "passed",
-              "duration": 32956400
+              "duration": 35500400
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 7,
+            "line": 6,
             "name": "User clicks on the Login button",
             "match": {
               "location": "features\\step_definitions\\login.steps.js:41"
             },
             "result": {
               "status": "passed",
-              "duration": 459526900
+              "duration": 168252100
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 11,
+            "line": 10,
             "name": "User clicks on the Contractor Employee menu option",
             "match": {
-              "location": "features\\step_definitions\\master.steps.js:13"
+              "location": "features\\step_definitions\\master.steps.js:11"
             },
             "result": {
               "status": "passed",
-              "duration": 116635400
+              "duration": 588006199
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 12,
+            "line": 11,
             "name": "User should see the Create and Upload options on the Contractor Employee page",
             "match": {
-              "location": "features\\step_definitions\\master.steps.js:34"
+              "location": "features\\step_definitions\\master.steps.js:33"
             },
             "result": {
               "status": "passed",
-              "duration": 1247077200
+              "duration": 100716099
             }
           },
           {
@@ -87,7 +87,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16402199
+              "duration": 17884400
             }
           }
         ],
@@ -98,7 +98,7 @@
         "description": "",
         "id": "contractor-employee-master-verification;click-on-create-button-and-inspect-elements",
         "keyword": "Scenario",
-        "line": 15,
+        "line": 14,
         "name": "Click on Create button and inspect elements",
         "steps": [
           {
@@ -106,85 +106,85 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 123521799
+              "duration": 97011800
             }
           },
           {
             "arguments": [],
             "keyword": "Given ",
-            "line": 5,
+            "line": 4,
             "name": "User opens the CLMS login application page",
             "match": {
               "location": "features\\step_definitions\\login.steps.js:19"
             },
             "result": {
               "status": "passed",
-              "duration": 107501699
+              "duration": 105039400
             }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "line": 6,
+            "line": 5,
             "name": "User enters username \"admin\" and password \"sa\"",
             "match": {
               "location": "features\\step_definitions\\login.steps.js:25"
             },
             "result": {
               "status": "passed",
-              "duration": 29982100
+              "duration": 27251400
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
-            "line": 7,
+            "line": 6,
             "name": "User clicks on the Login button",
             "match": {
               "location": "features\\step_definitions\\login.steps.js:41"
             },
             "result": {
               "status": "passed",
-              "duration": 111431899
+              "duration": 93319500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112875500
             }
           },
           {
             "arguments": [],
             "keyword": "And ",
             "line": 16,
-            "name": "User clicks on the Contractor Employee menu option",
-            "match": {
-              "location": "features\\step_definitions\\master.steps.js:13"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 103869099
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 17,
             "name": "User clicks on the Create button",
             "match": {
-              "location": "features\\step_definitions\\master.steps.js:46"
+              "location": "features\\step_definitions\\master.steps.js:26"
             },
             "result": {
               "status": "passed",
-              "duration": 85097200
+              "duration": 95056799
             }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "line": 18,
+            "line": 17,
             "name": "Playwright Inspector should open for further recording",
             "match": {
-              "location": "features\\step_definitions\\master.steps.js:57"
+              "location": "features\\step_definitions\\master.steps.js:78"
             },
             "result": {
               "status": "passed",
-              "duration": 12238363700
+              "duration": 3862371599
             }
           },
           {
@@ -192,7 +192,544 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 7131565199
+              "duration": 2004954099
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-master-verification;verify-clicking-close-symbol-on-popup-returns-to-main-ui-with-create-button",
+        "keyword": "Scenario",
+        "line": 20,
+        "name": "Verify clicking close symbol on popup returns to main UI with Create button",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 103465200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114379300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28661000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 137384200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103263299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116477399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "User clicks on the Close symbol on popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 500477599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "User should see the Create button on the Contractor Employee page",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:46"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3690399
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28338499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-master-verification;verify-clicking-close-button-on-popup-returns-to-main-ui-with-upload-button",
+        "keyword": "Scenario",
+        "line": 27,
+        "name": "Verify clicking Close button on popup returns to main UI with Upload button",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84553799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 120882900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25922999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 98329900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 121147499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83926199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "User clicks on the Close button on popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 520498900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "User should see the Upload button on the Contractor Employee page",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:50"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4003800
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24051099
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-master-verification;enter-aadhaar-number-dynamically-and-click-verify-on-popup",
+        "keyword": "Scenario Outline",
+        "line": 44,
+        "name": "Enter Aadhaar number dynamically and click Verify on popup",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 91169299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114809999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24805599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 131109099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107962799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 36,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94715399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 37,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 216051499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 38,
+            "name": "User enters Aadhaar number \"895645893029\"",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:59"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20407800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 342067500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "Playwright Inspector should open for further recording",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1782995899
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1532201199
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-master-verification;verify-submit-and-skip-verification-options-after-clicking-verify",
+        "keyword": "Scenario Outline",
+        "line": 58,
+        "name": "Verify Submit and Skip Verification options after clicking Verify",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 98855700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113218999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 34451900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 97634000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 104933900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 49,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106285599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 50,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 216660400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 51,
+            "name": "User enters Aadhaar number \"789023321278\"",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:59"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 21987900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 52,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 329219900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 53,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 73047000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 54,
+            "name": "Playwright Inspector should open for further recording",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2260689599
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1795451499
             }
           }
         ],
@@ -201,11 +738,4952 @@
       }
     ],
     "id": "contractor-employee-master-verification",
-    "line": 2,
+    "line": 1,
     "keyword": "Feature",
     "name": "Contractor Employee Master Verification",
     "tags": [],
     "uri": "features\\contractoremployee.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-all-tabs,-sections,-and-fields-on-contractor-employee-form",
+        "keyword": "Scenario",
+        "line": 8,
+        "name": "Verify all tabs, sections, and fields on Contractor Employee Form",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 105126400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 115268399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28465000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 207394700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 120307600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 90802200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 214990700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11823200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 313962800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63250700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "User pauses execution for locator inspection",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2782533300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "User should see all form tabs sections and input fields on Contractor Employee page",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15848916000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2258581899
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 32,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 109267899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123124000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29034899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127010499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127408300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84632700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 213318399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13515399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 315645199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 64857800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Deployment\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 413802799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10359499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3133732799
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 36528700
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 33,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87759899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 131661499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26859299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1430920700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123969900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2272578199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 256291999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29514800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 259363600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 156306599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Reporting Manager\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 446860699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20597499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3161278100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 33464800
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 34,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84432500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119233599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29326200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 254253499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105775399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 77921499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217830600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 16451900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 293591099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83439600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Shift\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 412688300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10363499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3139385099
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 28475600
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 35,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 92704799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 123413100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29916499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 148467800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110801200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 88111800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 212362700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19922100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 308572399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 71949499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Card\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 413966999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9734899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3135382999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 26765999
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 36,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 89894099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 111465400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27166599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 129558300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 101917900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 71857199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 210028900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10843099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 297931599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75439299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Week Off\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 414742400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9468999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3126698100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 20382199
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 37,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 109311399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106154800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24878700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130058600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112198199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85034299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 210618799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13933399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 298617799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 86184099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Other Detail\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 412842600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10016100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3133898900
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24898600
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 38,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 92628799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103987500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24915599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116224900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114667199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87386200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 201826000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12830100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 429037599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84363899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Address\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 411674199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10203399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3132270000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 25124200
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 39,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87660400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116080400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22702599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 188888700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112786299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 76085899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 219914999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12004300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 300464900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80242600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Family Member\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 411133199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9547099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3140618700
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 19739500
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 40,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 91932000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108620600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23532900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103633600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106499400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112216700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 221759099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13138900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 288721000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79253200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Qualification\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 424287299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9739400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3269187000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 23954699
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 41,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 90043399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102578199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25793600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119267200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108600699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79930500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 212735499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 14460500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 303459599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80962299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Experience\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 412007000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10278099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3132099399
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 25590299
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 42,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 90442999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110811099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25308099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119519000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 99789100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75141600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 204040399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12045299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 415285399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80464100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Training\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 407736499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10064999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3267067699
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 17593700
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 43,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 95539199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113159699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25408700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112952400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107175499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80105400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 218682999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12563099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 300834700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80043799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Document\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 414196900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9637499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3129569799
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 27692200
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 44,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 97627399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102564699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24006300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108848599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102156399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 69177700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 220879000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15611799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 279653699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79567799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Assets/PPE\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 414601299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9737200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3130928899
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 19034300
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 45,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 91651499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108052400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25659299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116563199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 117600500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 73504400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217737399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11395900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 281102799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80415399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Salary Allocation\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 414402800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9609599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3126340599
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 22620500
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 46,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94436000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130514599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22511299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2822734599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106502200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1012906999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 223357600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15157000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 335146699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 60555999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Penalty / Fine\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 359107600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10385599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3259248999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 18960600
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 47,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 84581599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107475300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27642200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 194189199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110383799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 64467100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 204085900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12099499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 417030400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80012000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Assign Work Order\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 395615900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10146999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3140874700
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 27104200
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 48,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 90435299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102059600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24604300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 111681400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108172099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 74025800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 214595699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13594300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 298238699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 86860999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Nomination\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 413032399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10395699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3131541500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24264600
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 49,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 90789699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 109518799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24342800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 105994000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 101989299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75882600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 202373800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13831600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 276677299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 82042699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Medical Checkup\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 414690400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10492499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3125194499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24207200
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 50,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94292900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 109749699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25394400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 109986500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108481899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83395000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 209141999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10679199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 271865200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83469299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Disciplinary Action\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 393521899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10459300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3256476900
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 23269199
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 51,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 89730400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 100123300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27285000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110697799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 101924100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 72957699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 207613400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12589000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 293569199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 81648900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Police Verification\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 414792400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9784199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3138694600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24329599
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 52,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94730000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102554600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23941199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 131440899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112297200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84978399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 214061000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11924700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 285143899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83913199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Project Salary\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 413437500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9851199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3132371299
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 26499400
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 53,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87399199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102750599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26004700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135987900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107979300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75305699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 222481300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13133999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 295462400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 82333599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Employee Accident Register\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 430975500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9677800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3129338500
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 23945600
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-\"please-first-create-employee\"-popup-for-all-restricted-tabs",
+        "keyword": "Scenario Outline",
+        "line": 54,
+        "name": "Verify \"please First Create Employee\" popup for all restricted tabs",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94495999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 109093099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25027600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 115612800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 111998500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 88040399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 219507000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11438900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 277120500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 84001699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on the \"Onboarding Fields\" tab without filling basic employee details",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:103"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 373363300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "A validation popup with message \"please First Create Employee\" should appear",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10668499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User clicks the \"OK\" button on the popup to dismiss it",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3254644200
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 17535799
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Regression",
+            "line": 18
+          },
+          {
+            "name": "@Smoke",
+            "line": 18
+          },
+          {
+            "name": "@Validation",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-detailed-form-verification-and-validations;verify-check-verification-section-expand,-collapse-and-field-interaction-functionality",
+        "keyword": "Scenario",
+        "line": 56,
+        "name": "Verify Check Verification section expand, collapse and field interaction functionality",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 93567199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 104914099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "User enters username \"Green\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25319199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 124093499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 57,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103533100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 58,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 411461500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 59,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:55"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 214816300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 60,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 17092699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 61,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 309208299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 62,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:71"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87435800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 63,
+            "name": "User expands the Check Verification section if collapsed",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1365454700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 64,
+            "name": "User verifies and interacts with Background Checked and Medical Check Up fields",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:63"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26440000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "remarkBackground",
+                      "Background check verified successfully"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "remarkMedical",
+                      "Medical checkup completed fine"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 65,
+            "name": "User verifies editable remark fields with dynamic inputs:",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:67"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26360099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 68,
+            "name": "User collapses the Check Verification section",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:75"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1082021300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 69,
+            "name": "Verification sub-fields should not be visible",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 547500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 70,
+            "name": "User expands the Check Verification section again",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:83"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 866277200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 71,
+            "name": "Previously entered remark data should be retained",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:87"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 440499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 19205600
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "contractor-employee-detailed-form-verification-and-validations",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Contractor Employee Detailed Form Verification and Validations",
+    "tags": [],
+    "uri": "features\\contractorEmployeeDetails.feature"
   },
   {
     "description": "",
@@ -222,7 +5700,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 112528800
+              "duration": 85547099
             }
           },
           {
@@ -235,7 +5713,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 154652999
+              "duration": 108141999
             }
           },
           {
@@ -248,7 +5726,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 19297599
+              "duration": 18038800
             }
           },
           {
@@ -261,7 +5739,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 7306100
+              "duration": 3391199
             }
           },
           {
@@ -269,7 +5747,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 19232700
+              "duration": 17343200
             }
           }
         ],
@@ -288,7 +5766,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 79934599
+              "duration": 97342999
             }
           },
           {
@@ -301,7 +5779,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 117244900
+              "duration": 100054999
             }
           },
           {
@@ -314,7 +5792,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 29501800
+              "duration": 22678199
             }
           },
           {
@@ -327,7 +5805,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 562962600
+              "duration": 106314000
             }
           },
           {
@@ -340,7 +5818,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 271025599
+              "duration": 238360999
             }
           },
           {
@@ -348,7 +5826,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 16935800
+              "duration": 18183500
             }
           }
         ],
@@ -367,7 +5845,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 84746899
+              "duration": 92098999
             }
           },
           {
@@ -380,7 +5858,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 135846699
+              "duration": 109619099
             }
           },
           {
@@ -393,7 +5871,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 27773100
+              "duration": 25262400
             }
           },
           {
@@ -406,7 +5884,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 366273000
+              "duration": 124892699
             }
           },
           {
@@ -419,7 +5897,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 218853900
+              "duration": 231091500
             }
           },
           {
@@ -427,7 +5905,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 21408899
+              "duration": 18870499
             }
           }
         ],
@@ -446,7 +5924,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 79608499
+              "duration": 93289799
             }
           },
           {
@@ -459,7 +5937,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 107711499
+              "duration": 109052999
             }
           },
           {
@@ -472,7 +5950,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 29725200
+              "duration": 26902000
             }
           },
           {
@@ -485,7 +5963,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 151544399
+              "duration": 122389400
             }
           },
           {
@@ -498,7 +5976,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 211895000
+              "duration": 216207099
             }
           },
           {
@@ -506,7 +5984,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 17554900
+              "duration": 17332699
             }
           }
         ],
@@ -525,7 +6003,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 82415799
+              "duration": 92029600
             }
           },
           {
@@ -538,7 +6016,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 106375500
+              "duration": 101236799
             }
           },
           {
@@ -551,7 +6029,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 29168300
+              "duration": 21577599
             }
           },
           {
@@ -564,7 +6042,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 104657699
+              "duration": 111323300
             }
           },
           {
@@ -577,7 +6055,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 48866200
+              "duration": 27222000
             }
           },
           {
@@ -585,7 +6063,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 18493400
+              "duration": 17216699
             }
           }
         ],
@@ -604,7 +6082,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 86896300
+              "duration": 87219199
             }
           },
           {
@@ -617,7 +6095,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 104691299
+              "duration": 108901699
             }
           },
           {
@@ -630,7 +6108,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 27779100
+              "duration": 24114900
             }
           },
           {
@@ -643,7 +6121,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 117286599
+              "duration": 95652100
             }
           },
           {
@@ -656,7 +6134,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 33591899
+              "duration": 26000199
             }
           },
           {
@@ -664,7 +6142,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 18818299
+              "duration": 18227499
             }
           }
         ],
@@ -683,7 +6161,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 87218100
+              "duration": 92899799
             }
           },
           {
@@ -696,7 +6174,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 110541799
+              "duration": 108303299
             }
           },
           {
@@ -709,7 +6187,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 26462899
+              "duration": 24480999
             }
           },
           {
@@ -722,7 +6200,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 130758499
+              "duration": 92943399
             }
           },
           {
@@ -735,7 +6213,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 42800699
+              "duration": 25541200
             }
           },
           {
@@ -743,7 +6221,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 18732500
+              "duration": 18125800
             }
           }
         ],
