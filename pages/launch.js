@@ -84,7 +84,6 @@ const scenariosData = require('../utilities/testData.json');
     const fpContext = await fpBrowser.newContext();
     const fpPage = await fpContext.newPage();
     const fpLoginPage = new CLMSLoginPage(fpPage);
-    await this.page.pause();
 
     try {
         await fpLoginPage.openUrl();

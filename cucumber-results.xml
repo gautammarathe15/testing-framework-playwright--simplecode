@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<testsuite failures="0" skipped="0" name="cucumber-js" time="166.752473673" tests="38">
-  <testcase classname="Contractor Employee Master Verification" name="Verify Create and Upload options are visible on Contractor Employee Page" time="1.208054698">
+<testsuite failures="1" skipped="0" name="cucumber-js" time="285.95980737499997" tests="49">
+  <testcase classname="Contractor Employee Master Verification" name="Verify Create and Upload options are visible on Contractor Employee Page" time="4.765065795">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
 And User clicks on the Contractor Employee menu option....................passed
 Then User should see the Create and Upload options on the Contractor Em...passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Master Verification" name="Click on Create button and inspect elements" time="6.397880097">
+  <testcase classname="Contractor Employee Master Verification" name="Click on Create button and inspect elements" time="5.589320697000001">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -15,7 +15,7 @@ And User clicks on the Contractor Employee menu option....................passed
 And User clicks on the Create button......................................passed
 Then Playwright Inspector should open for further recording...............passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Master Verification" name="Verify clicking close symbol on popup returns to main UI with Create button" time="1.1361368949999997">
+  <testcase classname="Contractor Employee Master Verification" name="Verify clicking close symbol on popup returns to main UI with Create button" time="1.110885495">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -24,7 +24,7 @@ When User clicks on the Create button.....................................passed
 And User clicks on the Close symbol on popup..............................passed
 Then User should see the Create button on the Contractor Employee page....passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Master Verification" name="Verify clicking Close button on popup returns to main UI with Upload button" time="1.083317095">
+  <testcase classname="Contractor Employee Master Verification" name="Verify clicking Close button on popup returns to main UI with Upload button" time="1.1434129940000002">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -33,7 +33,7 @@ When User clicks on the Create button.....................................passed
 And User clicks on the Close button on popup..............................passed
 Then User should see the Upload button on the Contractor Employee page....passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Master Verification" name="Enter Aadhaar number dynamically and click Verify on popup" time="4.458296091">
+  <testcase classname="Contractor Employee Master Verification" name="Enter Aadhaar number dynamically and click Verify on popup" time="15.427472197">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -44,7 +44,7 @@ When User enters Aadhaar number "895645893029"............................passed
 And User clicks on the Verify link if visible.............................passed
 Then Playwright Inspector should open for further recording...............passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Master Verification" name="Verify Submit and Skip Verification options after clicking Verify" time="5.252436396">
+  <testcase classname="Contractor Employee Master Verification" name="Verify Submit and Skip Verification options after clicking Verify" time="7.685426592999999">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -56,7 +56,7 @@ And User clicks on the Verify link if visible.............................passed
 Then User should see Submit and Skip Verification options and click Ski...passed
 Then Playwright Inspector should open for further recording...............passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify all tabs, sections, and fields on Contractor Employee Form" time="22.161422897999998">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify all tabs, sections, and fields on Contractor Employee Form" time="6.958117393">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -69,7 +69,7 @@ Then User should see Submit and Skip Verification options and click Ski...passed
 Then User pauses execution for locator inspection.........................passed
 Then User should see all form tabs sections and input fields on Contrac...passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs" time="4.802238891">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs" time="4.828841591">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -83,7 +83,7 @@ When User clicks on the "Deployment" tab without filling basic employee...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [1]" time="8.437427592">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [1]" time="4.820007197">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -97,7 +97,7 @@ When User clicks on the "Reporting Manager" tab without filling basic e...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [2]" time="4.873168393">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [2]" time="4.8456252950000005">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -111,7 +111,7 @@ When User clicks on the "Shift" tab without filling basic employee deta...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [3]" time="4.792072792">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [3]" time="4.774539995">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -125,7 +125,7 @@ When User clicks on the "Card" tab without filling basic employee detai...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [4]" time="4.697394092">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [4]" time="4.792690094">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -139,7 +139,7 @@ When User clicks on the "Week Off" tab without filling basic employee d...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [5]" time="4.758646293000001">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [5]" time="4.799305092999999">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -153,7 +153,7 @@ When User clicks on the "Other Detail" tab without filling basic employ...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [6]" time="4.847139593">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [6]" time="4.850992890000001">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -167,7 +167,7 @@ When User clicks on the "Address" tab without filling basic employee de...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [7]" time="4.797869594">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [7]" time="4.884348792">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -181,7 +181,7 @@ When User clicks on the "Family Member" tab without filling basic emplo...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [8]" time="4.8764757969999994">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [8]" time="4.75809169">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -195,7 +195,7 @@ When User clicks on the "Qualification" tab without filling basic emplo...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [9]" time="4.717806291">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [9]" time="5.191141694000001">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -209,7 +209,7 @@ When User clicks on the "Experience" tab without filling basic employee...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [10]" time="4.935309991">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [10]" time="4.769484092">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -223,7 +223,7 @@ When User clicks on the "Training" tab without filling basic employee d...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [11]" time="4.727561892">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [11]" time="6.701119993">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -237,7 +237,7 @@ When User clicks on the "Document" tab without filling basic employee d...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [12]" time="4.674395091">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [12]" time="5.03215059">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -251,7 +251,7 @@ When User clicks on the "Assets/PPE" tab without filling basic employee...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [13]" time="4.696656292">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [13]" time="4.791669895">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -265,7 +265,7 @@ When User clicks on the "Salary Allocation" tab without filling basic e...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [14]" time="8.471525792">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [14]" time="4.78072139">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -279,7 +279,7 @@ When User clicks on the "Penalty / Fine" tab without filling basic empl...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [15]" time="4.875708795">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [15]" time="4.780972892">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -293,7 +293,7 @@ When User clicks on the "Assign Work Order" tab without filling basic e...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [16]" time="4.703502393000001">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [16]" time="4.849459191">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -307,7 +307,7 @@ When User clicks on the "Nomination" tab without filling basic employee...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [17]" time="4.658027193">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [17]" time="5.168816791999999">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -321,7 +321,7 @@ When User clicks on the "Medical Checkup" tab without filling basic emp...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [18]" time="4.7901833929999995">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [18]" time="5.233228591999999">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -335,7 +335,7 @@ When User clicks on the "Disciplinary Action" tab without filling basic...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [19]" time="4.685739594999999">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [19]" time="4.971771093">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -349,7 +349,7 @@ When User clicks on the "Police Verification" tab without filling basic...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [20]" time="4.727144492999999">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [20]" time="4.816313491">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -363,7 +363,7 @@ When User clicks on the "Project Salary" tab without filling basic empl...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [21]" time="4.742776095">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [21]" time="4.791584194">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -377,7 +377,7 @@ When User clicks on the "Employee Accident Register" tab without fillin...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [22]" time="4.792548294">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify &quot;please First Create Employee&quot; popup for all restricted tabs [22]" time="4.771299792">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -391,7 +391,7 @@ When User clicks on the "Onboarding Fields" tab without filling basic e...passed
 Then A validation popup with message "please First Create Employee" sho...passed
 And User clicks the "OK" button on the popup to dismiss it................passed]]></system-out>
   </testcase>
-  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify Check Verification section expand, collapse and field interaction functionality" time="4.878188592">
+  <testcase classname="Contractor Employee Detailed Form Verification and Validations" name="Verify Check Verification section expand, collapse and field interaction functionality" time="5.272212092">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -409,42 +409,237 @@ Then Verification sub-fields should not be visible........................passed
 When User expands the Check Verification section again....................passed
 Then Previously entered remark data should be retained....................passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Validate Username and Password fields are visible and editable" time="0.232462297">
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify mandatory asterisk indicators and field validations on save" time="1.5687452930000003">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+Then User verifies all mandatory fields are marked with red asterisk......passed
+When User clicks on Save button without filling mandatory details.........passed
+Then System should display validation errors for required fields..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify mandatory field alert popup, handle OK, complete form and save" time="30.677463093">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User scrolls to Save button and clicks Save..........................passed
+Then System should display "Fill all mandatory fields" alert popup........passed
+When User clicks on OK button on the alert popup..........................passed
+And User fills remaining mandatory fields with the following details:.....passed
+And User selects options for all mandatory dropdowns......................passed
+And User scrolls to Save button and clicks Save...........................passed
+Then User verifies contractor employee details saved successfully.........passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify filling form fields, scrolling to save, and validating inserted data" time="12.14202009">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User fills the Contractor Employee form with the following details...passed
+And User scrolls to Save button and clicks Save...........................passed
+Then User verifies that inserted details match with displayed details.....passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify filling, saving, matching data, and editing contractor employee details" time="22.131590090000003">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User fills the Contractor Employee form with the following details...passed
+And User scrolls to Save button and clicks Save...........................passed
+Then User verifies that inserted details match with displayed details.....passed
+When User edits the form fields with updated details:.....................passed
+And User scrolls to Save button and clicks Save...........................passed
+Then User verifies updated data is correctly populated in input fields....passed
+And User verifies contractor employee details saved successfully..........passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify Birthday Calendar display, headers, and navigation" time="14.687955291">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User clicks on the Birthday input field..............................passed
+Then Birthday calendar should be displayed successfully...................passed
+And Calendar month header should be visible...............................passed
+And Previous month "«" and Next month "»" controls should be visible......passed
+When User clicks on the Previous month "«" button.........................passed
+Then Previous month details should be displayed in the calendar header....passed
+When User clicks on the Next month "»" button.............................passed
+Then Next month details should be displayed in the calendar header........passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify validation popup when employee age is less than 18 years" time="6.550460192">
+    <failure type="Error" message="[2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed&#xA;&#xA;Locator:  locator('.swal2-popup, .modal-content, .alert-danger, :has-text(&quot;18&quot;)').first()&#xA;Expected: visible&#xA;Received: hidden&#xA;Timeout:  5000ms&#xA;&#xA;Call log:&#xA;[2m  - Expect &quot;to.be.visible&quot; with timeout 5000ms[22m&#xA;[2m  - waiting for locator('.swal2-popup, .modal-content, .alert-danger, :has-text(&quot;18&quot;)').first()[22m&#xA;[2m    13 × locator resolved to &lt;div class=&quot;modal-content width-615&quot;>…&lt;/div>[22m&#xA;[2m       - unexpected value &quot;hidden&quot;[22m&#xA;"><![CDATA[Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+Locator:  locator('.swal2-popup, .modal-content, .alert-danger, :has-text("18")').first()
+Expected: visible
+Received: hidden
+Timeout:  5000ms
+
+Call log:
+[2m  - Expect "to.be.visible" with timeout 5000ms[22m
+[2m  - waiting for locator('.swal2-popup, .modal-content, .alert-danger, :has-text("18")').first()[22m
+[2m    13 × locator resolved to <div class="modal-content width-615">…</div>[22m
+[2m       - unexpected value "hidden"[22m
+
+    at captureRawStack (D:\CLMS-Automation\testing-framework-playwright--simplecode\node_modules\playwright-core\lib\coreBundle.js:9681:17)
+    at callMatcherAsStep (D:\CLMS-Automation\testing-framework-playwright--simplecode\node_modules\playwright\lib\matchers\expect.js:13310:57)
+    at Object.toBeVisible (D:\CLMS-Automation\testing-framework-playwright--simplecode\node_modules\playwright\lib\matchers\expect.js:13300:23)
+    at ContractorEmployeeDetailsPage.verifyAgePopupDisplayed (D:\CLMS-Automation\testing-framework-playwright--simplecode\pages\mastermodule\contractorEmployeeDetails.js:221:42)
+    at World.<anonymous> (D:\CLMS-Automation\testing-framework-playwright--simplecode\features\step_definitions\contractorEmployeeForm.steps.js:205:23)]]></failure>
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User selects a birth date resulting in age less than 18 years........passed
+And User scrolls to Save button and clicks Save...........................passed
+Then Validation popup indicating age restriction should be displayed......failed
+When User clicks OK on the age validation popup..........................skipped
+Then Form should not be saved and user remains on the same page..........skipped]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify successful save when employee age is greater than 18 years" time="11.340648792">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User selects a birth date resulting in age greater than 18 years.....passed
+And User scrolls to Save button and clicks Save...........................passed
+Then Age validation popup should not be displayed.........................passed
+And Contractor Employee details should be saved successfully..............passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify Contract From calendar open and month navigation controls" time="3.6048938880000008">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User clicks on Contract From date field..............................passed
+Then Contract From date calendar should be displayed successfully.........passed
+And Calendar month header should display current month....................passed
+When User clicks on previous month "«" button in Contract From calendar...passed
+Then Header should display the previous month name........................passed
+When User clicks on next month "»" button in Contract From calendar.......passed
+Then Header should display the updated month name.........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify Contract To date is auto-calculated based on Contract From date and Days" time="5.494886393999999">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User enters Contract From date as "04-Mar-2026"......................passed
+And User enters Contract Period In Days as "15"...........................passed
+Then Contract To date field should be readonly and non-editable...........passed
+And Contract To date should be auto-filled as "19-Mar-2026"...............passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify Contract To date is auto-calculated based on Contract From date and Days [1]" time="6.3716104929999995">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User enters Contract From date as "01-Jan-2026"......................passed
+And User enters Contract Period In Days as "30"...........................passed
+Then Contract To date field should be readonly and non-editable...........passed
+And Contract To date should be auto-filled as "31-Jan-2026"...............passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations" name="Verify Contract To date is auto-calculated based on Contract From date and Days [2]" time="6.126935294000001">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "Green" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+Then User verifies Aadhaar Card input field is visible....................passed
+When User enters dynamic valid Aadhaar number.............................passed
+And User clicks on the Verify link if visible.............................passed
+Then User should see Submit and Skip Verification options and click Ski...passed
+When User enters Contract From date as "10-Feb-2026"......................passed
+And User enters Contract Period In Days as "10"...........................passed
+Then Contract To date field should be readonly and non-editable...........passed
+And Contract To date should be auto-filled as "20-Feb-2026"...............passed]]></system-out>
+  </testcase>
+  <testcase classname="CLMS Login Functionality Verification" name="Validate Username and Password fields are visible and editable" time="0.267049596">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 Then User verifies that the Username input field is visible and editabl...passed
 And User verifies that the Password input field is visible and editable...passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Successful login with valid credentials (Positive Scenarios)" time="0.582934696">
+  <testcase classname="CLMS Login Functionality Verification" name="Successful login with valid credentials (Positive Scenarios)" time="0.650686898">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
 Then User should be navigated to the main application dashboard...........passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Successful login with valid credentials (Positive Scenarios) [1]" time="0.601835196">
+  <testcase classname="CLMS Login Functionality Verification" name="Successful login with valid credentials (Positive Scenarios) [1]" time="0.616063298">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Green" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
 Then User should be navigated to the main application dashboard...........passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Successful login with valid credentials (Positive Scenarios) [2]" time="0.585173996">
+  <testcase classname="CLMS Login Functionality Verification" name="Successful login with valid credentials (Positive Scenarios) [2]" time="0.594986698">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "1003" and password "sa"........................passed
 And User clicks on the Login button.......................................passed
 Then User should be navigated to the main application dashboard...........passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Unsuccessful login with invalid credentials (Negative Scenarios)" time="0.370605997">
+  <testcase classname="CLMS Login Functionality Verification" name="Unsuccessful login with invalid credentials (Negative Scenarios)" time="0.424866998">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "wrong_sa".................passed
 And User clicks on the Login button.......................................passed
 Then User should see an appropriate authentication error message..........passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Unsuccessful login with invalid credentials (Negative Scenarios) [1]" time="0.360115596">
+  <testcase classname="CLMS Login Functionality Verification" name="Unsuccessful login with invalid credentials (Negative Scenarios) [1]" time="0.38519539700000005">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "Invalid" and password "sa".....................passed
 And User clicks on the Login button.......................................passed
 Then User should see an appropriate authentication error message..........passed]]></system-out>
   </testcase>
-  <testcase classname="CLMS Login Functionality Verification" name="Unsuccessful login with invalid credentials (Negative Scenarios) [2]" time="0.362294496">
+  <testcase classname="CLMS Login Functionality Verification" name="Unsuccessful login with invalid credentials (Negative Scenarios) [2]" time="0.367659996">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "" and password ""..............................passed
 And User clicks on the Login button.......................................passed

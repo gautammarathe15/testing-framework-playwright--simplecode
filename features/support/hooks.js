@@ -1,20 +1,23 @@
 /**
- * HOOKS - Test Lifecycle Hooks
- * Handles setup, teardown, and reporting
+ * HOOKS - Test Lifecycle Management
+ * Handles setup, teardown, page objects, and reporting
  */
 
 const { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } = require('@cucumber/cucumber');
 const { chromium, firefox, webkit } = require('@playwright/test');
 const fs = require('fs');
+const path = require('path');
 
-// 🟢 1. सेट Global Timeout to 30 Seconds (इथे सेट केल्यामुळे सर्व स्टेप्सला स्वतंत्रपणे टाइमआऊट द्यावा लागणार नाही)
+// 🎯 Import Playwright config to get baseURL
+const config = require('../../playwright.config');
+
+// 🟢 Set Global Timeout to 30 Seconds
 setDefaultTimeout(30000);
 
-// Global browser instance
 let browser;
 
 /**
- * BeforeAll - Initialize browser once for all tests
+ * BeforeAll - Initialize browser instance once
  */
 BeforeAll(async function() {
     const browserType = process.env.BROWSER || 'chromium';
@@ -36,49 +39,57 @@ BeforeAll(async function() {
             break;
     }
     
-    console.log(`🚀 Global Browser Launched: ${browserType}`);
+    console.log(`🚀 Global Browser Launched: ${browserType.toUpperCase()}`);
 });
 
 /**
- * Before - Setup before each scenario
+ * Before - Setup context, page, and baseURL before each scenario
  */
 Before(async function(scenario) {
+    // 🎯 Resolve Base URL dynamically
+    const targetBaseUrl = process.env.BASE_URL || config.use?.baseURL || 'http://192.168.40.115/CLMS_ENT_5.5/app';
+
+    // 🎯 Pass baseURL inside context options
     this.context = await browser.newContext({
+        baseURL: targetBaseUrl,
         recordVideo: process.env.RECORD_VIDEO === 'true' ? { dir: './videos' } : undefined
     });
     
     this.page = await this.context.newPage();
-    await this.page.setViewportSize({ width: 1280, height: 720 });
+    await this.page.setViewportSize({ width: 1366, height: 768 });
     
+    // 🎯 Bind Page Objects here if needed (e.g., ClmsLoginPage)
+    // const { ClmsLoginPage } = require('./pages/clmsLoginPage');
+    // this.clmsLoginPage = new ClmsLoginPage(this.page);
+
     this.scenarioName = scenario?.pickle?.name || 'Unnamed_Scenario';
-    console.log(`\n▶️ Starting Scenario: ${this.scenarioName}`);
+    console.log(`\n▶️ Starting Scenario: "${this.scenarioName}"`);
 });
 
 /**
- * After - Cleanup after each scenario & handle failure reporting
+ * After - Cleanup and capture screenshots on failure
  */
 After(async function(scenario) {
     const scenarioName = scenario?.pickle?.name || this.scenarioName || 'Unnamed_Scenario';
     const status = scenario?.result?.status;
 
-    // टेस्ट फेल झाल्यास स्क्रीनशॉट काढणे आणि रिपोर्टला अटॅच करणे
     if (status === Status.FAILED) {
         const sanitizedTitle = scenarioName.replace(/[^a-zA-Z0-9]/g, '_');
-        const screenshotPath = `./screenshots/${sanitizedTitle}_failure.png`;
+        const screenshotDir = './screenshots';
+        const screenshotPath = path.join(screenshotDir, `${sanitizedTitle}_failure.png`);
         
-        if (!fs.existsSync('./screenshots')) {
-            fs.mkdirSync('./screenshots', { recursive: true });
+        if (!fs.existsSync(screenshotDir)) {
+            fs.mkdirSync(screenshotDir, { recursive: true });
         }
 
         if (this.page) {
-            // १. स्क्रीनशॉट डिस्कवर सेव्ह करा
             const imgBuffer = await this.page.screenshot({ 
                 path: screenshotPath, 
                 fullPage: true 
             });
             console.log(`❌ Scenario Failed. Screenshot saved at: ${screenshotPath}`);
 
-            // २. Cucumber HTML रिपोर्टसाठी इमेज अटॅच करा
+            // Attach screenshot to Cucumber HTML Report
             await this.attach(imgBuffer, 'image/png');
         }
     }
@@ -88,12 +99,12 @@ After(async function(scenario) {
 });
 
 /**
- * AfterAll - Cleanup after all tests completed
+ * AfterAll - Close browser after test suite completion
  */
 AfterAll(async function() {
     if (browser) {
         await browser.close();
-        console.log('🔒 Global Browser Closed');
+        console.log('🔒 Global Browser Closed Successfully');
     }
 });
 
