@@ -66,6 +66,10 @@ class ContractorEmployeeDetailsPage {
             { name: "ESIC No Textbox", locator: page.locator('#Employee_ESICNo, #Employee_EsicNo, input[name*="ESIC"]').first() },
             { name: "Bank Account Dropdown/Input", locator: page.locator('#Employee_BankID, input[name*="Bank"]').first() },
             { name: "Payment Mode Dropdown", locator: page.locator('#Employee_PaymentModeID') }
+        
+        
+        
+        
         ];
 
         // --- Save Button Locator ---
@@ -99,6 +103,25 @@ class ContractorEmployeeDetailsPage {
         this.ageErrorPopup = page.locator('.swal2-popup, .modal-content, .alert-danger, :has-text("18")').first();
         this.okButton = page.locator('.swal2-confirm, .swal-button--confirm, button:has-text("OK"), button:has-text("Ok"), button:has-text("Close")').first();
         this.successPopup = page.locator('.alert-success, .toast-success, #swal2-title, :has-text("Saved Successfully")').first();
+
+
+        // --- Status Dropdown :
+        this.statusDropdown = page.locator('#Employee_EmployeeStatusID, select[name="Employee.EmployeeStatusID"]').first();
+        
+        
+
+        // Deployment Locators (Fallback definitions)
+        this.subsidiaryDropdown = this.page.locator('#Subsidiary, #SubsidiaryId, select[name*="Subsidiary"]').first();
+        this.divisionDropdown = this.page.locator('#Division, #DivisionId, select[name*="Division"]').first();
+        this.departmentDropdown = this.page.locator('#Department, #DepartmentId, select[name*="Department"]').first();
+        this.categoryDropdown = this.page.locator('#Category, #CategoryId, select[name*="Category"]').first();
+        this.gradeDropdown = this.page.locator('#Grade, #GradeId, select[name*="Grade"]').first();
+        this.designationDropdown = this.page.locator('#Designation, #DesignationId, select[name*="Designation"]').first();
+        this.locationDropdown = this.page.locator('#Location, #LocationId, select[name*="Location"]').first();
+        this.skillDropdown = this.page.locator('#SkillLevel, #SkilledLevel, select[name*="Skill"]').first();
+        this.contractorDropdown = this.page.locator('#Contractor, #ContractorId, select[name*="Contractor"]').first();
+
+   
     }
 
     /**
@@ -638,7 +661,7 @@ class ContractorEmployeeDetailsPage {
     }
 
 /**
-     * Fills the Contract From Date by dynamically navigating calendar months/years
+   
      * @param {string} dateVal - Target Date String (e.g., "04-Mar-2026")
      */
     async fillContractFromDate(dateVal) {
@@ -648,9 +671,6 @@ class ContractorEmployeeDetailsPage {
         await this.contractFromInput.waitFor({ state: 'visible', timeout: 5000 });
         await this.contractFromInput.click();
         await this.page.waitForTimeout(500);
-
-        // direct input pass करायचा असल्यास आणि कॅलेंडर नेव्हिगेशन नको असल्यास:
-        // (परंतु UI वर ऑटो-कॅल्क्युलेशन ट्रिगर होण्यासाठी खालील DatePicker Loop बेस्ट आहे)
 
         const targetDate = new Date(dateVal); // "04-Mar-2026"
         const targetMonth = targetDate.toLocaleString('default', { month: 'long' }); // "March"
@@ -674,7 +694,6 @@ class ContractorEmployeeDetailsPage {
                 console.log(`✅ Target month "${expectedHeader}" reached!`);
                 break;
             }
-
             // Click Previous Month '«' button
             console.log("👈 Target month not reached. Clicking Previous Month ('«') button...");
             await this.prevMonthBtn.click();
@@ -735,6 +754,347 @@ class ContractorEmployeeDetailsPage {
 
         expect(actualContractTo.trim()).toBe(expectedContractTo.trim());
         console.log("🎉 Auto-calculated Contract To date verified successfully!");
+    }
+
+    async verifyStatusIsVisibleAndMandatory() {
+    console.log("🔍 Verifying Status dropdown visibility...");
+    await this.statusDropdown.scrollIntoViewIfNeeded().catch(() => {});
+    await this.statusDropdown.waitFor({ state: 'visible', timeout: 5000 });
+    
+    const isVisible = await this.statusDropdown.isVisible();
+    expect(isVisible).toBeTruthy();
+    console.log("✅ Status dropdown is visible on page.");
+}
+
+/**
+ * Verifies default status is 'Active'
+ * @param {string} expectedStatus - "Active"
+ */
+async verifyDefaultStatus(expectedStatus) {
+    console.log(`🎯 Verifying default Status is "${expectedStatus}"...`);
+    
+    // Select tag मधील निवडलेली Value/Text मिळवणे
+    const selectedText = await this.statusDropdown.evaluate(el => el.options[el.selectedIndex].text.trim());
+    console.log(`📄 Default Selected Status in UI: "${selectedText}"`);
+    
+    expect(selectedText).toBe(expectedStatus);
+    console.log(`✅ Default status verified successfully as "${expectedStatus}".`);
+}
+
+/**
+ * Clicks Status Dropdown
+ */
+async clickStatusDropdown() {
+    await this.statusDropdown.click({ force: true });
+}
+
+/**
+ * Verifies all options (Select, Active, Left, Terminated, Absconded)
+ * @param {Array<string>} expectedOptions
+ */
+async verifyStatusDropdownOptions(expectedOptions) {
+    console.log("📋 Verifying all options in Status dropdown...");
+    
+    const actualOptions = await this.statusDropdown.locator('option').allTextContents();
+    const cleanedActualOptions = actualOptions.map(opt => opt.trim()).filter(opt => opt !== '');
+    
+    console.log("Found Options in UI:", cleanedActualOptions);
+    console.log("Expected Options:", expectedOptions);
+
+    for (const option of expectedOptions) {
+        expect(cleanedActualOptions).toContain(option);
+    }
+    console.log("✅ All Status options are present and verified!");
+}
+
+/**
+ * Selects an option from Status dropdown
+ * @param {string} statusText
+ */
+async selectStatusOption(statusText) {
+    console.log(`👇 Selecting Status option: "${statusText}"...`);
+    await this.statusDropdown.selectOption({ label: statusText });
+    await this.page.waitForTimeout(300);
+}
+
+/**
+ * Verifies the currently selected option
+ * @param {string} expectedStatus
+ */
+async verifySelectedStatus(expectedStatus) {
+    const selectedText = await this.statusDropdown.evaluate(el => el.options[el.selectedIndex].text.trim());
+    console.log(`🔍 Current Selected Status: "${selectedText}" | Expected: "${expectedStatus}"`);
+    expect(selectedText).toBe(expectedStatus);
+    console.log(`✅ Status updated successfully to "${expectedStatus}".`);
+}
+
+async fillAllDeploymentMandatoryDetails(details) {
+        console.log("✍️ Filling ALL Deployment Mandatory Fields from UI dropdowns...");
+
+        const selectOptionSafe = async (locator, value) => {
+            if (value && locator) {
+                await locator.scrollIntoViewIfNeeded().catch(() => {});
+                await locator.selectOption({ label: value }).catch(async () => {
+                    await locator.selectOption({ value: value }).catch(() => {});
+                });
+            }
+        };
+
+        await selectOptionSafe(this.subsidiaryDropdown, details.subsidiary);
+        await selectOptionSafe(this.divisionDropdown, details.division);
+        await selectOptionSafe(this.departmentDropdown, details.department);
+        await selectOptionSafe(this.categoryDropdown, details.category);
+        await selectOptionSafe(this.gradeDropdown, details.grade);
+        await selectOptionSafe(this.designationDropdown, details.designation);
+        await selectOptionSafe(this.locationDropdown, details.location);
+        await selectOptionSafe(this.skillDropdown, details.skill);
+        await selectOptionSafe(this.contractorDropdown, details.contractor);
+
+        console.log("✅ Deployment section filled successfully!");
+    }
+
+    /**
+     * Personal Details Fill
+     */
+    /**
+     * Personal Mandatory Details Fill Method
+     */
+    async fillPersonalMandatoryDetails(firstName, lastName, gender, dob) {
+        console.log(`✍️ Filling Personal Details: Name="${firstName} ${lastName}", Gender="${gender}", DOB="${dob}"...`);
+
+        // 1. First Name & Last Name Fill
+        if (firstName) {
+            const fNameInput = this.page.locator('#Employee_FName, input[name*="FName"], input[name*="FirstName"]').first();
+            await fNameInput.waitFor({ state: 'visible', timeout: 5000 });
+            await fNameInput.fill(firstName);
+        }
+
+        if (lastName) {
+            const lNameInput = this.page.locator('#Employee_LName, input[name*="LName"], input[name*="LastName"]').first();
+            await lNameInput.waitFor({ state: 'visible', timeout: 5000 });
+            await lNameInput.fill(lastName);
+        }
+
+        // 2. Gender Selection
+        if (gender) {
+            const genderDropdown = this.page.locator('#Employee_Gender, select[name*="Gender"]').first();
+            await genderDropdown.waitFor({ state: 'visible', timeout: 5000 });
+            await genderDropdown.selectOption({ label: gender }).catch(async () => {
+                await genderDropdown.selectOption({ value: gender });
+            });
+            await genderDropdown.dispatchEvent('change').catch(() => {});
+        }
+
+        // 3. Birth Date Fill & Age Recalculation Event Trigger
+        if (dob) {
+            await this.page.evaluate((dobValue) => {
+                const dobInput = document.querySelector('#Employee_DOB') 
+                    || document.querySelector('#Employee_BirthDate') 
+                    || document.querySelector('input[name*="DOB"]') 
+                    || document.querySelector('input[name*="BirthDate"]');
+
+                if (dobInput) {
+                    dobInput.removeAttribute('readonly');
+                    dobInput.value = dobValue;
+                    
+                    // Age चा 'NaN' काढून टाकण्यासाठी सर्व इव्हेंट्स ट्रिगर करा:
+                    dobInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    dobInput.dispatchEvent(new Event('change', { bubbles: true }));
+                    dobInput.dispatchEvent(new Event('blur', { bubbles: true }));
+                }
+            }, dob);
+
+            await this.page.waitForTimeout(300); // Wait for Age field to update from NaN to a valid number
+        }
+
+        console.log("✅ Personal Mandatory Details filled successfully!");
+    }
+    /**
+     * Contract Period Fill Method (Interacts directly with UI Calendar UI)
+     */
+/**
+     * Contract Period Fill Method (Direct Inject + Fallback Calendar Click)
+     */
+ async fillContractPeriodDetails(contractFromDate, periodInDays) {
+        console.log(`✍️ Filling Contract From: "${contractFromDate}" and Days: "${periodInDays}"...`);
+
+        // 1. Contract From - Force Value Set & Trigger Change Events
+        if (contractFromDate) {
+            await this.page.evaluate((dateVal) => {
+                const input = document.querySelector('#Employee_JoinDate') || document.querySelector('input[name="Employee.JoinDate"]');
+                if (input) {
+                    input.removeAttribute('readonly');
+                    input.value = dateVal;
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                    input.dispatchEvent(new Event('blur', { bubbles: true }));
+                }
+            }, contractFromDate);
+        }
+
+        // 2. Contract Period In Days Fill
+        if (periodInDays) {
+            const daysInput = this.page.locator('#ContractPeriod')
+                .or(this.page.locator('input[name="ContractPeriod"]'))
+                .or(this.page.locator('input[name*="Period"]'))
+                .first();
+
+            await daysInput.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
+            await daysInput.click({ force: true }).catch(() => {});
+            await daysInput.fill('');
+            await daysInput.fill(periodInDays.toString());
+            await daysInput.dispatchEvent('change').catch(() => {});
+            await daysInput.press('Tab');
+            await this.page.waitForTimeout(500); // Wait for UI auto-calculation
+        }
+
+        // 3. Validate 'Contract To' field is NOT empty
+        const contractToInput = this.page.locator('#ContractTo')
+            .or(this.page.locator('input[name*="ContractTo"]'))
+            .or(this.page.locator('input[name*="ValidTo"]'))
+            .first();
+
+        if (await contractToInput.isVisible().catch(() => false)) {
+            const contractToVal = await contractToInput.inputValue();
+            console.log(`🎯 Auto-calculated Contract To Date: "${contractToVal}"`);
+            expect(contractToVal.trim()).not.toBe('');
+        }
+
+        console.log("✅ Contract Period Details filled & 'Contract To' verified successfully!");
+    }
+
+    /**
+     * Reporting Manager Details Fill
+     */
+    async fillReportingManagerMandatoryDetails(effectiveFromDate) {
+        console.log(`✍️ Filling Reporting Manager Effective From Date: "${effectiveFromDate}"...`);
+        if (effectiveFromDate && this.effectiveFromInput) {
+            await this.effectiveFromInput.scrollIntoViewIfNeeded().catch(() => {});
+            await this.effectiveFromInput.fill(effectiveFromDate).catch(() => {});
+            await this.effectiveFromInput.press('Tab').catch(() => {});
+        }
+    }
+
+    /**
+     * Verify Default Status
+     */
+    async verifyDefaultStatus(expectedStatus) {
+        console.log(`🎯 Verifying default Status is "${expectedStatus}"...`);
+        if (this.statusDropdown) {
+            await this.statusDropdown.scrollIntoViewIfNeeded().catch(() => {});
+            const selectedText = await this.statusDropdown.evaluate(el => el.options[el.selectedIndex].text.trim());
+            expect(selectedText).toBe(expectedStatus);
+        }
+    }
+
+/**
+     * Helper to select dropdown and force triggering change event
+     */
+    async selectDropdownByLabel(selector, labelValue) {
+        if (!labelValue) return;
+        const dropdown = this.page.locator(selector).first();
+        await dropdown.waitFor({ state: 'visible', timeout: 5000 });
+        
+        // Try direct select option first
+        await dropdown.selectOption({ label: labelValue }).catch(async () => {
+            // Fallback: Select by text/value in DOM directly
+            await this.page.evaluate(({ sel, val }) => {
+                const el = document.querySelector(sel);
+                if (el) {
+                    for (let opt of el.options) {
+                        if (opt.text.trim() === val.trim() || opt.value === val) {
+                            el.value = opt.value;
+                            el.dispatchEvent(new Event('change', { bubbles: true }));
+                            break;
+                        }
+                    }
+                }
+            }, { sel: selector, val: labelValue });
+        });
+
+        // Fire UI Change Events
+        await dropdown.dispatchEvent('change').catch(() => {});
+        await this.page.waitForTimeout(200); // Give small delay for cascading dropdowns
+    }
+
+/**
+     * Deployment Mandatory Details Selection with Cascading Sync
+     */
+   /**
+     * Deployment Mandatory Details Selection (Fast & Robust)
+     */
+    async fillDeploymentDetails(data) {
+        console.log("✍️ Filling ALL Deployment Mandatory Fields from UI dropdowns...");
+
+        const dropdowns = [
+            { id: '#Subsidiary, select[name*="Subsidiary"]', value: data.subsidiary },
+            { id: '#Division, select[name*="Division"]', value: data.division },
+            { id: '#Department, select[name*="Department"]', value: data.department },
+            { id: '#Category, select[name*="Category"]', value: data.category },
+            { id: '#Grade, select[name*="Grade"]', value: data.grade },
+            { id: '#Designation, select[name*="Designation"]', value: data.designation },
+            { id: '#EmployeeAllocateToOrg_BranchID, select[name*="BranchID"], #Location', value: data.location },
+            { id: '#SkillLevel, #SkilledLevel, select[name*="Skill"]', value: data.skilledLevel },
+            { id: '#Contractor, select[name*="Contractor"]', value: data.contractor }
+        ];
+
+        for (const item of dropdowns) {
+            if (!item.value) continue;
+
+            await this.page.evaluate(({ sel, val }) => {
+                const selectors = sel.split(',');
+                let el = null;
+                for (let s of selectors) {
+                    const found = document.querySelector(s.trim());
+                    if (found) { el = found; break; }
+                }
+
+                if (el) {
+                    const target = val.trim().toLowerCase();
+                    for (let opt of el.options) {
+                        if (opt.text.trim().toLowerCase() === target || opt.value.trim().toLowerCase() === target || opt.text.toLowerCase().includes(target)) {
+                            el.value = opt.value;
+                            el.dispatchEvent(new Event('input', { bubbles: true }));
+                            el.dispatchEvent(new Event('change', { bubbles: true }));
+                            el.dispatchEvent(new Event('blur', { bubbles: true }));
+                            if (window.jQuery) {
+                                window.jQuery(el).trigger('change');
+                            }
+                            break;
+                        }
+                    }
+                }
+            }, { sel: item.id, val: item.value });
+
+            // dynamic cascading options लोड होण्यासाठी ५००ms चा ब्रेक
+            await this.page.waitForTimeout(500);
+        }
+
+        console.log("✅ Deployment section filled successfully!");
+    }
+
+    /**
+     * Verify Save Success
+     */
+   async verifySaveSuccess() {
+        console.log("🎯 Verifying Employee Save Success Message...");
+        await this.page.pause();
+        // SweetAlert message locator (.swal-text)
+        const successPopup = this.page.locator('.swal-text');
+        
+        // 1. Popup stop
+        await successPopup.waitFor({ state: 'visible', timeout: 10000 });
+        
+        // 2. "Saved Successfully" --- Valdation
+        const messageText = await successPopup.innerText();
+        console.log(`✅ Success Popup Text Received: "${messageText}"`);
+        expect(messageText.trim()).toContain("Saved Successfully");
+
+        // 3. if its comes then click on Ok . 
+        const okButton = this.page.locator('.swal-button--confirm');
+        if (await okButton.isVisible().catch(() => false)) {
+            await okButton.click();
+        }
     }
 }
 

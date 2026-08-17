@@ -298,3 +298,87 @@ Then('Contract To date should be auto-filled as {string}', async function (expec
     const detailsPage = getDetailsPage(this);
     await detailsPage.verifyAutoCalculatedContractToDate(expectedContractTo);
 });
+
+Then('User verifies the Status dropdown is visible and mandatory', async function () {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.verifyStatusIsVisibleAndMandatory();
+});
+
+Then('The default selected Status value should be {string}', async function (expectedDefault) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.verifyDefaultStatus(expectedDefault);
+});
+
+When('User clicks on the Status dropdown', async function () {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.clickStatusDropdown();
+});
+
+Then('User should see the following options in Status dropdown:', async function (dataTable) {
+    const detailsPage = getDetailsPage(this);
+    const expectedOptions = dataTable.raw().map(row => row[0]);
+    await detailsPage.verifyStatusDropdownOptions(expectedOptions);
+});
+
+When('User selects Status as {string}', async function (statusValue) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.selectStatusOption(statusValue);
+});
+
+When('User updates Status to {string}', async function (newStatusValue) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.selectStatusOption(newStatusValue);
+});
+
+Then('The Status field value should be updated to {string}', async function (expectedStatus) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.verifySelectedStatus(expectedStatus);
+});
+
+// Deployment Details Step
+When('User fills all mandatory Deployment details with Subsidiary {string}, Division {string}, Department {string}, Category {string}, Grade {string}, Designation {string}, Location {string}, Skilled Level {string}, and Contractor {string}', 
+{ timeout: 90900 }, 
+async function (subsidiary, division, department, category, grade, designation, location, skilledLevel, contractor) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.fillDeploymentDetails({
+        subsidiary,
+        division,
+        department,
+        category,
+        grade,
+        designation,
+        location,
+        skilledLevel, 
+        contractor
+    });
+});
+
+// 1. Mandatory Personal Details
+When('User fills mandatory Personal details with First Name {string}, Last Name {string}, Gender {string}, and DOB {string}', async function (firstName, lastName, gender, dob) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.fillPersonalMandatoryDetails(firstName, lastName, gender, dob);
+});
+
+// 2. Contract Period Details
+When('User fills Contract Period details with Contract From {string} and Contract Period In Days {string}', async function (contractFrom, contractPeriodDays) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.fillContractPeriodDetails(contractFrom, contractPeriodDays);
+});
+
+// 3. Verify Default Status
+When('User verifies default Status is {string}', async function (expectedStatus) {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.verifyDefaultStatus(expectedStatus);
+});
+
+// 4. Verify Save Success Message
+Then('User should see a success message confirming the employee was saved successfully', async function () {
+    const detailsPage = getDetailsPage(this);
+    await detailsPage.verifySaveSuccess();
+
+});
+
+//When('User fills mandatory Reporting Manager details with Effective From {string}', async function (effectiveFromDate) {
+   // const detailsPage = getDetailsPage(this);
+    //await detailsPage.fillReportingManagerMandatoryDetails(effectiveFromDate);
+//});

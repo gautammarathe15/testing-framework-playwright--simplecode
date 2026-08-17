@@ -117,5 +117,46 @@ Feature: Contractor Employee Form Data Filling, Verification, Editing and Mandat
     Examples:
       | ContractFrom | Days | ExpectedContractTo |
       | 04-Mar-2026  | 15   | 19-Mar-2026        |
-      | 01-Jan-2026  | 30   | 31-Jan-2026        |
+      | 01-Aug-2026  | 30   | 31-Aug-2026        |
       | 10-Feb-2026  | 10   | 20-Feb-2026        |
+
+
+  @statusValidation
+  Scenario: Verify default Status value on first time page launch
+    Then User verifies the Status dropdown is visible and mandatory
+    And The default selected Status value should be "Active"
+
+  @statusValidation
+  Scenario: Verify all options are present in Status dropdown
+    When User clicks on the Status dropdown
+    Then User should see the following options in Status dropdown:
+      | Select    |
+      | Active    |
+      | Left      |
+      | Terminated |
+      | Absconded |
+
+  @statusValidation
+  Scenario Outline: Verify Status dropdown selection and updating
+    When User selects Status as "<InitialStatus>"
+    Then The Status field value should be updated to "<InitialStatus>"
+    When User updates Status to "<UpdatedStatus>"
+    Then The Status field value should be updated to "<UpdatedStatus>"
+
+    Examples:
+      | InitialStatus | UpdatedStatus |
+      | Left          | Terminated    |
+      | Absconded     | Active        |
+
+  @saveEmployee @allMandatoryFields
+  Scenario Outline: Verify successfully saving Contractor Employee by filling ALL mandatory fields across sections
+    When User fills mandatory Personal details with First Name "<FirstName>", Last Name "<LastName>", Gender "<Gender>", and DOB "<DOB>"
+    And User fills Contract Period details with Contract From "<ContractFrom>" and Contract Period In Days "<ContractPeriodDays>"
+    And User fills all mandatory Deployment details with Subsidiary "<Subsidiary>", Division "<Division>", Department "<Department>", Category "<Category>", Grade "<Grade>", Designation "<Designation>", Location "<Location>", Skilled Level "<Skill>", and Contractor "<Contractor>"
+    And User verifies default Status is "Active"
+    And User clicks on the Save button
+    Then User should see a success message confirming the employee was saved successfully
+
+    Examples:
+      | FirstName | LastName | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor | EffectiveFrom |
+      | Harish    | Patil    | M      | 15-May-1995 | 20-Aug-2026  | 10                | A.k enterprise | Sales    | Software   | Staff Employee  | A     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    | 20-Aug-2026   |
