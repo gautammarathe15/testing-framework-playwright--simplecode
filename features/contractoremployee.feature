@@ -26,26 +26,3 @@ Feature: Contractor Employee Master Verification
     When User clicks on the Create button
     And User clicks on the Close button on popup
     Then User should see the Upload button on the Contractor Employee page
-
-  # Scenario 5: Dynamic Identity Card input entry and verification trigger
-  Scenario Outline: Enter identity number dynamically and click Verify on popup
-    When User clicks on the Create button
-    Then User verifies identity card input field is visible
-    When User enters identity number "<IdentityNumber>"
-    And User clicks on the Verify link if visible
-
-    Examples:
-      | IdentityNumber   |
-      | [Auto_Generated] |
-
-  # Scenario 6: Verify Submit and Skip Verification options after clicking Verify link
-  Scenario Outline: Verify Submit and Skip Verification options after clicking Verify
-    When User clicks on the Create button
-    Then User verifies identity card input field is visible
-    When User enters identity number "<IdentityNumber>"
-    And User clicks on the Verify link if visible
-    Then User should see Submit and Skip Verification options and click Skip Verification
-
-    Examples:
-      | IdentityNumber   |
-      | [Auto_Generated] |
