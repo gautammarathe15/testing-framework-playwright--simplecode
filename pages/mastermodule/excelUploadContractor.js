@@ -10,15 +10,15 @@ export class ExcelUploadContractorPage {
     constructor(page) {
         this.page = page;
 
-        // Grid & Popup Locators
-        this.excelUploadIcon = this.page.locator('#btnExport, a#btnExport, a[data-original-title="btnExport"]').first();
+        // Grid & Popup Locators (Updated with DOM Inspection)
+        this.excelUploadIcon = this.page.locator('a[href="#divEmployeeUpload"], #btnExport, a#btnExport').first();
         this.popupModal = this.page.locator('#divEmployeeUpload');
         this.popupTitle = this.page.locator('#myModalLabel3');
         this.headerCloseBtn = this.page.locator('#divEmployeeUpload button.close');
         this.footerCloseBtn = this.page.locator('#divEmployeeUpload .modal-footer button').first();
         
         // Dynamic Counts & Inputs
-        this.fileInput = this.page.locator('input#documentFile[type="file"]');
+        this.fileInput = this.page.locator('input#documentFile[type="file"], #divEmployeeUpload input[type="file"]').first();
         this.uploadBtn = this.page.locator('input#btnUploadEmployee');
         this.successCount = this.page.locator('#spnSuccess');
         this.failedCount = this.page.locator('#spnFailed');
@@ -67,9 +67,15 @@ export class ExcelUploadContractorPage {
     }
 
     async uploadSingleFile(absoluteFilePath) {
+        // 🔹 1. जर मोडल ओपन नसेल तर आधी '+Create' शेजारील Upload बटन वर क्लिक करून मोडल ओपन करा
+        await this.openPopupIfNotOpen();
+
+        // 🔹 2. जुनी फाईल क्लिअर करून नवीन अटॅच करा
         await this.fileInput.setInputFiles([]);
         await this.fileInput.setInputFiles(absoluteFilePath);
-        await this.uploadBtn.waitFor({ state: 'visible' });
+        
+        // 🔹 3. Upload बटणाची वाट पाहून त्यावर क्लिक करा
+        await this.uploadBtn.waitFor({ state: 'visible', timeout: 10000 });
         await this.uploadBtn.click();
         console.log(`🚀 Clicked upload for: ${path.basename(absoluteFilePath)}`);
     }
@@ -85,8 +91,8 @@ export class ExcelUploadContractorPage {
     async openPopupIfNotOpen() {
         if (!(await this.popupModal.isVisible())) {
             await this.excelUploadIcon.click();
-            await this.popupModal.waitFor({ state: 'visible', timeout: 5000 });
-            console.log("👉 Re-opened Upload Popup Modal.");
+            await this.popupModal.waitFor({ state: 'visible', timeout: 10000 });
+            console.log("👉 Opened Upload Popup Modal.");
         }
     }
 
@@ -330,8 +336,6 @@ export class ExcelUploadContractorPage {
                 await this.codeSearchSubmitBtn.click();
                 await this.page.waitForTimeout(1000);
             }
-
-            await this.openPopupIfNotOpen();
         }
     }
 
@@ -349,6 +353,8 @@ export class ExcelUploadContractorPage {
         for (let i = 0; i < files.length; i++) {
             const fileName = files[i];
             const filePath = path.join(folderPath, fileName);
+
+            await this.closePopupIfOpen();
             
             console.log(`\n--------------------------------------------------`);
             console.log(`🔄 [Iteration ${i + 1}/${files.length}] Uploading File: ${fileName}`);
