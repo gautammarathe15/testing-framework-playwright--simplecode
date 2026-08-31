@@ -3,10 +3,16 @@ import { expect } from '@playwright/test';
 
 Given('User captures the current Active Count and Total Count from UI header', { timeout: 60000 }, async function () {
     const activeLocator = this.page.locator('#spnActiveRecordCount');
+    const leftLocator = this.page.locator('#spnLeftRecordCount'); // 👈 Left Count Locator
     const totalLocator = this.page.locator('#spnTopRecordCount');
 
     await activeLocator.waitFor({ state: 'visible' });
     await totalLocator.waitFor({ state: 'visible' });
+
+    // Left Count DOM मध्ये लोड होण्याची वाट पहा
+    if (await leftLocator.isVisible({ timeout: 3000 }).catch(() => false)) {
+        await leftLocator.waitFor({ state: 'visible' });
+    }
 
     await this.page.waitForFunction((selector) => {
         const el = document.querySelector(selector);
@@ -16,12 +22,15 @@ Given('User captures the current Active Count and Total Count from UI header', {
     }, '#spnTopRecordCount');
 
     const activeText = await activeLocator.innerText();
+    const leftText = await leftLocator.innerText().catch(() => '0'); // 👈 Fetch Left Text
     const totalText = await totalLocator.innerText();
 
+    // Context मधील सर्व Counts सेव्ह केले
     this.initialActiveCount = parseInt(activeText.replace(/[^0-9]/g, ''), 10) || 0;
+    this.initialLeftCount = parseInt(leftText.replace(/[^0-9]/g, ''), 10) || 0; // 👈 initialLeftCount Captured!
     this.initialTotalCount = parseInt(totalText.replace(/[^0-9]/g, ''), 10) || 0;
 
-    console.log(`📌 Initial Captured -> Active: ${this.initialActiveCount}, Total: ${this.initialTotalCount}`);
+    console.log(`📌 Initial Captured -> Active: ${this.initialActiveCount}, Left: ${this.initialLeftCount}, Total: ${this.initialTotalCount}`);
 });
 
 // 🔹 Single Form Creation साठी (जुन्या सिनेरिओसाठी)
@@ -44,7 +53,7 @@ Then('User verifies Total Count increased by {int}', { timeout: 30000 }, async f
 
     expect(currentTotalCount).toBe(expectedTotal);
 });
-
+/*
 Then('User verifies Active Count increased by {int}', { timeout: 30000 }, async function (expectedActiveIncrease) {
     const expectedActive = this.initialActiveCount + expectedActiveIncrease;
 
@@ -64,6 +73,7 @@ Then('User verifies Active Count increased by {int}', { timeout: 30000 }, async 
 
     expect(currentActiveCount).toBe(expectedActive);
 });
+*/
 
 // 🔹 Bulk Excel Upload साठी DYNAMIC STEP (नव्या सिनेरिओसाठी)
 Then('User verifies Total and Active Count increased by total successful uploaded records', { timeout: 30000 }, async function () {

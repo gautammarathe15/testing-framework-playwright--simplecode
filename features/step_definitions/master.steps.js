@@ -86,7 +86,7 @@ When('User enters identity number {string}', async function (identityNumber) {
     // Auto-generate a 12-digit number starting specifically with '88'
     if (identityNumber === '[Auto_Generated]') {
         const random10Digits = Math.floor(1000000000 + Math.random() * 9000000000).toString();
-        finalIdNumber = `88${random10Digits}`;
+        finalIdNumber = `80${random10Digits}`;
     }
     this.createdIdentityNumber = finalIdNumber;
     
@@ -137,4 +137,13 @@ Then('The grid should display employee record matching created identity number',
     
     const pageInstance = getPageInstance(this);
     await pageInstance.verifyAadhaarInGrid(verifyId);
+});
+When('User clicks on OK button on success popup', async function () {
+    
+    const okButton = this.page.locator('button.swal2-confirm, button:has-text("OK"), div.sa-button-container button.confirm').first();
+    
+    if (await okButton.isVisible({ timeout: 5000 })) {
+        await okButton.click({ force: true });
+        await this.page.waitForTimeout(1000); 
+    }
 });

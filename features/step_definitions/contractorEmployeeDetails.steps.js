@@ -23,11 +23,18 @@ Then('User should see all form tabs sections and input fields on Contractor Empl
     await this.contractorEmployeeDetailsPage.verifyAllFormFieldsAndSections();
 });
 
-// --- Dynamic Input Step ---
+// --- Dynamic Input Step (FIXED: Context Storage Added) ---
 When('User enters dynamic valid Aadhaar number', { timeout: 30000 }, async function () {
     const dynamicId = '7' + Date.now().toString().slice(-11);
     
-    console.log("🔢 Entering dynamically generated identifier for testing...");
+    // 🔹 Cucumber Context ('this') वर नंबर सेव्ह करा जेणेकरून दुसऱ्या स्टेप्समध्ये वापरता येईल
+    this.createdAadhaar = dynamicId;
+    this.generatedAadhaar = dynamicId;
+    this.aadhaarNumber = dynamicId;
+    this.identityNumber = dynamicId;
+    this.createdAadhar = dynamicId;
+
+    console.log(`🔢 Dynamically generated identifier stored in context for testing.`);
     
     const inputField = this.page.getByRole('textbox', { name: 'Aadhaar Card No*' });
     await inputField.waitFor({ state: 'visible', timeout: 10000 });

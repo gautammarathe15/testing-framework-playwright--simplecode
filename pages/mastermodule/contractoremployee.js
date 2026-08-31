@@ -1,10 +1,3 @@
-/**
- * --------------------------------------------------------------------------
- * CLMS Master Module - Contractor Employee Page Object Class
- * File: pages/mastermodule/contractorEmployee.js
- * --------------------------------------------------------------------------
- */
-
 import { expect } from '@playwright/test';
 
 export class ContractorEmployeePage {
@@ -50,6 +43,74 @@ export class ContractorEmployeePage {
         this.calendarHeader = this.page.locator('.datepicker-switch, .bs-datepicker-head button.current, .ui-datepicker-title').first();
         this.prevMonthBtn = this.page.locator('.datepicker-days .prev, button.previous, .ui-datepicker-prev').first();
         this.nextMonthBtn = this.page.locator('.datepicker-days .next, button.next, .ui-datepicker-next').first();
+    } // 👈 constructor चा ब्रॅकेट इथेच बंद झाला पाहिजे!
+
+    // --------------------------------------------------------------------------
+    // Class Methods (constructor च्या बाहेर आणि class च्या आत)
+    // --------------------------------------------------------------------------
+
+    async searchByAadhaarNumber(identityNumber) {
+        await this.page.waitForLoadState('domcontentloaded');
+
+        if (!identityNumber || identityNumber === 'undefined') {
+            throw new Error("❌ Grid search failed: Provided identityNumber is undefined or empty!");
+        }
+
+        const cleanId = String(identityNumber).trim();
+
+        const searchInput = this.page.locator('#hsAadharCardNo');
+        const searchIcon = this.page.locator('img.headerSearchIcon').first();
+        const searchBtn = this.page.locator('button[name="AadharCardNo"]').first();
+
+        console.log("🔍 Checking grid search input field visibility...");
+
+        if (!(await searchInput.isVisible({ timeout: 2000 }).catch(() => false))) {
+            if (await searchIcon.isVisible({ timeout: 2000 }).catch(() => false)) {
+                console.log("👉 Search input is hidden. Clicking on header search icon to expand...");
+                await searchIcon.click();
+                await this.page.waitForTimeout(300);
+            }
+        }
+
+        await searchInput.waitFor({ state: 'visible', timeout: 10000 });
+        await searchInput.clear();
+        await searchInput.fill(cleanId);
+        await searchInput.dispatchEvent('input');
+        await searchInput.dispatchEvent('keyup');
+
+        console.log(`✍️ Entered identity number into grid search input.`);
+
+        if (await searchBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+            await searchBtn.click();
+        } else {
+            await searchInput.press('Enter');
+        }
+
+        await this.page.waitForLoadState('networkidle').catch(() => {});
+    }
+
+    async verifyAadhaarInGrid(expectedIdentity) {
+        if (!expectedIdentity || expectedIdentity === 'undefined') {
+            throw new Error("❌ Cannot verify grid: Provided expectedIdentity is undefined!");
+        }
+
+        console.log(`🔍 Verifying record presence in grid for ID...`);
+        
+        await this.searchByAadhaarNumber(expectedIdentity);
+
+        const lastFourDigits = String(expectedIdentity).trim().slice(-4);
+        console.log(`🔎 Searching table row with masked identity ending in: ${lastFourDigits}`);
+
+        const matchedRow = this.page.locator('table tbody tr')
+            .filter({ hasText: lastFourDigits })
+            .first();
+
+        try {
+            await matchedRow.waitFor({ state: 'visible', timeout: 15000 });
+            console.log(`✅ Record verified successfully in grid with masked identity ending in ${lastFourDigits}.`);
+        } catch (error) {
+            throw new Error(`❌ Record with identity ending in ${lastFourDigits} was not found in table grid!`);
+        }
     }
 
     async verifyCreateAndUploadOptionsVisible() {
@@ -108,16 +169,12 @@ export class ContractorEmployeePage {
             await this.submitButton.waitFor({ state: 'visible', timeout: 5000 });
             await expect(this.submitButton).toBeVisible();
         } catch (e) {
-            console.log("⚠️ Submit button did not appear as link/button tag within expected window, proceeding with Skip Verification.");
+            console.log("⚠️ Submit button did not appear within expected window, proceeding with Skip Verification.");
         }
 
-        console.log("✅ 'Skip Verification' option verified.");
-        console.log("👆 Clicking on 'Skip Verification' button...");
-        
         try {
             await this.skipVerificationButton.click({ timeout: 5000 });
         } catch (e) {
-            console.log("⚠️ Standard click failed on Skip Verification button, applying force click...");
             await this.skipVerificationButton.click({ force: true });
         }
     }
@@ -144,7 +201,6 @@ export class ContractorEmployeePage {
                 await this.page.waitForTimeout(200);
             }
         }
-        console.log("✅ Selected options in all mandatory dropdowns.");
     }
 
     async scrollToSaveAndClick() {
@@ -167,10 +223,6 @@ export class ContractorEmployeePage {
     async verifyUploadButtonVisible() {
         await expect(this.uploadButton).toBeVisible();
     }
-
-    // --------------------------------------------------------------------------
-    // Calendar & Date Methods 
-    // --------------------------------------------------------------------------
 
     async openContractFromCalendar() {
         const inputLocator = this.page.locator('#Employee_JoinDate, input[name*="ContractFrom"], #dtpContractFrom').first();
@@ -212,62 +264,4 @@ export class ContractorEmployeePage {
     async verifyAutoCalculatedContractToDate(expectedDate) {
         await expect(this.contractToInput).toHaveValue(expectedDate);
     }
-
-    // --------------------------------------------------------------------------
-    // Grid Search & Verification Methods 
-    // --------------------------------------------------------------------------
-
-    async searchByAadhaarNumber(identityNumber) {
-        await this.page.waitForLoadState('domcontentloaded');
-
-        const searchInput = this.page.locator('#hsAadharCardNo');
-        const searchIcon = this.page.locator('img.headerSearchIcon').first();
-        const searchBtn = this.page.locator('button[name="AadharCardNo"]').first();
-
-        console.log("🔍 Checking grid search input field visibility...");
-
-        if (!(await searchInput.isVisible({ timeout: 2000 }).catch(() => false))) {
-            if (await searchIcon.isVisible({ timeout: 2000 }).catch(() => false)) {
-                console.log("👉 Search input is hidden. Clicking on header search icon to expand...");
-                await searchIcon.click();
-                await this.page.waitForTimeout(500);
-            }
-        }
-
-        await searchInput.waitFor({ state: 'visible', timeout: 10000 });
-        await searchInput.clear();
-        await searchInput.fill(String(identityNumber));
-        await searchInput.dispatchEvent('input');
-        await searchInput.dispatchEvent('keyup');
-
-        console.log(`✍️ Entered identity number for grid search.`);
-
-        if (await searchBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
-            await searchBtn.click();
-        } else {
-            await searchInput.press('Enter');
-        }
-
-        await this.page.waitForTimeout(1500);
-    } 
-
-    async verifyAadhaarInGrid(expectedIdentity) {
-        console.log(`🔍 Verifying record presence in grid for ID...`);
-        
-        await this.searchByAadhaarNumber(expectedIdentity);
-
-        const lastFourDigits = String(expectedIdentity).slice(-4);
-        console.log(`🔎 Searching table row with masked identity ending in: ${lastFourDigits}`);
-
-        const matchedRow = this.page.locator('table tbody tr')
-            .filter({ hasText: lastFourDigits })
-            .first();
-
-        try {
-            await matchedRow.waitFor({ state: 'visible', timeout: 15000 });
-            console.log(`✅ Record verified successfully in grid with masked identity ending in ${lastFourDigits}.`);
-        } catch (error) {
-            throw new Error(`❌ Record with identity ending in ${lastFourDigits} was not found in table grid!`);
-        }
-    }
-}
+} // 👈 ContractorEmployeePage क्लासचा क्लोजिंग ब्रॅकेट
