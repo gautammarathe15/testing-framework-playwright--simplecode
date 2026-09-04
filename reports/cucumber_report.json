@@ -1,0 +1,1341 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "contractor-employee-status-update-and-count-validation;verify-employee-status-change-from-active-to-left-and-back-to-active-with-header-count-validations",
+        "keyword": "Scenario Outline",
+        "line": 65,
+        "name": "Verify employee status change from Active to Left and back to Active with header count validations",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 127740100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 790490200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 32829600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 111953299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 126948699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "User captures the current Active Count and Total Count from UI header",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\countvalidation.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 623745200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41030199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 250432599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26628199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 311693600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108862900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User fills mandatory Personal details with First Name \"Shubham\", Last Name \"Lele\", Gender \"M\", and DOB \"18-May-1983\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:357"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1347272699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "User fills Contract Period details with Contract From \"27-Aug-2025\" and Contract Period In Days \"171\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1835502300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "User fills all mandatory Deployment details with Subsidiary \"A.k enterprise\", Division \"Sales\", Department \"Software\", Category \"Staff Employee\", Grade \"B\", Designation \"Jr Engineer\", Location \"Pune\", Skilled Level \"Semi-Skilled\", and Contractor \"GG ROOT\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:339"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4630258399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "User verifies default Status is \"Active\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:369"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 31716700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on the Save button",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:198"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 212082399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4139900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5437962999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "User verifies employee status in grid is \"Active\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2052642800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2048556599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "User verifies pre-filled form details match First Name \"Shubham\", Last Name \"Lele\", Gender \"M\", and Location \"Pune\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:184"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 49033599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "User verifies Delete button is visible on employee edit form",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:392"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2815599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "User updates status from \"Active\" to \"Left\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1022876299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "User clicks on the Update button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:215"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1026931899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1012594399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 36,
+            "name": "User selects today date as Resignation Date and verifies Relieving Date auto-populates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:342"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1613622599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 37,
+            "name": "User clicks on Update button after filling dates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:367"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1019236100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 38,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1029580399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "User clicks on Cancel button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:376"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6592905299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "User verifies Active Count decreased by 1",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:397"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1557735899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 43,
+            "name": "User verifies Left Count increased by 1",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:416"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1555953200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 44,
+            "name": "User verifies Total Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:474"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1558124400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 45,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9648637900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 46,
+            "name": "User verifies employee status in grid is \"Left\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2056802299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 49,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2042413000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 50,
+            "name": "User verifies pre-filled form details match First Name \"Shubham\", Last Name \"Lele\", Gender \"M\", and Location \"Pune\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:184"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52791299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 51,
+            "name": "User updates status from \"Left\" to \"Active\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1017617200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 52,
+            "name": "User clicks on the Update button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:215"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1026863899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 53,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1028299400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 54,
+            "name": "User clicks on Cancel button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:376"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6585357799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 57,
+            "name": "User verifies Active Count increased by 1",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:435"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1557404399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 58,
+            "name": "User verifies Left Count decreased by 1",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:455"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1553491600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 59,
+            "name": "User verifies Total Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:474"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1558162700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 60,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9661368999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 61,
+            "name": "User verifies employee status in grid is \"Active\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2044055899
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 27308900
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@status_change_validation",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@status_change_active_to_left_to_active",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-status-update-and-count-validation;verify-employee-status-change-from-left-to-terminated-and-absconded-with-count-and-aadhaar-grid-validation",
+        "keyword": "Scenario Outline",
+        "line": 132,
+        "name": "Verify employee status change from Left to Terminated and Absconded with count and Aadhaar grid validation",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94472399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 464653399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20055300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 101987200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116160400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 73,
+            "name": "User captures the current Active Count and Total Count from UI header",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\countvalidation.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 492761799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 76,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37662199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 77,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 223836299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 78,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 21766600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 79,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:104"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 329389699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 80,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:110"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 89175400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 81,
+            "name": "User fills mandatory Personal details with First Name \"Nishant\", Last Name \"More\", Gender \"M\", and DOB \"01-May-1988\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:357"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1337654200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 82,
+            "name": "User fills Contract Period details with Contract From \"11-Aug-2025\" and Contract Period In Days \"300\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1820906499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 83,
+            "name": "User fills all mandatory Deployment details with Subsidiary \"A.k enterprise\", Division \"Sales\", Department \"Software\", Category \"Staff Employee\", Grade \"B\", Designation \"Jr Engineer\", Location \"Pune\", Skilled Level \"Semi-Skilled\", and Contractor \"GG ROOT\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:339"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4612809099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 84,
+            "name": "User clicks on the Save button",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:198"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 162953599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 85,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3974799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 86,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5438203600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 87,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2070278400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 88,
+            "name": "User updates status from \"Active\" to \"Left\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1028846900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 89,
+            "name": "User clicks on the Update button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:215"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1026425499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 90,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1028387900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 91,
+            "name": "User selects today date as Resignation Date and verifies Relieving Date auto-populates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:342"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1600437600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 92,
+            "name": "User clicks on Update button after filling dates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:367"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1022061000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 93,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1031007200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 94,
+            "name": "User clicks on Cancel button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:376"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6582187599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 97,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:98"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9654628899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 98,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2056031300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 99,
+            "name": "User updates status to \"Terminated\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:276"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1054413800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 100,
+            "name": "User clicks on the Update button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:215"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1015565800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 101,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1027794799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 102,
+            "name": "User selects today date as Resignation Date and verifies Relieving Date auto-populates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:342"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1598476800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 103,
+            "name": "User clicks on Update button after filling dates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:367"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1034429199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 104,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1028853300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 105,
+            "name": "User clicks on Cancel button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:376"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6577896500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 108,
+            "name": "User verifies Active Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:507"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1028274999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 109,
+            "name": "User verifies Left Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:491"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1012421999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 110,
+            "name": "User verifies Total Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:474"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1541672299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 111,
+            "name": "User searches employee in grid by captured Aadhaar number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:523"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9657511399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 112,
+            "name": "User verifies employee status in grid is \"Terminated\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2051653999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 114,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:153"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2038555099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 115,
+            "name": "User updates status to \"Absconded\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:276"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1583482599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 116,
+            "name": "User clicks on the Update button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:215"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1021363899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 117,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1026365900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 118,
+            "name": "User fills mandatory exit dates based on status",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:239"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 528271300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 119,
+            "name": "User clicks on Update button after filling dates",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:367"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1020636800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 120,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:141"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1030719099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 121,
+            "name": "User clicks on Cancel button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:376"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6591537500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 124,
+            "name": "User verifies Active Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:507"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1023004300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 125,
+            "name": "User verifies Left Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:491"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1011560100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 126,
+            "name": "User verifies Total Count remains unchanged",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:474"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1552591899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 127,
+            "name": "User searches employee in grid by captured Aadhaar number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:523"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9635704400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 128,
+            "name": "User verifies employee status in grid is \"Absconded\"",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2055402300
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 24154200
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@status_change_validation",
+            "line": 1
+          },
+          {
+            "name": "@regression",
+            "line": 1
+          },
+          {
+            "name": "@status_change_active_to_left_to_active",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "contractor-employee-status-update-and-count-validation",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Contractor Employee Status Update and Count Validation",
+    "tags": [
+      {
+        "name": "@status_change_validation",
+        "line": 1
+      },
+      {
+        "name": "@regression",
+        "line": 1
+      },
+      {
+        "name": "@status_change_active_to_left_to_active",
+        "line": 1
+      }
+    ],
+    "uri": "features\\statuschange.feature"
+  }
+]
