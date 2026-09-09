@@ -1,6 +1,10 @@
 import { expect } from '@playwright/test';
 
 export class ContractorEmployeeDeploymentPage {
+    // Cross-step persistence साठी Static variables
+    static sharedInitialData = {};
+    static sharedModifiedData = {};
+
     /**
      * @param {import('@playwright/test').Page} page
      */
@@ -10,15 +14,15 @@ export class ContractorEmployeeDeploymentPage {
         // Navigation Tab
         this.deploymentTab = page.locator('#lnkEmployeeAllocateToOrg').first();
 
-        // Exact Corrected Locators based on HTML Inspection
+        // Exact Locators based on HTML Inspection
         this.subsidiaryDropdown = page.locator('#EmployeeAllocateToOrg_SubsidiaryID');
         this.divisionDropdown = page.locator('#EmployeeAllocateToOrg_DivisionID');
         this.departmentDropdown = page.locator('#EmployeeAllocateToOrg_DepartmentID');
-        this.categoryDropdown = page.locator('#EmployeeAllocateToOrg_EmpCategoryID'); // Corrected ID
+        this.categoryDropdown = page.locator('#EmployeeAllocateToOrg_EmpCategoryID');
         this.gradeDropdown = page.locator('#EmployeeAllocateToOrg_GradeID');
         this.designationDropdown = page.locator('#EmployeeAllocateToOrg_DesignationID');
-        this.locationDropdown = page.locator('#EmployeeAllocateToOrg_BranchID');     // Corrected ID (BranchID is Location)
-        this.skillDropdown = page.locator('#EmployeeAllocateToOrg_EmployeeTypeID');  // Corrected ID (EmployeeTypeID is Skill/Skilled Level)
+        this.locationDropdown = page.locator('#EmployeeAllocateToOrg_BranchID');
+        this.skillDropdown = page.locator('#EmployeeAllocateToOrg_EmployeeTypeID');
         this.contractorDropdown = page.locator('#EmployeeAllocateToOrg_ContractorID');
 
         // Action Buttons & Fields
@@ -29,14 +33,6 @@ export class ContractorEmployeeDeploymentPage {
         // SweetAlert Popups
         this.swalModal = page.locator('.swal-modal, .sweet-alert, .swal2-popup').first();
         this.swalOkButton = page.locator('.swal-button, button.confirm, button:has-text("OK")').first();
-
-        // Cross-step persistence
-        if (!ContractorEmployeeDeploymentPage.sharedInitialData) {
-            ContractorEmployeeDeploymentPage.sharedInitialData = {};
-        }
-        if (!ContractorEmployeeDeploymentPage.sharedModifiedData) {
-            ContractorEmployeeDeploymentPage.sharedModifiedData = {};
-        }
     }
 
     async clickDeploymentTab() {
@@ -47,7 +43,7 @@ export class ContractorEmployeeDeploymentPage {
         await this.page.waitForTimeout(1500);
     }
 
-    // Dropdown मधील Current Value/Text शोधण्याचे helper
+    // Dropdown मधील Current Selected Text शोधणारा सुरक्षित Helper
     async getSelectedOptionText(locator) {
         if (await locator.isVisible().catch(() => false)) {
             return await locator.evaluate(sel => {
@@ -59,7 +55,7 @@ export class ContractorEmployeeDeploymentPage {
         return '';
     }
 
-    // Dropdown मध्ये Value किंवा Text ने Select करणारा Robust Helper
+    // Dropdown मध्ये Value/Label निवडून DOM Event Trigger करणारा Helper
     async selectDropdownRobust(locator, searchText) {
         if (!searchText || !(await locator.isVisible().catch(() => false))) return;
 
@@ -84,7 +80,7 @@ export class ContractorEmployeeDeploymentPage {
 
         await locator.dispatchEvent('change').catch(() => {});
         await locator.dispatchEvent('blur').catch(() => {});
-        await this.page.waitForTimeout(800);
+        await this.page.waitForTimeout(500);
     }
 
     // 1. Initial Values Capture करणे
@@ -106,38 +102,38 @@ export class ContractorEmployeeDeploymentPage {
         this.initialData = ContractorEmployeeDeploymentPage.sharedInitialData;
     }
 
-    // 2. Initial Values Verification
-    async verifySelectedValues(expected) {
+    // 2. Deployment Values Verify करणे (Null/Undefined Safety सह)
+    async verifySelectedValues(expectedData) {
         await expect(this.departmentDropdown).toBeVisible({ timeout: 10000 });
 
-        if (expected && Object.keys(expected).length > 0) {
-            ContractorEmployeeDeploymentPage.sharedInitialData = { ...expected };
-            this.initialData = ContractorEmployeeDeploymentPage.sharedInitialData;
-        } else {
-            await this.captureInitialDetails();
+        // जर parameter दिला नसेल, तर static variable किंवा initial capture वापरणे
+        const targetData = expectedData || this.modifiedData || ContractorEmployeeDeploymentPage.sharedModifiedData || ContractorEmployeeDeploymentPage.sharedInitialData;
+
+        if (!targetData || Object.keys(targetData).length === 0) {
+            throw new Error("❌ Validation Error: Verification साठी कोणताही अपेक्षित डेटा (expectedData) मिळालेला नाही.");
         }
 
         const checkDropdownValue = async (locator, expectedVal) => {
             if (expectedVal && await locator.isVisible().catch(() => false)) {
                 const selectedText = await this.getSelectedOptionText(locator);
                 if (selectedText) {
-                    expect(selectedText.toLowerCase()).toContain(expectedVal.trim().toLowerCase());
+                    expect(selectedText.toLowerCase().trim()).toContain(expectedVal.trim().toLowerCase());
                 }
             }
         };
 
-        if (expected.subsidiary) await checkDropdownValue(this.subsidiaryDropdown, expected.subsidiary);
-        if (expected.division) await checkDropdownValue(this.divisionDropdown, expected.division);
-        if (expected.department) await checkDropdownValue(this.departmentDropdown, expected.department);
-        if (expected.category) await checkDropdownValue(this.categoryDropdown, expected.category);
-        if (expected.grade) await checkDropdownValue(this.gradeDropdown, expected.grade);
-        if (expected.designation) await checkDropdownValue(this.designationDropdown, expected.designation);
-        if (expected.location) await checkDropdownValue(this.locationDropdown, expected.location);
-        if (expected.skill) await checkDropdownValue(this.skillDropdown, expected.skill);
-        if (expected.contractor) await checkDropdownValue(this.contractorDropdown, expected.contractor);
+        if (targetData.subsidiary) await checkDropdownValue(this.subsidiaryDropdown, targetData.subsidiary);
+        if (targetData.division) await checkDropdownValue(this.divisionDropdown, targetData.division);
+        if (targetData.department) await checkDropdownValue(this.departmentDropdown, targetData.department);
+        if (targetData.category) await checkDropdownValue(this.categoryDropdown, targetData.category);
+        if (targetData.grade) await checkDropdownValue(this.gradeDropdown, targetData.grade);
+        if (targetData.designation) await checkDropdownValue(this.designationDropdown, targetData.designation);
+        if (targetData.location) await checkDropdownValue(this.locationDropdown, targetData.location);
+        if (targetData.skill) await checkDropdownValue(this.skillDropdown, targetData.skill);
+        if (targetData.contractor) await checkDropdownValue(this.contractorDropdown, targetData.contractor);
     }
 
-    // 3. Temporary Values Fill करणे
+    // 3. Temporary Values Modify आणि Capture करणे (Delay सह)
     async modifyDeploymentFields() {
         await expect(this.departmentDropdown).toBeVisible({ timeout: 10000 });
 
@@ -151,8 +147,11 @@ export class ContractorEmployeeDeploymentPage {
         await this.selectDropdownRobust(this.skillDropdown, 'Skilled');
 
         if (await this.remarkInput.isVisible().catch(() => false)) {
-            await this.remarkInput.fill('Check If Cancel then old data reflect properly or not');
+            await this.remarkInput.fill('Check Update persistence logic');
         }
+
+        // DOM मध्ये नवी निवड सेट होण्यासाठी १ सेकंदाचा विराम
+        await this.page.waitForTimeout(1000);
 
         ContractorEmployeeDeploymentPage.sharedModifiedData = {
             subsidiary: await this.getSelectedOptionText(this.subsidiaryDropdown),
@@ -190,7 +189,7 @@ export class ContractorEmployeeDeploymentPage {
         await this.page.waitForTimeout(1000);
     }
 
-    // 4. Console Table Print करणारी Method
+    // 4. Final Comparison Chart Logging
     async logFinalComparisonChart(world) {
         await this.page.waitForTimeout(1000);
 
@@ -216,8 +215,8 @@ export class ContractorEmployeeDeploymentPage {
             const modifiedVal = modified[field] || '';
             const finalVal = finalData[field] || '';
             
-            const isRestored = initialVal !== '' && (
-                initialVal.trim().toLowerCase() === finalVal.trim().toLowerCase()
+            const isMatched = finalVal !== '' && (
+                finalVal.trim().toLowerCase() === (modifiedVal || initialVal).trim().toLowerCase()
             );
 
             return {
@@ -225,11 +224,11 @@ export class ContractorEmployeeDeploymentPage {
                 '1. Initial Created': initialVal,
                 '2. Modified (Temporary)': modifiedVal,
                 '3. Final Reflected': finalVal,
-                'Result': isRestored ? '✅ Restored' : '❌ Failed'
+                'Result': isMatched ? '✅ Matched' : '❌ Mismatched'
             };
         });
 
-        console.log('\n📊 DEPLOYMENT CANCEL VALIDATION COMPARISON TABLE:');
+        console.log('\n📊 DEPLOYMENT VALIDATION COMPARISON TABLE:');
         console.table(tableData);
 
         if (world && world.attach) {

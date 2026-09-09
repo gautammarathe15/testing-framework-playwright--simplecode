@@ -57,12 +57,19 @@ Feature: Contractor Employee Deployment Details Validation and Update
     Then User verifies employee status in grid is "Active"
     When User clicks on Edit icon for the created employee
 
-    # 3. Deployment Tab Update & Persist Verification (Needs Edit re-click after Update redirect)
+    # 3. Modify Details and Update
     And User clicks on "Deployment" tab in employee profile
     Then User verifies deployment fields match initial created details Subsidiary "<Subsidiary>", Division "<Division>", Department "<Department>", Category "<Category>", Grade "<Grade>", Designation "<Designation>", Location "<Location>", Skilled Level "<Skill>", and Contractor "<Contractor>"
     When User modifies deployment fields with new values
     And User clicks on Update button in deployment form
     Then User verifies deployment update success message appears
+    And User clicks on OK button on success popup
+    
+
+    # 4. Navigate via Dashboard -> Contractor Employee to refresh Grid
+    When User clicks on the Dashboard menu option
+    And User clicks on the Contractor Employee menu option
+    When User searches created employee status in grid by identity number
     When User clicks on Edit icon for the created employee
     And User clicks on "Deployment" tab in employee profile
     Then User verifies deployment fields match newly updated values

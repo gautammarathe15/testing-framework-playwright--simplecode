@@ -6,6 +6,7 @@
  */
 
 const { Given, When, Then } = require('@cucumber/cucumber');
+const { expect } = require('@playwright/test');
 const { ContractorEmployeePage } = require('../../pages/mastermodule/contractorEmployee.js');
 const { ContractorEmployeeDetailsPage } = require('../../pages/mastermodule/contractorEmployeeDetails.js');
 // Helper function to safely retrieve or initialize the ContractorEmployeePage instance
@@ -146,4 +147,12 @@ When('User clicks on OK button on success popup', async function () {
         await okButton.click({ force: true });
         await this.page.waitForTimeout(1000); 
     }
+});
+
+When('User clicks on the Dashboard menu option', async function () {
+    const dashboardMenu = this.page.locator('a[title="Dashboard"], a:has-text("Dashboard")').first();
+    await expect(dashboardMenu).toBeVisible({ timeout: 10000 });
+    await dashboardMenu.click({ force: true });
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForTimeout(1500);
 });
