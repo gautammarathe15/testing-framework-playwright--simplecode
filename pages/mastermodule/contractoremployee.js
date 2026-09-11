@@ -43,11 +43,7 @@ export class ContractorEmployeePage {
         this.calendarHeader = this.page.locator('.datepicker-switch, .bs-datepicker-head button.current, .ui-datepicker-title').first();
         this.prevMonthBtn = this.page.locator('.datepicker-days .prev, button.previous, .ui-datepicker-prev').first();
         this.nextMonthBtn = this.page.locator('.datepicker-days .next, button.next, .ui-datepicker-next').first();
-    } // 👈 constructor चा ब्रॅकेट इथेच बंद झाला पाहिजे!
-
-    // --------------------------------------------------------------------------
-    // Class Methods (constructor च्या बाहेर आणि class च्या आत)
-    // --------------------------------------------------------------------------
+    }
 
     async searchByAadhaarNumber(identityNumber) {
         await this.page.waitForLoadState('domcontentloaded');
@@ -264,4 +260,4 @@ export class ContractorEmployeePage {
     async verifyAutoCalculatedContractToDate(expectedDate) {
         await expect(this.contractToInput).toHaveValue(expectedDate);
     }
-} // 👈 ContractorEmployeePage क्लासचा क्लोजिंग ब्रॅकेट
+} 

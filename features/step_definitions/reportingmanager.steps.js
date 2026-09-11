@@ -6,11 +6,6 @@ function getReportingPage(page) {
     return new ContractorEmployeeReportingManagerPage(page);
 }
 
-When('User clicks on "Reporting Manager" tab in employee profile', async function () {
-    const reportingPage = getReportingPage(this.page);
-    await reportingPage.clickReportingManagerTab();
-});
-
 When('User opens search popup for {string}', async function (managerType) {
     const reportingPage = getReportingPage(this.page);
     await this.page.waitForLoadState('domcontentloaded');

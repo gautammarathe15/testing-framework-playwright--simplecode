@@ -13,7 +13,6 @@ class ContractorEmployeeCombinedPage {
     return Math.floor(100000000000 + Math.random() * 900000000000).toString();
   }
 
-  // Active आणि Total Live Count घेणे
   async getLiveCounts() {
     await this.activeCountHeader.waitFor({ state: 'visible' });
     const activeText = await this.activeCountHeader.innerText();

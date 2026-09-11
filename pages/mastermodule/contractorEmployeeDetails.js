@@ -578,7 +578,6 @@ class ContractorEmployeeDetailsPage {
                     const tagName = await dropdown.evaluate(el => el.tagName.toLowerCase()).catch(() => '');
 
                     if (tagName === 'select') {
-                        // index: 1 म्हणजे default "Select" सोडून 1st actual option select होईल
                         await dropdown.selectOption({ index: 1 });
                         console.log(`✅ Selected 1st option for dropdown: ${item.name}`);
                     } else {
@@ -701,7 +700,6 @@ class ContractorEmployeeDetailsPage {
             attempts++;
         }
 
-        // 3. March 2026 मधील specific day (उदा. 4) सेलेक्ट करणे
         const dayLocator = this.page.locator('.datepicker-days td.day:not(.old):not(.new)')
             .filter({ hasText: new RegExp(`^${targetDay}$`) }).first();
 
@@ -709,7 +707,6 @@ class ContractorEmployeeDetailsPage {
         await dayLocator.click();
         console.log(`🎉 Clicked on day: ${targetDay}`);
 
-        // Blur event trigger करण्यासाठी Tab दाबा
         await this.contractFromInput.press('Tab');
     }
     /**
@@ -721,8 +718,6 @@ class ContractorEmployeeDetailsPage {
         await this.contractDaysInput.waitFor({ state: 'visible', timeout: 5000 });
         await this.contractDaysInput.clear();
         await this.contractDaysInput.fill(String(days));
-        
-        // Tab key press केल्याने blur/change event ट्रिगर होतो आणि Contract To तारीख auto-calculate होते
         await this.contractDaysInput.press('Tab');
         await this.page.waitForTimeout(500);
     }
@@ -882,14 +877,11 @@ async fillPersonalMandatoryDetails(firstName, lastName, gender, dob) {
         await dobInput.waitFor({ state: 'visible', timeout: 5000 });
         await dobInput.click({ force: true });
         await this.page.waitForTimeout(300);
-
-        // Step B: Direct jQuery DatePicker API चा वापर करून Date Set करा व Change Event Trigger करा
         await this.page.evaluate((dobValue) => {
             const $el = window.jQuery ? window.jQuery('#Employee_BirthDate') : null;
             const el = document.getElementById('Employee_BirthDate') || document.querySelector('input[name="Employee.BirthDate"]');
 
             if ($el && $el.datepicker) {
-                // jQuery Datepicker API वापरून तारीख सेट करा
                 $el.datepicker('setDate', dobValue);
                 $el.trigger('change');
                 $el.trigger('blur');
@@ -910,7 +902,7 @@ async fillPersonalMandatoryDetails(firstName, lastName, gender, dob) {
             await dobInput.press('Tab');
         }
 
-        await this.page.waitForTimeout(800); // Age field update होण्यासाठी पॉझ
+        await this.page.waitForTimeout(800); 
 
         // 4. Age Field Auto-Calculation Validation
         const ageInput = this.page.locator('#Employee_Age, #Age, input[name*="Age"]').first();
@@ -937,22 +929,17 @@ async fillPersonalMandatoryDetails(firstName, lastName, gender, dob) {
 async fillContractPeriodDetails(contractFromDate, periodInDays) {
     console.log(`✍️ Filling Contract From using correct locator (#Employee_JoinDate)...`);
 
-    // 1. अचूक Locator: DevTools मधील खरी ID (#Employee_JoinDate)
+    
     const joinDateInput = this.page.locator('#Employee_JoinDate, input[name="Employee.JoinDate"]').first();
     await joinDateInput.waitFor({ state: 'visible', timeout: 10000 });
-
-    // Inupt वर क्लिक करून कॅलेंडर उघडा
     await joinDateInput.click({ force: true });
     await this.page.waitForTimeout(500);
-
-    // कॅलेंडर पॉपअपमधील हायलाइट झालेली/पहिली व्हॅलिड तारीख क्लिक करा
     const calendarDate = this.page.locator('.datepicker-days td.day:not(.old):not(.new), .ui-datepicker-calendar td:not(.ui-datepicker-other-month)').first();
 
     if (await calendarDate.isVisible().catch(() => false)) {
         console.log("👉 Clicking on date in open calendar popup...");
         await calendarDate.click();
     } else {
-        // Readonly हटवून व्हॅल्यू फोर्स सेट करा
         await this.page.evaluate((dateVal) => {
             const input = document.getElementById('Employee_JoinDate') || document.querySelector('input[name="Employee.JoinDate"]');
             if (input) {
@@ -966,8 +953,6 @@ async fillContractPeriodDetails(contractFromDate, periodInDays) {
     }
 
     await this.page.waitForTimeout(500);
-
-    // 2. Contract Period In Days Fill ('0' पूर्ण काढून मग व्हॅल्यू टाका)
     if (periodInDays) {
         const daysInput = this.page.locator('#ContractPeriodInDays, #ContractPeriod, input[name*="Period"]').first();
 
@@ -983,8 +968,6 @@ async fillContractPeriodDetails(contractFromDate, periodInDays) {
         await daysInput.press('Tab');
         await this.page.waitForTimeout(500);
     }
-
-    // 3. Contract To field वर क्लिक करा जेणेकरून कॅल्क्युलेशन ट्रिगर होईल
     const contractToInput = this.page.locator('#ContractTo, #Employee_ContractTo, input[name*="ContractTo"]').first();
 
     if (await contractToInput.isVisible().catch(() => false)) {

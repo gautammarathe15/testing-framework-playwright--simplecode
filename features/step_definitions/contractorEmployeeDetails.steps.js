@@ -27,7 +27,6 @@ Then('User should see all form tabs sections and input fields on Contractor Empl
 When('User enters dynamic valid Aadhaar number', { timeout: 30000 }, async function () {
     const dynamicId = '7' + Date.now().toString().slice(-11);
     
-    // 🔹 Cucumber Context ('this') वर नंबर सेव्ह करा जेणेकरून दुसऱ्या स्टेप्समध्ये वापरता येईल
     this.createdAadhaar = dynamicId;
     this.generatedAadhaar = dynamicId;
     this.aadhaarNumber = dynamicId;

@@ -3,19 +3,11 @@ import { ContractorEmployeeDeploymentPage } from '../../pages/deployment.js';
 
 let updatedDeploymentData = {};
 
-When('User clicks on "Deployment" tab in employee profile', { timeout: 60000 }, async function () {
-    const deploymentPage = new ContractorEmployeeDeploymentPage(this.page);
-    await deploymentPage.clickDeploymentTab();
-    // 📸 initial values कॅप्चर करण्यासाठी:
-    await deploymentPage.captureInitialDetails();
-});
-
 Then('User verifies deployment fields match initial created details Subsidiary {string}, Division {string}, Department {string}, Category {string}, Grade {string}, Designation {string}, Location {string}, Skilled Level {string}, and Contractor {string}', 
 { timeout: 60000 }, 
 async function (subsidiary, division, department, category, grade, designation, location, skill, contractor) {
     const deploymentPage = new ContractorEmployeeDeploymentPage(this.page);
     
-    // 1. मूळ व्हेरिफिकेशन
     await deploymentPage.verifySelectedValues({
         subsidiary,
         division,
@@ -27,8 +19,6 @@ async function (subsidiary, division, department, category, grade, designation, 
         skill,
         contractor
     });
-
-    // 2. 📊 Terminal आणि HTML Report मध्ये Chart Log करण्यासाठी:
     await deploymentPage.logFinalComparisonChart(this);
 });
 

@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 
 export class ContractorEmployeeDeploymentPage {
-    // Cross-step persistence साठी Static variables
     static sharedInitialData = {};
     static sharedModifiedData = {};
 
@@ -43,7 +42,6 @@ export class ContractorEmployeeDeploymentPage {
         await this.page.waitForTimeout(1500);
     }
 
-    // Dropdown मधील Current Selected Text शोधणारा सुरक्षित Helper
     async getSelectedOptionText(locator) {
         if (await locator.isVisible().catch(() => false)) {
             return await locator.evaluate(sel => {
@@ -55,7 +53,6 @@ export class ContractorEmployeeDeploymentPage {
         return '';
     }
 
-    // Dropdown मध्ये Value/Label निवडून DOM Event Trigger करणारा Helper
     async selectDropdownRobust(locator, searchText) {
         if (!searchText || !(await locator.isVisible().catch(() => false))) return;
 
@@ -102,11 +99,9 @@ export class ContractorEmployeeDeploymentPage {
         this.initialData = ContractorEmployeeDeploymentPage.sharedInitialData;
     }
 
-    // 2. Deployment Values Verify करणे (Null/Undefined Safety सह)
     async verifySelectedValues(expectedData) {
         await expect(this.departmentDropdown).toBeVisible({ timeout: 10000 });
 
-        // जर parameter दिला नसेल, तर static variable किंवा initial capture वापरणे
         const targetData = expectedData || this.modifiedData || ContractorEmployeeDeploymentPage.sharedModifiedData || ContractorEmployeeDeploymentPage.sharedInitialData;
 
         if (!targetData || Object.keys(targetData).length === 0) {
@@ -133,7 +128,6 @@ export class ContractorEmployeeDeploymentPage {
         if (targetData.contractor) await checkDropdownValue(this.contractorDropdown, targetData.contractor);
     }
 
-    // 3. Temporary Values Modify आणि Capture करणे (Delay सह)
     async modifyDeploymentFields() {
         await expect(this.departmentDropdown).toBeVisible({ timeout: 10000 });
 
@@ -150,7 +144,6 @@ export class ContractorEmployeeDeploymentPage {
             await this.remarkInput.fill('Check Update persistence logic');
         }
 
-        // DOM मध्ये नवी निवड सेट होण्यासाठी १ सेकंदाचा विराम
         await this.page.waitForTimeout(1000);
 
         ContractorEmployeeDeploymentPage.sharedModifiedData = {

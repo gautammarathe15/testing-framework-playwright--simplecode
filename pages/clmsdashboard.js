@@ -22,10 +22,6 @@ class CLMSDashboardPage {
         this.emSphereFooter = this.page.getByRole('link', { name: 'emSphere Technologies Pvt.' });
     }
 
-    /**
-     * 🟢 FIX FOR TypeError: verifyDashboardLanding is not a function
-     * Dashboard वर यशस्वीरित्या लँड झाल्याची खात्री करण्यासाठी ही मेथड वापरली जाते.
-     */
     async verifyDashboardLanding() {
         console.log("🔍 Verifying Dashboard Landing...");
         await this.page.waitForURL(/.*dashboard/i, { timeout: 15000 });
@@ -39,9 +35,6 @@ class CLMSDashboardPage {
         return true;
     }
 
-    /**
-     * Top Navigation Menu Visibility & Clickability Validation
-     */
     async validateNavigationMenu() {
         console.log("🔍 Testing Navigation Menu options for Visibility & Real Clickability...");
 

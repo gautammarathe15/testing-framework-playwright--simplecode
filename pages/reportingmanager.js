@@ -6,7 +6,6 @@ export class ContractorEmployeeReportingManagerPage {
 
         this.reportingManagerTab = page.locator('#lnkEmployeeReporting').first();
 
-        // M1, M2, M3, M4 साठीचे सर्च आयकॉन (Magnifying Glass Icons)
         this.searchButtons = {
             M1: page.locator('#SearchM1, a[id="SearchM1"]').first(),
             M2: page.locator('#SearchM2, a[id="SearchM2"]').first(),
@@ -22,7 +21,6 @@ export class ContractorEmployeeReportingManagerPage {
         this.popupDepartmentDropdown = this.employeeSearchModal.locator('#DepartmentIDCnt').first();
         this.popupSearchButton = this.employeeSearchModal.locator('#btnSearchCnt, #btnSearchSingleCnt, button:has-text("Search")').first();
 
-        // 🔹 1st time सेव्ह करण्यापूर्वीचा डेटा Temporary Memory मध्ये ठेवण्यासाठी
         this.tempManagerData = {
             M1: '',
             M2: '',
@@ -33,7 +31,6 @@ export class ContractorEmployeeReportingManagerPage {
         this.updatedSelectedManager = '';
     }
 
-    // मॅनेजरचा इनपुट फील्ड किंवा डिस्प्ले टेक्स्ट मिळवण्यासाठी (Hidden input वगळून)
     getManagerDisplayLocator(managerType) {
         return this.page.locator(`input[name*="${managerType}"]:not([type="hidden"]), #txt${managerType}Name, #spnName${managerType}, input[id*="${managerType}"]:not([type="hidden"])`).first();
     }
@@ -98,7 +95,6 @@ export class ContractorEmployeeReportingManagerPage {
         await this.page.waitForTimeout(1000);
     }
 
-    // 🔹 ग्रिडमधून पहिला कर्मचारी सेलेक्ट करून तो Temp Data मध्ये स्टोअर करणे
     async selectFirstEmployeeFromGridAndStore(managerType) {
         const firstRow = this.employeeSearchModal.locator('table tbody tr').first();
         await expect(firstRow).toBeVisible({ timeout: 15000 });
@@ -107,7 +103,6 @@ export class ContractorEmployeeReportingManagerPage {
         const lName = (await firstRow.locator('td').nth(3).innerText().catch(() => '')).trim();
         const fullManagerName = `${fName} ${lName}`.trim();
 
-        // Temporary Variable मध्ये सेव्ह करणे
         this.tempManagerData[managerType] = fullManagerName;
 
         const selectBtn = firstRow.locator('.btn-success, button:has-text("Select"), button[name="btnSelectCnt"]').first();
@@ -125,7 +120,6 @@ export class ContractorEmployeeReportingManagerPage {
         await this.page.waitForTimeout(1000);
     }
 
-    // 🔹 M1 साठी स्वतंत्र Save मेथड
     async clickSaveButton() {
         const saveBtn = this.page.locator('input#btnSaveEmployeeReporting[value="Save"], input[name="btnSaveEmployeeReporting"]').first();
 
@@ -143,7 +137,6 @@ export class ContractorEmployeeReportingManagerPage {
     }
 
     async clickUpdateButton() {
-        // 🔹 अगदी अचूक आयडी वापरून फिक्स केलेले अपडेट बटण (इतर ड्युप्लिकेट बटणे इग्नोर करण्यासाठी)
         const updateBtn = this.page.locator('input#btnUpdateEmployeeReporting').first();
 
         await updateBtn.waitFor({ state: 'visible', timeout: 15000 });
