@@ -31,7 +31,7 @@ Feature: Contractor Employee Status Update and Count Validation
     Then User verifies pre-filled form details match First Name "<FirstName>", Last Name "<LastName>", Gender "<Gender>", and Location "<Location>"
     And User verifies Delete button is visible on employee edit form
     When User updates status from "Active" to "Left"
-    And User clicks on the Update button
+    When User clicks on the Update button for Status
     And User clicks on OK button on success popup
     When User selects today date as Resignation Date and verifies Relieving Date auto-populates
     And User clicks on Update button after filling dates
@@ -49,7 +49,7 @@ Feature: Contractor Employee Status Update and Count Validation
     When User clicks on Edit icon for the created employee
     Then User verifies pre-filled form details match First Name "<FirstName>", Last Name "<LastName>", Gender "<Gender>", and Location "<Location>"
     When User updates status from "Left" to "Active"
-    And User clicks on the Update button
+    When User clicks on the Update button for Status
     And User clicks on OK button on success popup
     And User clicks on Cancel button
 
@@ -86,7 +86,7 @@ Scenario Outline: Verify employee status change from Left to Terminated and Absc
     Then User searches created employee status in grid by identity number
     When User clicks on Edit icon for the created employee
     When User updates status from "Active" to "Left"
-    And User clicks on the Update button
+    When User clicks on the Update button for Status 
     And User clicks on OK button on success popup
     When User selects today date as Resignation Date and verifies Relieving Date auto-populates
     And User clicks on Update button after filling dates
@@ -97,7 +97,7 @@ Scenario Outline: Verify employee status change from Left to Terminated and Absc
     Then User searches created employee status in grid by identity number
     When User clicks on Edit icon for the created employee
     When User updates status to "<TargetStatus1>"
-    And User clicks on the Update button
+    When User clicks on the Update button for Status
     And User clicks on OK button on success popup
     When User selects today date as Resignation Date and verifies Relieving Date auto-populates
     And User clicks on Update button after filling dates 
@@ -113,7 +113,7 @@ Scenario Outline: Verify employee status change from Left to Terminated and Absc
 
     When User clicks on Edit icon for the created employee
     When User updates status to "<TargetStatus2>"
-    And User clicks on the Update button
+    When User clicks on the Update button for Status
     And User clicks on OK button on success popup
     When User fills mandatory exit dates based on status
     And User clicks on Update button after filling dates

@@ -21,6 +21,9 @@ export class ContractorEmployeePage {
         this.submitButton = this.page.locator('a, button, input').filter({ hasText: /^Submit$/i }).first();
         this.skipVerificationButton = this.page.locator('a, button, input').filter({ hasText: /Skip Verification/i }).first();
 
+        // Universal Update Button Locator (सर्व मॉड्यूल्ससाठी चालणारा लोकेटर)
+        this.universalUpdateButton = this.page.locator('input[value="Update"], button:has-text("Update"), input[id*="Update"]').first();
+
         // Mandatory Dropdown Locators List
         this.mandatoryDropdownsList = [
             this.page.getByLabel('Subsidiary*'),
@@ -212,6 +215,33 @@ export class ContractorEmployeePage {
         console.log("✅ Clicked on Save button.");
     }
 
+    // Universal Update Method (सर्व सब-टॅबवरील अपडेटसाठी उपयुक्त)
+    async clickUniversalUpdate() {
+        const swalOverlay = this.page.locator('.swal-overlay, .modal-backdrop').first();
+        if (await swalOverlay.isVisible().catch(() => false)) {
+            await this.page.keyboard.press('Escape');
+            await this.page.waitForTimeout(500);
+        }
+
+        const okButton = this.page.locator('.swal-button--confirm, button:has-text("OK")').first();
+        if (await okButton.isVisible({ timeout: 2000 }).catch(() => false)) {
+            await okButton.click();
+            await this.page.waitForTimeout(300);
+        }
+
+        await this.universalUpdateButton.scrollIntoViewIfNeeded();
+        await this.universalUpdateButton.waitFor({ state: 'visible', timeout: 15000 });
+        
+        try {
+            await this.universalUpdateButton.click({ timeout: 5000 });
+        } catch (e) {
+            await this.universalUpdateButton.click({ force: true });
+        }
+        
+        console.log("✅ Clicked on Universal Update button successfully.");
+        await this.page.waitForTimeout(2000);
+    }
+
     async verifyCreateButtonVisible() {
         await expect(this.createButton).toBeVisible();
     }
@@ -260,4 +290,4 @@ export class ContractorEmployeePage {
     async verifyAutoCalculatedContractToDate(expectedDate) {
         await expect(this.contractToInput).toHaveValue(expectedDate);
     }
-} 
+}

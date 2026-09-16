@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<testsuite failures="1" skipped="0" name="cucumber-js" time="74.35942887" tests="4">
-  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate Card allocation features under Card tab for a New Employee" time="28.219873291">
+<testsuite failures="0" skipped="0" name="cucumber-js" time="58.65957197099999" tests="1">
+  <testcase classname="CLMS Employee Week Off Functionality Verification" name="Verify Week Off tab elements and field visibility for a new employee" time="58.65957197099999">
     <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
 When User enters username "admin" and password "sa".......................passed
 And User clicks on the Login button.......................................passed
@@ -10,70 +10,51 @@ And User verifies Aadhaar Card input field is visible.....................passed
 And User enters dynamic valid Aadhaar number..............................passed
 And User clicks on the Verify link if visible.............................passed
 And User should see Submit and Skip Verification options and click Skip...passed
-And User fills mandatory Personal details with First Name "Mangal", Las...passed
-And User fills Contract Period details with Contract From "29-Aug-2025"...passed
+And User fills mandatory Personal details with First Name "Sirachand", ...passed
+And User fills Contract Period details with Contract From "01-Mar-2026"...passed
 And User fills all mandatory Deployment details with Subsidiary "A.k en...passed
 And User verifies default Status is "Active"..............................passed
 And User clicks on the Save button........................................passed
 And User clicks on OK button on success popup.............................passed
 When User searches created employee status in grid by identity number.....passed
 And User clicks on Edit icon for the created employee.....................passed
-When User clicks on "Card" tab in employee profile........................passed
-Then User verifies 'Allocate Temporary Card' button is visible............passed
-When User clicks on "Allocate Temporary Card" button......................passed
-Then User verifies "Card Number" label and input textbox are visible......passed
-Then User verifies "Effective From" label and input textbox are visible...passed
-And User verifies mandatory field red symbols are visible.................passed
-And User verifies "Save" and "Cancel" buttons are visible.................passed]]></system-out>
-  </testcase>
-  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate Card allocation features under Card tab for an Existing Employee" time="21.427617995">
-    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
-When User enters username "admin" and password "sa".......................passed
-And User clicks on the Login button.......................................passed
-And User clicks on the Contractor Employee menu option....................passed
-When User enters "5500" in search filter for Aadhaar or employee detail...passed
-And User selects the 1st entry from the employee grid.....................passed
-When User clicks on "Card" tab in employee profile........................passed
-Then User verifies 'Allocate Temporary Card' button is visible............passed
-When User clicks on "Allocate Temporary Card" button......................passed
-Then User verifies "Card Number" label and input textbox are visible......passed
-Then User verifies "Effective From" label and input textbox are visible...passed
-And User verifies mandatory field red symbols are visible.................passed
-And User verifies "Save" and "Cancel" buttons are visible.................passed]]></system-out>
-  </testcase>
-  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate successful temporary card allocation with dynamic unique card number and today's date" time="12.430487694">
-    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
-When User enters username "admin" and password "sa".......................passed
-And User clicks on the Login button.......................................passed
-And User clicks on the Contractor Employee menu option....................passed
-When User enters "5500" in search filter for Aadhaar or employee detail...passed
-And User selects the 1st entry from the employee grid.....................passed
-When User clicks on "Card" tab in employee profile........................passed
-And User clicks on "Allocate Temporary Card" button.......................passed
-And User enters dynamic card number based on Aadhaar......................passed
-And User selects today's date in Effective From field.....................passed
-And User clicks on the Save button for card allocation....................passed
-Then User verifies card allocation success message........................passed]]></system-out>
-  </testcase>
-  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate error message when Effective To date is earlier than Effective From" time="12.281449890000001">
-    <failure type="Error" message="[2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m&#xA;&#xA;Received: [31mfalse[39m"><![CDATA[Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
-
-Received: [31mfalse[39m
-    at captureRawStack (D:\CLMS-Automation\testing-framework-playwright--simplecode\node_modules\playwright-core\lib\coreBundle.js:9681:17)
-    at callMatcherAsStep (D:\CLMS-Automation\testing-framework-playwright--simplecode\node_modules\playwright\lib\matchers\expect.js:13310:57)
-    at Object.toBeTruthy (D:\CLMS-Automation\testing-framework-playwright--simplecode\node_modules\playwright\lib\matchers\expect.js:13300:23)
-    at World.<anonymous> (D:\CLMS-Automation\testing-framework-playwright--simplecode\features\step_definitions\card.steps.js:156:21)]]></failure>
-    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
-When User enters username "admin" and password "sa".......................passed
-And User clicks on the Login button.......................................passed
-And User clicks on the Contractor Employee menu option....................passed
-When User enters "5500" in search filter for Aadhaar or employee detail...passed
-And User selects the 1st entry from the employee grid.....................passed
-When User clicks on "Card" tab in employee profile........................passed
-And User clicks on "Allocate Temporary Card" button.......................passed
-And User enters dynamic card number based on Aadhaar......................passed
-And User enters an invalid date range where Effective To is earlier tha...passed
-And User clicks on the Save button for card allocation....................passed
-Then User verifies popup message "date must be greater than from date" ...failed]]></system-out>
+And User clicks on the Week Off tab.......................................passed
+Then User verifies "Week Off Default Applicable" checkbox and "Effectiv...passed
+And User verifies "Week Off and Shift Template" dropdown is visible.......passed
+And User verifies "From Date" field is visible............................passed
+And User verifies "To Date" field is visible..............................passed
+And On WeekOff Page User selects today's date in Effective From field.....passed
+When User clicks on the Update button for week off........................passed
+And User clicks on OK button on success popup.............................passed
+When User unchecks the "Week Off Default Applicable" checkbox.............passed
+And User enters "30-Sep-2026" in the Effective From field.................passed
+When User clicks on the Update button for week off........................passed
+And User clicks on OK button on success popup.............................passed
+Then User verifies the first row in the table shows status "No" and eff...passed
+And User clicks on OK button on success popup.............................passed
+And User selects the first template from the Week Off and Shift Templat...passed
+And User selects today date in From Date field............................passed
+And User selects date after 5 days from today in To Date field............passed
+And User clicks on Save button for template...............................passed
+And User clicks on OK button on success popup.............................passed
+Then User verifies the table displays template expectedTemplate, expect...passed
+When User leaves 'Week Off and Shift Template' dropdown empty.............passed
+And User selects today date in From Date field............................passed
+And User selects date after 5 days from today in To Date field............passed
+And User clicks on Save button for template...............................passed
+Then User should see validation popup or message for template selection...passed
+And User clicks on OK button on success popup.............................passed
+When User selects the first template from the Week Off and Shift Templa...passed
+And User leaves 'From Date' field empty...................................passed
+And User selects date after 5 days from today in To Date field............passed
+And User clicks on Save button for template...............................passed
+Then User should see validation popup or message for From Date............passed
+And User clicks on OK button on success popup.............................passed
+When User selects the first template from the Week Off and Shift Templa...passed
+And User selects today date in From Date field............................passed
+And User leaves 'To Date' field empty.....................................passed
+And User clicks on Save button for template...............................passed
+Then User should see validation popup or message for To Date..............passed
+And User clicks on OK button on success popup.............................passed]]></system-out>
   </testcase>
 </testsuite>

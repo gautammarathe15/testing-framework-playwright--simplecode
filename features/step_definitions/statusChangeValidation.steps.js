@@ -212,7 +212,7 @@ When('User updates status from {string} to {string}', async function (fromStatus
     await this.page.waitForTimeout(1000);
 });
 
-When('User clicks on the Update button', async function () {
+When('User clicks on the Update button for Status', async function () {
     const updateBtn = this.page.locator('#btnUpdate, button:has-text("Update"), input[value="Update"]').first();
     await expect(updateBtn).toBeVisible({ timeout: 5000 });
     await updateBtn.click({ force: true });

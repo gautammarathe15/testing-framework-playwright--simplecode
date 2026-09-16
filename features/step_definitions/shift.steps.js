@@ -2,7 +2,8 @@ import { When, Then } from '@cucumber/cucumber';
 import { ContractorEmployeeShiftPage } from '../../pages/shift.js';
 import { ContractorEmployeeDeploymentPage } from '../../pages/deployment.js';
 import { ContractorEmployeeReportingManagerPage } from '../../pages/reportingmanager.js';
-import { ContractorEmployeeCardPage } from '../../pages/card.js'; // 1. कार्ड पेज इम्पोर्ट करा
+import { ContractorEmployeeCardPage } from '../../pages/card.js';
+import { ContractorEmployeeWeekOffPage } from '../../pages/weekoff.js';
 
 function getShiftPage(page) {
     return new ContractorEmployeeShiftPage(page);
@@ -20,6 +21,11 @@ function getCardPage(page) {
     return new ContractorEmployeeCardPage(page); 
 }
 
+function getWeekOffPage(page) {
+    return new ContractorEmployeeWeekOffPage(page);
+}
+
+
 When('User clicks on {string} tab in employee profile', async function (tabName) {
     await this.page.waitForTimeout(1000); 
     const tabLower = tabName.toLowerCase();
@@ -35,9 +41,13 @@ When('User clicks on {string} tab in employee profile', async function (tabName)
         const reportingPage = getReportingPage(this.page);
         await reportingPage.clickReportingManagerTab();
     } else if (tabLower === 'card') {
-        const cardPage = getCardPage(this.page); // 3. 'Card' टॅबसाठी लॉजिक जोडा
+        const cardPage = getCardPage(this.page); 
         await cardPage.clickCardTab();
+    } else if (tabLower === 'week off' || tabLower === 'weekoff') {
+        const weekOffPage = getWeekOffPage(this.page); 
+        await weekOffPage.clickWeekOffTab();
     }
+
 });
 
 When('User selects "Auto Shift Applied" checkbox', async function () {

@@ -16,7 +16,7 @@ export class ContractorEmployeeShiftPage {
     }
 
     async clickShiftTab() {
-        await this.page.waitForTimeout(2000); // पृष्ठ व्यवस्थित लोड होण्यासाठी थोडा वेळ देणे
+        await this.page.waitForTimeout(2000); 
         await this.shiftTab.waitFor({ state: 'visible', timeout: 20000 });
         await this.shiftTab.scrollIntoViewIfNeeded().catch(() => {});
         try {
@@ -74,3 +74,11 @@ export class ContractorEmployeeShiftPage {
         }
     }
 }
+
+
+
+
+
+
+
+
