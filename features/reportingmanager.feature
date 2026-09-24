@@ -87,7 +87,7 @@ Feature: Contractor Employee Reporting Manager Flow
 
     # --- M3 Flow ---
     When User opens search popup for "M3"
-    And User searches by Employee Code "1003" in popup search
+    And User searches by Employee Code "9009" in popup search
     And User stores first result details and clicks Select button
     And User clicks on Update button in Reporting Manager tab
     And User clicks on OK button on success popup

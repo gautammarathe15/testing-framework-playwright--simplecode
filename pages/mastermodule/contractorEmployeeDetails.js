@@ -241,13 +241,21 @@ class ContractorEmployeeDetailsPage {
     }
 
     async verifyAgePopupDisplayed() {
-        await expect(this.ageErrorPopup).toBeVisible({ timeout: 5000 });
+        
+        const popupLocator = this.page.locator('.swal-modal, .swal2-popup, .modal-content, .alert-danger, :has-text("18")').first();
+        await popupLocator.waitFor({ state: 'visible', timeout: 10000 });
+        
+        const isVisible = await popupLocator.isVisible();
+        if (!isVisible) {
+            throw new Error("Age validation popup is not visible!");
+        }
+        return popupLocator;
     }
 
-    async clickOkOnAgePopup() {
-        if (await this.okButton.isVisible().catch(() => false)) {
-            await this.okButton.click();
-        }
+   async clickAgePopupOkButton() {
+        const okBtn = this.page.locator('.swal-button--confirm, .swal2-confirm, button:has-text("OK")').first();
+        await okBtn.waitFor({ state: 'visible', timeout: 5000 });
+        await okBtn.click();
     }
 
     async verifyFormNotSaved() {

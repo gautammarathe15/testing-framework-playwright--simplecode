@@ -4,6 +4,10 @@ import { ContractorEmployeeDeploymentPage } from '../../pages/deployment.js';
 import { ContractorEmployeeReportingManagerPage } from '../../pages/reportingmanager.js';
 import { ContractorEmployeeCardPage } from '../../pages/card.js';
 import { ContractorEmployeeWeekOffPage } from '../../pages/weekoff.js';
+import { OtherDetailsPage } from '../../pages/otherdetailspage/otherdetails.js';
+
+import { AddressPage } from '../../pages/address.js';
+
 
 function getShiftPage(page) {
     return new ContractorEmployeeShiftPage(page);
@@ -25,6 +29,13 @@ function getWeekOffPage(page) {
     return new ContractorEmployeeWeekOffPage(page);
 }
 
+function getOtherDetailsPage(page) {
+    return new OtherDetailsPage(page);  
+}
+
+function getAddressPage(page) {
+    return new AddressPage(page);
+}
 
 When('User clicks on {string} tab in employee profile', async function (tabName) {
     await this.page.waitForTimeout(1000); 
@@ -46,7 +57,14 @@ When('User clicks on {string} tab in employee profile', async function (tabName)
     } else if (tabLower === 'week off' || tabLower === 'weekoff') {
         const weekOffPage = getWeekOffPage(this.page); 
         await weekOffPage.clickWeekOffTab();
+    } else if (tabLower === 'other detail' || tabLower === 'other details') {
+        const otherDetailsPage = getOtherDetailsPage(this.page);
+        await otherDetailsPage.clickOtherDetailsTab(); 
+    } else if (tabLower === 'address' || tabLower === 'address') {
+        const addressPage = getAddressPage(this.page);
+        await addressPage.clickAddressTab();
     }
+
 
 });
 

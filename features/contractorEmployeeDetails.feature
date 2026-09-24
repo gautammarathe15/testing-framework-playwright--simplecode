@@ -1,3 +1,4 @@
+@dashboard
 Feature: Contractor Employee Detailed Form Verification and Validations
 
   Background:
@@ -52,6 +53,7 @@ Feature: Contractor Employee Detailed Form Verification and Validations
       | Project Salary             |
       | Employee Accident Register |
       | Onboarding Fields          |
+
 
   Scenario: Verify Check Verification section expand, collapse and field interaction functionality
     And User clicks on the Contractor Employee menu option

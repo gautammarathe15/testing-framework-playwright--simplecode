@@ -143,16 +143,39 @@ Then('User verifies card allocation success message', async function () {
     }
 });
 
+// Then('User verifies popup message {string} is displayed', async function (expectedMessage) {
+//     const popup = this.page.locator('.swal-modal, .swal-text, .alert, .toast, .modal-body, span.text-danger, label.error, div:has-text("date must be greater"), div:has-text("Fill all mandatory fields")').first();
+    
+//     await popup.waitFor({ state: 'attached', timeout: 15000 });
+    
+//     const fullText = await popup.evaluate(el => el.textContent || el.innerText || '');
+    
+//     const isMatch = fullText.toLowerCase().includes(expectedMessage.toLowerCase()) || 
+//                     fullText.toLowerCase().includes("date must be greater") ||
+//                     fullText.toLowerCase().includes("to date must be greater than from date") ||
+//                     fullText.toLowerCase().includes("fill all mandatory fields");
+//     expect(isMatch).toBeTruthy();
+
+//     const okBtn = this.page.locator('.swal-button--confirm, button:has-text("OK"), button:has-text("Close")').first();
+//     if (await okBtn.isVisible().catch(() => false)) {
+//         await okBtn.click();
+//     }
+// });
+
+
+
+
 Then('User verifies popup message {string} is displayed', async function (expectedMessage) {
-    const popup = this.page.locator('.swal-modal, .swal-text, .alert, .toast, .modal-body, span.text-danger, label.error, div:has-text("date must be greater"), div:has-text("Fill all mandatory fields")').first();
+    const popup = this.page.locator('.swal-text').first();
     
-    await popup.waitFor({ state: 'attached', timeout: 15000 });
+    await popup.waitFor({ state: 'visible', timeout: 15000 });
     
-    const fullText = await popup.evaluate(el => el.textContent || el.innerText || '');
+    const fullText = await popup.textContent() || '';
     
     const isMatch = fullText.toLowerCase().includes(expectedMessage.toLowerCase()) || 
-                    fullText.toLowerCase().includes("date must be greater") ||
-                    fullText.toLowerCase().includes("fill all mandatory fields");
+                    fullText.toLowerCase().includes("to date must be greater") ||
+                    fullText.toLowerCase().includes("to date must be greater than from date");
+    
     expect(isMatch).toBeTruthy();
 
     const okBtn = this.page.locator('.swal-button--confirm, button:has-text("OK"), button:has-text("Close")').first();

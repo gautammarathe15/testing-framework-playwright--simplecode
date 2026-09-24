@@ -104,6 +104,9 @@ Then('User verifies retained remark fields can be edited with updated inputs:', 
 When('User clicks on the {string} tab without filling basic employee details', { timeout: 30000 }, async function (tabName) {
     console.log(`\n👇 Attempting to click on Tab: "${tabName}" without creating employee...`);
     const tabLocator = this.page.getByRole('tab', { name: tabName });
+    const isVisible = await tabLocator.isVisible().catch(() => false);
+    const actualStatus = isVisible ? "Visible" : "Not Visible";
+    this.attach(`Tab Name: ${tabName} ---> Status on UI: ${actualStatus}`, 'text/plain');
     await tabLocator.scrollIntoViewIfNeeded({ timeout: 3000 }).catch(() => {});
     await tabLocator.click();
 });

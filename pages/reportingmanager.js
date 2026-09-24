@@ -153,7 +153,6 @@ export class ContractorEmployeeReportingManagerPage {
         await this.page.waitForTimeout(1000);
     }
 
-    // 🔹 जुनी ऑटोमॅटिक मेथड (जर इतरत्र कुठे वापरायची असेल तर ठेवली आहे)
     async clickSaveOrUpdateButton() {
         const updateBtn = this.page.locator('input#btnUpdateEmployeeReporting, input[value="Update"]').first();
         const saveBtn = this.page.locator('input#btnSaveEmployeeReporting, input[value="Save"]').first();
