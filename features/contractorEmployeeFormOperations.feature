@@ -11,7 +11,7 @@ Feature: Contractor Employee Form Data Filling, Verification, Editing and Mandat
     And User clicks on the Verify link if visible
     Then User should see Submit and Skip Verification options and click Skip Verification
 
-  @Validation @Smoke
+  @Validation @Smoke @asterisk
   Scenario: Verify mandatory asterisk indicators and field validations on save
     Then User verifies all mandatory fields are marked with red asterisk
     When User clicks on Save button without filling mandatory details

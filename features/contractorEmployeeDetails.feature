@@ -16,7 +16,7 @@ Feature: Contractor Employee Detailed Form Verification and Validations
     Then User pauses execution for locator inspection
     Then User should see all form tabs sections and input fields on Contractor Employee page
 
-  @Regression @Smoke @Validation
+  @Regression @Smoke @Validation 
   Scenario Outline: Verify "please First Create Employee" popup for all restricted tabs
     And User clicks on the Contractor Employee menu option
     When User clicks on the Create button

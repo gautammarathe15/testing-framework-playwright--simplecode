@@ -6,7 +6,7 @@ Feature: CLMS Employee PAN Number Validation Testing
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    When User enters "46838" in search filter for Aadhaar or employee details
+    When User enters "91312" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid 
     And User clicks on "Other Details" tab in employee profile
 
@@ -17,10 +17,10 @@ Feature: CLMS Employee PAN Number Validation Testing
 
   Examples:
     | PanNumber    | ExpectedMessage                                        |
-    | AYTDE1234F   | success                                                |
-    | abcdb1034f   | success                                                |
-    | UBCDP1234Z   | success                                                |
-    | WQ1EDQWDE    | PAN Value: WQAEDQWDE should be a 10 alphanumeric value.|
+    | PYTEY1134F   | success                                                |
+    | ajgdb0734f   | success                                                |
+    | UHJBP1204Z   | success                                                |
+    | WQ1EDQWDE    | PAN Value: WQ1EDQWDE should be a 10 alphanumeric value.|
     | 11111HHHH    | PAN Value: 11111HHHH should be a 10 alphanumeric value. |    
     | )88882%7&D   | Invalid PAN Card No                                    |
     | ABCDEFGHIJ   | Invalid PAN Card No                                    |

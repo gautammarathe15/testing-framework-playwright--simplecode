@@ -29,4 +29,4 @@ Feature: CLMS Employee Other Details Tab Verification and Reporting
 
   Examples:
     | FirstName | LastName | Gender | DOB         | ContractFrom | ContractDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | SkilledLevel | Contractor |
-    | Sara      | Datta    | F      | 15-Jun-1995 | 01-Jun-2026  | 280          | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+    | Falguni   | Gupta    | F      | 21-Jun-1995 | 01-Nov-2026  | 280          | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |

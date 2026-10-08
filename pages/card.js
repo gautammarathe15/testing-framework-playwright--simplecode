@@ -18,7 +18,7 @@ export class ContractorEmployeeCardPage {
         this.mandatoryRedSymbols = page.locator('span.text-Red, span.required, .text-danger, span:has-text("*")');
     }
 
-    async searchEmployee(searchTerm) {
+async searchEmployee(searchTerm) {
         const gridSearchIcon = this.page.locator('th.w-172 img.headerSearchIcon, img.headerSearchIcon').first();
 
         try {
@@ -30,7 +30,8 @@ export class ContractorEmployeeCardPage {
             } catch (err) {}
         }
 
-        const gridSearchInput = this.page.locator('.input-group.hsHide input, th.w-172 input, input.form-control').last();
+        // Fixed: Added :visible filter to avoid hidden input (#hsAadharCardNo) timeout error
+        const gridSearchInput = this.page.locator('input.form-control:visible, th.w-172 input:visible').last();
         await gridSearchInput.waitFor({ state: 'visible', timeout: 15000 });
         await gridSearchInput.click({ force: true });
         await gridSearchInput.clear();

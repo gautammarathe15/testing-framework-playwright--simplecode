@@ -40,7 +40,7 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test */
     trace: 'on-first-retry',
 
-    /* 🎯 प्रत्येक टेस्टचा स्क्रीनशॉट रिपोर्टमध्ये दिसेल */
+  
     screenshot: 'on',
 
     /* Video retain on failure */
@@ -62,7 +62,7 @@ module.exports = defineConfig({
       name: 'Google Chrome',
       use: { 
         ...devices['Desktop Chrome'],
-        channel: 'chrome' // 👈 लोकल ओरिजिनल क्रोम ब्राऊझर वापरण्यासाठी
+        channel: 'chrome' 
       },
     },
   ],

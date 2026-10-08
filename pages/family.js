@@ -84,15 +84,12 @@ async clickSave() {
     }
 
    async clickEditIcon(memberName = "Rahul Darvitkar") {
-        // 1. फॅमिली मेंबर टेबल लोड होण्याची वाट पाहणे
         const table = this.page.locator('#dtFamilyMemberList, table').first();
         await table.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
 
-        // 2. निर्दिष्ट केलेल्या नावाची रो (Row) आणि त्यातील एडिट (पेंसिल) आयकॉन शोधणे
         const row = this.page.locator('#dtFamilyMemberList tr, table tr').filter({ hasText: memberName }).last();
         const editButton = row.locator('.fa-pencil, button:has(.fa-pencil), [name="btnEditFamilyMember"]').first();
         
-        // 3. आयकॉन पूर्णपणे दिसेपर्यंत थांबून मग क्लिक करणे
         await editButton.waitFor({ state: 'visible', timeout: 15000 });
         await editButton.click({ force: true });
     }

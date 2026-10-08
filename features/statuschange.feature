@@ -62,7 +62,7 @@ Feature: Contractor Employee Status Update and Count Validation
 
     Examples:
       | FirstName | LastName | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor |
-      | Shubham   | Lele     | M      | 18-May-1983 | 27-Aug-2025  | 171                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+      | K         | Lele     | M      | 18-May-1991 | 21-Aug-2022  | 301                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
 
 
 

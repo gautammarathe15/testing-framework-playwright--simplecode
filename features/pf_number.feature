@@ -6,7 +6,7 @@ Feature: PF Number Validation in Contractor Employee Other Details
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    When User enters "46838" in search filter for Aadhaar or employee details
+    When User enters "91312" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid
     And User clicks on "Other Details" tab in employee profile
 
@@ -17,7 +17,7 @@ Feature: PF Number Validation in Contractor Employee Other Details
 
     Examples:
       | pfValue                 | expectedMessage                                     |
-      | MHBAN09990610012515099  | Updated Successfully                                |
+      | MHBAN01911100012505099  | Updated Successfully                                |
       |                         | Updated Successfully                                |
       | MHBAN090906455099       | PF Number: "MHBAN090906455099" Is InValid.          |
       | mHBAN09090640005555099  | PF Number: "mHBAN09090640005555099" Is InValid.     |

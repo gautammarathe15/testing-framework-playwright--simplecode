@@ -1,3 +1,4 @@
+@master
 Feature: Contractor Employee Master Verification
 
   Background:
