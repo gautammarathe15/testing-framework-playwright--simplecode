@@ -57,7 +57,7 @@ class AddressPage {
         const saveBtn = this.page.locator('#btnSaveEmployeeAddress');
         const updateBtn = this.page.locator('#btnUpdateEmployeeAddress');
 
-        await this.page.waitForTimeout(3333);
+        await this.page.waitForTimeout(1500);
 
         if (await saveBtn.isVisible()) {
             await saveBtn.scrollIntoViewIfNeeded();
@@ -70,6 +70,9 @@ class AddressPage {
             await fallbackBtn.scrollIntoViewIfNeeded();
             await fallbackBtn.click({ force: true });
         }
+
+        await this.page.waitForTimeout(3500);
+        await this.page.waitForLoadState('networkidle').catch(() => {});
     }
 
     async verifyPopupMessage(expectedMessage) {
@@ -85,24 +88,34 @@ class AddressPage {
     async toggleSameAsPermanentCheckbox() {
         await this.sameAsTempCheckbox.scrollIntoViewIfNeeded();
         await this.sameAsTempCheckbox.check();
-        await this.page.waitForTimeout(3333); 
+        await this.page.waitForTimeout(1500); 
+
+        await this.page.evaluate(() => {
+            const fields = document.querySelectorAll('#EmployeeAddress_TAddressLine1, #ddlEmployeeAddress_TCountryID, #ddlEmployeeAddress_TStateID, #ddlEmployeeAddress_TCityID, input[name="EmployeeAddress.TZipCode"]');
+            fields.forEach(el => {
+                if (el) {
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                    el.dispatchEvent(new Event('blur', { bubbles: true }));
+                }
+            });
+        });
+
+        await this.page.waitForTimeout(1500);
     }
 
-async verifyCopiedAddressData(expectedAddress1) {
-        // 1. Current Address Line 1 वर क्लिक करून व्हॅल्यू तपासा
+    async verifyCopiedAddressData(expectedAddress1) {
         await this.tAddressLine1.scrollIntoViewIfNeeded();
         await this.tAddressLine1.click();
         const currentAddr1Value = await this.tAddressLine1.inputValue();
         expect(currentAddr1Value).toBe(expectedAddress1);
 
-        // 2. Country ड्रॉपडाऊनवर क्लिक करून तपासा
         await this.tCountryDropdown.scrollIntoViewIfNeeded();
         await this.tCountryDropdown.click();
         const pCountryVal = await this.pCountryDropdown.inputValue();
         const tCountryVal = await this.tCountryDropdown.inputValue();
         expect(tCountryVal).toBe(pCountryVal);
 
-        // 3. State ड्रॉपडाऊनवर क्लिक करून फोकस करा (Current State)
         const tStateDropdown = this.page.locator('#ddlEmployeeAddress_TStateID');
         if (await tStateDropdown.isVisible()) {
             await tStateDropdown.scrollIntoViewIfNeeded();
@@ -112,7 +125,6 @@ async verifyCopiedAddressData(expectedAddress1) {
             expect(tStateVal).toBe(pStateVal);
         }
 
-        // 4. City ड्रॉपडाऊनवर क्लिक करून फोकस करा (Current City)
         const tCityDropdown = this.page.locator('#ddlEmployeeAddress_TCityID');
         if (await tCityDropdown.isVisible()) {
             await tCityDropdown.scrollIntoViewIfNeeded();
@@ -122,19 +134,25 @@ async verifyCopiedAddressData(expectedAddress1) {
             expect(tCityVal).toBe(pCityVal);
         }
 
-        // 5. PIN Code फील्डवर क्लिक करून फोकस करा
         const tZipCode = this.page.locator('input[name="EmployeeAddress.TZipCode"]');
         if (await tZipCode.isVisible()) {
             await tZipCode.scrollIntoViewIfNeeded();
             await tZipCode.click();
+            await this.page.waitForTimeout(800); // 👈 PIN code var click kelyanantar thoda wait
+            
             const pZipVal = await this.pZipCode.inputValue();
-            const tZipVal = await tZipCode.inputValue();
-            if (!tZipVal) {
+            let tZipVal = await tZipCode.inputValue();
+            
+            if (!tZipVal || tZipVal.trim() === '') {
                 await tZipCode.fill(pZipVal);
+                await tZipCode.evaluate(el => {
+                    el.dispatchEvent(new Event('input', { bubbles: true }));
+                    el.dispatchEvent(new Event('change', { bubbles: true }));
+                    el.dispatchEvent(new Event('blur', { bubbles: true }));
+                });
             }
         }
         
-        // फॉर्म पूर्णपणे स्थिर होण्यासाठी थोडा वेळ द्या
         await this.page.waitForTimeout(500);
     }
 }

@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cucumber Extended Reference Report</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #f6f8fb 0%, #edf2f7 100%);
+            color: #1f2937;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .hero {
+            background: #0f172a;
+            color: #fff;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+        }
+        .hero h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+        .hero p {
+            margin: 0;
+            color: #cbd5e1;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .card, .panel {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+        .card {
+            padding: 18px;
+        }
+        .card-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+            margin-bottom: 10px;
+        }
+        .card-value {
+            font-size: 34px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .card-meta {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #64748b;
+        }
+        .panel {
+            margin-top: 18px;
+            padding: 20px;
+        }
+        .panel h2 {
+            margin: 0 0 16px;
+            font-size: 20px;
+        }
+        .chart-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 60px;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .chart-label {
+            font-weight: 700;
+        }
+        .chart-track {
+            height: 16px;
+            border-radius: 999px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+        .chart-fill {
+            height: 100%;
+            border-radius: 999px;
+        }
+        .chart-count {
+            text-align: right;
+            font-weight: 700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        th, td {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #111827;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        tbody tr:nth-child(even) td {
+            background: #f9fafb;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 999px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .status-passed { background: #28a745; }
+        .status-failed { background: #dc3545; }
+        .status-skipped { background: #6c757d; }
+        .status-pending { background: #fd7e14; }
+        .status-undefined { background: #17a2b8; }
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 16px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+        .section-note {
+            margin: 0 0 14px;
+            color: #64748b;
+        }
+        @media (max-width: 720px) {
+            .chart-row {
+                grid-template-columns: 1fr;
+            }
+            .chart-count {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Cucumber Extended Reference Report</h1>
+            <p>Additional reference view generated from <strong>cucumber-report.json</strong> without changing the live test flow.</p>
+        </div>
+
+        <div class="grid">
+            
+                <div class="card">
+                    <div class="card-label">Passed</div>
+                    <div class="card-value" style="color: #28a745;">154</div>
+                    <div class="card-meta">95.1% of scenarios</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Failed</div>
+                    <div class="card-value" style="color: #dc3545;">8</div>
+                    <div class="card-meta">4.9% of scenarios</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Skipped</div>
+                    <div class="card-value" style="color: #6c757d;">0</div>
+                    <div class="card-meta">0.0% of scenarios</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Pending</div>
+                    <div class="card-value" style="color: #fd7e14;">0</div>
+                    <div class="card-meta">0.0% of scenarios</div>
+                </div>
+                <div class="card">
+                    <div class="card-label">Undefined</div>
+                    <div class="card-value" style="color: #17a2b8;">0</div>
+                    <div class="card-meta">0.0% of scenarios</div>
+                </div>
+        </div>
+
+        <div class="panel">
+            <h2>Status Distribution</h2>
+            <p class="section-note">This chart gives a quick at-a-glance reference for execution health.</p>
+            
+                <div class="chart-row">
+                    <div class="chart-label">Passed</div>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 95.1%; background: #28a745;"></div>
+                    </div>
+                    <div class="chart-count">154</div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">Failed</div>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 4.9%; background: #dc3545;"></div>
+                    </div>
+                    <div class="chart-count">8</div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">Skipped</div>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 0.0%; background: #6c757d;"></div>
+                    </div>
+                    <div class="chart-count">0</div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">Pending</div>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 0.0%; background: #fd7e14;"></div>
+                    </div>
+                    <div class="chart-count">0</div>
+                </div>
+                <div class="chart-row">
+                    <div class="chart-label">Undefined</div>
+                    <div class="chart-track">
+                        <div class="chart-fill" style="width: 0.0%; background: #17a2b8;"></div>
+                    </div>
+                    <div class="chart-count">0</div>
+                </div>
+        </div>
+
+        <div class="panel">
+            <h2>Feature Summary</h2>
+            <p class="section-note">Breakdown of scenarios grouped by feature source.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Source</th>
+                            <th>Total</th>
+                            <th>Passed</th>
+                            <th>Failed</th>
+                            <th>Skipped</th>
+                            <th>Pending</th>
+                            <th>Undefined</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+            <tr>
+                <td>Employee Accident Management and Its Operation</td>
+                <td>features\accident.feature</td>
+                <td>1</td>
+                <td style="color: #28a745; font-weight: 700;">1</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Address Details</td>
+                <td>features\address.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>features\bank.feature</td>
+                <td>9</td>
+                <td style="color: #28a745; font-weight: 700;">9</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Card Management Flow for New and Existing Employees</td>
+                <td>features\card.feature</td>
+                <td>4</td>
+                <td style="color: #28a745; font-weight: 700;">4</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Master Verification</td>
+                <td>features\contractoremployee.feature</td>
+                <td>4</td>
+                <td style="color: #28a745; font-weight: 700;">4</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>features\contractorEmployeeDetails.feature</td>
+                <td>25</td>
+                <td style="color: #28a745; font-weight: 700;">25</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>features\contractorEmployeeFormOperations.feature</td>
+                <td>16</td>
+                <td style="color: #28a745; font-weight: 700;">14</td>
+                <td style="color: #dc3545; font-weight: 700;">2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Deployment Details Validation and Update</td>
+                <td>features\deployment.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>features\disciplinary_action.feature</td>
+                <td>6</td>
+                <td style="color: #28a745; font-weight: 700;">6</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Employee Document Module Validation</td>
+                <td>features\document.feature</td>
+                <td>5</td>
+                <td style="color: #28a745; font-weight: 700;">5</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>ESIC Number Validation in Other Details</td>
+                <td>features\esic_validation.feature</td>
+                <td>4</td>
+                <td style="color: #28a745; font-weight: 700;">4</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Excel Bulk Upload and Search Validation</td>
+                <td>features\excelUploadContractor.feature</td>
+                <td>1</td>
+                <td style="color: #28a745; font-weight: 700;">1</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>features\experience.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Family Member Add, Verify, Update, and Validation Flow</td>
+                <td>features\family.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Employee Fine Management</td>
+                <td>features\fine.feature</td>
+                <td>5</td>
+                <td style="color: #28a745; font-weight: 700;">5</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Header Count Dynamic Verification</td>
+                <td>features\gridcountvalidation.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>features\login.feature</td>
+                <td>7</td>
+                <td style="color: #28a745; font-weight: 700;">7</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>features\madical_checkup.feature</td>
+                <td>6</td>
+                <td style="color: #28a745; font-weight: 700;">6</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee Other Details Tab Verification and Reporting</td>
+                <td>features\otherdetails.feature</td>
+                <td>1</td>
+                <td style="color: #28a745; font-weight: 700;">1</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>features\pan_validation.feature</td>
+                <td>8</td>
+                <td style="color: #28a745; font-weight: 700;">6</td>
+                <td style="color: #dc3545; font-weight: 700;">2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>features\passport.feature</td>
+                <td>7</td>
+                <td style="color: #28a745; font-weight: 700;">7</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>PF Number Validation in Contractor Employee Other Details</td>
+                <td>features\pf_number.feature</td>
+                <td>5</td>
+                <td style="color: #28a745; font-weight: 700;">4</td>
+                <td style="color: #dc3545; font-weight: 700;">1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Police Verification Module</td>
+                <td>features\police.feature</td>
+                <td>5</td>
+                <td style="color: #28a745; font-weight: 700;">5</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>features\qualification.feature</td>
+                <td>4</td>
+                <td style="color: #28a745; font-weight: 700;">4</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Reporting Manager Flow</td>
+                <td>features\reportingmanager.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>features\salary.feature</td>
+                <td>9</td>
+                <td style="color: #28a745; font-weight: 700;">8</td>
+                <td style="color: #dc3545; font-weight: 700;">1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Grid Search and Verification</td>
+                <td>features\searchcontractor.feature</td>
+                <td>1</td>
+                <td style="color: #28a745; font-weight: 700;">1</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Shift Management</td>
+                <td>features\shift.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Status Update and Count Validation</td>
+                <td>features\statuschange.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">2</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Training Module Verification</td>
+                <td>features\traning.feature</td>
+                <td>5</td>
+                <td style="color: #28a745; font-weight: 700;">5</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>UAN Number Validation in Contractor Employee Other Details</td>
+                <td>features\uan.feature</td>
+                <td>5</td>
+                <td style="color: #28a745; font-weight: 700;">5</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee Week Off Functionality Verification</td>
+                <td>features\weekoff.feature</td>
+                <td>1</td>
+                <td style="color: #28a745; font-weight: 700;">1</td>
+                <td style="color: #dc3545; font-weight: 700;">0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>Employee Assign Work Order Management</td>
+                <td>features\workorder.feature</td>
+                <td>2</td>
+                <td style="color: #28a745; font-weight: 700;">0</td>
+                <td style="color: #dc3545; font-weight: 700;">2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Scenario Reference Table</h2>
+            <p class="section-note">Detailed scenario list with status and total step duration.</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Scenario</th>
+                            <th>Line</th>
+                            <th>Status</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+            <tr>
+                <td>Employee Accident Management and Its Operation</td>
+                <td>Verify Employee Accident calculation of No Of Days and Report Generation</td>
+                <td>15</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>10.88 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Address Details</td>
+                <td>Verify Permanent and Current Address form functionality, validations, and saving</td>
+                <td>37</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>37.88 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Address Details</td>
+                <td>Verify Update Permanent and Current Address flow</td>
+                <td>53</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>22.31 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>26</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.86 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>27</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.82 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>28</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.85 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>29</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.11 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>30</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.75 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>31</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.76 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>32</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.74 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>33</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.76 sec</td>
+            </tr>
+            <tr>
+                <td>Bank Details and IFSC Code Validation in Contractor Employee Other Details</td>
+                <td>Validate Bank dropdown options, IFSC Code and Account Number rules</td>
+                <td>34</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.76 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Card Management Flow for New and Existing Employees</td>
+                <td>Validate Cards allocation features under Card tab for a New Employee</td>
+                <td>10</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>27.56 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Card Management Flow for New and Existing Employees</td>
+                <td>Validate Card allocation features under Card tab for an Existing Employee</td>
+                <td>32</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>14.98 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Card Management Flow for New and Existing Employees</td>
+                <td>Validate successful temporary card allocation with dynamic unique card number and today&#39;s date</td>
+                <td>43</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>15.17 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Card Management Flow for New and Existing Employees</td>
+                <td>Validate error message when Effective To date is earlier than Effective From</td>
+                <td>53</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>12.11 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Master Verification</td>
+                <td>Verify Create and Upload options are visible on Contractor Employee Page</td>
+                <td>11</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>416 ms</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Master Verification</td>
+                <td>Click on Create button and verify popup opens</td>
+                <td>15</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>696 ms</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Master Verification</td>
+                <td>Verify clicking close symbol on popup returns to main UI with Create button</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>968 ms</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Master Verification</td>
+                <td>Verify clicking Close button on popup returns to main UI with Upload button</td>
+                <td>26</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>886 ms</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify all tabs, sections, and fields on Contractor Employee Form</td>
+                <td>9</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.42 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>33</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.75 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>34</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.54 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>35</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.62 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>36</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.60 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>37</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.73 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.77 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>39</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.67 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>40</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>10.08 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>41</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.62 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>42</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.81 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>43</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.80 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>44</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.47 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>45</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.66 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>46</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.66 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>47</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.59 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>48</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.75 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>49</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.79 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>50</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.60 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>51</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.55 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>52</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>13.36 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>53</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.81 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>54</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>4.74 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify &quot;please First Create Employee&quot; popup for all restricted tabs</td>
+                <td>55</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.69 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Detailed Form Verification and Validations</td>
+                <td>Verify Check Verification section expand, collapse and field interaction functionality</td>
+                <td>58</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.97 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify mandatory asterisk indicators and field validations on save</td>
+                <td>15</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.25 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify mandatory field alert popup, handle OK, complete form and save</td>
+                <td>21</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>7.51 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify filling form fields, scrolling to save, and validating inserted data</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>11.48 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify filling, saving, matching data, and editing contractor employee details</td>
+                <td>51</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>21.57 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Birthday Calendar display, headers, and navigation</td>
+                <td>68</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.70 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify validation popup when employee age is less than 18 years</td>
+                <td>79</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>12.36 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify successful save when employee age is greater than 18 years</td>
+                <td>87</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>12.23 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Contract From calendar open and month navigation controls</td>
+                <td>98</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>3.13 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Contract To date is auto-calculated based on Contract From date and Days</td>
+                <td>119</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.56 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Contract To date is auto-calculated based on Contract From date and Days</td>
+                <td>120</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>5.09 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Contract To date is auto-calculated based on Contract From date and Days</td>
+                <td>121</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.00 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify default Status value on first time page launch</td>
+                <td>125</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.26 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify all options are present in Status dropdown</td>
+                <td>130</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.19 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Status dropdown selection and updating</td>
+                <td>148</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.84 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify Status dropdown selection and updating</td>
+                <td>149</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>2.70 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Form Data Filling, Verification, Editing and Mandatory Field Validations</td>
+                <td>Verify successfully saving Contractor Employee by filling ALL mandatory fields across sections</td>
+                <td>162</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>18.38 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Deployment Details Validation and Update</td>
+                <td>Validate Deployment details, modify fields, click Cancel, and verify original details persist</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>33.08 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Deployment Details Validation and Update</td>
+                <td>Validate Deployment details, modify fields, click Update, and verify changes persist</td>
+                <td>79</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>44.61 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>1. Verify negative validation for mandatory fields in Disciplinary Action</td>
+                <td>27</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.03 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>1. Verify negative validation for mandatory fields in Disciplinary Action</td>
+                <td>28</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.77 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>1. Verify negative validation for mandatory fields in Disciplinary Action</td>
+                <td>29</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.83 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>2. Verify successful creation of Employee Disciplinary Action</td>
+                <td>31</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.45 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>3. Verify duplicate record validation for Employee Disciplinary Action</td>
+                <td>53</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.94 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Disciplinary Action Module Automation</td>
+                <td>4. Verify successful update of Employee Disciplinary Action</td>
+                <td>68</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.76 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Document Module Validation</td>
+                <td>1. Verify validation when submitting without mandatory fields</td>
+                <td>14</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>16.71 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Document Module Validation</td>
+                <td>2. Verify validation for invalid file format upload</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>17.58 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Document Module Validation</td>
+                <td>3. Verify successful document creation and table verification</td>
+                <td>28</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>18.64 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Document Module Validation</td>
+                <td>4. Verify document update functionality and comparison report</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.74 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Document Module Validation</td>
+                <td>6. Verify delete functionality with cancel and confirmation</td>
+                <td>50</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>13.72 sec</td>
+            </tr>
+            <tr>
+                <td>ESIC Number Validation in Other Details</td>
+                <td>Validate ESIC number input with various formats</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.75 sec</td>
+            </tr>
+            <tr>
+                <td>ESIC Number Validation in Other Details</td>
+                <td>Validate ESIC number input with various formats</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.67 sec</td>
+            </tr>
+            <tr>
+                <td>ESIC Number Validation in Other Details</td>
+                <td>Validate ESIC number input with various formats</td>
+                <td>22</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.81 sec</td>
+            </tr>
+            <tr>
+                <td>ESIC Number Validation in Other Details</td>
+                <td>Validate ESIC number input with various formats</td>
+                <td>23</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.77 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Excel Bulk Upload and Search Validation</td>
+                <td>Validate Excel Upload popup UI elements and verify batch data search functionality</td>
+                <td>10</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>3.04 min</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>Verify Employee Experience form functionality, validations, and saving</td>
+                <td>12</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.35 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>Verify Employee Experience update functionality for Company Name, Skills and HR Verified</td>
+                <td>29</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.38 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Family Member Add, Verify, Update, and Validation Flow</td>
+                <td>Verify Family Member Add and Table Validation</td>
+                <td>13</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>17.03 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Family Member Add, Verify, Update, and Validation Flow</td>
+                <td>Verify Family Member Edit and Update Flow</td>
+                <td>26</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>16.99 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Fine Management</td>
+                <td>1 . Verify validation when Date of Offence is missing</td>
+                <td>16</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>11.41 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Fine Management</td>
+                <td>. Verify validation when Code of Misconduct is missing</td>
+                <td>25</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>14.13 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Fine Management</td>
+                <td>2. Verify validation when Action Taken is missing</td>
+                <td>34</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>14.17 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Fine Management</td>
+                <td>3. Verify successful creation of Employee Disciplinary Action with all mandatory details</td>
+                <td>45</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>14.23 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Fine Management</td>
+                <td>4. Verify successful creation of Employee Disciplinary Action with all mandatory details</td>
+                <td>56</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>14.11 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Header Count Dynamic Verification</td>
+                <td>Verify Active and Total count increment on Single Employee Creation via Form</td>
+                <td>29</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>12.40 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Header Count Dynamic Verification</td>
+                <td>Verify Active and Total count increment dynamically after Bulk Excel Upload</td>
+                <td>32</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.66 min</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Validate Username and Password fields are visible and editable</td>
+                <td>6</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>158 ms</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Successful login with valid credentials (Positive Scenarios)</td>
+                <td>18</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>538 ms</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Successful login with valid credentials (Positive Scenarios)</td>
+                <td>19</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>576 ms</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Successful login with valid credentials (Positive Scenarios)</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>479 ms</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Unsuccessful login with invalid credentials (Negative Scenarios)</td>
+                <td>30</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>307 ms</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Unsuccessful login with invalid credentials (Negative Scenarios)</td>
+                <td>31</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>499 ms</td>
+            </tr>
+            <tr>
+                <td>CLMS Login Functionality Verification</td>
+                <td>Unsuccessful login with invalid credentials (Negative Scenarios)</td>
+                <td>32</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>302 ms</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>Verify successful creation of Employee Medical Checkup with validations and table check</td>
+                <td>13</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.97 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>Verify negative validation for mandatory fields in Medical Checkup</td>
+                <td>33</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.68 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>Verify negative validation for mandatory fields in Medical Checkup</td>
+                <td>34</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.03 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>Verify negative validation for mandatory fields in Medical Checkup</td>
+                <td>35</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.31 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>Verify created medical checkup details match in the list table</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.37 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Medical Checkup Management</td>
+                <td>Verify successful update of Employee Medical Checkup by adding 6 days to Checkup Date</td>
+                <td>42</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.25 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee Other Details Tab Verification and Reporting</td>
+                <td>Verify all fields, upload options, and verification links on Other Details tab</td>
+                <td>32</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>18.26 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.14 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.24 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>22</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.12 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>23</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>24.37 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>24</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>9.29 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>25</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.61 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>26</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.72 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee PAN Number Validation Testing</td>
+                <td>Validate PAN card input with various valid and invalid formats</td>
+                <td>27</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.69 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.60 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.65 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>22</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.63 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>23</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.69 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>24</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.58 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>25</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.80 sec</td>
+            </tr>
+            <tr>
+                <td>Passport Number Validation in Contractor Employee Other Details</td>
+                <td>Validate Passport number input with various formats and rules</td>
+                <td>26</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>9.55 sec</td>
+            </tr>
+            <tr>
+                <td>PF Number Validation in Contractor Employee Other Details</td>
+                <td>Validate PF number input with various formats and boundary rules</td>
+                <td>20</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.60 sec</td>
+            </tr>
+            <tr>
+                <td>PF Number Validation in Contractor Employee Other Details</td>
+                <td>Validate PF number input with various formats and boundary rules</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.61 sec</td>
+            </tr>
+            <tr>
+                <td>PF Number Validation in Contractor Employee Other Details</td>
+                <td>Validate PF number input with various formats and boundary rules</td>
+                <td>22</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>12.28 sec</td>
+            </tr>
+            <tr>
+                <td>PF Number Validation in Contractor Employee Other Details</td>
+                <td>Validate PF number input with various formats and boundary rules</td>
+                <td>23</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>8.72 sec</td>
+            </tr>
+            <tr>
+                <td>PF Number Validation in Contractor Employee Other Details</td>
+                <td>Validate PF number input with various formats and boundary rules</td>
+                <td>24</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.59 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Police Verification Module</td>
+                <td>1. Verify police verification fails when Verification Date is blank</td>
+                <td>13</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>10.75 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Police Verification Module</td>
+                <td>2. Verify police verification fails when Description is blank</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>17.43 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Police Verification Module</td>
+                <td>3. Verify successful police verification creation with month start date</td>
+                <td>29</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>11.70 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Police Verification Module</td>
+                <td>4. Verify police verification with previous date (current date - 1)</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>11.73 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Police Verification Module</td>
+                <td>5. Verify police verification update functionality</td>
+                <td>47</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>11.61 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>Verify Qualification form mandatory red asterisk fields and visibility</td>
+                <td>14</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.59 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>Verify validation message when mandatory qualification fields are left empty</td>
+                <td>19</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.79 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>Verify successful addition of employee qualification with valid data</td>
+                <td>25</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.13 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Qualification Add and Validation Flow</td>
+                <td>Verify successful update of existing employee qualification</td>
+                <td>43</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.75 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Reporting Manager Flow</td>
+                <td>Select, update, and compare reporting managers (M1, M2, and M3) sequentially within the same profile</td>
+                <td>4</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>58.85 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Reporting Manager Flow</td>
+                <td>Update all reporting managers M1, M2 and M3 using employee codes</td>
+                <td>50</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>37.49 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>1. Verify salary allocation initial form, joining date validation, and field selections</td>
+                <td>13</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>10.79 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>2. Verify Earning Head amounts sum matches with Total Earning</td>
+                <td>29</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.54 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>3. Verify Deduction Head amounts sum matches with Total Deduction</td>
+                <td>40</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.54 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>4. Verify Projected Net payable calculation and display in table format</td>
+                <td>52</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>12.37 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>5 . Update and New creation</td>
+                <td>64</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>10.65 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>6. Verify duplicate alert for an already assigned Earning Head</td>
+                <td>74</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>15.84 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>6. Verify duplicate alert for an already assigned Earning Head</td>
+                <td>75</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>15.87 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>6. Verify duplicate alert for an already assigned Earning Head</td>
+                <td>76</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>15.96 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Salary Allocation</td>
+                <td>7. Verify additional Earning Heads, amount behaviour and table details</td>
+                <td>79</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>19.76 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Grid Search and Verification</td>
+                <td>Verify searching created contractor employee in grid using dynamic identity number</td>
+                <td>23</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>16.26 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Shift Management</td>
+                <td>Verify Shift operations with Auto Shift and specific shift selections</td>
+                <td>46</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>26.58 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Shift Management</td>
+                <td>Verify Shift operations with Auto Shift and specific shift selections</td>
+                <td>47</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>26.82 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Status Update and Count Validation</td>
+                <td>Verify employee status change from Active to Left and back to Active with header count validations</td>
+                <td>65</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.30 min</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Status Update and Count Validation</td>
+                <td>Verify employee status change from Left to Terminated and Absconded with count and Aadhaar grid validation</td>
+                <td>132</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>1.71 min</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Training Module Verification</td>
+                <td>1. Verify From Date validation against Employee Joining Date</td>
+                <td>13</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>7.03 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Training Module Verification</td>
+                <td>2. Verify permissible range for hours per day validation</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.65 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Training Module Verification</td>
+                <td>3. Verify validation when Program ID is not selected</td>
+                <td>30</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.75 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Training Module Verification</td>
+                <td>4. Verify validation when Conducted By Faculty is empty</td>
+                <td>38</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.64 sec</td>
+            </tr>
+            <tr>
+                <td>Contractor Employee Training Module Verification</td>
+                <td>5. Verify successful training creation and table data re-verification</td>
+                <td>45</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>6.77 sec</td>
+            </tr>
+            <tr>
+                <td>UAN Number Validation in Contractor Employee Other Details</td>
+                <td>Validate UAN number input with various formats and boundary rules</td>
+                <td>21</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>11.75 sec</td>
+            </tr>
+            <tr>
+                <td>UAN Number Validation in Contractor Employee Other Details</td>
+                <td>Validate UAN number input with various formats and boundary rules</td>
+                <td>22</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.83 sec</td>
+            </tr>
+            <tr>
+                <td>UAN Number Validation in Contractor Employee Other Details</td>
+                <td>Validate UAN number input with various formats and boundary rules</td>
+                <td>23</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.77 sec</td>
+            </tr>
+            <tr>
+                <td>UAN Number Validation in Contractor Employee Other Details</td>
+                <td>Validate UAN number input with various formats and boundary rules</td>
+                <td>24</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.77 sec</td>
+            </tr>
+            <tr>
+                <td>UAN Number Validation in Contractor Employee Other Details</td>
+                <td>Validate UAN number input with various formats and boundary rules</td>
+                <td>25</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>8.75 sec</td>
+            </tr>
+            <tr>
+                <td>CLMS Employee Week Off Functionality Verification</td>
+                <td>Verify Week Off tab elements and field visibility for a new employee</td>
+                <td>82</td>
+                <td><span class="status status-passed">passed</span></td>
+                <td>48.95 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Assign Work Order Management</td>
+                <td>Verify successful creation of Employee Work Order with validations and table check</td>
+                <td>16</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>26.75 sec</td>
+            </tr>
+            <tr>
+                <td>Employee Assign Work Order Management</td>
+                <td>Verify update of Employee Work Order with table verification, date changes, and edit flow</td>
+                <td>31</td>
+                <td><span class="status status-failed">failed</span></td>
+                <td>15.57 sec</td>
+            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

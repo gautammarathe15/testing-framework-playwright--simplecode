@@ -6,7 +6,7 @@ Feature: Contractor Employee Address Details
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    When User enters "91312" in search filter for Aadhaar or employee details
+    When User enters "95550" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid
     When User clicks on the "Address" tab
 
@@ -33,8 +33,8 @@ Feature: Contractor Employee Address Details
     And User verifies the saved address details match on the UI "<AddressLine1>"
 
     Examples:
-      | AddressLine1  | Pincode | Country | State       | City   |
-      | Tech Park     | 411000  | India   | Maharashtra | Pune   |
+      | AddressLine1      | Pincode | Country | State       | City   |
+      | Tech Park Tower 7.| 411000  | India   | Maharashtra | Pune   |
 
   Scenario Outline: Verify Update Permanent and Current Address flow
     When User clicks on the "Address" tab
@@ -50,4 +50,4 @@ Feature: Contractor Employee Address Details
 
     Examples:
       | UpdatedAddressLine1    | UpdatedPincode | Country | State       | City      |
-      | Emsphere Office Pune   | 411050         | India   | Maharashtra | Manchar   |
+      | Emsphere Office Pune   | 411150         | India   | Maharashtra | Pune      |

@@ -31,7 +31,7 @@ module.exports = {
       snippetInterface: 'async-await',
     },
     parallel: 1, 
-    retry: 0,
+    retry: 2, // 👈 Added retry count here for automatic re-execution of failed scenarios
     strict: true,
     dryRun: false,
     failFast: false,

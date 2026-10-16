@@ -103,3 +103,35 @@ When('User updates the salary structure with next month effective date and verif
     const reportTable = await this.salaryPage.updateAndVerifySalaryStructure();
     await this.attach(reportTable, 'text/markdown');
 });
+
+
+Then(
+    'User verifies duplicate alert when assigning existing earning head {string} with amount {string}',
+    async function (headName, amount) {
+        const reportTable =
+            await this.salaryPage.verifyDuplicateEarningHeadAlert(headName, amount);
+
+        await this.attach(reportTable, 'text/markdown');
+    }
+);
+
+
+When(
+    'User adds additional earning heads and verifies their table details',
+    { timeout: 120000 },
+    async function (dataTable) {
+        const result =
+            await this.salaryPage.addAndVerifyAdditionalEarningHeads(
+                dataTable.hashes()
+            );
+
+        console.log(result.report);
+
+        await this.attach(result.report, 'text/markdown');
+
+        expect(
+            result.passed,
+            `Scenario 7 failed.\n${result.report}`
+        ).toBe(true);
+    }
+);

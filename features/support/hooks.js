@@ -15,6 +15,7 @@ const config = require('../../playwright.config');
 setDefaultTimeout(30000);
 
 let browser;
+let scenarioExecutionCounts = {}; // 👈 Track retry attempts per scenario
 
 /**
  * BeforeAll - Initialize browser instance once
@@ -43,7 +44,7 @@ BeforeAll(async function() {
 });
 
 /**
- * Before - Setup context, page, and baseURL before each scenario
+ * Before - Setup context, page, retry detection, and baseURL before each scenario
  */
 Before(async function(scenario) {
     // 🎯 Resolve Base URL dynamically
@@ -58,11 +59,24 @@ Before(async function(scenario) {
     this.page = await this.context.newPage();
     await this.page.setViewportSize({ width: 1366, height: 768 });
     
-    // 🎯 Bind Page Objects here if needed (e.g., ClmsLoginPage)
-    // const { ClmsLoginPage } = require('./pages/clmsLoginPage');
-    // this.clmsLoginPage = new ClmsLoginPage(this.page);
-
     this.scenarioName = scenario?.pickle?.name || 'Unnamed_Scenario';
+
+    // 🔄 Retry Tracking & Extra Buffer Wait Logic
+    const scenarioId = scenario?.pickle?.id;
+    if (scenarioId) {
+        if (!scenarioExecutionCounts[scenarioId]) {
+            scenarioExecutionCounts[scenarioId] = 1;
+            this.isRetry = false;
+        } else {
+            scenarioExecutionCounts[scenarioId]++;
+            this.isRetry = true;
+            console.log(`\n🔄 Retrying Scenario (Attempt ${scenarioExecutionCounts[scenarioId]}): "${this.scenarioName}"`);
+            
+            // Retry run astana DOM elements/network sathi extra stability wait
+            await this.page.waitForTimeout(2500);
+        }
+    }
+
     console.log(`\n▶️ Starting Scenario: "${this.scenarioName}"`);
 });
 

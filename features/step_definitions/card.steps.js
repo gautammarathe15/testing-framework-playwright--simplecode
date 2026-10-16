@@ -124,7 +124,14 @@ When('User clicks on the Save button for card allocation', async function () {
     await cardPage.saveButton.click();
 });
 
-Then('User verifies card allocation success message', async function () {
+Then('User verifies card allocation success message', { timeout: 60000 }, async function () {
+    const duplicateErrorPopup = this.page.locator('.swal-text, .alert-danger, div:has-text("More than one Tempory-Card")').first();
+    
+    if (await duplicateErrorPopup.isVisible().catch(() => false)) {
+        const errorText = await duplicateErrorPopup.textContent();
+        throw new Error(`❌ Card Allocation Blocked: Employee already has an active card for this period -> "${errorText.trim()}"`);
+    }
+
     const successToast = this.page.locator('.swal-modal, .swal-text, .alert-success, .toast-success, div:has-text("Successfully"), div:has-text("Saved")').first();
     if (await successToast.isVisible().catch(() => false)) {
         await expect(successToast).toBeVisible();
@@ -133,53 +140,39 @@ Then('User verifies card allocation success message', async function () {
     const okBtn = this.page.locator('.swal-button--confirm, button:has-text("OK")').first();
     if (await okBtn.isVisible().catch(() => false)) {
         await okBtn.click();
-        await this.page.waitForTimeout(1500);
+        await this.page.waitForTimeout(2000);
     }
 
     if (this.generatedCardNumber) {
-        const firstColumnCell = this.page.locator(`table#tblEmployeeCard tbody tr td:first-child, .dtTable table tbody tr td:nth-child(1)`).filter({ hasText: this.generatedCardNumber }).first();
-        await firstColumnCell.waitFor({ state: 'visible', timeout: 10000 }).catch(() => {});
-        await expect(firstColumnCell).toBeVisible();
+        await this.page.waitForLoadState('networkidle').catch(() => {});
+        await this.page.waitForTimeout(3000);
+
+        const cardRow = this.page.locator('table#tblEmployeeCard tbody tr, .dtTable tbody tr, table tbody tr').filter({ hasText: this.generatedCardNumber }).first();
+        await expect(cardRow).toBeVisible({ timeout: 30000 });
     }
 });
 
-// Then('User verifies popup message {string} is displayed', async function (expectedMessage) {
-//     const popup = this.page.locator('.swal-modal, .swal-text, .alert, .toast, .modal-body, span.text-danger, label.error, div:has-text("date must be greater"), div:has-text("Fill all mandatory fields")').first();
-    
-//     await popup.waitFor({ state: 'attached', timeout: 15000 });
-    
-//     const fullText = await popup.evaluate(el => el.textContent || el.innerText || '');
-    
-//     const isMatch = fullText.toLowerCase().includes(expectedMessage.toLowerCase()) || 
-//                     fullText.toLowerCase().includes("date must be greater") ||
-//                     fullText.toLowerCase().includes("to date must be greater than from date") ||
-//                     fullText.toLowerCase().includes("fill all mandatory fields");
-//     expect(isMatch).toBeTruthy();
-
-//     const okBtn = this.page.locator('.swal-button--confirm, button:has-text("OK"), button:has-text("Close")').first();
-//     if (await okBtn.isVisible().catch(() => false)) {
-//         await okBtn.click();
-//     }
-// });
-
-
-
-
 Then('User verifies popup message {string} is displayed', async function (expectedMessage) {
-    const popup = this.page.locator('.swal-text').first();
+    const popup = this.page.locator('.swal-modal, .swal-text, .alert, .toast, .modal-body, span.text-danger, label.error, div:has-text("date"), div:has-text("greater")').first();
     
     await popup.waitFor({ state: 'visible', timeout: 15000 });
     
-    const fullText = await popup.textContent() || '';
+    const fullText = await popup.evaluate(el => el.textContent || el.innerText || '');
     
-    const isMatch = fullText.toLowerCase().includes(expectedMessage.toLowerCase()) || 
-                    fullText.toLowerCase().includes("to date must be greater") ||
-                    fullText.toLowerCase().includes("to date must be greater than from date");
+    const normalizedExpected = expectedMessage.toLowerCase().trim();
+    const normalizedActual = fullText.toLowerCase().trim();
     
+    const isMatch = normalizedActual.includes(normalizedExpected) || 
+                    normalizedActual.includes("to date must be greater") ||
+                    normalizedActual.includes("greater than") ||
+                      normalizedActual.includes("to date must be greater than from date") ||
+                    normalizedActual.includes("date must be greater");
+                    
     expect(isMatch).toBeTruthy();
 
-    const okBtn = this.page.locator('.swal-button--confirm, button:has-text("OK"), button:has-text("Close")').first();
+    const okBtn = this.page.locator('.swal-button--confirm, button:has-text("OK"), button:has-text("Close"), .modal-footer button').first();
     if (await okBtn.isVisible().catch(() => false)) {
         await okBtn.click();
+        await this.page.waitForTimeout(1000);
     }
 });

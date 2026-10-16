@@ -26,7 +26,7 @@ Feature: Contractor Employee Header Count Dynamic Verification
 
     Examples:
       | FirstName | LastName | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor | ActiveIncrease |
-      | Harish    | Patil    | M      | 15-May-1995 | 20-Aug-2026  | 10                 | A.k enterprise | Sales    | Software   | Staff Employee | A     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    | 1              |
+      | Gokul     | Pardesi  | M      | 15-May-1995 | 30-Aug-2026  | 100                | A.k enterprise | Sales    | Software   | Staff Employee | A     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    | 1              |
 
   @excel_upload_count @countvalidation
   Scenario: Verify Active and Total count increment dynamically after Bulk Excel Upload

@@ -6,7 +6,7 @@ Feature: Contractor Employee Salary Allocation
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    And User enters "7002" in search filter for Aadhaar or employee details
+ And User enters "95550" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid
     Given User clicks on the Employee Salary Structure menu option
 
@@ -25,7 +25,6 @@ Feature: Contractor Employee Salary Allocation
     And User toggles the "Is Calculate Double On Holiday Present" checkbox
     And User toggles the "Is Calculate Extra Hours On WeekOff Present" checkbox
 
-
     @salary_earning_validation
 Scenario: 2. Verify Earning Head amounts sum matches with Total Earning
 
@@ -36,7 +35,6 @@ Scenario: 2. Verify Earning Head amounts sum matches with Total Earning
     And User selects Salary Structure As "Present"
     Then User extracts all Earning Head amounts, calculates the sum, and verifies it with Total Earning
     And User attaches the earning calculation breakdown to the cucumber report
-
 
     @salary_deduction_validation
 Scenario: 3. Verify Deduction Head amounts sum matches with Total Deduction
@@ -66,3 +64,23 @@ Scenario: 4. Verify Projected Net payable calculation and display in table forma
     Scenario: 5 . Update and New creation
 
     And User updates the salary structure with next month effective date and verifies table records
+  
+      @salary_duplicate_head_validation
+  Scenario Outline: 6. Verify duplicate alert for an already assigned Earning Head
+    Then User verifies duplicate alert when assigning existing earning head "<headName>" with amount "<amount>"
+
+    Examples:
+      | headName        | amount |
+      | Basic           | 20000  |
+      | DA              | 4000   |
+      | Other_Allowance | 1000   |
+
+      @salary_additional_heads_validation
+  Scenario: 7. Verify additional Earning Heads, amount behaviour and table details
+    When User adds additional earning heads and verifies their table details
+      | headName              | amountMode | amount | remark                      |
+      | Leave_Encashment      | automatic  |        | Leave encashment validation |
+      | Shift_Allowance       | manual     | 1900   | Shift allowance validation  |
+      | Night_Shift_Allowance | automatic  |        | Night shift validation      |
+      | Salary_Arrear         | manual     | 5555   | Salary arrear validation    |
+      | Incentive             | manual     | 3007   | Incentive validation        |
