@@ -18,18 +18,18 @@ When('User clicks on the Create Salary Structure button', async function () {
 When('User reads the employee joining date from the profile', async function () {
     await this.salaryPage.joinDateSpan.waitFor({ state: 'visible', timeout: 10000 });
     this.employeeJoinDate = await this.salaryPage.joinDateSpan.textContent();
-    console.log("📅 Employee Joining Date:", this.employeeJoinDate);
+    console.log('📅 Employee Joining Date:', this.employeeJoinDate);
 });
 
 When('User selects an Effective From date before the joining date', async function () {
     const wrongDate = '01-Aug-2023';
-    console.log("📅 [TEST LOG] Selecting Wrong/Before Joining Date from Calendar:", wrongDate);
+    console.log('📅 [TEST LOG] Selecting Wrong/Before Joining Date from Calendar:', wrongDate);
     await this.salaryPage.selectEffectiveFrom(wrongDate);
 });
 
 Then('User should see salary popup message {string}', async function (expectedMessage) {
     const msg = await this.salaryPage.getPopupMessage();
-    console.log("💬 Popup Message Found:", msg);
+    console.log('💬 Popup Message Found:', msg);
     expect(msg).toContain(expectedMessage);
 });
 
@@ -39,7 +39,7 @@ Then('User clicks OK on the salary popup', async function () {
 
 Then('User selects the correct Effective From date matching the joining date month', async function () {
     const correctDate = this.employeeJoinDate ? this.employeeJoinDate.trim() : '25-Jan-2024';
-    console.log("📅 [TEST LOG] Selecting Correct Effective From Date from Calendar:", correctDate);
+    console.log('📅 [TEST LOG] Selecting Correct Effective From Date from Calendar:', correctDate);
     await this.salaryPage.selectEffectiveFrom(correctDate);
 });
 
@@ -86,7 +86,7 @@ When('User attaches the deduction calculation breakdown to the cucumber report',
 
 When('User calculates Projected Net payable as Total Earning minus Total Deduction and verifies it with UI', async function () {
     this.netPayableReportText = await this.salaryPage.verifyProjectedNetPayableCalculation();
-    console.log("Projected Net Payable Verified Successfully!");
+    console.log('Projected Net Payable Verified Successfully!');
 });
 
 When('User attaches the salary summary breakdown in a table format to the cucumber report', async function () {
@@ -94,7 +94,7 @@ When('User attaches the salary summary breakdown in a table format to the cucumb
 });
 
 When('User clicks on the Save button and verifies the record in the salary structure table', async function () {
-    const templateName = this.selectedTemplate || "Salary GG";
+    const templateName = this.selectedTemplate || 'Salary GG';
     const reportTable = await this.salaryPage.saveAndVerifySalaryStructure(templateName);
     await this.attach(reportTable, 'text/markdown');
 });
@@ -104,34 +104,21 @@ When('User updates the salary structure with next month effective date and verif
     await this.attach(reportTable, 'text/markdown');
 });
 
-
 Then(
     'User verifies duplicate alert when assigning existing earning head {string} with amount {string}',
     async function (headName, amount) {
-        const reportTable =
-            await this.salaryPage.verifyDuplicateEarningHeadAlert(headName, amount);
-
+        const reportTable = await this.salaryPage.verifyDuplicateEarningHeadAlert(headName, amount);
         await this.attach(reportTable, 'text/markdown');
     }
 );
-
 
 When(
     'User adds additional earning heads and verifies their table details',
     { timeout: 120000 },
     async function (dataTable) {
-        const result =
-            await this.salaryPage.addAndVerifyAdditionalEarningHeads(
-                dataTable.hashes()
-            );
-
+        const result = await this.salaryPage.addAndVerifyAdditionalEarningHeads(dataTable.hashes());
         console.log(result.report);
-
         await this.attach(result.report, 'text/markdown');
-
-        expect(
-            result.passed,
-            `Scenario 7 failed.\n${result.report}`
-        ).toBe(true);
+        expect(result.passed, `Scenario 7 failed.\n${result.report}`).toBe(true);
     }
 );

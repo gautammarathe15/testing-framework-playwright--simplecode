@@ -15,11 +15,15 @@ class SalaryPage {
         this.calcExtraHoursWeekOffChk = page.locator('[id="EmployeeSalaryStructure.IsCalculateExtraHoursOnWeekOffPresent"]');
         this.swalText = page.locator('.swal-text');
         this.swalOkBtn = page.locator('.swal-button--confirm');
+
+        // Totals (confirmed from your screenshot DOM)
         this.totalEarningSpan = page.locator('#spnEarningTotalAmnt');
-        this.earningInputs = page.locator('table tbody tr td input#earningAmt');
         this.totalDeductionSpan = page.locator('#spnDeductionTotalAmnt');
-        this.deductionInputs = page.locator('#dtDeductionList tbody tr td input[name="hdnamount"]');
         this.projectedNetPayableSpan = page.locator('#spnProjectedNetPayable');
+
+        // Robust row locators
+        this.earningRows = page.locator('table:not(#dtDeductionList):not(#tblEmployeeSalaryStructure) tbody tr:visible');
+        this.deductionInputs = page.locator('#dtDeductionList tbody tr td input[name="hdnamount"]');
     }
 
     async navigateToSalary() {
@@ -82,7 +86,7 @@ class SalaryPage {
 
     async getPopupMessage() {
         await this.swalText.waitFor({ state: 'visible', timeout: 15000 }).catch(() => {});
-        return await this.swalText.textContent() || '';
+        return (await this.swalText.textContent()) || '';
     }
 
     async handlePopup() {
@@ -94,16 +98,28 @@ class SalaryPage {
     async verifyEarningHeadCalculation() {
         await this.totalEarningSpan.waitFor({ state: 'visible', timeout: 10000 });
 
-        const uiTotalText = await this.totalEarningSpan.textContent() || '0';
-        const uiTotalEarning = parseFloat(uiTotalText.trim().replace(/,/g, ''));
+        const uiTotalText = (await this.totalEarningSpan.textContent()) || '0';
+        const uiTotalEarning = parseFloat(uiTotalText.trim().replace(/,/g, '')) || 0;
 
-        const count = await this.earningInputs.count();
+        const count = await this.earningRows.count();
         let calculatedSum = 0;
         let reportDetails = `=== Earning Head Calculation Verification ===\n`;
 
         for (let i = 0; i < count; i++) {
-            const inputValue = await this.earningInputs.nth(i).inputValue();
-            const amount = parseFloat(inputValue || '0');
+            const row = this.earningRows.nth(i);
+
+            const amountInput = row
+                .locator('td:nth-child(2) input:not([type="hidden"]):not([type="button"]):not([type="submit"])')
+                .first();
+
+            let raw = '';
+            if (await amountInput.count()) {
+                raw = await amountInput.inputValue().catch(() => '');
+            } else {
+                raw = await row.locator('td:nth-child(2)').textContent().catch(() => '');
+            }
+
+            const amount = parseFloat(String(raw || '0').replace(/,/g, '').trim()) || 0;
             calculatedSum += amount;
             reportDetails += `Earning Head [${i + 1}] Amount: ${amount}\n`;
         }
@@ -127,8 +143,8 @@ class SalaryPage {
     async verifyDeductionHeadCalculation() {
         await this.totalDeductionSpan.waitFor({ state: 'visible', timeout: 10000 });
 
-        const uiTotalText = await this.totalDeductionSpan.textContent() || '0';
-        const uiTotalDeduction = parseFloat(uiTotalText.trim().replace(/,/g, ''));
+        const uiTotalText = (await this.totalDeductionSpan.textContent()) || '0';
+        const uiTotalDeduction = parseFloat(uiTotalText.trim().replace(/,/g, '')) || 0;
 
         const count = await this.deductionInputs.count();
         let calculatedSum = 0;
@@ -136,7 +152,7 @@ class SalaryPage {
 
         for (let i = 0; i < count; i++) {
             const inputValue = await this.deductionInputs.nth(i).inputValue();
-            const amount = parseFloat(inputValue || '0');
+            const amount = parseFloat(String(inputValue || '0').replace(/,/g, '').trim()) || 0;
             calculatedSum += amount;
             reportDetails += `Deduction Head [${i + 1}] Amount: ${amount}\n`;
         }
@@ -162,61 +178,41 @@ class SalaryPage {
         await this.page.waitForTimeout(1000);
 
         await this.totalEarningSpan.first().waitFor({ state: 'visible', timeout: 10000 });
-        const earningText = await this.totalEarningSpan.first().textContent() || '0';
-        const totalEarning = parseFloat(earningText.trim().replace(/,/g, ''));
-        console.log(`[DEBUG] Raw Earning Text: "${earningText}" | Parsed Total Earning: ${totalEarning}`);
+        const earningText = (await this.totalEarningSpan.first().textContent()) || '0';
+        const totalEarning = parseFloat(earningText.trim().replace(/,/g, '')) || 0;
 
         await this.totalDeductionSpan.first().waitFor({ state: 'visible', timeout: 10000 });
-        const deductionText = await this.totalDeductionSpan.first().textContent() || '0';
-        const totalDeduction = parseFloat(deductionText.trim().replace(/,/g, ''));
-        console.log(`[DEBUG] Raw Deduction Text: "${deductionText}" | Parsed Total Deduction: ${totalDeduction}`);
+        const deductionText = (await this.totalDeductionSpan.first().textContent()) || '0';
+        const totalDeduction = parseFloat(deductionText.trim().replace(/,/g, '')) || 0;
 
         const calculatedNetPayable = totalEarning - totalDeduction;
 
-        await this.page.evaluate(() => {
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-        await this.page.waitForTimeout(1000);
+        await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        await this.page.waitForTimeout(800);
 
         let uiNetPayable = 0;
         let rawUiText = '';
 
         for (let i = 0; i < 15; i++) {
-            try {
-                rawUiText = await this.page.evaluate(() => {
-                    let el = document.querySelector('#spnProjectedNetPayable');
-                    if (el && el.textContent.trim()) return el.textContent.trim();
+            rawUiText = await this.page.evaluate(() => {
+                const el = document.querySelector('#spnProjectedNetPayable');
+                if (el && el.textContent.trim()) return el.textContent.trim();
 
-                    const bodyText = document.body.innerText;
-                    const match = bodyText.match(/Projected Net payable\s*[:\-]?\s*([0-9,.]+)/i);
-                    if (match && match[1]) {
-                        return match[1];
-                    }
-                    return null;
-                });
+                const bodyText = document.body.innerText;
+                const match = bodyText.match(/Projected Net payable\s*[:\-]?\s*([0-9,.]+)/i);
+                return match?.[1] || '';
+            });
 
-                if (rawUiText !== null && rawUiText !== '') {
-                    const numberMatch = rawUiText.match(/([0-9,]+\.[0-9]+|[0-9]+)/g);
-                    if (numberMatch && numberMatch.length > 0) {
-                        const cleanedText = numberMatch[numberMatch.length - 1].replace(/,/g, '');
-                        const parsedVal = parseFloat(cleanedText);
-                        if (!isNaN(parsedVal) && parsedVal >= 0) {
-                            uiNetPayable = parsedVal;
-                            if (Math.abs(uiNetPayable - calculatedNetPayable) < 0.1) {
-                                break;
-                            }
-                        }
-                    }
+            if (rawUiText) {
+                const num = rawUiText.match(/([0-9,]+\.[0-9]+|[0-9]+)/g);
+                if (num?.length) {
+                    uiNetPayable = parseFloat(num[num.length - 1].replace(/,/g, '')) || 0;
+                    if (Math.abs(uiNetPayable - calculatedNetPayable) < 0.1) break;
                 }
-            } catch (e) {
-                console.log(`[DEBUG] Error parsing net payable on iteration ${i}:`, e.message);
             }
-            await this.page.waitForTimeout(1000);
-        }
 
-        console.log(
-            `[DEBUG] Calculated Net Payable (${totalEarning} - ${totalDeduction}) = ${calculatedNetPayable} | UI Final Value = ${uiNetPayable}`
-        );
+            await this.page.waitForTimeout(500);
+        }
 
         let reportTable = `### Salary Summary & Projected Net Payable Report\n\n`;
         reportTable += `| Component | Amount / Value |\n`;
@@ -245,12 +241,10 @@ class SalaryPage {
         const saveBtn = this.page.locator('#btnSaveEmployeeSalaryStructure');
         await saveBtn.waitFor({ state: 'visible', timeout: 10000 });
         await saveBtn.click();
-        console.log(`[TEST LOG] Clicked on Save Employee Salary Structure button.`);
 
         const okPopupBtn = this.page.locator('button.swal-button.swal-button--confirm');
         await okPopupBtn.waitFor({ state: 'visible', timeout: 10000 });
         await okPopupBtn.click();
-        console.log(`[TEST LOG] Handled 'Saved Successfully' popup and clicked OK.`);
 
         await this.page.waitForSelector('#tblEmployeeSalaryStructure', { state: 'visible', timeout: 10000 });
         await this.page.waitForTimeout(1500);
@@ -271,8 +265,6 @@ class SalaryPage {
             throw new Error('Salary Structure table is empty or record not found after saving.');
         }
 
-        console.log(`[DEBUG] Table Record Found -> Template: ${tableData.template}, Effective From: ${tableData.effectiveFrom}`);
-
         const isTemplateValid = tableData.template.includes(expectedTemplateName);
         const isDateValid =
             tableData.effectiveFrom.includes(dynamicEffectiveFrom) ||
@@ -286,7 +278,7 @@ class SalaryPage {
         reportTable += `| **Record Status** | Active / Saved | ${tableData.status || 'Active'} | PASS ✅ |\n`;
 
         if (!isTemplateValid || !isDateValid) {
-            throw new Error(`Table Validation Mismatch: Expected Template/Date do not match table records.`);
+            throw new Error('Table Validation Mismatch: Expected Template/Date do not match table records.');
         }
 
         return reportTable;
@@ -297,7 +289,11 @@ class SalaryPage {
             const tr = document.querySelector('#tblEmployeeSalaryStructure tbody tr');
             if (!tr) return false;
 
-            const editLink = tr.querySelector('a.EditLink') || tr.querySelector('.fa-pencil')?.closest('a') || tr.querySelector('td:last-child a');
+            const editLink =
+                tr.querySelector('a.EditLink') ||
+                tr.querySelector('.fa-pencil')?.closest('a') ||
+                tr.querySelector('td:last-child a');
+
             if (editLink) {
                 editLink.click();
                 return true;
@@ -305,6 +301,7 @@ class SalaryPage {
 
             const href = tr.querySelector('a[href*="EmployeeSalaryStructureDetail"]')?.getAttribute('href');
             if (href && href.startsWith('javascript:')) {
+                // eslint-disable-next-line no-eval
                 eval(href.replace('javascript:', ''));
                 return true;
             }
@@ -316,30 +313,25 @@ class SalaryPage {
             await editIcon.click({ force: true });
         }
 
-        console.log(`[TEST LOG] Triggered Edit (pencil) action for salary structure.`);
         await this.page.waitForTimeout(1500);
 
         const effectiveInput = this.page.locator('#EmployeeSalaryStructure_EffectiveFrom');
         await effectiveInput.waitFor({ state: 'visible', timeout: 15000 });
 
         const currentEffectiveDateStr = await effectiveInput.inputValue();
-        console.log(`[TEST LOG] Current Effective Date read from input: "${currentEffectiveDateStr}"`);
-
         const parts = currentEffectiveDateStr.split('-');
         const day = parts[0] || '01';
         const monthStr = parts[1];
         let year = parseInt(parts[2], 10);
 
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let monthIndex = months.findIndex((m) => m.toLowerCase() === monthStr.toLowerCase());
+        const monthIndex = months.findIndex((m) => m.toLowerCase() === (monthStr || '').toLowerCase());
 
-        let nextMonthIndex = (monthIndex + 1) % 12;
-        if (monthIndex === 11) {
-            year += 1;
-        }
-        let nextMonthStr = months[nextMonthIndex];
+        const nextMonthIndex = (monthIndex + 1) % 12;
+        if (monthIndex === 11) year += 1;
+
+        const nextMonthStr = months[nextMonthIndex];
         const nextEffectiveFromDate = `${day}-${nextMonthStr}-${year}`;
-        console.log(`[TEST LOG] Target Next Month Effective Date: "${nextEffectiveFromDate}"`);
 
         await this.page.evaluate((targetDate) => {
             const input = document.querySelector('#EmployeeSalaryStructure_EffectiveFrom');
@@ -355,17 +347,14 @@ class SalaryPage {
         const updateBtn = this.page.locator('#btnUpdateEmployeeSalaryStructure');
         await updateBtn.waitFor({ state: 'visible', timeout: 10000 });
         await updateBtn.click({ force: true });
-        console.log(`[TEST LOG] Clicked on Update Employee Salary Structure button.`);
 
         const okPopupBtn = this.page.locator('button.swal-button.swal-button--confirm');
         await okPopupBtn.waitFor({ state: 'visible', timeout: 10000 });
 
-        const popupTextLocator = this.page.locator('.swal-text').first();
-        const popupText = await popupTextLocator.textContent() || '';
+        const popupText = (await this.page.locator('.swal-text').first().textContent()) || '';
         const isPopupValid = popupText.includes('Updated Successfully');
 
         await okPopupBtn.click({ force: true });
-        console.log(`[TEST LOG] Handled 'Updated Successfully' popup and clicked OK.`);
 
         await this.page.waitForSelector('#tblEmployeeSalaryStructure', { state: 'visible', timeout: 10000 });
         await this.page.waitForTimeout(1500);
@@ -399,9 +388,7 @@ class SalaryPage {
         reportTable += `| **Old/Previous Entry Icon** | Eye (View) on Older Row | ${olderRowHasEye ? 'PASS ✅' : 'FAIL ❌'} |\n`;
 
         if (!isPopupValid || !topRowHasPencil) {
-            throw new Error(
-                `Update Validation Mismatch: Popup message or table action icons are not as expected.`
-            );
+            throw new Error('Update Validation Mismatch: Popup message or table action icons are not as expected.');
         }
 
         return reportTable;
@@ -448,7 +435,7 @@ class SalaryPage {
             })
             .catch(() => null);
 
-        const domMessagePromise = this.page.evaluate(({ expectedMessage }) => {
+        const domMessagePromise = this.page.evaluate(({ expectedMessage: expected }) => {
             const selectors = [
                 '.swal-text',
                 '.swal2-html-container',
@@ -465,11 +452,7 @@ class SalaryPage {
             const isVisible = (element) => {
                 if (!element) return false;
                 const style = window.getComputedStyle(element);
-                return (
-                    style.visibility !== 'hidden' &&
-                    style.display !== 'none' &&
-                    element.offsetParent !== null
-                );
+                return style.visibility !== 'hidden' && style.display !== 'none' && element.offsetParent !== null;
             };
 
             const clickAddButton = () => {
@@ -508,17 +491,15 @@ class SalaryPage {
                     }
                 }
                 const bodyText = normalize(document.body?.innerText || '');
-                if (bodyText.includes(expectedMessage)) {
-                    messages.push(expectedMessage);
-                }
+                if (bodyText.includes(expected)) messages.push(expected);
                 return [...new Set(messages)];
             };
 
             const baselineMessages = getMessages();
-            const clicked = clickAddButton();
+            const clickedAdd = clickAddButton();
 
             return new Promise((resolve) => {
-                if (!clicked) {
+                if (!clickedAdd) {
                     resolve(null);
                     return;
                 }
@@ -526,17 +507,13 @@ class SalaryPage {
                 const deadline = Date.now() + 7000;
                 const poll = () => {
                     const currentMessages = getMessages();
-                    const matchedMessage = currentMessages.find((message) =>
-                        message.includes(expectedMessage)
-                    );
+                    const matchedMessage = currentMessages.find((msg) => msg.includes(expected));
                     if (matchedMessage) {
                         resolve({ source: 'dom', message: matchedMessage });
                         return;
                     }
 
-                    const newMessage = currentMessages.find(
-                        (message) => !baselineMessages.includes(message)
-                    );
+                    const newMessage = currentMessages.find((msg) => !baselineMessages.includes(msg));
                     if (newMessage) {
                         resolve({ source: 'dom', message: newMessage });
                         return;
@@ -555,6 +532,7 @@ class SalaryPage {
         }, { expectedMessage });
 
         const [dialogResult, domResult] = await Promise.all([dialogPromise, domMessagePromise]);
+
         const result = dialogResult?.message?.includes(expectedMessage)
             ? dialogResult
             : domResult?.message?.includes(expectedMessage)
@@ -608,82 +586,69 @@ class SalaryPage {
     async addAndVerifyAdditionalEarningHeads(heads) {
         const results = [];
 
-        const normalize = (value) =>
-            String(value ?? '').replace(/\s+/g, ' ').trim();
+        const normalize = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
 
         const parseAmount = (value) => {
             const cleaned = normalize(value).replace(/,/g, '');
-
             if (!/^-?\d+(?:\.\d+)?$/.test(cleaned)) {
                 throw new Error(`Invalid amount: "${value}"`);
             }
-
             const amount = Number(cleaned);
-
             if (!Number.isFinite(amount)) {
                 throw new Error(`Invalid amount: "${value}"`);
             }
-
             return amount;
         };
 
         const findRow = (headName) => {
-            const escaped = normalize(headName).replace(
-                /[.*+?^${}()|[\]\\]/g,
-                '\\$&'
-            );
+            const escaped = normalize(headName).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-            return this.page.locator(
-                'table:not(#dtDeductionList):not(#tblEmployeeSalaryStructure) tbody tr:visible'
-            ).filter({
-                has: this.page.locator('td:first-child').filter({
-                    hasText: new RegExp(`^\\s*${escaped}\\s*$`)
-                })
-            });
+            return this.page
+                .locator('table:not(#dtDeductionList):not(#tblEmployeeSalaryStructure) tbody tr:visible')
+                .filter({
+                    has: this.page.locator('td:first-child').filter({
+                        hasText: new RegExp(`^\\s*${escaped}\\s*$`)
+                    })
+                });
         };
 
-        const readRow = async (row) => row.evaluate((tr) => {
-            const cells = Array.from(tr.children).filter(
-                (element) => element.tagName === 'TD'
+        const readRow = async (row) =>
+            row.evaluate(
+                (tr) => {
+                    const cells = Array.from(tr.children).filter((element) => element.tagName === 'TD');
+
+                    if (cells.length < 3) {
+                        throw new Error('Expected Head, Amount and Remark columns.');
+                    }
+
+                    const readCell = (cell) => {
+                        const controls = cell.querySelectorAll(
+                            'input:not([type="hidden"]):not([type="button"]):not([type="submit"]), textarea'
+                        );
+
+                        if (controls.length > 1) {
+                            throw new Error('Multiple value controls found in table cell.');
+                        }
+
+                        return controls.length === 1 ? controls[0].value : cell.textContent?.trim() || '';
+                    };
+
+                    return {
+                        head: cells[0].textContent?.trim() || '',
+                        amount: readCell(cells[1]),
+                        remark: readCell(cells[2])
+                    };
+                },
+                undefined,
+                { timeout: 5000 }
             );
-
-            if (cells.length < 3) {
-                throw new Error(
-                    'Expected Head, Amount and Remark columns.'
-                );
-            }
-
-            const readCell = (cell) => {
-                const controls = cell.querySelectorAll(
-                    'input:not([type="hidden"]):not([type="button"]):not([type="submit"]), textarea'
-                );
-
-                if (controls.length > 1) {
-                    throw new Error(
-                        'Multiple value controls found in table cell.'
-                    );
-                }
-
-                return controls.length === 1
-                    ? controls[0].value
-                    : cell.textContent?.trim() || '';
-            };
-
-            return {
-                head: cells[0].textContent?.trim() || '',
-                amount: readCell(cells[1]),
-                remark: readCell(cells[2])
-            };
-        }, undefined, { timeout: 5000 });
 
         const newResult = (head) => ({
             headName: head.headName,
             amountMode: head.amountMode,
             fieldState: 'Not checked',
             enteredAmount: 'Not entered',
-            expectedAmount: head.amountMode === 'automatic'
-                ? 'Numeric system amount; formula not asserted'
-                : head.amount,
+            expectedAmount: head.amountMode === 'automatic' ? 'Numeric system amount; formula not asserted' : head.amount,
             actualAmount: 'Not checked',
             expectedRemark: head.remark || '',
             actualRemark: 'Not checked',
@@ -694,7 +659,6 @@ class SalaryPage {
 
         const finish = () => {
             const report = this.createScenario7Report(results);
-
             console.log(report);
 
             return {
@@ -719,39 +683,22 @@ class SalaryPage {
 
         try {
             const clicked = await this.page.evaluate(() => {
-                const row = document.querySelector(
-                    '#tblEmployeeSalaryStructure tbody tr'
-                );
-
-                const editLink =
-                    row?.querySelector('a.EditLink') ||
-                    row?.querySelector('.fa-pencil')?.closest('a');
-
+                const row = document.querySelector('#tblEmployeeSalaryStructure tbody tr');
+                const editLink = row?.querySelector('a.EditLink') || row?.querySelector('.fa-pencil')?.closest('a');
                 if (!editLink) return false;
-
                 editLink.click();
                 return true;
             });
 
             if (!clicked) {
-                await this.page.locator(
-                    '#tblEmployeeSalaryStructure tbody tr a.EditLink'
-                ).first().click({
-                    force: true,
-                    timeout: 10000
-                });
+                await this.page
+                    .locator('#tblEmployeeSalaryStructure tbody tr a.EditLink')
+                    .first()
+                    .click({ force: true, timeout: 10000 });
             }
 
-            await this.effectiveFromInput.waitFor({
-                state: 'visible',
-                timeout: 15000
-            });
-
-            await this.page.locator('#lnkEarningHead').waitFor({
-                state: 'visible',
-                timeout: 10000
-            });
-
+            await this.effectiveFromInput.waitFor({ state: 'visible', timeout: 15000 });
+            await this.page.locator('#lnkEarningHead').waitFor({ state: 'visible', timeout: 10000 });
             await this.page.waitForTimeout(2000);
         } catch (error) {
             for (const head of heads) {
@@ -772,7 +719,6 @@ class SalaryPage {
 
             const dialogHandler = async (dialog) => {
                 dialogMessages.push(dialog.message());
-
                 try {
                     await dialog.accept();
                 } catch (error) {
@@ -782,55 +728,34 @@ class SalaryPage {
 
             try {
                 if (!['automatic', 'manual'].includes(head.amountMode)) {
-                    throw new Error(
-                        `Unsupported amount mode: "${head.amountMode}"`
-                    );
+                    throw new Error(`Unsupported amount mode: "${head.amountMode}"`);
                 }
 
                 const row = findRow(head.headName);
                 result.rowCount = await row.count();
 
                 if (result.rowCount !== 0) {
-                    throw new Error(
-                        `"${head.headName}" already exists. ` +
-                        'Use test data without this head assigned.'
-                    );
+                    throw new Error(`"${head.headName}" already exists. Use test data without this head assigned.`);
                 }
 
                 stage = 'Opening Earning Head modal';
 
                 const earningLink = this.page.locator('#lnkEarningHead');
+                await this.page.waitForTimeout(1000);
+                await earningLink.scrollIntoViewIfNeeded({ timeout: 10000 });
+                await earningLink.click({ force: true, timeout: 10000 });
 
-                await earningLink.scrollIntoViewIfNeeded({
-                    timeout: 10000
-                });
-                await earningLink.click({
-                    force: true,
-                    timeout: 10000
-                });
+                const dropdown = this.page.locator('#earningHead');
+                const amountInput = this.page.locator('#txtEarAmount');
+                const remarkInput = this.page.locator('#txtEarRemark');
+                const addButton = this.page.locator('#btnAddEarHead');
 
-                const dropdown = this.page.locator('#earningHead:visible');
-                const amountInput = this.page.locator('#txtEarAmount:visible');
-                const remarkInput = this.page.locator('#txtEarRemark:visible');
-                const addButton = this.page.locator('#btnAddEarHead:visible');
-
-                await dropdown.waitFor({
-                    state: 'visible',
-                    timeout: 10000
-                });
+                await dropdown.waitFor({ state: 'visible', timeout: 15000 });
 
                 stage = 'Selecting head';
+                await dropdown.selectOption({ label: head.headName }, { timeout: 10000 });
 
-                await dropdown.selectOption(
-                    { label: head.headName },
-                    { timeout: 10000 }
-                );
-
-                await amountInput.waitFor({
-                    state: 'visible',
-                    timeout: 5000
-                });
-
+                await amountInput.waitFor({ state: 'visible', timeout: 5000 });
                 await this.page.waitForTimeout(500);
 
                 result.fieldState = await amountInput.evaluate((input) => {
@@ -842,38 +767,33 @@ class SalaryPage {
                 stage = 'Handling amount';
 
                 if (head.amountMode === 'manual') {
-                    result.expectedAmount = parseAmount(head.amount);
+                    await expect(amountInput).toBeEditable({ timeout: 5000 });
 
-                    await expect(amountInput).toBeEditable({
-                        timeout: 5000
-                    });
+                    const providedAmount = String(head.amount ?? '').trim();
 
-                    await amountInput.fill(String(head.amount), {
-                        timeout: 5000
-                    });
+                    if (providedAmount) {
+                        result.expectedAmount = parseAmount(providedAmount);
+                        await amountInput.fill(providedAmount, { timeout: 5000 });
+                        result.enteredAmount = await amountInput.inputValue({ timeout: 5000 });
+                    } else {
+                        const currentValue = await amountInput.inputValue({ timeout: 5000 });
+                        const parsedCurrent = parseAmount(currentValue || '0');
 
-                    result.enteredAmount = await amountInput.inputValue({
-                        timeout: 5000
-                    });
+                        result.expectedAmount = parsedCurrent;
+                        result.enteredAmount = currentValue || '0';
+
+                        await amountInput.click({ timeout: 3000 }).catch(() => {});
+                        await amountInput.press('Tab').catch(() => {});
+                    }
                 } else {
                     result.enteredAmount = 'Not entered';
                 }
 
                 stage = 'Filling remark';
 
-                await remarkInput.waitFor({
-                    state: 'visible',
-                    timeout: 5000
-                });
-
-                await remarkInput.fill(head.remark || '', {
-                    timeout: 5000
-                });
-
-                await expect(remarkInput).toHaveValue(
-                    head.remark || '',
-                    { timeout: 5000 }
-                );
+                await remarkInput.waitFor({ state: 'visible', timeout: 5000 });
+                await remarkInput.fill(head.remark || '', { timeout: 5000 });
+                await expect(remarkInput).toHaveValue(head.remark || '', { timeout: 5000 });
 
                 stage = 'Clicking Add';
 
@@ -883,56 +803,49 @@ class SalaryPage {
                     await addButton.click({ timeout: 5000 });
 
                     stage = 'Finding added row';
-
-                    await expect(row).toHaveCount(1, {
-                        timeout: 10000
-                    });
-
+                    await expect(row).toHaveCount(1, { timeout: 10000 });
                     result.rowCount = await row.count();
 
                     stage = 'Validating table data';
 
-                    await expect.poll(async () => {
-                        const data = await readRow(row);
+                    await expect
+                        .poll(
+                            async () => {
+                                const data = await readRow(row);
 
-                        result.actualAmount = data.amount;
-                        result.actualRemark = data.remark;
+                                result.actualAmount = data.amount;
+                                result.actualRemark = data.remark;
 
-                        let actualAmount;
+                                let actualAmount;
+                                try {
+                                    actualAmount = parseAmount(data.amount);
+                                } catch {
+                                    return false;
+                                }
 
-                        try {
-                            actualAmount = parseAmount(data.amount);
-                        } catch {
-                            return false;
-                        }
+                                const amountMatches =
+                                    head.amountMode === 'automatic' ||
+                                    Math.abs(actualAmount - result.expectedAmount) < 0.01;
 
-                        const amountMatches =
-                            head.amountMode === 'automatic' ||
-                            Math.abs(
-                                actualAmount - result.expectedAmount
-                            ) < 0.01;
-
-                        return (
-                            normalize(data.head) === normalize(head.headName) &&
-                            amountMatches &&
-                            normalize(data.remark) === normalize(head.remark)
-                        );
-                    }, {
-                        timeout: 10000,
-                        message:
-                            `${head.headName}: table amount and remark must match`
-                    }).toBe(true);
+                                return (
+                                    normalize(data.head) === normalize(head.headName) &&
+                                    amountMatches &&
+                                    normalize(data.remark) === normalize(head.remark)
+                                );
+                            },
+                            {
+                                timeout: 10000,
+                                message: `${head.headName}: table amount and remark must match`
+                            }
+                        )
+                        .toBe(true);
 
                     if (dialogMessages.length > 0) {
-                        throw new Error(
-                            `Unexpected alert: ${dialogMessages.join('; ')}`
-                        );
+                        throw new Error(`Unexpected alert: ${dialogMessages.join('; ')}`);
                     }
 
                     if (dialogError) {
-                        throw new Error(
-                            `Dialog handling failed: ${dialogError}`
-                        );
+                        throw new Error(`Dialog handling failed: ${dialogError}`);
                     }
 
                     stage = 'Closing Add modal';
@@ -957,41 +870,47 @@ class SalaryPage {
                     }
 
                     if (!closed) {
-                        await this.page.evaluate(() => {
-                            const selectors = [
-                                '#btnAddCancelEarHead',
-                                '#divEarningHead .close',
-                                '#divEarningHead [data-dismiss="modal"]',
-                                '.modal.show #btnAddCancelEarHead',
-                                '.modal.show .close'
-                            ];
+                        await this.page
+                            .evaluate(() => {
+                                const selectors = [
+                                    '#btnAddCancelEarHead',
+                                    '#divEarningHead .close',
+                                    '#divEarningHead [data-dismiss="modal"]',
+                                    '.modal.show #btnAddCancelEarHead',
+                                    '.modal.show .close'
+                                ];
 
-                            for (const selector of selectors) {
-                                const element = document.querySelector(selector);
-                                if (element instanceof HTMLElement) {
-                                    element.click();
-                                    break;
+                                for (const selector of selectors) {
+                                    const element = document.querySelector(selector);
+                                    if (element instanceof HTMLElement) {
+                                        element.click();
+                                        break;
+                                    }
                                 }
-                            }
-                        }).catch(() => {});
+                            })
+                            .catch(() => {});
                     }
 
-                    await expect.poll(async () => {
-                        const modalVisible = await this.page.locator('#divEarningHead:visible').count();
-                        return modalVisible === 0;
-                    }, {
-                        timeout: 10000,
-                        message: 'Earning Head modal should close after Add'
-                    }).toBe(true);
+                    await expect
+                        .poll(
+                            async () => {
+                                const modalVisible = await this.page.locator('#divEarningHead:visible').count();
+                                return modalVisible === 0;
+                            },
+                            {
+                                timeout: 10000,
+                                message: 'Earning Head modal should close after Add'
+                            }
+                        )
+                        .toBe(true);
 
-                    await expect(row).toHaveCount(1, {
-                        timeout: 5000
-                    });
+                    await expect(row).toHaveCount(1, { timeout: 5000 });
 
                     result.status = 'PASS ✅';
-                    result.details = head.amountMode === 'automatic'
-                        ? 'Head, numeric system amount and remark verified. Automatic formula not asserted.'
-                        : 'Head, entered amount and remark verified.';
+                    result.details =
+                        head.amountMode === 'automatic'
+                            ? 'Head, numeric system amount and remark verified. Automatic formula not asserted.'
+                            : 'Head, entered/default amount and remark verified.';
                 } finally {
                     this.page.off('dialog', dialogHandler);
                 }
@@ -1007,8 +926,7 @@ class SalaryPage {
 
                 for (const remaining of heads.slice(index + 1)) {
                     const skipped = newResult(remaining);
-                    skipped.details =
-                        'Not executed because the previous head failed.';
+                    skipped.details = 'Not executed because the previous head failed.';
                     results.push(skipped);
                 }
 
@@ -1018,82 +936,62 @@ class SalaryPage {
             results.push(result);
         }
 
+        // Important: ensure modal closed and totals refreshed before next scenario steps
+        await this.page.waitForTimeout(500);
+        await expect
+            .poll(async () => {
+                const visibleModalCount = await this.page.locator('#divEarningHead:visible').count();
+                return visibleModalCount === 0;
+            }, { timeout: 10000 })
+            .toBe(true);
+
+        await this.page.waitForTimeout(1000);
+
         return finish();
     }
 
     createScenario7Report(results) {
-        const escapeCell = (value) =>
+        const safe = (value) =>
             String(value ?? '')
                 .replace(/\|/g, '\\|')
-                .replace(/[\r\n]+/g, ' ');
+                .replace(/\n/g, ' ')
+                .trim();
 
-        const headers = [
-            'Head',
-            'Amount Mode',
-            'Actual Field State',
-            'Entered Amount',
-            'Expected Amount',
-            'Actual Amount',
-            'Expected Remark',
-            'Actual Remark',
-            'Matching Row Count',
-            'Status',
-            'Details'
-        ];
+        const allResults = Array.isArray(results) ? results : [];
+        const total = allResults.length;
+        const passed = allResults.filter((r) => r?.status === 'PASS ✅').length;
+        const failed = allResults.filter((r) => r?.status === 'FAIL ❌').length;
+        const notRun = total - passed - failed;
 
-        const rows = results.map((result) => [
-            result.headName,
-            result.amountMode,
-            result.fieldState,
-            result.enteredAmount,
-            result.expectedAmount,
-            result.actualAmount,
-            result.expectedRemark,
-            result.actualRemark,
-            result.rowCount,
-            result.status,
-            result.details
-        ]);
+        const rows =
+            total > 0
+                ? allResults
+                      .map((result) => {
+                          const headName = safe(result?.headName || 'N/A');
+                          const amountMode = safe(result?.amountMode || 'N/A');
+                          const expectedAmount = safe(result?.expectedAmount ?? 'N/A');
+                          const actualAmount = safe(result?.actualAmount ?? 'N/A');
+                          const expectedRemark = safe(result?.expectedRemark ?? '');
+                          const actualRemark = safe(result?.actualRemark ?? '');
+                          const rowCount = safe(result?.rowCount ?? 'N/A');
+                          const status = safe(result?.status || 'NOT RUN');
+                          const details = safe(result?.details || '');
 
-        const summaryHeaders = ['Head', 'Mode', 'Amount', 'Remark', 'Row Count', 'Result'];
-        const summaryRows = results.map((result) => [
-            result.headName,
-            result.amountMode,
-            result.actualAmount,
-            result.actualRemark,
-            result.rowCount,
-            result.status
-        ]);
+                          return `| ${headName} | ${amountMode} | ${expectedAmount} | ${actualAmount} | ${expectedRemark} | ${actualRemark} | ${rowCount} | ${status} | ${details} |`;
+                      })
+                      .join('\n')
+                : '| No additional earning head results captured | - | - | - | - | - | - | - | - |';
 
-        const calculationLines = [];
-        const earningSum = results.reduce((sum, row) => {
-            const v = parseFloat(String(row.actualAmount ?? '').replace(/,/g, ''));
-            return sum + (Number.isFinite(v) ? v : 0);
-        }, 0);
-
-        calculationLines.push(`| Metric | Expected | Actual | Status |`);
-        calculationLines.push(`| :--- | :--- | :--- | :--- |`);
-        calculationLines.push(`| Total Earning | From UI rows sum | ${earningSum.toFixed(2)} | PASS ✅ |`);
-
-        return (
-            '### Scenario 7 — Additional Earning Heads Validation\n\n' +
-            `| ${summaryHeaders.map(escapeCell).join(' | ')} |\n` +
-            `| ${summaryHeaders.map(() => ':---').join(' | ')} |\n` +
-            summaryRows.map((row) =>
-                `| ${row.map(escapeCell).join(' | ')} |`
-            ).join('\n') +
-            '\n\n' +
-            '### Scenario 7 — Additional Earning Heads Validation Detail\n\n' +
-            `| ${headers.map(escapeCell).join(' | ')} |\n` +
-            `| ${headers.map(() => ':---').join(' | ')} |\n` +
-            rows.map((row) =>
-                `| ${row.map(escapeCell).join(' | ')} |`
-            ).join('\n') +
-            '\n\n' +
-            '### Scenario 7 — Calculation Check\n\n' +
-            calculationLines.join('\n') +
-            '\n'
-        );
+        return [
+            '### Scenario 7 — Additional Earning Head Validation',
+            '',
+            `**Summary:** Total: ${total} | Pass: ${passed} | Fail: ${failed} | Not Run: ${notRun}`,
+            '',
+            '| Head Name | Amount Mode | Expected Amount | Actual Amount | Expected Remark | Actual Remark | Row Count | Status | Details |',
+            '| :--- | :--- | :--- | ---: | :--- | :--- | ---: | :--- | :--- |',
+            rows,
+            ''
+        ].join('\n');
     }
 }
 

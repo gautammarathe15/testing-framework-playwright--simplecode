@@ -6,7 +6,7 @@ Feature: Employee Document Module Validation
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    And User enters "95550" in search filter for Aadhaar or employee details
+    And User enters "2731532" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid
     And User navigates to Document tab
 

@@ -8,8 +8,6 @@ When('User enters UAN number {string}', async function (uanValue) {
     uanPage = new UANPage(this.page);
     
     let finalUan = uanValue;
-    
-    // जर uanValue ही "UNIQUE" असेल किंवा रिकामी नसेल पण रँडम हवी असेल तर नवीन युनिक नंबर तयार करा
     if (uanValue === "UNIQUE") {
         const randomSuffix = Math.floor(1000000 + Math.random() * 9000000);
         finalUan = `10150${randomSuffix}`;

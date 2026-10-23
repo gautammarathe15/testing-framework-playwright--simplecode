@@ -70,6 +70,17 @@ When('User attempts an invalid Effective From date before joining date and handl
 
 When('User selects a valid Effective From date', async function () {
     await workOrderPage.setValidEffectiveFrom();
+
+    const dateAuditText = generateTextTable(
+        "Employee & Date Selection Audit Report",
+        ["Parameter", "Extracted / Selected Value"],
+        [
+            ["Employee Join Date (#spnEmployeeJoinDate)", workOrderPage.extractedJoinDate || "N/A"],
+            ["Contract Period To Date (#spnEmployeeToDate)", workOrderPage.extractedContractToDate || "N/A"],
+            ["Selected Effective From Date", workOrderPage.selectedEffectiveFromDate || "N/A"]
+        ]
+    );
+    await this.attach(dateAuditText, 'text/plain');
 });
 
 When('User attempts an invalid Effective To date after contract period and handles popup', async function () {
@@ -98,17 +109,20 @@ When('User clicks on the Save Work Order button', async function () {
 
 Then('User clicks on OK button on the work order success popup', async function () {
     await workOrderPage.handlePopup();
+    await this.page.waitForTimeout(2000);
 });
 
 Then('User should see the saved work order details in the assignment table', async function () {
-    const verification = await workOrderPage.verifyTableData("10003", "Manpower");
+    const expectedWorkOrder = workOrderPage.selectedWorkOrderText || workOrderPage.selectedWorkOrderId || '10003';
+    const verification = await workOrderPage.verifyTableData(expectedWorkOrder, 'Manpower');
     expect(verification.hasWorkOrder).toBeTruthy();
     expect(verification.hasType).toBeTruthy();
 });
 
 Given('User verifies the previously saved work order details in table {string}', async function (tableName) {
     workOrderPage = new WorkOrderPage(this.page);
-    const verification = await workOrderPage.verifyTableData("10003", "Manpower");
+    const expectedWorkOrder = workOrderPage.selectedWorkOrderText || workOrderPage.selectedWorkOrderId || '10003';
+    const verification = await workOrderPage.verifyTableData(expectedWorkOrder, 'Manpower');
     expect(verification.hasWorkOrder).toBeTruthy();
 });
 
@@ -136,6 +150,7 @@ Then('User validates that the Update button is visible and clicks on it', async 
 
 Then('User clicks on OK button on the update success popup', async function () {
     await workOrderPage.handlePopup();
+    await this.page.waitForTimeout(2000);
 });
 
 Then('User should see the updated work order details in table {string}', async function (tableName) {

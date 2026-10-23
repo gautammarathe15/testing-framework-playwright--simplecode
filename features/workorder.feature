@@ -7,12 +7,13 @@ Feature: Employee Assign Work Order Management
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    And User enters "95550" in search filter for Aadhaar or employee details
+    And User enters "2731532" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid
     Given User clicks on the Assign Work Order Option menu
     When User selects Work Order ID "1013" from the dropdown
     And User extracts Effective From and Employee To Date
 
+  @workorder_create
   Scenario: Verify successful creation of Employee Work Order with validations and table check
     
     
@@ -23,8 +24,6 @@ Feature: Employee Assign Work Order Management
     When User clicks on the Save Work Order button
     Then User clicks on OK button on the work order success popup
     And User should see the saved work order details in the assignment table
-
-
 
 
     @workorder_update

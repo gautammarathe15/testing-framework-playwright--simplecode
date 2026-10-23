@@ -79,4 +79,4 @@ When User unchecks the "Week Off Default Applicable" checkbox
   
   Examples:
       | FirstName | LastName | Gender | DOB         | ContractFrom | ContractDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | SkilledLevel | Contractor |
-      | Lalita    | P        | F      | 05-Jan-1890 | 11-Mar-2026  | 777          | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+      | SOFIYA    | P        | F      | 05-Jan-1890 | 06-Mar-2026  | 707          | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
