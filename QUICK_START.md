@@ -28,7 +28,67 @@ npm run cucumber:leave
 npm run cucumber:attendance
 ```
 
-### 4. View Reports
+### 4. Flaky Test Handling
+This framework is already designed to handle intermittent UI failures:
+
+- Cucumber retries failed scenarios automatically with `retry: 2` in the default profile.
+- `features/support/hooks.js` tracks retry counts and logs messages such as `Retrying Scenario (Attempt 2): "Update salary status"`.
+- A small stability wait is added on retry to reduce timing issues from delayed DOM updates or popup rendering.
+- Screenshots are captured for failed scenarios and stored in `./screenshots/` for quick investigation.
+- Global timeouts are set in `cucumber.js`, `playwright.config.js`, and hooks to avoid false failures from slow UI responses.
+
+Example for manual retry override:
+```bash
+npx cucumber-js --profile default --retry 3
+```
+
+Recommended handling approach:
+1. Re-run the failed scenario with retry enabled.
+2. Check the screenshot under `screenshots/`.
+3. Review the Cucumber HTML report for the exact failing step.
+4. Prefer explicit waits and stable selectors instead of hard-coded sleeps.
+
+### 5. Parallel Execution Status
+This project is currently configured for serial execution, not true parallel execution.
+
+Where it is defined:
+```js
+// cucumber.js
+default: {
+  parallel: 1,
+  ...
+}
+```
+
+This means Cucumber runs one scenario worker at a time. The same pattern is repeated across other profiles:
+```js
+shift: { parallel: 1 }
+leave: { parallel: 1 }
+attendance: { parallel: 1 }
+smoke: { parallel: 1 }
+```
+
+If you want serial execution, keep it as:
+```js
+parallel: 1
+```
+
+If you want parallel execution, change it to:
+```js
+parallel: 2
+```
+
+or run directly:
+```bash
+npx cucumber-js --profile default --parallel 2
+```
+
+Important note:
+- The current framework creates a single global browser in `features/support/hooks.js`.
+- That is valid for serial runs but not ideal for parallel runs.
+- For full parallel execution, browser creation and teardown should be handled per worker or per scenario.
+
+### 6. View Reports
 ```bash
 # Cucumber HTML Report
 open cucumber-report-extended.html
@@ -39,7 +99,72 @@ npm run allure:report
 
 ---
 
-## 📋 Common Commands
+## � Jenkins CI/CD Pipeline
+
+This project already includes a Jenkins pipeline definition in [Jenkinsfile](Jenkinsfile). The pipeline is designed to run automatically on a Jenkins agent and execute the Playwright + Cucumber automation suite.
+
+### What the Jenkins pipeline does
+1. Checks out the code from Git
+2. Installs Node.js dependencies using npm
+3. Installs Playwright browser binaries
+4. Runs the Cucumber test suite
+5. Generates the HTML test report
+6. Publishes the report and archives artifacts in Jenkins
+
+### Pipeline workflow
+
+```mermaid
+flowchart LR
+    A[Developer pushes code] --> B[Jenkins job triggered]
+    B --> C[Checkout repository]
+    C --> D[Install dependencies]
+    D --> E[Install Playwright browsers]
+    E --> F[Run Cucumber tests]
+    F --> G[Generate HTML report]
+    G --> H[Publish report + artifacts]
+    H --> I{Build status}
+    I -- Pass --> J[Pipeline success]
+    I -- Fail --> K[Pipeline failure]
+```
+
+```mermaid
+pie title Jenkins Pipeline Stage Distribution
+    "Checkout" : 10
+    "Install" : 20
+    "Run Tests" : 50
+    "Reports" : 20
+```
+
+### Required Jenkins setup
+- Jenkins installed and running
+- Node.js tool configured under Manage Jenkins → Global Tool Configuration
+- Git plugin installed
+- HTML Publisher plugin installed
+- JUnit plugin installed
+- A Jenkins job configured to use this repository and the Jenkinsfile
+- A Jenkins agent with access to Node/npm and browser dependencies
+
+### Jenkinsfile behavior
+The current Jenkinsfile is written to be cross-platform and avoids shell-specific command separators that can fail on Windows-based agents. It uses `checkout scm` for repository retrieval, installs dependencies and browsers, executes the tests, and publishes the final report in Jenkins.
+
+### Example Jenkins job configuration
+- Choose: Pipeline
+- Definition: Pipeline script from SCM
+- SCM: Git
+- Repository URL: your GitHub/GitLab repo URL
+- Branch: main or your target branch
+- Script Path: Jenkinsfile
+
+### Typical execution flow in practice
+- A developer pushes code to Git
+- Jenkins triggers the pipeline
+- The job executes the stages from [Jenkinsfile](Jenkinsfile)
+- Test results appear in Jenkins with artifacts and HTML reports
+- QA or team members can review the report without opening local files
+
+---
+
+## �📋 Common Commands
 
 | Command | Purpose |
 |---------|---------|
@@ -95,74 +220,103 @@ await page.fill(selector, text);
 
 ## 📦 Project Structure
 
-```
+```text
 features/
-├── shift.feature          ← Shift scenarios
-├── leave.feature          ← Leave scenarios
-├── attendance.feature     ← Attendance scenarios
-└── step_definitions/
-    ├── shift.steps.js
-    ├── leave.steps.js
-    ├── attendance.steps.js
-    └── support/hooks.js   ← Setup/Teardown
-
+├── login.feature
+├── contractoremployee.feature
+├── contractorEmployeeDetails.feature
+├── contractorEmployeeFormOperations.feature
+├── address.feature
+├── bank.feature
+├── card.feature
+├── deployment.feature
+├── document.feature
+├── family.feature
+├── qualification.feature
+├── salary.feature
+├── reportingmanager.feature
+├── statuschange.feature
+├── excelUploadContractor.feature
+├── searchcontractor.feature
+├── shift.feature
+├── weekoff.feature
+├── otherdetails.feature
+├── pan_validation.feature
+├── passport.feature
+├── uan.feature
+├── etc.
+├── step_definitions/
+│   ├── *.steps.js
+│   └── support/
+│       └── hooks.js
 pages/
-├── base.page.js           ← Base class
-├── shift/
-│   ├── shift.page.js
-│   ├── shiftPolicy.page.js
-│   ├── shiftScope.page.js
-│   ├── defaultShift.page.js
-│   ├── shiftRotationPattern.page.js
-│   └── shiftCorrection.page.js
-├── leave/
-│   ├── leaveApplication.page.js
-│   ├── leaveApproval.page.js
-│   ├── leaveBalance.page.js
-│   └── holidayList.page.js
-└── attendance/
-    ├── outDuty.page.js
-    ├── accessCard.page.js
-    ├── weekOffDefault.page.js
-    ├── attendanceApproval.page.js
-    ├── manualAttendance.page.js
-    ├── deleteManualAttendance.page.js
-    └── weekOffShiftTemplate.page.js
-
-cucumber.js               ← Test profiles
-generate-report.js        ← Report generation
+├── base.page.js
+├── clmslogin.js
+├── salary.js
+├── deployment.js
+├── document.js
+├── family.js
+├── qualification.js
+├── medical_checkup.js
+├── reportingmanager.js
+├── shift.js
+├── workorder.js
+├── mastermodule/
+├── otherdetailspage/
+├── *.js
+utilities/
+├── basePage.js
+├── browserManager.js
+├── testConfig.js
+├── testUtils.js
+cucumber.js
+playwright.config.js
+generate-report.js
 ```
 
 ---
 
 ## 🎯 Test Tags
 
-### Module Tags
-- `@SHIFT` - Shift management tests
-- `@LEAVE` - Leave management tests
-- `@ATTENDANCE` - Attendance tests
+The project uses a mix of feature-specific and validation tags rather than only the old generic module names.
 
-### Test Type Tags
-- `@SMOKE` - Smoke tests
-- `@REGRESSION` - Regression tests
-- `@MODULE` - Module feature tests
-
-### Operation Tags
-- `@CREATE` - Creation tests
-- `@EDIT` - Edit/Update tests
-- `@DELETE` - Deletion tests
-- `@APPROVE` - Approval workflow tests
+### Common tags used in the repo
+- `@smoke` / `@Smoke` - smoke coverage
+- `@regression` / `@Regression` - regression coverage
+- `@Validation` - validation scenarios
+- `@shift_module` - shift-related scenarios
+- `@salary_` - salary module scenarios
+- `@salary_earning_validation` - earning validation scenarios
+- `@salary_deduction_validation` - deduction validation scenarios
+- `@salary_net_payable_validation` - net payable validation scenarios
+- `@salary_duplicate_head_validation` - duplicate head validation
+- `@salary_additional_heads_validation` - additional head validation
+- `@status_change_validation` - status change validation
+- `@count_validation` - count validation scenarios
+- `@otherdetails` - other details scenarios
+- `@weekoff` - week-off scenarios
+- `@pan_validation` - PAN validation scenarios
+- `@Birthday`, `@Age_Validation`, `@Calendar` - scenario-specific checks
 
 ### Run Tests by Tag
 ```bash
-# Specific module
-npx cucumber-js --tags "@SHIFT"
+# Smoke tests
+npx cucumber-js --tags "@smoke"
 
-# Multiple tags (AND)
-npx cucumber-js --tags "@SHIFT and @CREATE"
+# Regression tests
+npx cucumber-js --tags "@regression"
 
-# Multiple tags (OR)
-npx cucumber-js --tags "@SHIFT or @LEAVE"
+# Salary module tests
+npx cucumber-js --tags "@salary_"
+
+# Validation scenarios
+npx cucumber-js --tags "@Validation"
+
+# Combined tags (AND)
+npx cucumber-js --tags "@status_change_validation and @regression"
+
+# Combined tags (OR)
+npx cucumber-js --tags "@smoke or @salary_"
 ```
 
 ---

@@ -2,18 +2,59 @@
 
 ## 🎯 Project Overview
 
-This is a **Cucumber BDD Framework** built with **Playwright** for testing the CLMS (Centralized Leave Management System) application. The framework is designed with a tiered architecture for optimal maintainability and scalability.
+This repository is a modern **CLMS automation framework** built with **Playwright** and **Cucumber BDD** for end-to-end validation of employee lifecycle and HR workflows. It follows a structured **Page Object Model (POM)** architecture to keep UI automation maintainable, reusable, and easy to scale.
+
+The project specifically automates the **Employee Master** module of the CLMS application, targeting the base URL:
+
+```text
+http://192.168.40.115/CLMS_ENT_5.5/app
+```
+
+It validates core employee data operations such as employee creation, profile updates, personal and communication details, address and family information, qualifications, experience, banking and salary-related data, documents, deployment, status changes, and verification of updated records in the grid.
 
 ### 📊 Key Features
 
-✅ **Tiered Architecture** (POM - Page Object Model)
-✅ **Cucumber BDD** with Gherkin syntax
-✅ **Playwright** browser automation
-✅ **Dual Reporting**: Cucumber HTML + Allure Reports
-✅ **Screenshot Capture** on failures
-✅ **Video Recording** (optional)
-✅ **Parallel Execution**
-✅ **Modular Test Organization**
+✅ **Playwright-powered browser automation**
+✅ **Cucumber BDD with Gherkin scenarios**
+✅ **Page Object Model for reusable UI interactions**
+✅ **Employee Master workflow automation**
+✅ **Dynamic test data generation** for CLMS workflows
+✅ **Excel upload and validation automation**
+✅ **HTML + Allure reporting** for execution visibility
+✅ **Screenshot capture** for failed scenarios
+✅ **Jenkins-ready CI pipeline**
+✅ **Modular, enterprise-friendly test organization**
+
+### 🔄 Workflow Overview
+
+1. Launch the CLMS application using the configured URL.
+2. Log in and navigate to the Employee Master / employee-related screens.
+3. Create or update employee records and required details.
+4. Fill sections such as personal information, address, family data, qualifications, bank details, and documents.
+5. Validate success messages, mandatory field behavior, and record visibility in the grid.
+6. Capture screenshots and test evidence on failure.
+7. Generate HTML, JSON, JUnit, and Allure reports for result analysis.
+
+### 🧩 Framework Structure
+
+The framework is organized in a layered design:
+
+- **Feature files** for business-readable scenarios
+- **Step definitions** for mapping Gherkin to automation logic
+- **Page Object Model** for reusable locators and interactions
+- **Utilities and config** for browser and environment parameters
+- **Support hooks** for setup, teardown, retries, and screenshots
+- **Reporting layer** for Cucumber, Playwright, and Allure outputs
+
+### 📈 Reporting
+
+The project uses a combination of reporting tools to provide execution visibility, including:
+
+- Cucumber HTML report
+- JUnit XML report
+- JSON output
+- Playwright HTML report
+- Allure reporting integration
 
 ---
 

@@ -85,6 +85,76 @@ The table below uses a legacy baseline model common in older UI suites: direct s
 | Reporting detail | Limited pass/fail visibility | Attached markdown, plain text, HTML, and JSON evidence | Faster root-cause analysis |
 | CI output | Only console logs | HTML/JUnit/Allure-ready outputs | Better traceability in Jenkins and external dashboards |
 
+### 1.7 Flaky Test Handling Pattern
+
+This project handles flaky UI failures in a structured way, not by random re-runs only:
+
+- Cucumber retries failed scenarios automatically through the default profile using `retry: 2`.
+- `features/support/hooks.js` tracks scenario execution counts and logs retry attempts, so the team can see when a scenario is retried and how many times.
+- The hooks layer adds a short stabilization wait before a retried scenario begins, which helps with delayed DOM updates and popup render timing.
+- `playwright.config.js` and `cucumber.js` set default timeouts for navigation and step execution, reducing false negatives caused by slow CLMS responses.
+- Failed scenarios automatically capture screenshots under `./screenshots/`, which makes it easier to inspect the exact UI state during intermittent failures.
+
+Example:
+
+```bash
+npx cucumber-js --profile default --retry 3
+```
+
+Practical workflow for flaky issues:
+
+1. Re-run the scenario with a higher retry value.
+2. Inspect the screenshot and failure report.
+3. Check whether the failure is caused by timing, stale DOM, or delayed popup rendering.
+4. Replace hard sleeps with explicit waits and stable locators when possible.
+
+This is the main resilience pattern used in the framework: retries + controlled waits + screenshots + timeout tuning.
+
+### 1.8 Current Parallel Execution Status
+
+The framework is currently configured for serial execution, not true parallel execution.
+
+The evidence is in [cucumber.js](cucumber.js):
+
+```js
+default: {
+  parallel: 1,
+  retry: 2,
+  timeout: 60000,
+}
+```
+
+The same serial setting is repeated in the other profiles:
+
+```js
+shift: { parallel: 1 }
+leave: { parallel: 1 }
+attendance: { parallel: 1 }
+smoke: { parallel: 1 }
+regression: { parallel: 1 }
+```
+
+This means the runner executes scenarios one worker at a time.
+
+#### Serial syntax
+```js
+parallel: 1
+```
+
+#### Parallel syntax
+```js
+parallel: 2
+```
+
+or directly:
+
+```bash
+npx cucumber-js --profile default --parallel 2
+```
+
+#### Important note
+The current browser lifecycle in [features/support/hooks.js](features/support/hooks.js) creates a shared global browser in `BeforeAll`. That setup is stable for serial execution, but for full parallel execution the framework should create or reuse browser instances in a worker-safe way.
+
 ## 2. Data Extraction and Sheet Operations
 
 ### 2.1 Primary Upload Automation Module

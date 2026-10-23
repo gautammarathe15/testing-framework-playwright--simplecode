@@ -35,7 +35,7 @@ Feature: Contractor Employee Deployment Details Validation and Update
 
     Examples:
       | FirstName | LastName | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor |
-      | Shubham   | Lele     | M      | 18-May-1983 | 27-Aug-2025  | 171                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+      | Popat     | Yamgekar | M      | 18-May-1993 | 27-Aug-2025  | 301                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
 
   @update @deployment_update_validation
   Scenario Outline: Validate Deployment details, modify fields, click Update, and verify changes persist
@@ -75,5 +75,5 @@ Feature: Contractor Employee Deployment Details Validation and Update
     Then User verifies deployment fields match newly updated values
 
     Examples:
-      | FirstName | LastName | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor |
-      | Rohit     | Joshi    | M      | 12-Jun-1990 | 27-Aug-2025  | 180                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+      | FirstName | LastName   | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor |
+      | Swaraj    | Wagholikar | M      | 12-Jun-1990 | 27-Aug-2025  | 188                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |

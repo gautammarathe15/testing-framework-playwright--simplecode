@@ -1,46 +1,107 @@
 pipeline {
     agent any
 
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+        timeout(time: 60, unit: 'MINUTES')
+    }
+
     tools {
-        nodejs 'node' // Ensure Node.js is configured in Jenkins Global Tool Configuration
+        nodejs 'node'
+    }
+
+    environment {
+        CI = 'true'
+        PLAYWRIGHT_BROWSERS_PATH = '0'
+        NODE_ENV = 'test'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: ''
+                checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                script {
+                    if (isUnix()) {
+                        sh 'npm install --no-audit --no-fund'
+                    } else {
+                        bat 'npm install --no-audit --no-fund'
+                    }
+                }
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
-                bat 'npx playwright install'
+                script {
+                    if (isUnix()) {
+                        sh 'npx playwright install --with-deps'
+                    } else {
+                        bat 'npx playwright install'
+                    }
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'npm test'
+                script {
+                    if (isUnix()) {
+                        sh 'npx cucumber-js --profile default'
+                    } else {
+                        bat 'npx cucumber-js --profile default'
+                    }
+                }
             }
         }
 
-        stage('Generate Report') {
+        stage('Generate HTML Report') {
             steps {
-                bat 'node generate-report.js'
+                script {
+                    if (isUnix()) {
+                        sh 'node generate-report.js'
+                    } else {
+                        bat 'node generate-report.js'
+                    }
+                }
             }
         }
     }
 
     post {
         always {
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '.', reportFiles: 'cucumber-report-extended.html', reportName: 'Cucumber Report', reportTitles: 'Test Report'])
-            archiveArtifacts artifacts: 'test-results/**, playwright-report/**'
+            script {
+                if (fileExists('cucumber-report-extended.html')) {
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: '.',
+                        reportFiles: 'cucumber-report-extended.html',
+                        reportName: 'Cucumber Test Report',
+                        reportTitles: 'CLMS Automation Report'
+                    ])
+                }
+
+                if (fileExists('playwright-report') || fileExists('test-results') || fileExists('screenshots')) {
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'playwright-report/**, test-results/**, screenshots/**, cucumber-report*.html', fingerprint: true
+                }
+            }
+
+            junit allowEmptyResults: true, testResults: 'test-results/**/*.xml'
+        }
+
+        success {
+            echo 'Jenkins pipeline completed successfully.'
+        }
+
+        failure {
+            echo 'Jenkins pipeline failed. Please review test results and artifacts.'
         }
     }
 }
