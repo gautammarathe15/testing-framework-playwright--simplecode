@@ -43,5 +43,5 @@ Feature: Contractor Employee Shift Management
 
     Examples:
       | FirstName | LastName | Gender | DOB         | ContractFrom | ContractDays | Subsidiary      | Division | Department | Category       | Grade | Designation | Location | SkilledLevel | Contractor | FirstShift | SecondShift |
-      | Hira      | S        | F      | 15-Jan-1990 | 01-Mar-2026  | 90           | A.k enterprise  | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    | Night Shift | Second      |
-      | Bhupeshji | Gawade    | M      | 20-May-1992 | 02-Mar-2026  | 60           | A.k enterprise  | Sales    | Software   | Staff Employee | A     | Engineer    | Pune     | Skilled      | GG ROOT    | Second      | Night Shift |
+      | Minal     | Sarode   | F      | 15-Jan-1990 | 01-Mar-2026  | 90           | A.k enterprise  | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    | Night Shift | Second      |
+      | Bhupeshji | Gawade   | M      | 20-May-1992 | 02-Mar-2026  | 60           | A.k enterprise  | Sales    | Software   | Staff Employee | A     | Engineer    | Pune     | Skilled      | GG ROOT    | Second      | Night Shift |

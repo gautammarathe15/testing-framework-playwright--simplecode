@@ -29,4 +29,4 @@ Feature: CLMS Employee Other Details Tab Verification and Reporting
 
   Examples:
     | FirstName | LastName | Gender | DOB         | ContractFrom | ContractDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | SkilledLevel | Contractor |
-    | Dharunshet | Gawade   | F     | 21-Jun-1995 | 04-Nov-2026  | 210          | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+    | Nayan     | Linge    | F     | 21-Jun-1995 | 04-Nov-2026  | 210          | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |

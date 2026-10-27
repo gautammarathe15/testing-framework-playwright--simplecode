@@ -76,4 +76,4 @@ Feature: Contractor Employee Deployment Details Validation and Update
 
     Examples:
       | FirstName | LastName   | Gender | DOB         | ContractFrom | ContractPeriodDays | Subsidiary     | Division | Department | Category       | Grade | Designation | Location | Skill        | Contractor |
-      | Swaraj    | Wagholikar | M      | 12-Jun-1990 | 27-Aug-2025  | 188                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |
+      | Swaraj    | Mirajkar   | M      | 12-Jun-1990 | 27-Aug-2025  | 188                | A.k enterprise | Sales    | Software   | Staff Employee | B     | Jr Engineer | Pune     | Semi-Skilled | GG ROOT    |

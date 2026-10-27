@@ -74,7 +74,34 @@ When('User selects today date in From Date field', async function () {
 
 When('User selects date after {int} days from today in To Date field', async function (days) {
     const weekOffPage = getWeekOffPage(this.page);
-    await weekOffPage.selectToDateFuture();
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + days);
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const targetMonthYear = `${monthNames[targetDate.getMonth()]} ${targetDate.getFullYear()}`;
+    const dayText = String(targetDate.getDate());
+
+    await weekOffPage.toDateInput.click();
+    
+    const calendarWidget = weekOffPage.page.locator('.datepicker, .bootstrap-datetimepicker-widget').first();
+    await calendarWidget.waitFor({ state: 'visible', timeout: 5000 });
+
+    for (let i = 0; i < 3; i++) {
+        const switchButton = calendarWidget.locator('th.datepicker-switch').first();
+        const currentSwitchText = await switchButton.textContent();
+
+        if (currentSwitchText && currentSwitchText.trim() === targetMonthYear) {
+            break;
+        }
+
+        const nextArrow = calendarWidget.locator('th.next').first();
+        await nextArrow.click();
+        await weekOffPage.page.waitForTimeout(500);
+    }
+
+    const calendarDay = calendarWidget.locator('td.day:not(.old):not(.new)').filter({ hasText: dayText }).first();
+    await calendarDay.waitFor({ state: 'visible', timeout: 5000 });
+    await calendarDay.click();
 });
 
 When('User clicks on Save button for template', async function () {
