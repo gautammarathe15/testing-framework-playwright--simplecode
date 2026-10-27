@@ -32,6 +32,58 @@ http://192.168.40.115/CLMS_ENT_5.5/app
 5. Capture screenshots and test evidence on failure.
 6. Generate HTML, JSON, JUnit, and Allure reports.
 
+## Browser and Browser Context model
+
+This framework follows the standard Playwright browser lifecycle used by modern automation suites.
+
+- Browser: the actual browser process (`chromium`, `firefox`, or `webkit`)
+- BrowserContext: a fresh isolated session for each scenario; cookies, storage, permissions, and session state are isolated
+- Page: a tab or window inside a browser context
+
+The main lifecycle is implemented in `features/support/hooks.js`:
+
+```js
+BeforeAll(async function() {
+  // launch one browser instance
+});
+
+Before(async function() {
+  this.context = await browser.newContext();
+  this.page = await this.context.newPage();
+});
+```
+
+This means each scenario gets a separate browser context, which gives better isolation and avoids state leakage across scenarios.
+
+### Browser support matrix
+
+| Browser type | Playwright support | Status in this framework | Notes |
+| :--- | :--- | :--- | :--- |
+| Chromium | Yes | Supported | Default browser for the repo and Chrome-based execution |
+| Firefox | Yes | Supported | Controlled via `BROWSER=firefox` |
+| WebKit | Yes | Supported | Playwright WebKit engine, not real Safari app |
+| Microsoft Edge app | No (not as a separate Playwright browser engine) | Not directly supported | Edge is usually run through Chromium channel support |
+| Safari app | No | Not directly supported | Real Safari is not launched by Playwright; WebKit is the supported engine |
+
+### Browser selection examples
+
+```bash
+# Default / Chromium
+npx cucumber-js --profile default
+
+# Firefox
+BROWSER=firefox npx cucumber-js --profile default
+
+# WebKit
+BROWSER=webkit npx cucumber-js --profile default
+```
+
+For report generation after execution:
+
+```bash
+BROWSER=firefox npx cucumber-js --profile default && node generate-report.js
+```
+
 ## Framework structure
 
 This project is organized in a layered architecture:

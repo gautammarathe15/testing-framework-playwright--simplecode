@@ -51,7 +51,28 @@ const formatDuration = (durationMs) => {
     return `${Math.round(seconds * 1000)} ms`;
 };
 
+const ensureValidJson = (jsonFile) => {
+    if (!fs.existsSync(jsonFile)) {
+        throw new Error(`JSON file not found: ${jsonFile}`);
+    }
+
+    const rawContent = fs.readFileSync(jsonFile, 'utf8').trim();
+    if (!rawContent) {
+        throw new Error(`JSON file is empty: ${jsonFile}`);
+    }
+
+    try {
+        JSON.parse(rawContent);
+        return true;
+    } catch (error) {
+        console.warn(`⚠️ Invalid JSON detected in ${jsonFile}. Removing stale/partial report file.`);
+        fs.unlinkSync(jsonFile);
+        throw new Error(`Stale or partial JSON removed from ${jsonFile}: ${error.message}`);
+    }
+};
+
 const buildReferenceData = (jsonFile) => {
+    ensureValidJson(jsonFile);
     const rawReport = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
     const featureSummaries = new Map();
     const scenarioRows = [];
@@ -456,6 +477,7 @@ const generateCucumberHTMLReport = () => {
 
     try {
         if (fs.existsSync('cucumber-report.json')) {
+            ensureValidJson('cucumber-report.json');
             reporter.generate(options);
             console.log('✅ Cucumber HTML Report generated: cucumber-report-extended.html');
             autoOpenReport('cucumber-report-extended.html'); // 👈 Explicit Browser Open Trigger

@@ -181,15 +181,15 @@ class CLMSDashboardPage {
 // 🎯 STANDALONE / AUTO-EXECUTION BLOCK
 // =========================================================================
 if (require.main === module) {
-    const { chromium } = require('@playwright/test');
+    const BrowserManager = require('../utilities/browserManager');
     const testData = require('../utilities/testData.json');
     const { CLMSLoginPage } = require('./clmslogin');
 
     (async () => {
         console.log("⚡ [clmsdashboard.js] Auto-Execution Started...");
-        const browser = await chromium.launch({ headless: false, channel: 'chrome' });
-        const context = await browser.newContext();
-        const page = await context.newPage();
+        const page = await BrowserManager.launchBrowser(process.env.BROWSER || 'chromium', process.env.HEADLESS === 'true');
+        const context = BrowserManager.context;
+        const browser = BrowserManager.browser;
 
         try {
             const loginPage = new CLMSLoginPage(page);
@@ -221,8 +221,7 @@ if (require.main === module) {
         } catch (err) {
             console.error("💥 [clmsdashboard.js] Error during execution:", err.message);
         } finally {
-            await context.close();
-            await browser.close();
+            await BrowserManager.closeBrowser();
             console.log("🔒 [clmsdashboard.js] Dashboard Browser Closed.\n");
         }
     })();

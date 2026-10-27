@@ -4,9 +4,9 @@
  */
 
 const { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } = require('@cucumber/cucumber');
-const { chromium, firefox, webkit } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+const { chromium, firefox, webkit } = require('@playwright/test');
 
 // 🎯 Import Playwright config to get baseURL
 const config = require('../../playwright.config');
@@ -21,25 +21,26 @@ let scenarioExecutionCounts = {}; // 👈 Track retry attempts per scenario
  * BeforeAll - Initialize browser instance once
  */
 BeforeAll(async function() {
-    const browserType = process.env.BROWSER || 'chromium';
-    const isHeadless = process.env.HEADLESS === 'true'; 
-    
-    switch(browserType.toLowerCase()) {
+    const browserType = (process.env.BROWSER || 'chromium').toLowerCase();
+    const isHeadless = process.env.HEADLESS === 'true';
+
+    switch (browserType) {
         case 'firefox':
             browser = await firefox.launch({ headless: isHeadless });
             break;
         case 'webkit':
             browser = await webkit.launch({ headless: isHeadless });
             break;
+        case 'chrome':
         case 'chromium':
         default:
-            browser = await chromium.launch({ 
-                headless: isHeadless,  
+            browser = await chromium.launch({
+                headless: isHeadless,
                 channel: 'chrome'
             });
             break;
     }
-    
+
     console.log(`🚀 Global Browser Launched: ${browserType.toUpperCase()}`);
 });
 

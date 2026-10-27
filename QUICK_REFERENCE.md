@@ -15,7 +15,50 @@ This document is a code-aligned quick reference for the current CLMS Playwright 
 | Data extraction | ExcelJS | Reads uploaded Excel sheets for post-upload verification |
 | CI integration | Jenkinsfile | Pipeline-driven execution and report publishing |
 
-### 1.2 Current File Workflow Architecture
+### 1.2 Browser and BrowserContext Execution Model
+
+This repository follows Playwright’s standard browser lifecycle model. The browser lifecycle is established in [features/support/hooks.js](features/support/hooks.js), while the browser selection is controlled by [playwright.config.js](playwright.config.js).
+
+| Playwright object | Meaning | How it is used here |
+| :--- | :--- | :--- |
+| `browser` | Browser process instance | Launched once in `BeforeAll` |
+| `browserContext` | Isolated browser session | Created per scenario in `Before` with `browser.newContext()` |
+| `page` | One tab/window | Created per scenario with `context.newPage()` |
+
+This ensures each scenario runs in a clean environment with its own cookies, local storage, and page state.
+
+#### Browser support matrix
+
+| Browser | Playwright support | Supported in this framework | Practical note |
+| :--- | :--- | :--- | :--- |
+| Chromium | Yes | Yes | Default browser; Chrome/Chromium-based execution |
+| Firefox | Yes | Yes | Use `BROWSER=firefox` |
+| WebKit | Yes | Yes | Supported as Playwright WebKit engine, not the real Safari browser |
+| Microsoft Edge desktop app | No (separate native browser engine not provided by Playwright) | Not directly supported | Use Chromium-based execution for Edge-like behavior |
+| Safari desktop app | No | Not directly supported | Real Safari is not launched by Playwright; WebKit emulates the engine |
+
+#### Example commands
+
+```bash
+# Chromium / default
+npx cucumber-js --profile default
+
+# Firefox
+BROWSER=firefox npx cucumber-js --profile default
+
+# WebKit
+BROWSER=webkit npx cucumber-js --profile default
+```
+
+#### Report generation for browser-specific runs
+
+```bash
+BROWSER=firefox npx cucumber-js --profile default && node generate-report.js
+```
+
+This keeps the report generation tied to a successful test run and avoids parsing stale or partial JSON files.
+
+### 1.3 Current File Workflow Architecture
 
 The framework follows a layered execution model where business-readable scenarios are translated into reusable code modules instead of embedding UI actions directly inside tests.
 

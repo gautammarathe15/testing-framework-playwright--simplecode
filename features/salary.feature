@@ -6,7 +6,7 @@ Feature: Contractor Employee Salary Allocation
     When User enters username "admin" and password "sa"
     And User clicks on the Login button
     And User clicks on the Contractor Employee menu option
-    And User enters "66652263" in search filter for Aadhaar or employee details
+    And User enters "300595" in search filter for Aadhaar or employee details
     And User selects the 1st entry from the employee grid
     And User clicks on the Employee Salary Structure menu option
 
@@ -73,11 +73,11 @@ Feature: Contractor Employee Salary Allocation
   Scenario: 7. Verify additional Earning Heads, amount behaviour and table details
     When User adds additional earning heads and verifies their table details
       | headName              | amountMode | amount | remark                      |
-      | Leave_Encashment      | automatic |        | Leave encashment validation |
-      | Shift_Allowance       | manual    | 7100   | Shift allowance validation  |
-      | Night_Shift_Allowance | automatic |        | Night shift validation      |
-      | Salary_Arrear         | manual    | 5555   | Salary arrear validation    |
-      | Incentive             | manual    | 3005   | Incentive validation        |
+      | Leave_Encashment      | automatic  |        | Leave encashment validation |
+      | Shift_Allowance       | manual     | 7100   | Shift allowance validation  |
+      | Night_Shift_Allowance | automatic  |        | Night shift validation      |
+      | Salary_Arrear         | manual     | 5555   | Salary arrear validation    |
+      | Incentive             | manual     | 3005   | Incentive validation        |
     Then User extracts all Earning Head amounts, calculates the sum, and verifies it with Total Earning
     And User attaches the earning calculation breakdown to the cucumber report
     When User extracts all Deduction Head amounts, calculates the sum, and verifies it with Total Deduction

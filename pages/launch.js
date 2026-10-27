@@ -5,8 +5,8 @@
  * --------------------------------------------------------------------------
  */
 
-const { chromium } = require('@playwright/test');
 const { execSync } = require('child_process');
+const BrowserManager = require('../utilities/browserManager');
 const { CLMSLoginPage } = require('./clmslogin');
 
 // Load test data from testData.json
@@ -21,10 +21,10 @@ const scenariosData = require('../utilities/testData.json');
     for (const sc of scenariosData) {
         console.log(`🧪 Starting Scenario [ID: ${sc.id}] | Type: ${sc.type} | (${sc.desc})`);
         
-        const browser = await chromium.launch({ headless: false, channel: 'chrome' });
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        
+        const page = await BrowserManager.launchBrowser(process.env.BROWSER || 'chromium', process.env.HEADLESS === 'true');
+        const context = BrowserManager.context;
+        const browser = BrowserManager.browser;
+
         const loginPage = new CLMSLoginPage(page);
 
         try {
@@ -40,8 +40,7 @@ const scenariosData = require('../utilities/testData.json');
         } catch (error) {
             console.error(`💥 [ID: ${sc.id}] Error: ${error.message}`);
         } finally {
-            await context.close();
-            await browser.close();
+            await BrowserManager.closeBrowser();
             console.log(`🔒 [ID: ${sc.id}] Browser Closed.\n`);
         }
     }
@@ -51,9 +50,9 @@ const scenariosData = require('../utilities/testData.json');
     // =========================================================================
     console.log("🧪 Starting Scenario [ID: 7] | Type: Manual | (Tester Manual Login Entry)");
     
-    const manualBrowser = await chromium.launch({ headless: false, channel: 'chrome' });
-    const manualContext = await manualBrowser.newContext();
-    const manualPage = await manualContext.newPage();
+    const manualPage = await BrowserManager.launchBrowser(process.env.BROWSER || 'chromium', process.env.HEADLESS === 'true');
+    const manualContext = BrowserManager.context;
+    const manualBrowser = BrowserManager.browser;
     const manualLoginPage = new CLMSLoginPage(manualPage);
 
     try {
@@ -70,8 +69,7 @@ const scenariosData = require('../utilities/testData.json');
     } catch (error) {
         console.error(`💥 [ID: 7] Manual Scenario Error: ${error.message}`);
     } finally {
-        await manualContext.close();
-        await manualBrowser.close();
+        await BrowserManager.closeBrowser();
         console.log("🔒 [ID: 7] Browser Closed.\n");
     }
 
@@ -80,9 +78,9 @@ const scenariosData = require('../utilities/testData.json');
     // =========================================================================
     console.log("🧪 Starting Scenario [ID: 8 & 9] | Type: Automation | (Forgot Password Window Validation)");
     
-    const fpBrowser = await chromium.launch({ headless: false, channel: 'chrome' });
-    const fpContext = await fpBrowser.newContext();
-    const fpPage = await fpContext.newPage();
+    const fpPage = await BrowserManager.launchBrowser(process.env.BROWSER || 'chromium', process.env.HEADLESS === 'true');
+    const fpContext = BrowserManager.context;
+    const fpBrowser = BrowserManager.browser;
     const fpLoginPage = new CLMSLoginPage(fpPage);
 
     try {
@@ -101,8 +99,7 @@ const scenariosData = require('../utilities/testData.json');
     } catch (error) {
         console.error(`💥 [ID: 8/9] Forgot Password Error: ${error.message}`);
     } finally {
-        await fpContext.close();
-        await fpBrowser.close();
+        await BrowserManager.closeBrowser();
         console.log("🔒 [ID: 8/9] Browser Closed.\n");
     }
 
