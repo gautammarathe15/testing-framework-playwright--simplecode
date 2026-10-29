@@ -38,14 +38,14 @@ class WorkOrderPage {
     async extractDates() {
         let fromDateVal = "";
         try {
-            await this.effectiveFromHidden.waitFor({ state: 'attached', timeout: 5000 });
+            await this.effectiveFromHidden.waitFor({ state: 'attached', timeout: 3000 });
             fromDateVal = await this.effectiveFromHidden.inputValue() || await this.effectiveFromHidden.getAttribute('value') || "";
         } catch (e) {
             fromDateVal = await this.effectiveFromInput.inputValue().catch(() => "");
         }
 
         try {
-            await this.employeeToDateSpan.waitFor({ state: 'visible', timeout: 5000 });
+            await this.employeeToDateSpan.waitFor({ state: 'visible', timeout: 3000 });
             this.extractedContractToDate = (await this.employeeToDateSpan.textContent() || "").trim();
         } catch (e) {
             this.extractedContractToDate = "";
@@ -85,13 +85,14 @@ class WorkOrderPage {
 
     async setValidEffectiveFrom() {
         await this.effectiveFromInput.waitFor({ state: 'visible', timeout: 10000 });
-
+        
         let joinDateStr = "";
         try {
             await this.employeeJoinDateSpan.waitFor({ state: 'visible', timeout: 3000 });
             joinDateStr = (await this.employeeJoinDateSpan.textContent() || "").trim();
-            this.extractedJoinDate = joinDateStr;
-        } catch (e) {}
+        } catch (e) {
+            joinDateStr = "";
+        }
 
         await this.effectiveFromInput.click();
         await this.page.waitForTimeout(600);
@@ -99,22 +100,59 @@ class WorkOrderPage {
         if (joinDateStr) {
             const parts = joinDateStr.split('-');
             if (parts.length === 3) {
-                const joinDay = parseInt(parts[0], 10);
-                const joinMonth = parts[1];
-                const joinYear = parts[2];
-                const targetDayToFind = (joinDay < 28) ? (joinDay + 1) : joinDay;
+                const day = parseInt(parts[0], 10);
+                const monthStr = parts[1];
+                const year = parseInt(parts[2], 10);
 
-                for (let attempt = 0; attempt < 12; attempt++) {
-                    const currentViewDate = await this.page.locator('.datepicker-days .datepicker-switch').textContent().catch(() => "");
-                    if (currentViewDate && currentViewDate.includes(joinMonth) && currentViewDate.includes(joinYear)) {
+                const months = {
+                    'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+                    'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+                };
+                const monthIndex = months[monthStr] !== undefined ? months[monthStr] : 0;
+
+                const targetDate = new Date(year, monthIndex, day);
+                targetDate.setDate(targetDate.getDate() + 1);
+
+                const targetDay = targetDate.getDate();
+                const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const targetMonthStr = monthNames[targetDate.getMonth()];
+                const targetYearStr = targetDate.getFullYear().toString();
+
+                for (let attempt = 0; attempt < 24; attempt++) {
+                    const currentView = await this.page.locator('.datepicker-days .datepicker-switch').textContent().catch(() => "");
+                    if (currentView && currentView.includes(targetMonthStr) && currentView.includes(targetYearStr)) {
                         break;
                     }
-                    const nextBtn = this.page.locator('.datepicker-days .next').first();
-                    if (await nextBtn.isVisible().catch(() => false)) {
-                        await nextBtn.click();
+
+                    const switchElem = this.page.locator('.datepicker-days .datepicker-switch').first();
+                    await switchElem.click();
+                    await this.page.waitForTimeout(300);
+
+                    const monthCells = this.page.locator('.datepicker-months span.month');
+                    if (await monthCells.first().isVisible().catch(() => false)) {
+                        for (let m = 0; m < await monthCells.count(); m++) {
+                            const mText = await monthCells.nth(m).textContent();
+                            if (mText.includes(targetMonthStr)) {
+                                await monthCells.nth(m).click();
+                                await this.page.waitForTimeout(300);
+                                break;
+                            }
+                        }
+                    }
+
+                    const yearSwitch = this.page.locator('.datepicker-months .datepicker-switch').first();
+                    if (await yearSwitch.isVisible().catch(() => false)) {
+                        await yearSwitch.click();
                         await this.page.waitForTimeout(300);
-                    } else {
-                        break;
+                        const yearCells = this.page.locator('.datepicker-years span.year');
+                        for (let y = 0; y < await yearCells.count(); y++) {
+                            const yText = await yearCells.nth(y).textContent();
+                            if (yText.trim() === targetYearStr) {
+                                await yearCells.nth(y).click();
+                                await this.page.waitForTimeout(300);
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -125,9 +163,9 @@ class WorkOrderPage {
                 for (let i = 0; i < count; i++) {
                     const cell = dayCells.nth(i);
                     const text = (await cell.textContent()).trim();
-                    if (parseInt(text, 10) === targetDayToFind) {
+                    if (parseInt(text, 10) === targetDay) {
                         await cell.click();
-                        this.selectedEffectiveFromDate = `${targetDayToFind}-${joinMonth}-${joinYear}`;
+                        this.selectedEffectiveFromDate = `${targetDay}-${targetMonthStr}-${targetYearStr}`;
                         clicked = true;
                         break;
                     }
@@ -225,7 +263,6 @@ class WorkOrderPage {
         const rowCount = await rows.count();
         
         const cleanExpectedWO = expectedWorkOrderText.replace(/\s+/g, '');
-        const cleanExpectedDate = expectedFromDate.replace(/\s+/g, '');
         
         let found = false;
         for (let i = 0; i < rowCount; i++) {

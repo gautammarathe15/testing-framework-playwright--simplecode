@@ -25,7 +25,7 @@ Then('User should see all form tabs sections and input fields on Contractor Empl
 
 // --- Dynamic Input Step (FIXED: Context Storage Added) ---
 When('User enters dynamic valid Aadhaar number', { timeout: 30000 }, async function () {
-    const dynamicId = '7' + Date.now().toString().slice(-11);
+    const dynamicId = '3' + Date.now().toString().slice(-11);
     
     this.createdAadhaar = dynamicId;
     this.generatedAadhaar = dynamicId;
