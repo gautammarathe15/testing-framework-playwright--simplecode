@@ -1,263 +1,319 @@
-# CLMS Automation Framework - Comprehensive Documentation
+# CLMS Automation Framework Guide
 
-## 🎯 Project Overview
+## 1. Overview
 
-This repository is a modern **CLMS automation framework** built with **Playwright** and **Cucumber BDD** for end-to-end validation of employee lifecycle and HR workflows. It follows a structured **Page Object Model (POM)** architecture to keep UI automation maintainable, reusable, and easy to scale.
+This repository is a Playwright + Cucumber BDD automation project for validating CLMS employee master and HR-related workflows in the browser.
 
-The project specifically automates the **Employee Master** module of the CLMS application, targeting the base URL:
+The application under test is:
 
 ```text
 http://192.168.40.115/CLMS_ENT_5.5/app
 ```
 
-It validates core employee data operations such as employee creation, profile updates, personal and communication details, address and family information, qualifications, experience, banking and salary-related data, documents, deployment, status changes, and verification of updated records in the grid.
+The suite focuses on end-to-end employee lifecycle flows, including:
 
-### 📊 Key Features
-
-✅ **Playwright-powered browser automation**
-✅ **Cucumber BDD with Gherkin scenarios**
-✅ **Page Object Model for reusable UI interactions**
-✅ **Employee Master workflow automation**
-✅ **Dynamic test data generation** for CLMS workflows
-✅ **Excel upload and validation automation**
-✅ **HTML + Allure reporting** for execution visibility
-✅ **Screenshot capture** for failed scenarios
-✅ **Jenkins-ready CI pipeline**
-✅ **Modular, enterprise-friendly test organization**
-
-### 🔄 Workflow Overview
-
-1. Launch the CLMS application using the configured URL.
-2. Log in and navigate to the Employee Master / employee-related screens.
-3. Create or update employee records and required details.
-4. Fill sections such as personal information, address, family data, qualifications, bank details, and documents.
-5. Validate success messages, mandatory field behavior, and record visibility in the grid.
-6. Capture screenshots and test evidence on failure.
-7. Generate HTML, JSON, JUnit, and Allure reports for result analysis.
-
-### 🧩 Framework Structure
-
-The framework is organized in a layered design:
-
-- **Feature files** for business-readable scenarios
-- **Step definitions** for mapping Gherkin to automation logic
-- **Page Object Model** for reusable locators and interactions
-- **Utilities and config** for browser and environment parameters
-- **Support hooks** for setup, teardown, retries, and screenshots
-- **Reporting layer** for Cucumber, Playwright, and Allure outputs
-
-### 📈 Reporting
-
-The project uses a combination of reporting tools to provide execution visibility, including:
-
-- Cucumber HTML report
-- JUnit XML report
-- JSON output
-- Playwright HTML report
-- Allure reporting integration
+- employee creation and master data updates
+- personal, address, family, and document details
+- qualifications, experience, bank, salary, and card validations
+- deployment, status change, and reporting manager workflows
+- work order, document, and bulk upload validation
+- search and verification of updated records in the grid
+- screenshot capture and fail analysis
 
 ---
 
-## 📁 Framework Structure
+## 2. Framework Purpose
 
-```
-TIER 1: GHERKIN FEATURES (Business Language)
+This project uses a layered automation design:
+
+- Feature files define business-readable test scenarios in Gherkin
+- Step definition files bind scenarios to actual UI interactions
+- Page object classes hold selectors and reusable page methods
+- Support hooks manage browser lifecycle, retries, screenshots, and Allure metadata
+- Utilities and config files store runtime setup and environment values
+- Reporting scripts generate HTML/JSON/JUnit results and can trigger Allure output
+
+The main goal is to automate real CLMS workflows with high maintainability and clear failure evidence.
+
+---
+
+## 3. Project Structure
+
+```text
+.
 ├── features/
-│   ├── shift.feature           ← Shift management scenarios
-│   ├── leave.feature           ← Leave management scenarios
-│   └── attendance.feature      ← Attendance management scenarios
-
-TIER 2: STEP DEFINITIONS & LIFECYCLE HOOKS
-├── step_definitions/
-│   ├── shift.steps.js          ← Maps shift scenarios to code
-│   ├── leave.steps.js          ← Maps leave scenarios to code
-│   ├── attendance.steps.js     ← Maps attendance scenarios to code
+│   ├── *.feature                           # Business scenarios
+│   ├── step_definitions/                  # Cucumber step implementations
 │   └── support/
-│       └── hooks.js            ← Setup/Teardown with Allure integration
-
-TIER 3: PAGE OBJECT MODEL LAYER
+│       └── hooks.js                       # Browser setup, scenario lifecycle, screenshots
 ├── pages/
-│   ├── base.page.js            ← Shared UI elements & actions
-│   ├── shift/                  ← Shift module pages
-│   │   ├── shift.page.js
-│   │   ├── shiftPolicy.page.js
-│   │   ├── shiftScope.page.js
-│   │   ├── defaultShift.page.js
-│   │   ├── shiftRotationPattern.page.js
-│   │   └── shiftCorrection.page.js
-│   ├── leave/                  ← Leave module pages
-│   │   ├── leaveApplication.page.js
-│   │   ├── leaveApproval.page.js
-│   │   ├── leaveBalance.page.js
-│   │   └── holidayList.page.js
-│   └── attendance/             ← Attendance module pages
-│       ├── outDuty.page.js
-│       ├── accessCard.page.js
-│       ├── weekOffDefault.page.js
-│       ├── attendanceApproval.page.js
-│       ├── manualAttendance.page.js
-│       ├── deleteManualAttendance.page.js
-│       └── weekOffShiftTemplate.page.js
-
-TIER 4: UTILITIES & CONFIGURATION
+│   ├── base.page.js                      # Shared page actions
+│   ├── clmslogin.js                      # Login page object
+│   ├── clmsdashboard.js                  # Dashboard navigation object
+│   ├── launch.js                         # App launch helpers
+│   ├── address.js                        # Address module page object
+│   ├── bank.js                           # Bank validation page object
+│   ├── card.js                           # Card validation page object
+│   ├── deployment.js                     # Deployment workflow page object
+│   ├── disciplinary_action.js            # Disciplinary action page object
+│   ├── document.js                       # Document module page object
+│   ├── family.js                         # Family details page object
+│   ├── experience.js                    # Experience page object
+│   ├── qualification.js                  # Qualification page object
+│   ├── salary.js                         # Salary page object
+│   ├── statuschange.js                   # Status change page object
+│   ├── workorder.js                      # Work order page object
+│   └── ...
 ├── utilities/
-│   ├── testConfig.js           ← Configuration management
-│   ├── basePage.js             ← Base page utilities
-│   └── testData.json           ← Test data repository
-├── fixtures/                   ← Test data files
-├── cucumber.js                 ← Cucumber profiles
-└── generate-report.js          ← Report generation
+│   ├── testConfig.js                     # Runtime config defaults
+│   ├── testConfig.json                   # Configuration JSON
+│   ├── testData.json                     # Shared test data
+│   └── ...
+├── playwright.config.js                  # Playwright browser configuration
+├── cucumber.js                           # Cucumber profiles and report format setup
+├── generate-report.js                    # Aggregates report outputs
+├── package.json                          # Scripts and dependencies
+├── README.md                             # Project intro and quick usage
+├── FRAMEWORK_GUIDE.md                    # This guide
+├── screenshots/                          # Failure screenshots
+├── test-results/                         # JUnit and JSON artifacts
+├── playwright-report/                    # Playwright HTML report output
+├── allure-results/                       # Allure result files
+├── cucumber-report.html                  # Default Cucumber HTML report
+├── cucumber-report.json                  # Default JSON report
+├── cucumber-results.xml                  # JUnit XML report
+└── .
 ```
 
 ---
 
-## 🚀 Getting Started
+## 4. Key Technology Stack
 
-### Prerequisites
-- Node.js (v14 or higher)
-- npm
-- Git
+This project uses the following stack:
 
-### Installation
+- Node.js
+- Playwright for browser automation
+- Cucumber.js for BDD scenarios
+- JavaScript Page Object Model structure
+- ExcelJS for Excel-based data handling
+- Allure for richer test reporting
+- Cucumber HTML / JUnit / JSON reporters for CI and debug visibility
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd projectsetup
-   ```
+Relevant versions from the project configuration:
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+- Playwright: 1.40.0
+- @playwright/test: 1.40.0
+- @cucumber/cucumber: 9.5.0
+- exceljs: 4.4.0
+- allure-commandline: 2.25.0
 
-3. **Install Allure CLI (optional for Allure reports)**
-   ```bash
-   npm install -g allure-commandline
-   ```
+---
 
-### Environment Configuration
+## 5. Execution Model
 
-Create a `.env` file in the root directory:
+The framework is driven by Cucumber, and each scenario creates an isolated Playwright browser context and page.
 
-```env
-# Application
-BASE_URL=http://localhost:3000
-ENV=staging
+The browser lifecycle is defined in `features/support/hooks.js`:
 
-# Browser
+- `BeforeAll` launches a browser instance
+- `Before` creates a new browser context and page for each scenario
+- `After` closes the page/context and captures screenshot on failure
+- `AfterAll` closes the browser
+
+This keeps scenarios isolated and reduces state leakage between tests.
+
+---
+
+## 6. Environment Configuration
+
+The project reads runtime values from environment variables and defaults defined in the config files.
+
+### Important variables
+
+```bash
+BASE_URL=http://192.168.40.115/CLMS_ENT_5.5/app
 BROWSER=chromium
 HEADLESS=true
-
-# Testing
-PARALLEL=2
-RETRY=0
-TIMEOUT=30000
-
-# Reporting
 RECORD_VIDEO=false
-RECORD_HAR=true
+```
 
-# Credentials
-TEST_USER=testuser@example.com
-TEST_PASSWORD=password123
+### Defaults used in the repo
+
+- `BASE_URL`: default application URL
+- `BROWSER`: `chromium` by default; also supports `firefox` and `webkit`
+- `HEADLESS`: `true` by default unless explicitly disabled
+- `RECORD_VIDEO`: optional when enabled for failed scenarios
+
+For example:
+
+```bash
+BASE_URL=http://192.168.40.115/CLMS_ENT_5.5/app BROWSER=firefox HEADLESS=true npx cucumber-js --profile default
 ```
 
 ---
 
-## 📝 Running Tests
+## 7. Available Test Commands
 
-### Run All Tests
+The real commands defined in `package.json` are:
+
+### Run all tests
+
 ```bash
 npm run cucumber:all
 ```
 
-### Run Module-Specific Tests
+### Run default suite
 
-**Shift Management**
 ```bash
-npm run cucumber:shift
+npm test
 ```
 
-**Leave Management**
+### Run a specific profile
+
 ```bash
-npm run cucumber:leave
+npx cucumber-js --profile default
+npx cucumber-js --profile smoke
+npx cucumber-js --profile regression
 ```
 
-**Attendance Management**
+### Run by tag
+
 ```bash
-npm run cucumber:attendance
+npx cucumber-js --profile default --tags "@login"
+npx cucumber-js --profile default --tags "@master"
+npx cucumber-js --profile default --tags "@Regression"
 ```
 
-### Run Tests with Tags
+### Debug / dry run
 
-**Smoke Tests**
-```bash
-npm run cucumber:smoke
-```
-
-**Regression Tests**
-```bash
-npm run cucumber:regression
-```
-
-### Run Specific Feature
-```bash
-npx cucumber-js features/shift.feature
-```
-
-### Debug Mode
 ```bash
 npm run test:debug
 ```
 
+### Report generation only
+
+```bash
+node generate-report.js
+```
+
+### Clean generated outputs
+
+```bash
+npm run clean
+```
+
 ---
 
-## 📊 Reports
+## 8. Real Feature Coverage in This Repository
 
-### Cucumber HTML Report
-Generated after test execution:
+This repository is not a generic shift/leave/attendance-only framework. The actual feature set is centered on CLMS employee master modules and validations.
+
+Examples of real feature files in the repo:
+
+- `login.feature`
+- `contractoremployee.feature`
+- `contractorEmployeeDetails.feature`
+- `contractorEmployeeFormOperations.feature`
+- `address.feature`
+- `family.feature`
+- `qualification.feature`
+- `experience.feature`
+- `bank.feature`
+- `card.feature`
+- `salary.feature`
+- `document.feature`
+- `deployment.feature`
+- `workorder.feature`
+- `statuschange.feature`
+- `excelUploadContractor.feature`
+- `gridcountvalidation.feature`
+
+Examples of tag usage seen in the repo:
+
+- `@login`
+- `@master`
+- `@Address`
+- `@bank_validation`
+- `@card_module`
+- `@family_module`
+- `@Regression`
+- `@Smoke`
+- `@count_validation`
+- `@excelUpload`
+
+This is important because the framework is built for employee master validation scenarios rather than a pure generic module template.
+
+---
+
+## 9. Reporting
+
+The repo generates multiple reporting artifacts after execution.
+
+### Default report files
+
+- `cucumber-report.html`
+- `cucumber-report.json`
+- `cucumber-results.xml`
+- `playwright-report/`
+- `allure-results/`
+
+### Report generation commands
+
 ```bash
-open cucumber-report-extended.html
-```
-
-### Allure Report
-
-Generate Allure report:
-```bash
+npm run cucumber:report
 npm run allure:report
-```
-
-Clean Allure results:
-```bash
 npm run allure:clean
 ```
 
-### Report Generation
-```bash
-npm run cucumber:report
-```
+### Notes
 
-This generates:
-- ✅ `cucumber-report-extended.html` - Main report
-- ✅ Module-specific reports
-- ✅ Allure report (if installed)
+- `cucumber.js` defines the Cucumber HTML/JSON/JUnit output format
+- `playwright.config.js` defines Playwright HTML, JUnit, and JSON reports
+- `generate-report.js` consolidates report generation and can open generated output when available
+- failure screenshots are stored under `screenshots/`
 
 ---
 
-## 🧪 Test Organization
+## 10. Best Practices for This Project
 
-### Feature Files
+1. Keep page objects focused on a single screen or module.
+2. Reuse common actions from `base.page.js` instead of duplicating selectors.
+3. Add scenario tags for smoke, regression, module, or validation categories.
+4. Prefer stable locators and wait strategies over brittle fixed sleeps.
+5. Use meaningful feature names and validation tags to identify failing workflows quickly.
+6. Keep environment-specific values in environment variables rather than hardcoding URLs or credentials.
+7. Preserve screenshot capture for failed scenarios to support debugging and defect evidence.
 
-Each feature file contains related scenarios organized by tags:
+---
 
-- `@SHIFT` - Shift module tests
-- `@SHIFT_CREATE` - Create shift scenarios
-- `@SHIFT_EDIT` - Edit shift scenarios
-- `@LEAVE` - Leave module tests
-- `@ATTENDANCE` - Attendance module tests
-- `@SMOKE` - Smoke tests
-- `@REGRESSION` - Regression tests
+## 11. Quick Start
+
+```bash
+npm install
+npx cucumber-js --profile default
+```
+
+Optional:
+
+```bash
+node generate-report.js
+BROWSER=firefox HEADLESS=true npx cucumber-js --profile default
+```
+
+---
+
+## 12. Important Conclusion
+
+This documentation was cleaned up to match the actual repository instead of a generic sample framework.
+
+The real project is an employee master automation suite for CLMS, using Playwright + Cucumber, with module-specific page objects, scenario-driven validation, and multi-format reporting. The most important details to remember are:
+
+- actual app URL is `http://192.168.40.115/CLMS_ENT_5.5/app`
+- primary runner is Cucumber JS
+- browser config is in `playwright.config.js`
+- cucumber profiles are in `cucumber.js`
+- feature coverage is employee master / HR validation, not a generic shift-only framework
+- report outputs are generated in root artifacts and under `playwright-report/` and `allure-results/`
 
 ### Example: Running Specific Tags
 ```bash

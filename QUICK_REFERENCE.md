@@ -1,270 +1,175 @@
 # CLMS Automation Quick Reference
 
-This document is a code-aligned quick reference for the current CLMS Playwright + Node.js + Cucumber automation framework. It focuses on how the framework is actually wired today: feature execution, step-definition orchestration, page-object ownership, dynamic test-data generation, Excel upload parsing, and extended report enrichment.
+This is the short operational reference for the current repository.
 
-## 1. Framework and Existing File Workflow Architecture
+## 1. Project purpose
 
-### 1.1 Technology Stack
+This repo automates CLMS employee master and HR validation workflows using Playwright and Cucumber.
 
-| Layer | Technology | Purpose |
-| :--- | :--- | :--- |
-| Test runner | Cucumber (`@cucumber/cucumber`) | BDD scenario execution through Gherkin feature files |
-| Browser automation | Playwright (`@playwright/test`) | UI automation, assertions, locators, browser/session control |
-| Language/runtime | Node.js / JavaScript | Execution runtime for steps, pages, utilities, and report scripts |
-| Reporting | Cucumber HTML Reporter, JUnit XML, Allure | Human-readable report output plus CI-friendly artifacts |
-| Data extraction | ExcelJS | Reads uploaded Excel sheets for post-upload verification |
-| CI integration | Jenkinsfile | Pipeline-driven execution and report publishing |
+The real focus areas are:
 
-### 1.2 Browser and BrowserContext Execution Model
+- employee master creation and validation
+- contractor employee details and form operations
+- address, family, qualification, experience, salary, and document flows
+- work order, deployment, status change, and reporting manager checks
+- bulk Excel upload and grid-count validation
+- negative and smoke validation scenarios
 
-This repository follows Playwright’s standard browser lifecycle model. The browser lifecycle is established in [features/support/hooks.js](features/support/hooks.js), while the browser selection is controlled by [playwright.config.js](playwright.config.js).
+---
 
-| Playwright object | Meaning | How it is used here |
-| :--- | :--- | :--- |
-| `browser` | Browser process instance | Launched once in `BeforeAll` |
-| `browserContext` | Isolated browser session | Created per scenario in `Before` with `browser.newContext()` |
-| `page` | One tab/window | Created per scenario with `context.newPage()` |
+## 2. Key files
 
-This ensures each scenario runs in a clean environment with its own cookies, local storage, and page state.
+- `package.json` - npm scripts and dependencies
+- `playwright.config.js` - browser and reporter configuration
+- `cucumber.js` - Cucumber profiles and outputs
+- `features/` - business scenarios
+- `features/step_definitions/` - step binding logic
+- `pages/` - page object model classes
+- `features/support/hooks.js` - browser lifecycle and failure capture
+- `generate-report.js` - report generation
 
-#### Browser support matrix
+---
 
-| Browser | Playwright support | Supported in this framework | Practical note |
-| :--- | :--- | :--- | :--- |
-| Chromium | Yes | Yes | Default browser; Chrome/Chromium-based execution |
-| Firefox | Yes | Yes | Use `BROWSER=firefox` |
-| WebKit | Yes | Yes | Supported as Playwright WebKit engine, not the real Safari browser |
-| Microsoft Edge desktop app | No (separate native browser engine not provided by Playwright) | Not directly supported | Use Chromium-based execution for Edge-like behavior |
-| Safari desktop app | No | Not directly supported | Real Safari is not launched by Playwright; WebKit emulates the engine |
-
-#### Example commands
+## 3. Default runtime values
 
 ```bash
-# Chromium / default
+BASE_URL=http://192.168.40.115/CLMS_ENT_5.5/app
+BROWSER=chromium
+HEADLESS=true
+```
+
+---
+
+## 4. Common commands
+
+Run all scenarios:
+
+```bash
+npm run cucumber:all
+```
+
+Run default profile directly:
+
+```bash
 npx cucumber-js --profile default
-
-# Firefox
-BROWSER=firefox npx cucumber-js --profile default
-
-# WebKit
-BROWSER=webkit npx cucumber-js --profile default
 ```
 
-#### Report generation for browser-specific runs
+Run smoke tests:
 
 ```bash
-BROWSER=firefox npx cucumber-js --profile default && node generate-report.js
+npm run cucumber:smoke
 ```
 
-This keeps the report generation tied to a successful test run and avoids parsing stale or partial JSON files.
+Run regression tests:
 
-### 1.3 Current File Workflow Architecture
-
-The framework follows a layered execution model where business-readable scenarios are translated into reusable code modules instead of embedding UI actions directly inside tests.
-
-| Layer | Primary Files | Responsibility |
-| :--- | :--- | :--- |
-| Business scenarios | `features/*.feature` | Defines test intent in Gherkin and supplies example data |
-| Action binding | `features/step_definitions/*.js` | Maps scenario steps to executable actions and assertions |
-| UI abstraction | `pages/**/*.js` | Owns locators, workflows, parsing logic, and module-specific UI behavior |
-| Shared support/config | `features/support/*`, `cucumber.js`, `utilities/*` | Runtime setup, profiles, helpers, and environment settings |
-| Artifact generation | `cucumber-report.json`, `cucumber-results.xml`, `allure-results/` | Raw execution evidence |
-| Final report assembly | `generate-report.js` | Produces `cucumber-report-extended.html` and optional Allure output |
-
-### 1.3 End-to-End Execution Flow
-
-```mermaid
-flowchart LR
-	A[npm script] --> B[cucumber.js profile]
-	B --> C[Feature files]
-	C --> D[Step definitions]
-	D --> E[Page objects]
-	E --> F[Playwright browser actions]
-	F --> G[Assertions and extracted values]
-	G --> H[Cucumber JSON XML HTML artifacts]
-	H --> I[generate-report.js]
-	I --> J[cucumber-report-extended.html]
-	H --> K[allure-results]
-	K --> L[allure-report]
+```bash
+npm run cucumber:regression
 ```
 
-### 1.4 Step-by-Step Comparison: Legacy/Existing Baseline vs Current Framework
+Run with tag filter:
 
-The table below uses a legacy baseline model common in older UI suites: direct script execution, limited reuse, and mostly manual result interpretation. The right-hand side reflects the framework currently implemented in this repository.
+```bash
+npx cucumber-js --profile default --tags "@login"
+npx cucumber-js --profile default --tags "@Regression"
+```
 
-| Step | Legacy / Existing Baseline Workflow | Current Framework Workflow |
-| :--- | :--- | :--- |
-| 1. Start execution | Run a single script or a small set of procedural test files | Run named npm scripts such as `cucumber:all`, `cucumber:smoke`, `cucumber:regression`, or module-specific profiles |
-| 2. Test definition | Test logic mixed with UI actions | Feature files describe behavior, while step definitions translate intent into code |
-| 3. Module routing | Test file decides everything inline | `cucumber.js` profile decides tags, output formats, timeouts, and execution scope |
-| 4. UI handling | Locators repeated across tests | Page Object Model centralizes locators and UI actions per business module |
-| 5. Test data handling | Hardcoded values or manual edits in scripts | Dynamic Aadhaar, card, UAN, and bank-account generation; scenario examples and reusable context storage |
-| 6. Sheet processing | Upload file and visually inspect result | Upload each sheet, parse Excel with ExcelJS, extract search keys, and verify grid retrieval programmatically |
-| 7. Validation | Human checks popups/tables manually | Assertions normalize popup text, inspect counts, validate tables, and compare derived calculations |
-| 8. Reporting | Basic HTML/pass-fail output | JSON + HTML + JUnit + optional Allure, enriched with markdown tables, JSON attachments, and HTML comparison charts |
-| 9. Failure analysis | Re-run and inspect UI manually | Reports carry scenario detail, computed evidence, popup text, comparison tables, and CI artifacts |
-| 10. Maintenance cost | High due to duplicated selectors and flow code | Lower due to isolated page classes, reusable steps, and profile-driven execution |
+Dry run:
 
-### 1.5 Workflow Detail: Current Framework
+```bash
+npm run test:debug
+```
 
-1. A package script starts Cucumber with a specific profile from `cucumber.js`.
-2. The selected profile loads feature files, step definitions, support hooks, and output formatters.
-3. Each Gherkin step maps to a step-definition method.
-4. Step definitions instantiate or reuse page objects for the relevant module.
-5. Page objects interact with the CLMS UI using Playwright locators and assertions.
-6. Dynamic values such as Aadhaar, card number, UAN, or generated account number are stored in scenario context (`this.*`) for downstream reuse.
-7. Scenario outputs are written into raw artifacts such as `cucumber-report.json`, `cucumber-results.xml`, screenshots, and optionally Allure results.
-8. `generate-report.js` transforms the Cucumber JSON into `cucumber-report-extended.html` and module-specific HTML reports.
-9. Jenkins publishes the extended HTML report and archives Playwright/Test artifacts.
+Generate reports:
 
-### 1.6 Architecture Benefits and Efficiency Gains
+```bash
+node generate-report.js
+npm run allure:report
+```
 
-| Area | Previous Pain Point | Current Improvement | Practical Benefit |
-| :--- | :--- | :--- | :--- |
-| Reusability | Repeated UI locators in many tests | Locators and workflows are owned by page objects | Faster locator maintenance after UI changes |
-| Selective execution | Hard to isolate module runs | Profiles for default, shift, leave, attendance, smoke, regression, API, negative, accessibility | Faster debugging and targeted CI jobs |
-| Test data | Static values cause collisions | Timestamp/randomized identifiers reduce reuse conflicts | Lower duplicate-data failures |
-| Bulk upload verification | Manual upload plus visual search | Automated Excel parsing and grid search validation | Full upload audit trail per file |
-| Reporting detail | Limited pass/fail visibility | Attached markdown, plain text, HTML, and JSON evidence | Faster root-cause analysis |
-| CI output | Only console logs | HTML/JUnit/Allure-ready outputs | Better traceability in Jenkins and external dashboards |
+---
 
-### 1.7 Flaky Test Handling Pattern
+## 5. Real repo feature coverage
 
-This project handles flaky UI failures in a structured way, not by random re-runs only:
+Representative feature files in this repo:
 
-- Cucumber retries failed scenarios automatically through the default profile using `retry: 2`.
-- `features/support/hooks.js` tracks scenario execution counts and logs retry attempts, so the team can see when a scenario is retried and how many times.
-- The hooks layer adds a short stabilization wait before a retried scenario begins, which helps with delayed DOM updates and popup render timing.
-- `playwright.config.js` and `cucumber.js` set default timeouts for navigation and step execution, reducing false negatives caused by slow CLMS responses.
-- Failed scenarios automatically capture screenshots under `./screenshots/`, which makes it easier to inspect the exact UI state during intermittent failures.
+- `login.feature`
+- `contractoremployee.feature`
+- `contractorEmployeeDetails.feature`
+- `contractorEmployeeFormOperations.feature`
+- `address.feature`
+- `family.feature`
+- `qualification.feature`
+- `experience.feature`
+- `bank.feature`
+- `salary.feature`
+- `document.feature`
+- `deployment.feature`
+- `workorder.feature`
+- `statuschange.feature`
+- `excelUploadContractor.feature`
+- `gridcountvalidation.feature`
+
+Common tags seen in the project:
+
+- `@login`
+- `@master`
+- `@Regression`
+- `@Smoke`
+- `@Validation`
+- `@count_validation`
+- `@excelUpload`
+
+---
+
+## 6. Browser support
+
+The configured browsers are:
+
+- Chromium (default)
+- Firefox
+- WebKit
 
 Example:
 
 ```bash
-npx cucumber-js --profile default --retry 3
+BROWSER=firefox npx cucumber-js --profile default
+BROWSER=webkit npx cucumber-js --profile default
 ```
 
-Practical workflow for flaky issues:
+---
 
-1. Re-run the scenario with a higher retry value.
-2. Inspect the screenshot and failure report.
-3. Check whether the failure is caused by timing, stale DOM, or delayed popup rendering.
-4. Replace hard sleeps with explicit waits and stable locators when possible.
+## 7. Report outputs
 
-This is the main resilience pattern used in the framework: retries + controlled waits + screenshots + timeout tuning.
+Results are generated into:
 
-### 1.8 Current Parallel Execution Status
+- `cucumber-report.html`
+- `cucumber-report.json`
+- `cucumber-results.xml`
+- `playwright-report/`
+- `allure-results/`
+- `screenshots/`
 
-The framework is currently configured for serial execution, not true parallel execution.
+---
 
-The evidence is in [cucumber.js](cucumber.js):
+## 8. Current execution pattern
 
-```js
-default: {
-  parallel: 1,
-  retry: 2,
-  timeout: 60000,
-}
-```
+The current framework is set up for a stable serial execution model. The browser lifecycle is created in `features/support/hooks.js`, and each scenario gets its own Playwright browser context and page.
 
-The same serial setting is repeated in the other profiles:
+This keeps the test state isolated and helps with reliable debugging and screenshot capture.
 
-```js
-shift: { parallel: 1 }
-leave: { parallel: 1 }
-attendance: { parallel: 1 }
-smoke: { parallel: 1 }
-regression: { parallel: 1 }
-```
+---
 
-This means the runner executes scenarios one worker at a time.
+## 9. Troubleshooting shortcut
 
-#### Serial syntax
-```js
-parallel: 1
-```
+If execution fails:
 
-#### Parallel syntax
-```js
-parallel: 2
-```
+1. confirm the `BASE_URL` is available
+2. verify browser install with `npx playwright install`
+3. inspect `screenshots/`
+4. open the generated Cucumber HTML report
+5. rerun a single tag or feature for faster debugging
 
-or directly:
-
-```bash
-npx cucumber-js --profile default --parallel 2
-```
-
-#### Important note
-The current browser lifecycle in [features/support/hooks.js](features/support/hooks.js) creates a shared global browser in `BeforeAll`. That setup is stable for serial execution, but for full parallel execution the framework should create or reuse browser instances in a worker-safe way.
-
-## 2. Data Extraction and Sheet Operations
-
-### 2.1 Primary Upload Automation Module
-
-Bulk sheet operations are implemented in `pages/mastermodule/excelUploadContractor.js` and are triggered from `features/step_definitions/excelUploadContractor.steps.js`.
-
-Core responsibilities of the upload page object:
-
-- Detect the Excel Upload icon on the Contractor Employee grid.
-- Open and validate the upload popup.
-- Confirm the initial no-file-selected state.
-- Upload one or many `.xlsx` files sequentially.
-- Read success and failed counts from the popup.
-- Extract searchable identifiers from popup rows or directly from Excel files.
-- Validate that uploaded records are retrievable from the CLMS grid by code, Aadhaar/card number, and combined filters.
-
-### 2.2 Sheet Upload Process
-
-1. The scenario opens the Contractor Employee screen and clicks the Excel Upload icon.
-2. The upload popup is validated for title and close-button availability.
-3. The framework resolves the target folder path with `path.resolve(process.cwd(), relativeFolderPath)`.
-4. It reads the folder contents with `fs.readdirSync(...)`.
-5. Only `.xlsx` files are processed, while temporary Office lock files beginning with `~$` are skipped.
-6. For each file, the framework ensures the popup is open, resets the file input, sets the selected file, and clicks the upload button.
-7. After upload, the framework reads success and failure counters from the popup and branches into result validation.
-
-### 2.3 Data Extraction Mechanics
-
-The framework does not depend only on UI output. It also reads the source sheet directly so validation remains possible even when the upload popup renders incomplete or delayed data.
-
-| Extraction Target | Mechanism | Logic |
-| :--- | :--- | :--- |
-| Uploaded file list | `fs.readdirSync` | Enumerates candidate Excel files in the target folder |
-| Workbook loading | `ExcelJS.Workbook().xlsx.readFile(filePath)` | Reads the uploaded Excel workbook directly from disk |
-| Worksheet selection | `workbook.worksheets[0]` | Uses the first sheet as the data source |
-| Aadhaar/card column detection | Header scan of row 1 | Dynamically finds `AadharCardNo` or `CardNumber` column instead of hardcoding the index |
-| Aadhaar/card value extraction | Cell cleanup | Converts object/text/formula values to string and strips non-digits with `/[^0-9]/g` |
-| Primary search code | First data row lookup | Reads row 2 cell 1, falling back to row 2 cell 2 |
-| UI popup row extraction | DOM table parsing | Collects code from the first cell and scans later cells for a numeric identifier |
-
-### 2.4 Upload Validation Logic
-
-Once upload is complete, `verifyDynamicStatus(fileName, filePath)` performs a multi-stage validation:
-
-1. Waits for the failed-count element to become visible.
-2. Reads `successCount` and `failedCount` from the popup.
-3. If failures exist, it verifies that the failed-status table exposes `FAILED` in the status cell when the row is visible.
-4. If successful rows exist, it inspects the passed-record grid and collects up to three records for downstream validation.
-5. If popup parsing yields no usable record data, it falls back to Excel-based extraction.
-6. It closes the popup and validates the extracted records against the main grid using three search strategies.
-
-### 2.5 Search Verification After Upload
-
-| Search Type | Input Source | Validation Rule |
-| :--- | :--- | :--- |
-| Code-only search | Popup table or Excel row | Searches the code column and expects a matching grid row or logs no-record evidence |
-| Aadhaar/card-only search | Popup table digits or Excel column | Searches the Aadhaar/card field and verifies record presence |
-| Combined search | Code + Aadhaar/card | Applies both filters together and confirms the row still resolves correctly |
-
-### 2.6 Fallback and Resilience Strategy
-
-| Situation | Fallback Used | Why It Matters |
-| :--- | :--- | :--- |
-| Upload popup table is slow to render | Additional wait and visibility checks | Reduces false negatives caused by delayed UI refresh |
-| Popup has incomplete data | ExcelJS file parsing | Keeps verification source-of-truth aligned with uploaded data |
-| Aadhaar/card value includes formatting characters | Non-digit cleanup | Ensures grid search uses a normalized numeric value |
-| Popup is closed between iterations | Re-open popup when needed | Supports batch upload loops without manual reset |
+This guide reflects the actual repository state and removes the stale generic module examples.
 
 ### 2.7 Header Count Verification for Uploads
 
