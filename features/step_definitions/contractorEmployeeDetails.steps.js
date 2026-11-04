@@ -1,19 +1,12 @@
-/**
- * --------------------------------------------------------------------------
- * Step Definitions - Contractor Employee Details (Unique Steps)
- * File: features/step_definitions/contractorEmployeeDetails.steps.js
- * --------------------------------------------------------------------------
- */
-
 const { Given, When, Then } = require('@cucumber/cucumber');
+const { expect } = require('@playwright/test');
 const { ContractorEmployeeDetailsPage } = require('../../pages/mastermodule/contractorEmployeeDetails.js');
 
 let savedBgRemark = '';
 let savedMedicalRemark = '';
 
 Then('User pauses execution for locator inspection', { timeout: 180000 }, async function () {
-    console.log("\n⏸️ Opening Playwright Inspector for locator inspection...");
-    await this.page.pause();
+    console.log("\n🔎 Locator inspection step is disabled; use browser devtools or explicit locators instead.");
 });
 
 Then('User should see all form tabs sections and input fields on Contractor Employee page', { timeout: 180000 }, async function () {
@@ -23,7 +16,6 @@ Then('User should see all form tabs sections and input fields on Contractor Empl
     await this.contractorEmployeeDetailsPage.verifyAllFormFieldsAndSections();
 });
 
-// --- Dynamic Input Step (FIXED: Context Storage Added) ---
 When('User enters dynamic valid Aadhaar number', { timeout: 30000 }, async function () {
     const dynamicId = '3' + Date.now().toString().slice(-11);
     
@@ -41,7 +33,6 @@ When('User enters dynamic valid Aadhaar number', { timeout: 30000 }, async funct
     await inputField.fill(dynamicId);
 });
 
-// --- Navigation Step ---
 When('User navigates to Contractor Employee Details page', { timeout: 60000 }, async function () {
     console.log("Navigating to Contractor Employee Details Page...");
     
@@ -53,7 +44,6 @@ When('User navigates to Contractor Employee Details page', { timeout: 60000 }, a
     console.log("Successfully navigated to Contractor Employee Details page.");
 });
 
-// --- Check Verification Steps ---
 When('User expands the Check Verification section if collapsed', { timeout: 60000 }, async function () {
     if (!this.contractorEmployeeDetailsPage) {
         this.contractorEmployeeDetailsPage = new ContractorEmployeeDetailsPage(this.page);
@@ -97,10 +87,6 @@ Then('User verifies retained remark fields can be edited with updated inputs:', 
     await this.contractorEmployeeDetailsPage.verifyAndEditRetainedData(updatedBg, updatedMedical);
 });
 
-// =========================================================================
-// --- Unsaved Employee Tab Validation Steps ---
-// =========================================================================
-
 When('User clicks on the {string} tab without filling basic employee details', { timeout: 30000 }, async function (tabName) {
     console.log(`\n👇 Attempting to click on Tab: "${tabName}" without creating employee...`);
     const tabLocator = this.page.getByRole('tab', { name: tabName });
@@ -109,6 +95,30 @@ When('User clicks on the {string} tab without filling basic employee details', {
     this.attach(`Tab Name: ${tabName} ---> Status on UI: ${actualStatus}`, 'text/plain');
     await tabLocator.scrollIntoViewIfNeeded({ timeout: 3000 }).catch(() => {});
     await tabLocator.click();
+});
+
+Then('User should see the copyright text in the footer', { timeout: 30000 }, async function () {
+    if (!this.contractorEmployeeDetailsPage) {
+        this.contractorEmployeeDetailsPage = new ContractorEmployeeDetailsPage(this.page);
+    }
+
+    const isCopyrightVisible = await this.contractorEmployeeDetailsPage.verifyFooterCopyright();
+    const copyrightStatus = isCopyrightVisible ? "Visible" : "Not Visible";
+
+    const reportTable = `
+=== Footer Copyright Verification Report ===
++----------------------+--------------------+
+| Check Item           | Status             |
++----------------------+--------------------+
+| Copyright Footer     | ${copyrightStatus} |
++----------------------+--------------------+
+Timestamp: ${new Date().toLocaleString()}
+`;
+
+    console.log(reportTable);
+    await this.attach(reportTable, 'text/plain');
+
+    expect(isCopyrightVisible).toBeTruthy();
 });
 
 Then('A validation popup with message {string} should appear', { timeout: 30000 }, async function (expectedMessage) {

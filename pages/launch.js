@@ -59,13 +59,8 @@ const scenariosData = require('../utilities/testData.json');
         await manualLoginPage.openUrl();
 
         console.log("\n==================================================");
-        console.log("⏸️  PAUSE: TESTER MANUAL LOGIN ENTRY");
-        console.log("👉 Focus on the browser screen.");
-        console.log("👉 Manually type the Username and Password of your choice.");
-        console.log("👉 Manually click the 'Login' button on the UI.");
+        console.log("👤 Manual login step: tester should complete Username, Password, and Login action on the browser screen.");
         console.log("==================================================\n");
-
-        await manualPage.pause();
     } catch (error) {
         console.error(`💥 [ID: 7] Manual Scenario Error: ${error.message}`);
     } finally {

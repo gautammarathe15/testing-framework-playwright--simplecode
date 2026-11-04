@@ -23,31 +23,61 @@ export class PoliceVerificationPage {
     async clickCreate() {
         await expect(this.createBtn).toBeVisible();
         await this.createBtn.click();
+        await this.page.waitForTimeout(500);
     }
 
-    async selectVerificationDateFromCalendar(targetDate) {
+   async selectVerificationDateFromCalendar(targetDate) {
         await this.verificationDateInput.waitFor({ state: 'visible', timeout: 10000 });
-        
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const day = targetDate.getDate().toString().padStart(2, '0');
-        const month = monthNames[targetDate.getMonth()];
-        const year = targetDate.getFullYear();
-        const formattedDate = `${day}-${month}-${year}`;
+        await this.verificationDateInput.click();
+        await this.page.waitForTimeout(500);
 
-        // Robust Native Value Setter script to avoid input mask restrictions
-        await this.verificationDateInput.evaluate((node, val) => {
-            const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-            if (nativeSetter) {
-                nativeSetter.call(node, val);
-            } else {
-                node.value = val;
+        const day = targetDate.getDate();
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const targetMonthStr = monthNames[targetDate.getMonth()];
+        const targetYearStr = targetDate.getFullYear().toString();
+
+        for (let attempt = 0; attempt < 24; attempt++) {
+            const currentView = await this.page.locator('.datepicker-days .datepicker-switch').first().textContent().catch(() => "");
+            if (currentView && currentView.includes(targetMonthStr) && currentView.includes(targetYearStr)) {
+                break;
             }
-            node.dispatchEvent(new Event('input', { bubbles: true }));
-            node.dispatchEvent(new Event('change', { bubbles: true }));
-            node.dispatchEvent(new Event('blur', { bubbles: true }));
-        }, formattedDate);
 
-        await this.page.keyboard.press('Tab');
+            const prevBtn = this.page.locator('.datepicker-days .prev').first();
+            const nextBtn = this.page.locator('.datepicker-days .next').first();
+            
+            // Compare dates to decide whether to click prev or next
+            const currentViewDate = new Date(currentView);
+            const targetCmpDate = new Date(targetDate.getFullYear(), targetDate.getMonth(), 1);
+
+            if (await prevBtn.isVisible().catch(() => false)) {
+                await prevBtn.click();
+                await this.page.waitForTimeout(300);
+            } else {
+                break;
+            }
+        }
+
+        const dayCells = this.page.locator('.datepicker-days td.day:not(.old):not(.new)');
+        const count = await dayCells.count();
+        let clicked = false;
+
+        for (let i = 0; i < count; i++) {
+            const cell = dayCells.nth(i);
+            const text = (await cell.textContent()).trim();
+            if (parseInt(text, 10) === day) {
+                await cell.click();
+                clicked = true;
+                break;
+            }
+        }
+
+        if (!clicked) {
+            const fallbackCell = this.page.locator('.datepicker-days td.day:not(.old):not(.new)').first();
+            if (await fallbackCell.isVisible({ timeout: 2000 }).catch(() => false)) {
+                await fallbackCell.click();
+            }
+        }
+        await this.page.waitForTimeout(500);
     }
 
     async enterDescription(descriptionText) {
@@ -59,11 +89,13 @@ export class PoliceVerificationPage {
     async clickSave() {
         await expect(this.saveBtn).toBeVisible();
         await this.saveBtn.click();
+        await this.page.waitForTimeout(1500);
     }
 
     async clickUpdate() {
         await expect(this.updateBtn).toBeVisible();
         await this.updateBtn.click();
+        await this.page.waitForTimeout(1500);
     }
 
     async getPopupMessage() {
@@ -79,6 +111,7 @@ export class PoliceVerificationPage {
         try {
             await this.popupOkBtn.waitFor({ state: 'visible', timeout: 4000 });
             await this.popupOkBtn.click();
+            await this.page.waitForTimeout(1000);
         } catch (e) {
             // Ignored if modal auto-dismisses
         }
@@ -89,13 +122,13 @@ export class PoliceVerificationPage {
         const lastEditBtn = this.table.locator('tbody tr').last().locator('[name="btnEditEmployeePoliceVerification"], #btnEditEmployeePoliceVerification, .fa-pencil').first();
         await expect(lastEditBtn).toBeVisible();
         await lastEditBtn.click();
+        await this.page.waitForTimeout(1000);
     }
 
     async verifyTableDetails(expectedDate, expectedDescription) {
         await this.table.waitFor({ state: 'visible', timeout: 10000 });
         await this.page.waitForTimeout(1000);
         
-        // Find the exact row containing the expected date rather than blindly taking the first row
         const targetRow = this.table.locator('tbody tr').filter({ hasText: expectedDate }).first();
         await expect(targetRow).toBeVisible();
         const rowText = await targetRow.textContent();

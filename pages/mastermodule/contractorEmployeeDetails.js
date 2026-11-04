@@ -121,6 +121,9 @@ class ContractorEmployeeDetailsPage {
         this.skillDropdown = this.page.locator('#SkillLevel, #SkilledLevel, select[name*="Skill"]').first();
         this.contractorDropdown = this.page.locator('#Contractor, #ContractorId, select[name*="Contractor"]').first();
 
+
+
+       this.footerCopyrightLocator = page.locator('.FooterLogo').filter({ hasText: 'emSphere Technologies Pvt. Ltd. All rights reserved' });
    
     }
 
@@ -1103,7 +1106,6 @@ async fillContractPeriodDetails(contractFromDate, periodInDays) {
      */
    async verifySaveSuccess() {
         console.log("🎯 Verifying Employee Save Success Message...");
-        await this.page.pause();
         // SweetAlert message locator (.swal-text)
         const successPopup = this.page.locator('.swal-text');
         
@@ -1120,6 +1122,12 @@ async fillContractPeriodDetails(contractFromDate, periodInDays) {
         if (await okButton.isVisible().catch(() => false)) {
             await okButton.click();
         }
+    }
+
+    async verifyFooterCopyright() {
+        await this.footerCopyrightLocator.first().waitFor({ state: 'visible', timeout: 5000 });
+        const isVisible = await this.footerCopyrightLocator.first().isVisible();
+        return isVisible;
     }
 }
 

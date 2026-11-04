@@ -1,4 +1,4 @@
-@dashboard
+@dashboard_check
 Feature: Contractor Employee Detailed Form Verification and Validations
 
   Background:
@@ -16,7 +16,7 @@ Feature: Contractor Employee Detailed Form Verification and Validations
     Then User pauses execution for locator inspection
     Then User should see all form tabs sections and input fields on Contractor Employee page
 
-  @Regression @Smoke @Validation 
+@Regression @Smoke @Validation 
   Scenario Outline: Verify "please First Create Employee" popup for all restricted tabs
     And User clicks on the Contractor Employee menu option
     When User clicks on the Create button
@@ -25,6 +25,7 @@ Feature: Contractor Employee Detailed Form Verification and Validations
     And User clicks on the Verify link if visible
     Then User should see Submit and Skip Verification options and click Skip Verification
     When User clicks on the "<TabName>" tab without filling basic employee details
+    Then User should see the copyright text in the footer
     Then A validation popup with message "please First Create Employee" should appear
     And User clicks the "OK" button on the popup to dismiss it
 

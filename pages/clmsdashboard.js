@@ -208,13 +208,6 @@ if (require.main === module) {
 
             if (isVisible) {
                 console.log("\n✅ [clmsdashboard.js] RESULT: PASSED! Dashboard menu items & sub-options are VERIFIED SUCCESSFULLY.");
-                
-                console.log("\n==================================================");
-                console.log("⏸️  PAUSE: DASHBOARD PLAYWRIGHT INSPECTOR OPENED!");
-                console.log("==================================================\n");
-
-                await page.pause();
-
             } else {
                 console.log("\n❌ [clmsdashboard.js] RESULT: FAILED! One or more options validation failed.");
             }
