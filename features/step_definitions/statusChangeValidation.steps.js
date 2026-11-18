@@ -1,10 +1,6 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 
-/**
- * Utility function to format today's date into 'DD-MMM-YYYY' format (e.g., 03-Sep-2026)
- * @returns {string} Formatted date string
- */
 function getTodayFormattedDate() {
     const today = new Date();
     const day = String(today.getDate()).padStart(2, '0');
@@ -14,11 +10,6 @@ function getTodayFormattedDate() {
     return `${day}-${month}-${year}`;
 }
 
-/**
- * Extracts the dynamically stored identification identifier from the test context or UI input field.
- * @param {Object} context - Cucumber test context (`this`)
- * @returns {Promise<string>} Dynamic Identifier String
- */
 async function getDynamicIdentifier(context) {
     let val = 
         context.createdAadhaar || 
@@ -45,27 +36,19 @@ async function getDynamicIdentifier(context) {
     return cleanVal || '';
 }
 
-/**
- * Performs column header filter search in grid using the dynamic identifier.
- * @param {Page} page - Playwright page instance
- * @param {string} dynamicId - Dynamic identifier string
- */
 async function performColumnSearch(page, dynamicId) {
-    // 1. Close open SweetAlert/Swal popups if visible
-    const openOkBtn = page.locator('.swal-button, button.confirm, button:has-text("OK"), .swal2-confirm').first();
+    const openOkBtn = page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
     if (await openOkBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
         await openOkBtn.click({ force: true }).catch(() => {});
-        await page.locator('.swal-overlay, .sweet-alert, .swal2-popup').waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
+        await page.waitForTimeout(1000);
     }
 
-    // 2. Click column header search icon
     const searchIcon = page.locator('th:has-text("Aadhaar Card No") img.headerSearchIcon, img.headerSearchIcon[data-parentnameofproperty="AadharCardNo"]').first();
     if (await searchIcon.isVisible({ timeout: 3000 }).catch(() => false)) {
         await searchIcon.click({ force: true });
         await page.waitForTimeout(500);
     }
 
-    // 3. Unhide and fill search input field
     const searchInput = page.locator('#hsAadharCardNo').first();
     await searchInput.evaluate((el) => {
         el.scrollIntoView();
@@ -76,12 +59,10 @@ async function performColumnSearch(page, dynamicId) {
     await searchInput.waitFor({ state: 'attached', timeout: 5000 });
     await searchInput.focus();
 
-    // Clear value cleanly to re-trigger search event
     await searchInput.fill('');
     await page.waitForTimeout(300);
     await searchInput.pressSequentially(dynamicId, { delay: 50 });
 
-    // 4. Dispatch events for grid filter re-rendering
     await searchInput.evaluate((el) => {
         el.dispatchEvent(new Event('input', { bubbles: true }));
         el.dispatchEvent(new Event('change', { bubbles: true }));
@@ -90,7 +71,6 @@ async function performColumnSearch(page, dynamicId) {
 
     await searchInput.press('Enter');
 
-    // 5. Wait for network state idle
     await page.waitForLoadState('networkidle').catch(() => {});
     await page.waitForTimeout(3000);
 }
@@ -112,11 +92,9 @@ Then('User verifies employee status in grid is {string}', async function (expect
         throw new Error("Cannot verify status: Dynamic Identifier is missing in context!");
     }
 
-    // 1. DOM Stabilization Wait
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(2000);
 
-    // 2. Row Locator Check
     const row = this.page.locator('table tbody tr').filter({ 
         hasText: new RegExp(lastFourDigits, 'i') 
     }).first();
@@ -128,7 +106,6 @@ Then('User verifies employee status in grid is {string}', async function (expect
 
     await row.scrollIntoViewIfNeeded().catch(() => {});
 
-    // 3. Dynamic Retry to check if grid updated to new status
     let statusFound = false;
     for (let attempt = 0; attempt < 3; attempt++) {
         const rowText = await row.innerText();
@@ -158,7 +135,7 @@ When('User clicks on Edit icon for the created employee', async function () {
         throw new Error("Cannot click Edit: Dynamic Identifier is missing in context!");
     }
 
-    const openOkBtn = this.page.locator('.swal-button, button.confirm, button:has-text("OK")').first();
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
     if (await openOkBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
         await openOkBtn.click({ force: true }).catch(() => {});
         await this.page.waitForTimeout(500);
@@ -228,7 +205,7 @@ Then('User verifies mandatory date validation popup appears and clicks OK', asyn
     expect(popupText).toContain('Employee Relieving date cannot be empty');
     expect(popupText).toContain('Employee resignation date cannot be empty');
 
-    const okBtn = this.page.locator('.swal-button, .swal-button--confirm, button:has-text("OK"), button.confirm').first();
+    const okBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
     await expect(okBtn).toBeVisible({ timeout: 5000 });
     await okBtn.click({ force: true });
 
@@ -242,7 +219,6 @@ When('User fills mandatory exit dates based on status', async function () {
 
     const todayDate = getTodayFormattedDate();
 
-    // 1. Safe Handle for Resignation Date
     if (await resignationInput.isVisible({ timeout: 2000 }).catch(() => false)) {
         const isResignationEnabled = await resignationInput.isEnabled().catch(() => false);
         const isResignationReadonly = await resignationInput.getAttribute('readonly') !== null;
@@ -256,7 +232,6 @@ When('User fills mandatory exit dates based on status', async function () {
         }
     }
 
-    // 2. Safe Handle for Relieving Date
     if (await relievingInput.isVisible({ timeout: 2000 }).catch(() => false)) {
         const isRelievingEnabled = await relievingInput.isEnabled().catch(() => false);
         const currentRelievingVal = (await relievingInput.inputValue().catch(() => '')).trim();
@@ -284,7 +259,6 @@ When('User updates status to {string}', async function (targetStatus) {
         'Absconded': '5'
     };
 
-    // 1. Select target status from dropdown
     if (statusValueMap[targetStatus]) {
         await statusDropdown.selectOption({ value: statusValueMap[targetStatus] });
     } else {
@@ -298,7 +272,6 @@ When('User updates status to {string}', async function (targetStatus) {
     await statusDropdown.dispatchEvent('change');
     await this.page.waitForTimeout(1000);
 
-    // 2. Validate calendar picker behaviour for 'Absconded' status
     if (targetStatus === 'Absconded') {
         const resignationInput = this.page.locator('#Employee_ResignationDate, #txtResignationDate, input[name*="ResignationDate"]').first();
 
@@ -319,7 +292,6 @@ When('User updates status to {string}', async function (targetStatus) {
             }
         }
     } else {
-        // Normal date population logic for Active/Left/Terminated statuses
         const resignationInput = this.page.locator('#Employee_ResignationDate, #txtResignationDate, input[name*="ResignationDate"]').first();
         if (await resignationInput.isVisible({ timeout: 2000 }).catch(() => false)) {
             const isEnabled = await resignationInput.isEnabled().catch(() => false);
@@ -330,7 +302,6 @@ When('User updates status to {string}', async function (targetStatus) {
         }
     }
 
-    // 3. Fill Remark input field
     const remarkInput = this.page.locator('#txtRemark, textarea[name*="Remark"]').first();
     if (await remarkInput.isVisible({ timeout: 1000 }).catch(() => false)) {
         await remarkInput.fill(`Status updated to ${targetStatus}`);
@@ -374,19 +345,19 @@ When('User clicks on Update button after filling dates', async function () {
 });
 
 When('User clicks on Cancel button', async function () {
-    const openOkBtn = this.page.locator('.swal-button, button.confirm, button:has-text("OK")').first();
-    if (await openOkBtn.isVisible({ timeout: 1500 }).catch(() => false)) {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
         await openOkBtn.click({ force: true }).catch(() => {});
-        await this.page.locator('.swal-overlay, .sweet-alert, .swal2-popup').waitFor({ state: 'hidden', timeout: 5000 }).catch(() => {});
+        await this.page.waitForTimeout(1000);
     }
 
-    const cancelBtn = this.page.locator('#btnCancelEmployee, #btnCancel, input[value="Cancel"], button:has-text("Cancel")').first();
-    await expect(cancelBtn).toBeVisible({ timeout: 8000 });
+    const cancelBtn = this.page.locator('#btnCancelEmployee').first();
+    await cancelBtn.waitFor({ state: 'visible', timeout: 8000 });
+    await cancelBtn.scrollIntoViewIfNeeded();
     await cancelBtn.click({ force: true });
 
-    await this.page.locator('.modal-backdrop, .modal, #editEmployeeModal, .swal-overlay').waitFor({ state: 'hidden', timeout: 10000 }).catch(() => {});
     await this.page.waitForLoadState('networkidle').catch(() => {});
-    await this.page.waitForTimeout(1500);
+    await this.page.waitForTimeout(2000);
 });
 
 Then('User verifies Delete button is visible on employee edit form', async function () {
@@ -395,6 +366,12 @@ Then('User verifies Delete button is visible on employee edit form', async funct
 });
 
 Then('User verifies Active Count decreased by {int}', async function (decrementVal) {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1500);
 
@@ -414,6 +391,12 @@ Then('User verifies Active Count decreased by {int}', async function (decrementV
 });
 
 Then('User verifies Left Count increased by {int}', async function (incrementVal) {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1500);
 
@@ -433,6 +416,12 @@ Then('User verifies Left Count increased by {int}', async function (incrementVal
 });
 
 Then('User verifies Active Count increased by {int}', async function (incrementVal) {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1500);
 
@@ -453,6 +442,12 @@ Then('User verifies Active Count increased by {int}', async function (incrementV
 });
 
 Then('User verifies Left Count decreased by {int}', async function (decrementVal) {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1500);
 
@@ -472,6 +467,12 @@ Then('User verifies Left Count decreased by {int}', async function (decrementVal
 });
 
 Then('User verifies Total Count remains unchanged', async function () {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1500);
 
@@ -489,6 +490,12 @@ Then('User verifies Total Count remains unchanged', async function () {
 });
 
 Then('User verifies Left Count remains unchanged', async function () {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1000);
 
@@ -505,6 +512,12 @@ Then('User verifies Left Count remains unchanged', async function () {
 });
 
 Then('User verifies Active Count remains unchanged', async function () {
+    const openOkBtn = this.page.locator('button.swal-button--confirm, button.swal-button, button:has-text("OK")').first();
+    if (await openOkBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await openOkBtn.click({ force: true }).catch(() => {});
+        await this.page.waitForTimeout(1500);
+    }
+
     await this.page.waitForLoadState('networkidle').catch(() => {});
     await this.page.waitForTimeout(1000);
 
@@ -523,7 +536,7 @@ Then('User verifies Active Count remains unchanged', async function () {
 Then('User searches employee in grid by captured Aadhaar number', async function () {
     const dynamicId = await getDynamicIdentifier(this);
     if (!dynamicId) {
-        throw new Error("Cannot search grid: Dynamic Identifier is missing in context!");
+        throw new Error("Dynamic identifier is missing in Cucumber context!");
     }
     console.log(`🔍 Searching grid by identity number via column header filter.`);
     await performColumnSearch(this.page, dynamicId);

@@ -538,6 +538,7 @@ const generateAllureReport = () => {
     try {
         // Clean and generate Allure report
         execSync('allure generate ./allure-results --clean -o ./allure-report', { stdio: 'pipe' });
+        execSync('node scripts/add-allure-logo.js', { stdio: 'inherit' });
         console.log('✅ Allure Report generated successfully');
         console.log('📂 View report at: ./allure-report/index.html');
     } catch (error) {

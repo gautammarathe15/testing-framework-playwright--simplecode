@@ -36,10 +36,10 @@ And User clicks on the Week Off tab
 
 
 When User unchecks the "Week Off Default Applicable" checkbox
-    And User enters "16-Nov-2026" in the Effective From field
+    And User enters "18-Nov-2026" in the Effective From field
     When User clicks on the Update button for week off
     And User clicks on OK button on success popup
-    Then User verifies the first row in the table shows status "No" and effective date "16-Nov-2026"
+    Then User verifies the first row in the table shows status "No" and effective date "18-Nov-2026"
     And User clicks on OK button on success popup
   
     And User selects the first template from the Week Off and Shift Template dropdown
