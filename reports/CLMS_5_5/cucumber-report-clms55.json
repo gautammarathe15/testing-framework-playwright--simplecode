@@ -1,0 +1,773 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "clms-employee-week-off-functionality-verification;verify-week-off-tab-elements-and-field-visibility-for-a-new-employee",
+        "keyword": "Scenario Outline",
+        "line": 82,
+        "name": "Verify Week Off tab elements and field visibility for a new employee",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 146218599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 158998800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35242199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 164826200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 130011400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 121797700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 228299500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22685600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 314637600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 93436300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "User fills mandatory Personal details with First Name \"Jairam\", Last Name \"Lohiya\", Gender \"F\", and DOB \"25-Jan-1995\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:357"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1392755599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "User fills Contract Period details with Contract From \"26-Aug-2026\" and Contract Period In Days \"507\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1806966500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "User fills all mandatory Deployment details with Subsidiary \"A.k enterprise\", Division \"Sales\", Department \"Software\", Category \"Staff Employee\", Grade \"B\", Designation \"Jr Engineer\", Location \"Pune\", Skilled Level \"Semi-Skilled\", and Contractor \"GG ROOT\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:339"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4635308999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "User verifies default Status is \"Active\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:369"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24943800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Save button",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:198"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 188166699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12259799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5449900900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 24,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:130"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2031976800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "User clicks on the Week Off tab",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8141201799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "User verifies \"Week Off Default Applicable\" checkbox and \"Effective From\" field are visible",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12502399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "User verifies \"Week Off and Shift Template\" dropdown is visible",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2856400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "User verifies \"From Date\" field is visible",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2287400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "User verifies \"To Date\" field is visible",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1910599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "On WeekOff Page User selects today's date in Effective From field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 439630100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "User clicks on the Update button for week off",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:43"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10924699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1024651300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 38,
+            "name": "User unchecks the \"Week Off Default Applicable\" checkbox",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:48"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 21141099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "On WeekOff Page User selects today's date in Effective From field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:38"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 408196099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 40,
+            "name": "User clicks on the Update button for week off",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:43"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13240200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 41,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1016037899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 42,
+            "name": "User verifies the first row in the table shows status \"No\" and today's effective date",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9270999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 43,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1014716499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 45,
+            "name": "User selects the first template from the Week Off and Shift Template dropdown",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52593600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 46,
+            "name": "User selects today date in From Date field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 428133699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 47,
+            "name": "User selects date after 5 days from today in To Date field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 421168200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "User clicks on Save button for template",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:93"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3283875999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1022894599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 50,
+            "name": "User verifies the table displays template expectedTemplate, expectedFromDate and expectedToDate",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:100"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2028132799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 57,
+            "name": "User leaves 'Week Off and Shift Template' dropdown empty",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:125"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6012699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 58,
+            "name": "User selects today date in From Date field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 425122699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 59,
+            "name": "User selects date after 5 days from today in To Date field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 423104700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 60,
+            "name": "User clicks on Save button for template",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:93"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3035028200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 61,
+            "name": "User should see validation popup or message for template selection",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10079200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 62,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1016578600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 65,
+            "name": "User selects the first template from the Week Off and Shift Template dropdown",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54091399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 66,
+            "name": "User leaves 'From Date' field empty",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:130"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13387299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 67,
+            "name": "User selects date after 5 days from today in To Date field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 416547200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 68,
+            "name": "User clicks on Save button for template",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:93"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3040747999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 69,
+            "name": "User should see validation popup or message for From Date",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9408999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 70,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1019391599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 73,
+            "name": "User selects the first template from the Week Off and Shift Template dropdown",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 68422600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 74,
+            "name": "User selects today date in From Date field",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 423918200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 75,
+            "name": "User leaves 'To Date' field empty",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:130"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11744699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 76,
+            "name": "User clicks on Save button for template",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:93"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3037442499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 77,
+            "name": "User should see validation popup or message for To Date",
+            "match": {
+              "location": "features\\step_definitions\\weekoff.steps.js:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6205900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 78,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1022160200
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 26926100
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@weekoff",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "clms-employee-week-off-functionality-verification",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "CLMS Employee Week Off Functionality Verification",
+    "tags": [
+      {
+        "name": "@weekoff",
+        "line": 1
+      },
+      {
+        "name": "@smoke",
+        "line": 1
+      }
+    ],
+    "uri": "features\\B5_weekoff.feature"
+  }
+]

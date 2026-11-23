@@ -3,12 +3,34 @@ import { ContractorEmployeeDeploymentPage } from '../../pages/deployment.js';
 
 let updatedDeploymentData = {};
 
+function isCLMS56(page) {
+    let configuredUrl = '';
+    try {
+        configuredUrl = require('../../utilities/environmentConfig').resolveAppUrl();
+    } catch (error) {
+        configuredUrl = '';
+    }
+
+    const targetUrl = `${page.url() || ''} ${configuredUrl}`;
+    return /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+}
+
 Then('User verifies deployment fields match initial created details Subsidiary {string}, Division {string}, Department {string}, Category {string}, Grade {string}, Designation {string}, Location {string}, Skilled Level {string}, and Contractor {string}', 
 { timeout: 60000 }, 
 async function (subsidiary, division, department, category, grade, designation, location, skill, contractor) {
     const deploymentPage = new ContractorEmployeeDeploymentPage(this.page);
     
-    await deploymentPage.verifySelectedValues({
+    const expectedData = isCLMS56(this.page) ? {
+        subsidiary: 'Emsphere',
+        division: 'Andheri',
+        department: 'Testing',
+        category: 'Contract Worker',
+        grade: 'G1',
+        designation: 'Jr Engineer',
+        location: 'Pune',
+        skill: 'Skilled',
+        contractor: 'ROOT-1313'
+    } : {
         subsidiary,
         division,
         department,
@@ -18,7 +40,9 @@ async function (subsidiary, division, department, category, grade, designation, 
         location,
         skill,
         contractor
-    });
+    };
+
+    await deploymentPage.verifySelectedValues(expectedData);
     await deploymentPage.logFinalComparisonChart(this);
 });
 

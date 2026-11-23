@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { chromium, firefox, webkit } = require('@playwright/test');
 const { AllureRuntime, AllureTest, Stage } = require('allure-js-commons');
+const { resolveAppUrl } = require('../../utilities/environmentConfig');
 
 // 🎯 Import Playwright config to get baseURL
 const config = require('../../playwright.config');
@@ -83,7 +84,8 @@ BeforeAll(async function() {
  */
 Before(async function(scenario) {
     // 🎯 Resolve Base URL dynamically
-    const targetBaseUrl = process.env.BASE_URL || config.use?.baseURL || 'http://192.168.40.115/CLMS_ENT_5.5/app';
+    const targetBaseUrl = resolveAppUrl();
+    console.log(`🌐 CLMS Environment: ${targetBaseUrl}`);
 
     // 🎯 Pass baseURL inside context options
     this.context = await browser.newContext({

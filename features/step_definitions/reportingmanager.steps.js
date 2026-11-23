@@ -20,7 +20,24 @@ When('User filters popup search with Subsidiary {string}, Division {string}, and
 
 When('User selects the first employee from the search result grid', async function () {
     const reportingPage = getReportingPage(this.page);
-    
+
+    const activeUrl = (this.page.url() || '').trim();
+    let configuredUrl = '';
+    try {
+        configuredUrl = require('../../utilities/environmentConfig').resolveAppUrl();
+    } catch (error) {
+        configuredUrl = '';
+    }
+
+    const targetUrl = `${activeUrl} ${configuredUrl}`;
+    const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+    if (isCLMS56) {
+        await reportingPage.selectFirstEmployeeFromGridAndStore(reportingPage.currentlyOpenedManagerLevel);
+        return;
+    }
+
+    // Existing CLMS 5.5 behavior remains unchanged.
     const modalContainer = this.page.locator('.select-single-emp-model, .modal-dialog').filter({ hasText: 'Employee Search' }).first();
     const firstRow = modalContainer.locator('#tblEmpSearchResultCnt tbody tr, table tbody tr').first();
     await firstRow.waitFor({ state: 'visible', timeout: 10000 });
@@ -44,6 +61,24 @@ When('User searches by Employee Code {string} in popup search', async function (
 
 When('User stores first result details and clicks Select button', async function () {
     const reportingPage = getReportingPage(this.page);
+
+    const activeUrl = (this.page.url() || '').trim();
+    let configuredUrl = '';
+    try {
+        configuredUrl = require('../../utilities/environmentConfig').resolveAppUrl();
+    } catch (error) {
+        configuredUrl = '';
+    }
+
+    const targetUrl = `${activeUrl} ${configuredUrl}`;
+    const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+    if (isCLMS56) {
+        await reportingPage.selectFirstEmployeeFromGridAndStore(reportingPage.currentlyOpenedManagerLevel);
+        return;
+    }
+
+    // Existing CLMS 5.5 behavior remains unchanged.
     const modalContainer = this.page.locator('.select-single-emp-model, .modal-dialog').filter({ hasText: 'Employee Search' }).first();
     const firstRow = modalContainer.locator('#tblEmpSearchResultCnt tbody tr, table tbody tr').first();
     await firstRow.waitFor({ state: 'visible', timeout: 10000 });

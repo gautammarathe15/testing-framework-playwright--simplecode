@@ -6,6 +6,7 @@
  */
 
 const { expect } = require('@playwright/test');
+const { resolveAppUrl } = require('../utilities/environmentConfig');
 
 class CLMSLoginPage {
     constructor(page) {
@@ -41,7 +42,7 @@ class CLMSLoginPage {
 
     async openUrl() {
         console.log("🌐 Navigating to CLMS URL...");
-        await this.page.goto('http://192.168.40.115/CLMS_ENT_5.5/app');
+        await this.page.goto(resolveAppUrl());
     }
 
     async verifyPage() {

@@ -131,6 +131,70 @@ export class ContractorEmployeeDeploymentPage {
     async modifyDeploymentFields() {
         await expect(this.departmentDropdown).toBeVisible({ timeout: 10000 });
 
+        const activeUrl = (this.page.url() || '').trim();
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${activeUrl} ${configuredUrl}`;
+        const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+        if (isCLMS56) {
+            const clms56Updates = [
+                { locator: '#EmployeeAllocateToOrg_SubsidiaryID', value: '1' },
+                { locator: '#EmployeeAllocateToOrg_DivisionID', value: '1' },
+                { locator: '#EmployeeAllocateToOrg_DepartmentID', value: '1' },
+                { locator: '#EmployeeAllocateToOrg_EmpCategoryID', value: '2' },
+                { locator: '#EmployeeAllocateToOrg_DesignationID', value: '3' },
+                { locator: '#EmployeeAllocateToOrg_GradeID', value: '2' },
+                { locator: '#EmployeeAllocateToOrg_BranchID', value: '1' },
+                { locator: '#EmployeeAllocateToOrg_EmployeeTypeID', value: '1' },
+                { locator: '#EmployeeAllocateToOrg_ContractorID', value: '1003' }
+            ];
+
+            for (const item of clms56Updates) {
+                const dropdown = this.page.locator(item.locator);
+                await dropdown.waitFor({ state: 'visible', timeout: 10000 });
+                await dropdown.selectOption({ value: item.value });
+                await dropdown.dispatchEvent('change').catch(() => {});
+                await dropdown.dispatchEvent('blur').catch(() => {});
+                await this.page.waitForTimeout(500);
+            }
+
+            await this.skillDropdown.selectOption({ value: '1' });
+            await this.skillDropdown.dispatchEvent('change').catch(() => {});
+            await this.skillDropdown.dispatchEvent('blur').catch(() => {});
+
+            const selectedSkill = await this.getSelectedOptionText(this.skillDropdown);
+            if (selectedSkill !== 'Skilled') {
+                throw new Error(`CLMS 5.6 Employee Type verification failed: expected "Skilled", got "${selectedSkill}"`);
+            }
+
+            if (await this.remarkInput.isVisible().catch(() => false)) {
+                await this.remarkInput.fill('Check CLMS 5.6 update persistence logic');
+            }
+
+            await this.page.waitForTimeout(1000);
+
+            ContractorEmployeeDeploymentPage.sharedModifiedData = {
+                subsidiary: await this.getSelectedOptionText(this.subsidiaryDropdown),
+                division: await this.getSelectedOptionText(this.divisionDropdown),
+                department: await this.getSelectedOptionText(this.departmentDropdown),
+                category: await this.getSelectedOptionText(this.categoryDropdown),
+                grade: await this.getSelectedOptionText(this.gradeDropdown),
+                designation: await this.getSelectedOptionText(this.designationDropdown),
+                location: await this.getSelectedOptionText(this.locationDropdown),
+                skill: selectedSkill,
+                contractor: await this.getSelectedOptionText(this.contractorDropdown)
+            };
+            this.modifiedData = ContractorEmployeeDeploymentPage.sharedModifiedData;
+            console.log('✅ CLMS 5.6 B1 Deployment modifications applied and Employee Type verified.');
+            return ContractorEmployeeDeploymentPage.sharedModifiedData;
+        }
+
         await this.selectDropdownRobust(this.subsidiaryDropdown, 'yashodhan pvt');
         await this.selectDropdownRobust(this.divisionDropdown, 'Support');
         await this.selectDropdownRobust(this.departmentDropdown, 'Hardware');
@@ -158,6 +222,7 @@ export class ContractorEmployeeDeploymentPage {
             contractor: await this.getSelectedOptionText(this.contractorDropdown)
         };
         this.modifiedData = ContractorEmployeeDeploymentPage.sharedModifiedData;
+        return ContractorEmployeeDeploymentPage.sharedModifiedData;
     }
 
     async clickCancel() {

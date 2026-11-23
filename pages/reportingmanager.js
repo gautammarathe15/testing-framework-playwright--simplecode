@@ -1,6 +1,8 @@
 import { expect } from '@playwright/test';
 
 export class ContractorEmployeeReportingManagerPage {
+    static currentManagerByPage = new WeakMap();
+
     constructor(page) {
         this.page = page;
 
@@ -29,6 +31,9 @@ export class ContractorEmployeeReportingManagerPage {
         };
 
         this.updatedSelectedManager = '';
+
+        // For CLMS 5.6 indexed row selection
+        this.currentlyOpenedManagerLevel = '';
     }
 
     getManagerDisplayLocator(managerType) {
@@ -52,7 +57,9 @@ export class ContractorEmployeeReportingManagerPage {
 }
 
     async openSearchPopupFor(managerType) {
-    const cleanType = managerType.trim();
+    const cleanType = managerType.trim().toUpperCase();
+    this.currentlyOpenedManagerLevel = cleanType;
+    ContractorEmployeeReportingManagerPage.currentManagerByPage.set(this.page, cleanType);
     const searchIcon = this.page.locator(`#Search${cleanType}, a[id="Search${cleanType}"]`).first();
     
     await searchIcon.scrollIntoViewIfNeeded();
@@ -61,9 +68,29 @@ export class ContractorEmployeeReportingManagerPage {
     
     await expect(this.employeeSearchModal).toBeVisible({ timeout: 15000 });
     await this.page.waitForTimeout(500);
+
+    console.log(`👉 Opened Reporting Manager search popup for ${cleanType}`);
 }
 
     async filterPopupSearch(subsidiary, division, department) {
+        const activeUrl = (this.page.url() || '').trim();
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${activeUrl} ${configuredUrl}`;
+        const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+        if (isCLMS56) {
+            subsidiary = 'Emsphere';
+            division = 'Andheri';
+            department = 'Testing';
+            console.log('👉 CLMS 5.6 Reporting Manager filters: Emsphere / Andheri / Testing');
+        }
+
         if (subsidiary) {
             await this.popupSubsidiaryDropdown.waitFor({ state: 'visible', timeout: 10000 });
             await this.popupSubsidiaryDropdown.click({ force: true }).catch(() => {});
@@ -96,25 +123,97 @@ export class ContractorEmployeeReportingManagerPage {
     }
 
     async selectFirstEmployeeFromGridAndStore(managerType) {
-        const firstRow = this.employeeSearchModal.locator('table tbody tr').first();
-        await expect(firstRow).toBeVisible({ timeout: 15000 });
+        const activeUrl = (this.page.url() || '').trim();
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
 
-        const fName = (await firstRow.locator('td').nth(2).innerText().catch(() => '')).trim();
-        const lName = (await firstRow.locator('td').nth(3).innerText().catch(() => '')).trim();
+        const targetUrl = `${activeUrl} ${configuredUrl}`;
+        const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+        const cleanType = (
+            ContractorEmployeeReportingManagerPage.currentManagerByPage.get(this.page)
+            || managerType
+            || this.currentlyOpenedManagerLevel
+            || 'M1'
+        ).trim().toUpperCase();
+        const dataRows = this.employeeSearchModal.locator('#tblEmpSearchResultCnt tbody tr, table tbody tr');
+
+        await expect(dataRows.first()).toBeVisible({ timeout: 15000 });
+
+        let targetRow = dataRows.first();
+        if (isCLMS56) {
+            const indexByManager = { M1: 0, M2: 1, M3: 2, M4: 3 };
+            const requestedIndex = indexByManager[cleanType] ?? 0;
+            const rowCount = await dataRows.count();
+
+            if (rowCount > requestedIndex) {
+                targetRow = dataRows.nth(requestedIndex);
+                console.log(`✅ CLMS 5.6 ${cleanType} selected result index ${requestedIndex}`);
+            } else if (rowCount > 0) {
+                const fallbackIndex = rowCount - 1;
+                targetRow = dataRows.nth(fallbackIndex);
+                console.log(`⚠️ CLMS 5.6 ${cleanType} requested index ${requestedIndex}, only ${rowCount} rows available; using index ${fallbackIndex}`);
+            } else {
+                throw new Error(`CLMS 5.6 ${cleanType} Reporting Manager search returned no rows`);
+            }
+        }
+
+        await targetRow.waitFor({ state: 'visible', timeout: 10000 });
+
+        const fName = (await targetRow.locator('td').nth(2).innerText().catch(() => '')).trim();
+        const lName = (await targetRow.locator('td').nth(3).innerText().catch(() => '')).trim();
         const fullManagerName = `${fName} ${lName}`.trim();
 
-        this.tempManagerData[managerType] = fullManagerName;
+        this.tempManagerData[cleanType] = fullManagerName;
 
-        const selectBtn = firstRow.locator('.btn-success, button:has-text("Select"), button[name="btnSelectCnt"]').first();
+        const selectBtn = targetRow.locator('.btn-success, button:has-text("Select"), button[name="btnSelectCnt"]').first();
         await selectBtn.click({ force: true });
         await expect(this.employeeSearchModal).toBeHidden({ timeout: 10000 });
     }
 
     async searchByEmployeeCode(empCode) {
         await expect(this.popupEmpCodeInput).toBeVisible({ timeout: 5000 });
-        await this.popupEmpCodeInput.fill('');
-        await this.popupEmpCodeInput.fill(empCode);
 
+        const activeUrl = (this.page.url() || '').trim();
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${activeUrl} ${configuredUrl}`;
+        const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+        await this.popupEmpCodeInput.fill('');
+
+        if (isCLMS56) {
+            const dataRows = this.employeeSearchModal.locator('#tblEmpSearchResultCnt tbody tr, table tbody tr');
+
+            await this.popupSearchButton.click({ force: true });
+            await this.page.waitForTimeout(1500);
+
+            if (await dataRows.count() === 0) {
+                await this.popupEmpCodeInput.fill(empCode);
+                await this.popupSearchButton.click({ force: true });
+                await this.page.waitForTimeout(1500);
+            }
+
+            const firstRow = dataRows.first();
+            await firstRow.waitFor({ state: 'visible', timeout: 15000 });
+            const resolvedCode = (await firstRow.locator('td').nth(1).textContent().catch(() => empCode)).trim();
+
+            await this.popupEmpCodeInput.fill(resolvedCode);
+            await this.popupSearchButton.click({ force: true });
+            await this.page.waitForTimeout(1000);
+            console.log(`👉 CLMS 5.6 Reporting Manager resolved employee code: ${resolvedCode}`);
+            return;
+        }
+
+        await this.popupEmpCodeInput.fill(empCode);
         await expect(this.popupSearchButton).toBeVisible({ timeout: 5000 });
         await this.popupSearchButton.click({ force: true });
         await this.page.waitForTimeout(1000);

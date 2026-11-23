@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<testsuite failures="0" skipped="0" name="cucumber-js" time="50.380120172" tests="1">
+  <testcase classname="CLMS Employee Week Off Functionality Verification" name="Verify Week Off tab elements and field visibility for a new employee" time="50.380120172">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "admin" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+And User verifies Aadhaar Card input field is visible.....................passed
+And User enters dynamic valid Aadhaar number..............................passed
+And User clicks on the Verify link if visible.............................passed
+And User should see Submit and Skip Verification options and click Skip...passed
+And User fills mandatory Personal details with First Name "Jairam", Las...passed
+And User fills Contract Period details with Contract From "26-Aug-2026"...passed
+And User fills all mandatory Deployment details with Subsidiary "A.k en...passed
+And User verifies default Status is "Active"..............................passed
+And User clicks on the Save button........................................passed
+And User clicks on OK button on success popup.............................passed
+When User searches created employee status in grid by identity number.....passed
+And User clicks on Edit icon for the created employee.....................passed
+And User clicks on the Week Off tab.......................................passed
+Then User verifies "Week Off Default Applicable" checkbox and "Effectiv...passed
+And User verifies "Week Off and Shift Template" dropdown is visible.......passed
+And User verifies "From Date" field is visible............................passed
+And User verifies "To Date" field is visible..............................passed
+And On WeekOff Page User selects today's date in Effective From field.....passed
+When User clicks on the Update button for week off........................passed
+And User clicks on OK button on success popup.............................passed
+When User unchecks the "Week Off Default Applicable" checkbox.............passed
+And On WeekOff Page User selects today's date in Effective From field.....passed
+When User clicks on the Update button for week off........................passed
+And User clicks on OK button on success popup.............................passed
+Then User verifies the first row in the table shows status "No" and tod...passed
+And User clicks on OK button on success popup.............................passed
+And User selects the first template from the Week Off and Shift Templat...passed
+And User selects today date in From Date field............................passed
+And User selects date after 5 days from today in To Date field............passed
+And User clicks on Save button for template...............................passed
+And User clicks on OK button on success popup.............................passed
+Then User verifies the table displays template expectedTemplate, expect...passed
+When User leaves 'Week Off and Shift Template' dropdown empty.............passed
+And User selects today date in From Date field............................passed
+And User selects date after 5 days from today in To Date field............passed
+And User clicks on Save button for template...............................passed
+Then User should see validation popup or message for template selection...passed
+And User clicks on OK button on success popup.............................passed
+When User selects the first template from the Week Off and Shift Templa...passed
+And User leaves 'From Date' field empty...................................passed
+And User selects date after 5 days from today in To Date field............passed
+And User clicks on Save button for template...............................passed
+Then User should see validation popup or message for From Date............passed
+And User clicks on OK button on success popup.............................passed
+When User selects the first template from the Week Off and Shift Templa...passed
+And User selects today date in From Date field............................passed
+And User leaves 'To Date' field empty.....................................passed
+And User clicks on Save button for template...............................passed
+Then User should see validation popup or message for To Date..............passed
+And User clicks on OK button on success popup.............................passed]]></system-out>
+  </testcase>
+</testsuite>

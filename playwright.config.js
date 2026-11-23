@@ -1,4 +1,5 @@
 const { defineConfig, devices } = require('@playwright/test');
+const { resolveAppUrl } = require('./utilities/environmentConfig');
 
 /**
  * Playwright Configuration for CLMS UI Automation Tests
@@ -58,7 +59,7 @@ module.exports = defineConfig({
   ],
 
   use: {
-    baseURL: process.env.BASE_URL || 'http://192.168.40.115/CLMS_ENT_5.5/app',
+    baseURL: resolveAppUrl(),
     headless: process.env.HEADLESS === 'true',
     trace: 'on-first-retry',
     screenshot: 'on',

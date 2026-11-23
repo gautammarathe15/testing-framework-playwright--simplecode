@@ -15,8 +15,78 @@ export class ContractorEmployeeShiftPage {
         this.cancelButton = page.locator('#btnCancelEmployeeAutoShift');
     }
 
+    isCLMS56() {
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${this.page.url() || ''} ${configuredUrl}`;
+        return /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+    }
+
+    mapShiftNameForEnvironment(shiftName) {
+        if (!this.isCLMS56()) return shiftName;
+
+        const mappedName = {
+            'Night Shift': 'Night',
+            'Second': 'Morning'
+        }[shiftName] || shiftName;
+
+        if (!['Afternoon', 'Morning', 'Night'].includes(mappedName)) {
+            throw new Error(`CLMS 5.6 unsupported shift "${shiftName}" -> "${mappedName}". Valid options: Afternoon, Morning, Night.`);
+        }
+        return mappedName;
+    }
+
+    async getExactShiftCheckbox(shiftName) {
+        const labels = this.page.locator('label').filter({ has: this.page.locator('input[type="checkbox"]') });
+        const count = await labels.count();
+
+        for (let index = 0; index < count; index++) {
+            const label = labels.nth(index);
+            const text = (await label.innerText().catch(() => '')).replace(/\s+/g, ' ').trim();
+            if (text === shiftName) {
+                return label.locator('input[type="checkbox"]').first();
+            }
+        }
+
+        throw new Error(`CLMS 5.6 shift checkbox with exact visible text "${shiftName}" was not found.`);
+    }
+
     async clickShiftTab() {
-        await this.page.waitForTimeout(2000); 
+        await this.page.waitForTimeout(2000);
+
+        if (this.isCLMS56()) {
+            await this.page.waitForLoadState('domcontentloaded').catch(() => {});
+
+            const fallbackTabs = [
+                this.shiftTab,
+                this.page.getByRole('tab', { name: 'Shift', exact: true }),
+                this.page.getByText('Shift', { exact: true }).first()
+            ];
+
+            for (const tab of fallbackTabs) {
+                try {
+                    await tab.waitFor({ state: 'visible', timeout: 10000 });
+                    await tab.scrollIntoViewIfNeeded().catch(() => {});
+                    await tab.click({ force: true, timeout: 8000 }).catch(async () => {
+                        await tab.evaluate(el => el.click());
+                    });
+                    await this.page.waitForLoadState('networkidle').catch(() => {});
+                    await this.page.waitForTimeout(1500);
+                    console.log('✅ CLMS 5.6 Shift tab opened successfully.');
+                    return;
+                } catch (error) {
+                    console.log(`⚠️ CLMS 5.6 Shift tab locator retry failed: ${error.message}`);
+                }
+            }
+
+            throw new Error('CLMS 5.6 Shift tab could not be opened after retrying available locators.');
+        }
+
         await this.shiftTab.waitFor({ state: 'visible', timeout: 20000 });
         await this.shiftTab.scrollIntoViewIfNeeded().catch(() => {});
         try {
@@ -35,7 +105,16 @@ export class ContractorEmployeeShiftPage {
     }
 
     async selectShiftOption(shiftName, shouldCheck = true) {
-        const checkbox = this.shiftOptionCheckbox(shiftName);
+        let checkbox;
+
+        if (this.isCLMS56()) {
+            const mappedName = this.mapShiftNameForEnvironment(shiftName);
+            checkbox = await this.getExactShiftCheckbox(mappedName);
+            console.log(`✅ CLMS 5.6 shift mapping: "${shiftName}" -> "${mappedName}"`);
+        } else {
+            checkbox = this.shiftOptionCheckbox(shiftName);
+        }
+
         await checkbox.waitFor({ state: 'visible', timeout: 8000 });
         if (shouldCheck && !(await checkbox.isChecked())) {
             await checkbox.check({ force: true });
@@ -45,7 +124,15 @@ export class ContractorEmployeeShiftPage {
     }
 
     async verifyShiftOptionChecked(shiftName) {
-        const checkbox = this.shiftOptionCheckbox(shiftName);
+        let checkbox;
+
+        if (this.isCLMS56()) {
+            const mappedName = this.mapShiftNameForEnvironment(shiftName);
+            checkbox = await this.getExactShiftCheckbox(mappedName);
+        } else {
+            checkbox = this.shiftOptionCheckbox(shiftName);
+        }
+
         await expect(checkbox).toBeChecked();
     }
 
@@ -72,6 +159,16 @@ export class ContractorEmployeeShiftPage {
             await expect(this.updateButton).toBeVisible({ timeout: 8000 });
             await expect(this.saveButton).toBeHidden({ timeout: 5000 }).catch(() => {});
         }
+    }
+
+    async selectShiftPattern(shouldCheck = true) {
+        if (shouldCheck && !(await this.shiftPatternCheckbox.isChecked())) {
+            await this.shiftPatternCheckbox.check({ force: true });
+        }
+    }
+
+    async verifyShiftPatternChecked() {
+        await expect(this.shiftPatternCheckbox).toBeChecked();
     }
 }
 

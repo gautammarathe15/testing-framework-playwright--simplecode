@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<testsuite failures="0" skipped="0" name="cucumber-js" time="82.429457466" tests="4">
+  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate Cards allocation features under Card tab for a New Employee" time="26.479058987">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "admin" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User clicks on the Create button.....................................passed
+And User verifies Aadhaar Card input field is visible.....................passed
+And User enters dynamic valid Aadhaar number..............................passed
+And User clicks on the Verify link if visible.............................passed
+And User should see Submit and Skip Verification options and click Skip...passed
+And User fills mandatory Personal details with First Name "Revan", Last...passed
+And User fills Contract Period details with Contract From "31-Aug-2025"...passed
+And User fills all mandatory Deployment details with Subsidiary "A.k en...passed
+And User verifies default Status is "Active"..............................passed
+And User clicks on the Save button........................................passed
+And User clicks on OK button on success popup.............................passed
+When User searches created employee status in grid by identity number.....passed
+And User clicks on Edit icon for the created employee.....................passed
+When User clicks on "Card" tab in employee profile........................passed
+Then User verifies 'Allocate Temporary Card' button is visible............passed
+When User clicks on "Allocate Temporary Card" button......................passed
+Then User verifies "Card Number" label and input textbox are visible......passed
+Then User verifies "Effective From" label and input textbox are visible...passed
+And User verifies mandatory field red symbols are visible.................passed
+And User verifies "Save" and "Cancel" buttons are visible.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate Card allocation features under Card tab for an Existing Employee" time="13.473605691000001">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "admin" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User enters "435" in search filter for Aadhaar or employee details...passed
+And User selects the 1st entry from the employee grid.....................passed
+When User clicks on "Card" tab in employee profile........................passed
+Then User verifies 'Allocate Temporary Card' button is visible............passed
+When User clicks on "Allocate Temporary Card" button......................passed
+Then User verifies "Card Number" label and input textbox are visible......passed
+Then User verifies "Effective From" label and input textbox are visible...passed
+And User verifies mandatory field red symbols are visible.................passed
+And User verifies "Save" and "Cancel" buttons are visible.................passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate successful temporary card allocation with dynamic unique card number and today's date" time="14.962731792000001">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "admin" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User enters "435" in search filter for Aadhaar or employee details...passed
+And User selects the 1st entry from the employee grid.....................passed
+When User clicks on "Card" tab in employee profile........................passed
+And User clicks on "Allocate Temporary Card" button.......................passed
+And User enters dynamic card number based on Aadhaar......................passed
+And User selects today's date in Effective From field.....................passed
+And User clicks on the Save button for card allocation....................passed
+Then User verifies card allocation success message........................passed]]></system-out>
+  </testcase>
+  <testcase classname="Contractor Employee Card Management Flow for New and Existing Employees" name="Validate error message when Effective To date is earlier than Effective From" time="27.514060996">
+    <system-out><![CDATA[Given User opens the CLMS login application page..........................passed
+When User enters username "admin" and password "sa".......................passed
+And User clicks on the Login button.......................................passed
+And User clicks on the Contractor Employee menu option....................passed
+When User enters "435" in search filter for Aadhaar or employee details...passed
+And User selects the 1st entry from the employee grid.....................passed
+When User clicks on "Card" tab in employee profile........................passed
+And User clicks on "Allocate Temporary Card" button.......................passed
+And User enters dynamic card number based on Aadhaar......................passed
+And User enters an invalid date range where Effective To is earlier tha...passed
+And User clicks on the Save button for card allocation....................passed
+Then User verifies popup message "to date must be greater than from dat...passed]]></system-out>
+  </testcase>
+</testsuite>

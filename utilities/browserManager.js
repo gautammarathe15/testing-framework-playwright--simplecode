@@ -1,4 +1,5 @@
 const { chromium, firefox, webkit } = require('@playwright/test');
+const { resolveAppUrl } = require('./environmentConfig');
 
 class BrowserManager {
   static browser = null;
@@ -25,7 +26,7 @@ class BrowserManager {
 
     this.context = await this.browser.newContext({
       viewport: null,
-      baseURL: process.env.BASE_URL || 'http://192.168.40.115/CLMS_ENT_5.5/app'
+      baseURL: resolveAppUrl()
     });
 
     this.context.setDefaultTimeout(120000);

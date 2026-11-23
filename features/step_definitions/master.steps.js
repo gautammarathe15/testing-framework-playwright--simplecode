@@ -32,7 +32,7 @@ When('User clicks on the Contractor Employee menu option', { timeout: 120000 }, 
         const baseUrl = currentUrl.substring(0, currentUrl.indexOf('/app/'));
         targetUrl = `${baseUrl}/app/Employee/Index`;
     } else {
-        targetUrl = 'http://192.168.40.115/CLMS_ENT_5.5/app/Employee/Index';
+        targetUrl = `${require('../../utilities/environmentConfig').resolveAppUrl()}/Employee/Index`;
     }
 
     await this.page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -121,7 +121,7 @@ When('User fills all required deployment details and submits the form', async fu
 
     await detailsPage.fillPersonalMandatoryDetails('TestUser', 'Automation', 'M', '18/11/2001');
     await detailsPage.fillContractPeriodDetails('18-03-2026', 30);
-    await detailsPage.selectMandatoryDropdowns();
+    await detailsPage.selectA5DeploymentDropdowns();
     await detailsPage.scrollToSaveAndClick();
     
     await detailsPage.verifySaveSuccess();

@@ -55,8 +55,12 @@ When('User enters {string} in the Effective From field', async function (dateStr
     await weekOffPage.setEffectiveFromDate(dateStr);
 });
 
-Then('User verifies the first row in the table shows status {string} and effective date {string}', async function (expectedStatus, expectedDate) {
+Then('User verifies the first row in the table shows status {string} and today\'s effective date', async function (expectedStatus) {
     const weekOffPage = getWeekOffPage(this.page);
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const expectedDate = `${day}-${monthNames[now.getMonth()]}-${now.getFullYear()}`;
     await weekOffPage.verifyFirstRowTableData(expectedStatus, expectedDate);
 });
 
@@ -75,33 +79,15 @@ When('User selects today date in From Date field', async function () {
 When('User selects date after {int} days from today in To Date field', async function (days) {
     const weekOffPage = getWeekOffPage(this.page);
     const targetDate = new Date();
+    targetDate.setHours(0, 0, 0, 0);
     targetDate.setDate(targetDate.getDate() + days);
 
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const targetMonthYear = `${monthNames[targetDate.getMonth()]} ${targetDate.getFullYear()}`;
-    const dayText = String(targetDate.getDate());
+    await weekOffPage.selectDateFromInputAndCalendar(weekOffPage.toDateInput, targetDate);
 
-    await weekOffPage.toDateInput.click();
-    
-    const calendarWidget = weekOffPage.page.locator('.datepicker, .bootstrap-datetimepicker-widget').first();
-    await calendarWidget.waitFor({ state: 'visible', timeout: 5000 });
-
-    for (let i = 0; i < 3; i++) {
-        const switchButton = calendarWidget.locator('th.datepicker-switch').first();
-        const currentSwitchText = await switchButton.textContent();
-
-        if (currentSwitchText && currentSwitchText.trim() === targetMonthYear) {
-            break;
-        }
-
-        const nextArrow = calendarWidget.locator('th.next').first();
-        await nextArrow.click();
-        await weekOffPage.page.waitForTimeout(500);
-    }
-
-    const calendarDay = calendarWidget.locator('td.day:not(.old):not(.new)').filter({ hasText: dayText }).first();
-    await calendarDay.waitFor({ state: 'visible', timeout: 5000 });
-    await calendarDay.click();
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const expectedValue = `${String(targetDate.getDate()).padStart(2, '0')}-${monthNames[targetDate.getMonth()]}-${targetDate.getFullYear()}`;
+    await weekOffPage.page.locator('#EmployeeWeekOffShiftTemplate_ToDate').first().waitFor({ state: 'visible', timeout: 5000 });
+    await require('@playwright/test').expect(weekOffPage.toDateInput).toHaveValue(expectedValue);
 });
 
 When('User clicks on Save button for template', async function () {
@@ -127,7 +113,11 @@ Then('User verifies the table displays template expectedTemplate, expectedFromDa
     const fYear = futureDate.getFullYear();
     const futureStr = `${fDay}-${fMonth}-${fYear}`;
 
-    await weekOffPage.verifyTemplateTableData('Week off shift template', todayStr, futureStr);
+    await weekOffPage.verifyTemplateTableData(
+        weekOffPage.isCLMS56() ? (weekOffPage.selectedTemplateName || 'General') : 'Week off shift template',
+        todayStr,
+        futureStr
+    );
 });
 
 // --- Negative Test Scenario Steps ---

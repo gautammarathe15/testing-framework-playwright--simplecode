@@ -16,6 +16,18 @@ export class ContractorEmployeeWeekOffPage {
         this.saveTemplateButton = page.locator('#btnSaveTemplateDetails, input[name="SaveTemplateDetails"], button:text-is("Save")').first();
     }
 
+    isCLMS56() {
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${this.page.url() || ''} ${configuredUrl}`;
+        return /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+    }
+
     async clickWeekOffTab() {
         const swalOverlay = this.page.locator('.swal-overlay').first();
         if (await swalOverlay.isVisible().catch(() => false)) {
@@ -79,38 +91,107 @@ async uncheckWeekOffDefault() {
     }
 
     async selectEffectiveFromToday() {
-        const now = new Date();
-        const day = String(now.getDate());
-        await this.selectDateFromInputAndCalendar(this.effectiveFromInput, day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        await this.selectDateFromInputAndCalendar(this.effectiveFromInput, today);
+
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const expectedValue = `${String(today.getDate()).padStart(2, '0')}-${monthNames[today.getMonth()]}-${today.getFullYear()}`;
+        const resultingValue = (await this.effectiveFromInput.inputValue().catch(() => '')).trim();
+
+        if (resultingValue !== expectedValue) {
+            throw new Error(`CLMS 5.5 Week Off Effective From verification failed: expected "${expectedValue}", got "${resultingValue}"`);
+        }
     }
 
     async setEffectiveFromDate(dateValue) {
-        let dayText = String(dateValue);
-        if (dateValue.includes('-')) {
-            dayText = dateValue.split('-')[0];
+        const match = String(dateValue).trim().match(/^([0-3]?\d)-([A-Za-z]{3})-(\d{4})$/);
+        if (!match) {
+            throw new Error(`CLMS 5.5 Week Off invalid Effective From date: "${dateValue}"`);
         }
-        await this.selectDateFromInputAndCalendar(this.effectiveFromInput, dayText);
+
+        const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+        const month = monthNames.indexOf(match[2].toLowerCase());
+        if (month < 0) {
+            throw new Error(`CLMS 5.5 Week Off invalid month in Effective From date: "${dateValue}"`);
+        }
+
+        const targetDate = new Date(Number(match[3]), month, Number(match[1]));
+        await this.selectDateFromInputAndCalendar(this.effectiveFromInput, targetDate);
+
+        const resultingValue = (await this.effectiveFromInput.inputValue().catch(() => '')).trim();
+        if (resultingValue !== String(dateValue).trim()) {
+            throw new Error(`CLMS 5.5 Week Off Effective From verification failed: expected "${dateValue}", got "${resultingValue}"`);
+        }
     }
 
-    async selectDateFromInputAndCalendar(inputLocator, dayText) {
-        const swalOverlay = this.page.locator('.swal-overlay, .modal-backdrop');
+    async selectDateFromInputAndCalendar(inputLocator, targetDate) {
+        const swalOverlay = this.page.locator('.swal-overlay, .modal-backdrop').first();
         if (await swalOverlay.isVisible().catch(() => false)) {
             await this.page.keyboard.press('Escape');
         }
+
         await inputLocator.waitFor({ state: 'visible', timeout: 10000 });
-        await inputLocator.click();
-        const calendarWidget = this.page.locator('.datepicker, .bootstrap-datetimepicker-widget').first();
-        if (!(await calendarWidget.isVisible().catch(() => false))) {
-            const parentGroup = inputLocator.locator('xpath=ancestor::div[contains(@class, "input-group")]').first();
-            const addon = parentGroup.locator('.input-group-addon, span, i').first();
-            if (await addon.isVisible().catch(() => false)) {
-                await addon.click().catch(() => {});
+        await inputLocator.scrollIntoViewIfNeeded();
+        await inputLocator.click({ force: true });
+
+        const daysPanel = this.page.locator('.datepicker-days:visible').first();
+        await daysPanel.waitFor({ state: 'visible', timeout: 10000 });
+
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const targetMonth = targetDate.getMonth();
+        const targetYear = targetDate.getFullYear();
+        const targetDay = targetDate.getDate();
+
+        for (let attempt = 0; attempt < 24; attempt++) {
+            const headerText = (await daysPanel.locator('th.datepicker-switch').first().innerText().catch(() => '')).trim();
+            const headerMatch = headerText.match(/^([A-Za-z]+)\s+(\d{4})$/);
+
+            if (!headerMatch) {
+                throw new Error(`CLMS 5.5 Week Off datepicker header could not be parsed: "${headerText}"`);
+            }
+
+            const monthIndex = monthNames.findIndex(month => month.toLowerCase().startsWith(headerMatch[1].toLowerCase()));
+            const headerYear = Number(headerMatch[2]);
+
+            if (monthIndex === targetMonth && headerYear === targetYear) break;
+
+            const headerValue = headerYear * 12 + monthIndex;
+            const targetValue = targetYear * 12 + targetMonth;
+            const navigationButton = headerValue > targetValue
+                ? daysPanel.locator('th.prev').first()
+                : daysPanel.locator('th.next').first();
+
+            await navigationButton.waitFor({ state: 'visible', timeout: 5000 });
+            await navigationButton.click({ force: true });
+            await this.page.waitForTimeout(300);
+        }
+
+        const dayCells = daysPanel.locator('td.day:not(.old):not(.new)');
+        const dayCount = await dayCells.count();
+        let selected = false;
+
+        for (let i = 0; i < dayCount; i++) {
+            const cell = dayCells.nth(i);
+            const text = (await cell.innerText().catch(() => '')).trim();
+            if (text === String(targetDay)) {
+                await cell.click({ force: true });
+                selected = true;
+                break;
             }
         }
-        await calendarWidget.waitFor({ state: 'visible', timeout: 5000 }).catch(() => {});
-        const calendarDay = calendarWidget.locator('td.day:not(.old):not(.new)').filter({ hasText: dayText }).first();
-        await calendarDay.waitFor({ state: 'visible', timeout: 5000 });
-        await calendarDay.click();
+
+        if (!selected) {
+            throw new Error(`CLMS 5.5 Week Off datepicker could not find active-month day ${targetDay}.`);
+        }
+
+        await this.page.waitForTimeout(300);
+        await inputLocator.evaluate((node) => {
+            node.dispatchEvent(new Event('input', { bubbles: true }));
+            node.dispatchEvent(new Event('change', { bubbles: true }));
+            node.dispatchEvent(new Event('blur', { bubbles: true }));
+        });
     }
 
     async selectFirstTemplate() {
@@ -120,20 +201,31 @@ async uncheckWeekOffDefault() {
         if (options.length > 1) {
             const secondOptionValue = await options[1].getAttribute('value');
             await this.templateDropdown.selectOption(secondOptionValue);
+            this.selectedTemplateName = (await this.templateDropdown.locator('option:checked').innerText().catch(() => '')).trim();
         }
     }
 
     async selectFromDateToday() {
-        const now = new Date();
-        const day = String(now.getDate());
-        await this.selectDateFromInputAndCalendar(this.fromDateInput, day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        await this.selectDateFromInputAndCalendar(this.fromDateInput, today);
+
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const expectedValue = `${String(today.getDate()).padStart(2, '0')}-${monthNames[today.getMonth()]}-${today.getFullYear()}`;
+        await expect(this.fromDateInput).toHaveValue(expectedValue);
     }
 
     async selectToDateFuture() {
         const futureDate = new Date();
+        futureDate.setHours(0, 0, 0, 0);
         futureDate.setDate(futureDate.getDate() + 5);
-        const day = String(futureDate.getDate());
-        await this.selectDateFromInputAndCalendar(this.toDateInput, day);
+
+        await this.selectDateFromInputAndCalendar(this.toDateInput, futureDate);
+
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const expectedValue = `${String(futureDate.getDate()).padStart(2, '0')}-${monthNames[futureDate.getMonth()]}-${futureDate.getFullYear()}`;
+        await expect(this.toDateInput).toHaveValue(expectedValue);
     }
 
     async clickSaveTemplate() {
@@ -152,25 +244,44 @@ async uncheckWeekOffDefault() {
     }
 
 async verifyTemplateTableData(expectedTemplate, expectedFromDate, expectedToDate) {
-        
         await this.page.waitForTimeout(2000);
-        
-        const templateTableRows = this.page.locator('table tr').filter({ has: this.page.locator('td .icon-pencil, td .fa-pencil, td i.fa, td a.btn, td img[alt*="Edit"], td .glyphicon-pencil, td a i') });
-        
-       
-        const targetRow = this.page.locator('tr').filter({ hasText: expectedTemplate }).first();
-        
-       
-        const firstRow = await targetRow.isVisible().catch(() => false) 
-            ? targetRow 
-            : this.page.locator('#dtWeekOffTable').last().locator('tbody tr').first(); // किंवा उजव्या टेबलची पहिली रो
+
+        let firstRow;
+
+        if (this.isCLMS56()) {
+            const targetRow = this.page.locator('table tbody tr').filter({ hasText: expectedTemplate }).first();
+            if (await targetRow.isVisible({ timeout: 15000 }).catch(() => false)) {
+                firstRow = targetRow;
+            } else {
+                const visibleRows = this.page.locator('table tbody tr:visible');
+                const rowCount = await visibleRows.count();
+
+                for (let i = 0; i < rowCount; i++) {
+                    const candidate = visibleRows.nth(i);
+                    const text = (await candidate.innerText().catch(() => '')).trim();
+                    if (text.includes(expectedTemplate) || text.includes(expectedFromDate) || text.includes(expectedToDate)) {
+                        firstRow = candidate;
+                        break;
+                    }
+                }
+            }
+
+            if (!firstRow) {
+                throw new Error(`CLMS 5.6 Week Off template row was not found: template="${expectedTemplate}", From="${expectedFromDate}", To="${expectedToDate}"`);
+            }
+        } else {
+            const targetRow = this.page.locator('tr').filter({ hasText: expectedTemplate }).first();
+            firstRow = await targetRow.isVisible().catch(() => false)
+                ? targetRow
+                : this.page.locator('#dtWeekOffTable').last().locator('tbody tr').first();
+        }
 
         await firstRow.waitFor({ state: 'visible', timeout: 15000 });
-        
+
         const templateCell = firstRow.locator('td').nth(0);
         const fromDateCell = firstRow.locator('td').nth(1);
         const toDateCell = firstRow.locator('td').nth(2);
-        
+
         await expect(templateCell).toContainText(expectedTemplate);
         await expect(fromDateCell).toContainText(expectedFromDate);
         await expect(toDateCell).toContainText(expectedToDate);

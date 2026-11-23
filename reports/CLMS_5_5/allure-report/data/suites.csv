@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","14122","Validate Card allocation features under Card tab for an Existing Employee","","2026-11-23","passed","2026-11-23","","Contractor Employee Card Management Flow for New and Existing Employees","",""
+"","26802","Validate Cards allocation features under Card tab for a New Employee","","2026-11-23","passed","2026-11-23","","Contractor Employee Card Management Flow for New and Existing Employees","",""
+"","28727","Validate successful temporary card allocation with dynamic unique card number and today's date","","2026-11-23","passed","2026-11-23","","Contractor Employee Card Management Flow for New and Existing Employees","",""
+"","33204","Validate error message when Effective To date is earlier than Effective From","","2026-11-23","passed","2026-11-23","","Contractor Employee Card Management Flow for New and Existing Employees","",""

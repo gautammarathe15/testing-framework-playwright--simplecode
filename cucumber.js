@@ -37,7 +37,7 @@ module.exports = {
     failFast: false,
     timeout: 60000,
     worldParameters: {
-      appUrl: process.env.BASE_URL || 'http://192.168.40.115/CLMS_ENT_5.5/app',
+      appUrl: require('./utilities/environmentConfig').resolveAppUrl(),
       browser: process.env.BROWSER || 'chromium',
       headless: process.env.HEADLESS !== 'false',
     }

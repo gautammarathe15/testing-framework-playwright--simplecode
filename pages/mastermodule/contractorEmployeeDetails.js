@@ -118,8 +118,7 @@ class ContractorEmployeeDetailsPage {
         this.gradeDropdown = this.page.locator('#Grade, #GradeId, select[name*="Grade"]').first();
         this.designationDropdown = this.page.locator('#Designation, #DesignationId, select[name*="Designation"]').first();
         this.locationDropdown = this.page.locator('#Location, #LocationId, select[name*="Location"]').first();
-        this.skillDropdown = this.page.locator('#SkillLevel, #SkilledLevel, select[name*="Skill"]').first();
-        this.contractorDropdown = this.page.locator('#Contractor, #ContractorId, select[name*="Contractor"]').first();
+        this.skillDropdown = this.page.locator('#Contractor, #ContractorId, select[name*="Contractor"]').first();
 
 
 
@@ -563,9 +562,98 @@ class ContractorEmployeeDetailsPage {
     }
 
     /**
-     * Selects 1st valid option for all mandatory dropdowns dynamically
+     * A5-only Deployment selection: exact values are used only for CLMS 5.6 URLs.
+     * CLMS 5.5 and non-5.6 URLs use the existing selectMandatoryDropdowns() flow.
+     */
+    async selectA5DeploymentDropdowns() {
+        const activeUrl = (this.page.url() || '').trim();
+        let configuredUrl = '';
+
+        try {
+            configuredUrl = require('../../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${activeUrl} ${configuredUrl}`;
+        const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+        if (!isCLMS56) {
+            await this.selectMandatoryDropdowns();
+            return;
+        }
+
+        console.log(`👉 A5 CLMS 5.6 detected (${activeUrl || configuredUrl}); selecting exact Deployment values.`);
+
+        const dropdowns = [
+            { name: 'Subsidiary', locator: '#EmployeeAllocateToOrg_SubsidiaryID', value: '1', label: 'Emsphere' },
+            { name: 'Division', locator: '#EmployeeAllocateToOrg_DivisionID', value: '1', label: 'Andheri' },
+            { name: 'Department', locator: '#EmployeeAllocateToOrg_DepartmentID', value: '1', label: 'Testing' },
+            { name: 'Category', locator: '#EmployeeAllocateToOrg_EmpCategoryID', value: '2', label: 'Contract Worker' },
+            { name: 'Grade', locator: '#EmployeeAllocateToOrg_GradeID', value: '2', label: 'G1' },
+            { name: 'Location / Branch', locator: '#EmployeeAllocateToOrg_BranchID', value: '1', label: 'Pune' },
+            { name: 'Skilled Level / Employee Type', locator: '#EmployeeAllocateToOrg_EmployeeTypeID', value: '1', label: 'Skilled' },
+            { name: 'Contractor', locator: '#EmployeeAllocateToOrg_ContractorID', value: '1003', label: 'ROOT-1313' },
+            { name: 'Designation', locator: '#EmployeeAllocateToOrg_DesignationID', value: '3', label: 'Jr Engineer' }
+        ];
+
+        for (const item of dropdowns) {
+            const dropdown = this.page.locator(item.locator);
+            await dropdown.waitFor({ state: 'visible', timeout: 10000 });
+            await dropdown.selectOption({ value: item.value });
+            await dropdown.dispatchEvent('change').catch(() => {});
+            await dropdown.dispatchEvent('blur').catch(() => {});
+
+            if (item.name === 'Skilled Level / Employee Type') {
+                let selected = await dropdown.evaluate(select => {
+                    const option = select.options[select.selectedIndex];
+                    return option ? { value: option.value, text: option.text.trim() } : { value: '', text: '' };
+                });
+
+                if (selected.value !== item.value && selected.text !== item.label) {
+                    await dropdown.selectOption({ label: item.label });
+                    await dropdown.dispatchEvent('change').catch(() => {});
+                    await dropdown.dispatchEvent('blur').catch(() => {});
+                    selected = await dropdown.evaluate(select => {
+                        const option = select.options[select.selectedIndex];
+                        return option ? { value: option.value, text: option.text.trim() } : { value: '', text: '' };
+                    });
+                }
+
+                if (selected.value !== item.value && selected.text !== item.label) {
+                    throw new Error(`CLMS 5.6 Skilled Level verification failed: expected "${item.label}" (value "${item.value}"), got value "${selected.value}" text "${selected.text}"`);
+                }
+            }
+
+            console.log(`✅ CLMS 5.6 selected ${item.name}: "${item.label}" (value "${item.value}")`);
+            await this.page.waitForTimeout(500);
+        }
+
+        const skillDropdown = this.page.locator('#EmployeeAllocateToOrg_EmployeeTypeID');
+        await skillDropdown.waitFor({ state: 'visible', timeout: 10000 });
+        await skillDropdown.selectOption({ value: '1' });
+        await skillDropdown.dispatchEvent('change').catch(() => {});
+        await skillDropdown.dispatchEvent('blur').catch(() => {});
+
+        const finalSkill = await skillDropdown.evaluate(select => {
+            const option = select.options[select.selectedIndex];
+            return option ? { value: option.value, text: option.text.trim() } : { value: '', text: '' };
+        });
+
+        if (finalSkill.value !== '1' && finalSkill.text !== 'Skilled') {
+            throw new Error(`CLMS 5.6 Skilled Level was not retained: expected "Skilled" (value "1"), got value "${finalSkill.value}" text "${finalSkill.text}"`);
+        }
+
+        console.log('✅ CLMS 5.6 final verification: Skilled Level / Employee Type = "Skilled" (value "1")');
+    }
+
+    /**
+     * Selects 1st valid option for all mandatory dropdowns dynamically.
+     * Existing shared 5.5 / non-5.6 behavior is preserved.
      */
     async selectMandatoryDropdowns() {
+        // Existing CLMS 5.5 / non-5.6 behavior: original first-valid-option flow.
+
         console.log("👉 Selecting first valid option for all mandatory dropdowns...");
 
         const dropdownConfigs = [
@@ -1053,6 +1141,56 @@ async fillContractPeriodDetails(contractFromDate, periodInDays) {
      */
     async fillDeploymentDetails(data) {
         console.log("✍️ Filling ALL Deployment Mandatory Fields from UI dropdowns...");
+
+        const activeUrl = (this.page.url() || '').trim();
+        let configuredUrl = '';
+        try {
+            configuredUrl = require('../../utilities/environmentConfig').resolveAppUrl();
+        } catch (error) {
+            configuredUrl = '';
+        }
+
+        const targetUrl = `${activeUrl} ${configuredUrl}`;
+        const isCLMS56 = /(?:CLMS_5_6|\/CLMS_5_6\/app)/i.test(targetUrl);
+
+        if (isCLMS56) {
+            const clms56Dropdowns = [
+                { name: 'Subsidiary', locator: '#EmployeeAllocateToOrg_SubsidiaryID', value: '1' },
+                { name: 'Division', locator: '#EmployeeAllocateToOrg_DivisionID', value: '1' },
+                { name: 'Department', locator: '#EmployeeAllocateToOrg_DepartmentID', value: '1' },
+                { name: 'Category', locator: '#EmployeeAllocateToOrg_EmpCategoryID', value: '2' },
+                { name: 'Designation', locator: '#EmployeeAllocateToOrg_DesignationID', value: '3' },
+                { name: 'Grade', locator: '#EmployeeAllocateToOrg_GradeID', value: '2' },
+                { name: 'Branch', locator: '#EmployeeAllocateToOrg_BranchID', value: '1' },
+                { name: 'Employee Type', locator: '#EmployeeAllocateToOrg_EmployeeTypeID', value: '1' },
+                { name: 'Contractor', locator: '#EmployeeAllocateToOrg_ContractorID', value: '1003' }
+            ];
+
+            for (const item of clms56Dropdowns) {
+                const dropdown = this.page.locator(item.locator);
+                await dropdown.waitFor({ state: 'visible', timeout: 10000 });
+                await dropdown.selectOption({ value: item.value });
+                await dropdown.dispatchEvent('change').catch(() => {});
+                await dropdown.dispatchEvent('blur').catch(() => {});
+                await this.page.waitForTimeout(500);
+            }
+
+            const skillDropdown = this.page.locator('#EmployeeAllocateToOrg_EmployeeTypeID');
+            await skillDropdown.selectOption({ value: '1' });
+            await skillDropdown.dispatchEvent('change').catch(() => {});
+            await skillDropdown.dispatchEvent('blur').catch(() => {});
+
+            const selectedSkill = await skillDropdown.evaluate(select => {
+                const option = select.options[select.selectedIndex];
+                return option ? option.text.trim() : '';
+            });
+            if (selectedSkill !== 'Skilled') {
+                throw new Error(`CLMS 5.6 Employee Type verification failed: expected "Skilled", got "${selectedSkill}"`);
+            }
+
+            console.log('✅ CLMS 5.6 B1 Deployment values selected and Employee Type verified.');
+            return;
+        }
 
         const dropdowns = [
             { id: '#Subsidiary, select[name*="Subsidiary"]', value: data.subsidiary },

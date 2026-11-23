@@ -1,0 +1,5 @@
+"BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
+"0","","0","Contractor Employee Card Management Flow for New and Existing Employees","1","0","Validate Cards allocation features under Card tab for a New Employee","0"
+"0","","0","Contractor Employee Card Management Flow for New and Existing Employees","1","0","Validate error message when Effective To date is earlier than Effective From","0"
+"0","","0","Contractor Employee Card Management Flow for New and Existing Employees","1","0","Validate successful temporary card allocation with dynamic unique card number and today's date","0"
+"0","","0","Contractor Employee Card Management Flow for New and Existing Employees","1","0","Validate Card allocation features under Card tab for an Existing Employee","0"

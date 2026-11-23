@@ -1,0 +1,939 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "contractor-employee-card-management-flow-for-new-and-existing-employees;validate-cards-allocation-features-under-card-tab-for-a-new-employee",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Validate Cards allocation features under Card tab for a New Employee",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 143190299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 170718499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37302799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 200035199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114422900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 11,
+            "name": "User clicks on the Create button",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103254700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "User verifies Aadhaar Card input field is visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 237520900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "User enters dynamic valid Aadhaar number",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeDetails.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26256300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "User clicks on the Verify link if visible",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 317005999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "User should see Submit and Skip Verification options and click Skip Verification",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 115442100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "User fills mandatory Personal details with First Name \"Revan\", Last Name \"Shivkumar\", Gender \"M\", and DOB \"20-Dec-1990\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:357"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1394043499
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "User fills Contract Period details with Contract From \"31-Aug-2025\" and Contract Period In Days \"690\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:363"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1836440300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 18,
+            "name": "User fills all mandatory Deployment details with Subsidiary \"A.k enterprise\", Division \"Sales\", Department \"Software\", Category \"Staff Employee\", Grade \"B\", Designation \"Jr Engineer\", Location \"Pune\", Skilled Level \"Semi-Skilled\", and Contractor \"GG ROOT\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:339"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4625843200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 19,
+            "name": "User verifies default Status is \"Active\"",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:369"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 19874299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "User clicks on the Save button",
+            "match": {
+              "location": "features\\step_definitions\\contractorEmployeeForm.steps.js:198"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 207715900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "User clicks on OK button on success popup",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:142"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4271800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "User searches created employee status in grid by identity number",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5449947399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "User clicks on Edit icon for the created employee",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\statusChangeValidation.steps.js:130"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2055856799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "User clicks on \"Card\" tab in employee profile",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\shift.steps.js:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4654291099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "User verifies 'Allocate Temporary Card' button is visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:62"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1577926599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "User clicks on \"Allocate Temporary Card\" button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3618592700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "User verifies \"Card Number\" label and input textbox are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13086300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "User verifies \"Effective From\" label and input textbox are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6236400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "User verifies mandatory field red symbols are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5818300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "User verifies \"Save\" and \"Cancel\" buttons are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5720900
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 21606700
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@card_module",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-card-management-flow-for-new-and-existing-employees;validate-card-allocation-features-under-card-tab-for-an-existing-employee",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "Validate Card allocation features under Card tab for an Existing Employee",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 125804700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 145035100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35026399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 139507100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 115060799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "User enters \"435\" in search filter for Aadhaar or employee details",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3884863000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "User selects the 1st entry from the employee grid",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2027114100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "User clicks on \"Card\" tab in employee profile",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\shift.steps.js:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3620391999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "User verifies 'Allocate Temporary Card' button is visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:62"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1552418300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 37,
+            "name": "User clicks on \"Allocate Temporary Card\" button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2577685700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "User verifies \"Card Number\" label and input textbox are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8674299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 39,
+            "name": "User verifies \"Effective From\" label and input textbox are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3369800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 40,
+            "name": "User verifies mandatory field red symbols are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:84"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5300000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 41,
+            "name": "User verifies \"Save\" and \"Cancel\" buttons are visible",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:89"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5750400
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 21345800
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@card_module",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-card-management-flow-for-new-and-existing-employees;validate-successful-temporary-card-allocation-with-dynamic-unique-card-number-and-today's-date",
+        "keyword": "Scenario",
+        "line": 43,
+        "name": "Validate successful temporary card allocation with dynamic unique card number and today's date",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 112912799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 138973299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35078000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 95562899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127605600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 44,
+            "name": "User enters \"435\" in search filter for Aadhaar or employee details",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3896316099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 45,
+            "name": "User selects the 1st entry from the employee grid",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2038860599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 46,
+            "name": "User clicks on \"Card\" tab in employee profile",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\shift.steps.js:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3602802199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 47,
+            "name": "User clicks on \"Allocate Temporary Card\" button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2575608899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "User enters dynamic card number based on Aadhaar",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 22479199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "User selects today's date in Effective From field",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:106"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3389017999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "User clicks on the Save button for card allocation",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:190"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4057555200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 51,
+            "name": "User verifies card allocation success message",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:249"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8744305099
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 23874700
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@card_module",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "contractor-employee-card-management-flow-for-new-and-existing-employees;validate-error-message-when-effective-to-date-is-earlier-than-effective-from",
+        "keyword": "Scenario",
+        "line": 53,
+        "name": "Validate error message when Effective To date is earlier than Effective From",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 199473899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "User opens the CLMS login application page",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125092699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "User enters username \"admin\" and password \"sa\"",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 27805099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 7,
+            "name": "User clicks on the Login button",
+            "match": {
+              "location": "features\\step_definitions\\login.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102432200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "User clicks on the Contractor Employee menu option",
+            "match": {
+              "location": "features\\step_definitions\\master.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110573300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 54,
+            "name": "User enters \"435\" in search filter for Aadhaar or employee details",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3892811999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 55,
+            "name": "User selects the 1st entry from the employee grid",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2035859700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 56,
+            "name": "User clicks on \"Card\" tab in employee profile",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\shift.steps.js:40"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3626569300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 57,
+            "name": "User clicks on \"Allocate Temporary Card\" button",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:69"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2579544899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 58,
+            "name": "User enters dynamic card number based on Aadhaar",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 18226099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 59,
+            "name": "User enters an invalid date range where Effective To is earlier than Effective From",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:151"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2770964000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 60,
+            "name": "User clicks on the Save button for card allocation",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:190"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4065532099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 61,
+            "name": "User verifies popup message \"to date must be greater than from date\" is displayed",
+            "match": {
+              "location": "file:\\D:\\CLMS-Automation\\testing-framework-playwright--simplecode\\features\\step_definitions\\card.steps.js:311"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 13846297099
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 25372900
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@card_module",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "contractor-employee-card-management-flow-for-new-and-existing-employees",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Contractor Employee Card Management Flow for New and Existing Employees",
+    "tags": [
+      {
+        "name": "@card_module",
+        "line": 1
+      }
+    ],
+    "uri": "features\\B4_card.feature"
+  }
+]
